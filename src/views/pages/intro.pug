@@ -1,0 +1,33 @@
+extends ../layout
+
+block content
+  section.intro-page
+    // Logo
+    .intro-logo
+      img(src="/images/logo.svg", alt="Logo")
+
+    // Main quote
+    h1.intro-quote
+      | “Hi. I’ve been waiting 432 million milliseconds for you.
+      br
+      | Pls pick anything you want before I panic.”
+
+    // Question buttons
+    .intro-questions
+      each q in intro.questions
+        button.intro-pill(type="button")= q 
+
+    // CTA
+    a.intro-cta(href=intro.ctaLink)
+      span= intro.ctaLabel
+      span.underline
+
+    // Privacy & compliance
+    .intro-privacy
+      .privacy-text
+        h4 PRIVACY & COMPLIANCE
+        p= intro.privacy
+
+      .privacy-actions
+        button.accept YUMMY
+        button.reject NO, THANKS

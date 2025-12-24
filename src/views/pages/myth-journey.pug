@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  section.myth-journey
+    p.intro-message= introMessage
+
+    .question-buttons
+      each q in questions
+        button.question-btn= q
+
+    .chat-interface
+      .messages
+      input(type="text", placeholder="Type anything…")
+
+  script(src="/js/mythJourney.js")
