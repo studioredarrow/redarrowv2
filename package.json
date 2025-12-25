@@ -17,6 +17,7 @@
     "pug": "^3.0.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.11"
+    "nodemon": "^3.1.11",
+    "sass": "^1.97.1"
   }
 }

@@ -1,10 +1,80 @@
-.menu-overlay.hidden
-  .menu-inner
-    ul
-      li: a(href="/myth-journey") Myth Journey
-      li Myth Creation
-      li Work
-      li About
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Myth Journey
+    link(
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+      rel="stylesheet"
+    )
+    link(rel="stylesheet", href="assets/css/style.css")
+    link(
+      rel="stylesheet",
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    )
 
-.menu-trigger
-  img(src="/images/menu-icon.svg", alt="Menu")
+  body
+    // Logo that triggers the overlay
+    .logo-container
+      img.logo-trigger(src="/images/red-arrow-logo.png", alt="Logo")
+
+    // Overlay Page (initially hidden)
+    .overlay
+      .outer
+        .main-container
+          .arrow
+            img(src="/images/menu-arrow.png", alt="Arrow Icon")
+
+          .content
+            .text-group
+              .text.left
+                span.label (01)
+                h2 OPEN
+                h2 STUDIO
+              .text.center
+                span.label (02)
+                h1 MYTH
+                h1 JOURNEY
+              .text.right
+                span.label (03)
+                h2 MYTH
+                h2 CREATION
+
+          .social
+            a(href="#")
+              img(src="/images/facebook-icon.png", alt="Facebook")
+            a(href="#")
+              img(src="/images/linkdin-icon.png", alt="LinkedIn")
+            a(href="#")
+              img(src="/images/instagram-icon.png", alt="Instagram")
+
+    // GSAP
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js")
+
+    // Main script
+    script.
+      const overlay = document.querySelector('.overlay');
+      const logo = document.querySelector('.logo-trigger');
+      const arrow = document.querySelector('.arrow img');
+
+      // Hide overlay initially
+      gsap.set(overlay, { y: "-100%", display: "none" });
+
+      // Open overlay on logo click
+      logo.addEventListener('click', () => {
+        overlay.style.display = "block";
+        gsap.to(overlay, { y: 0, duration: 1, ease: "power4.out" });
+      });
+
+      // Close overlay on arrow click
+      arrow.addEventListener('click', () => {
+        gsap.to(overlay, {
+          y: "-100%",
+          duration: 1,
+          ease: "power4.in",
+          onComplete: () => {
+            overlay.style.display = "none";
+          }
+        });
+      });
