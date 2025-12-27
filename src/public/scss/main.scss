@@ -15,7 +15,7 @@ body {
 }
 
 .hero1 {
-    max-width: 1170px;
+       max-width: 1093px;
     text-align: center;
     color: #ffffff;
     padding: 20px 20px;
@@ -183,6 +183,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  margin-right: 60px;
 
   .accept {
     color: #ff4a3d;
