@@ -41,6 +41,10 @@ body {
   strong {
     font-weight: 600;
   }
+  p {
+  margin: 0;
+  line-height: 1.2;
+  }
 }
 
 .actions {
@@ -111,7 +115,6 @@ body {
     padding: 12px 98px;
     font-size: 14px;
     opacity: 0;
-    animation: slideUp 0.8s ease-out forwards;
     animation-delay: 0.5s;
 }
 /* Text + icon section */
@@ -269,19 +272,6 @@ body {
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-/* Slide-up animation */
-@keyframes slideUp {
-  0% {
-    bottom: -200px;
-    opacity: 0;
-  }
-  100% {
-    bottom: 20px;
-    opacity: 1;
-  }
-}
-
-
 
 .outer {
   background: #ff0000;
