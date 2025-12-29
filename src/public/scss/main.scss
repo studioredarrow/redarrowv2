@@ -1,9 +1,16 @@
 // Google Font
-body {
-  margin: 0;
-}
+
 body {
   font-family: 'Work Sans', sans-serif;
+  margin: 0;
+  // overflow: hidden;
+}
+.logo-container.fixed {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  z-index: 999;
+  width: 100%;
 }
 
 .wrapper {
@@ -37,9 +44,14 @@ body {
   font-weight: 400;
   line-height: 130%;
   margin-bottom: 40px;
+  margin-top: 130px;
 
   strong {
     font-weight: 600;
+  }
+  p {
+  margin: 0;
+  line-height: 1.2;
   }
 }
 
@@ -111,7 +123,6 @@ body {
     padding: 12px 98px;
     font-size: 14px;
     opacity: 0;
-    animation: slideUp 0.8s ease-out forwards;
     animation-delay: 0.5s;
 }
 /* Text + icon section */
@@ -270,19 +281,6 @@ body {
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-/* Slide-up animation */
-@keyframes slideUp {
-  0% {
-    bottom: -200px;
-    opacity: 0;
-  }
-  100% {
-    bottom: 20px;
-    opacity: 1;
-  }
-}
-
-
 
 .outer {
   background: #ff0000;
@@ -378,13 +376,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ff0000;
+    // background: #ff0000;
+    position: absolute;
+    top: 0;
+    left: 50%;
 }
 
 .logo-trigger {
     cursor: pointer;
     transition: transform 0.3s ease;
-    margin-top: 40px;
+     margin-top: 13px;
 }
 .logo-trigger:hover {
   transform: scale(1.1);
@@ -404,15 +405,6 @@ body {
   color: #fff;
 }
 
-/* Your Myth Journey layout */
-.outer {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 .main-container {
   text-align: center;
@@ -462,16 +454,16 @@ $input-bg: #ffffff;
 $border-radius: 18px;
 
 .myth-wrapper {
-  min-height: 100vh;
+  // min-height: 100vh;
   background: $bg-color;
   padding: 24px;
-  position: relative;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  width: 100%;
 }
 
 /* Header */
 .myth-header {
   margin-bottom: 12px;
+  margin-top: 100px;
 
   .breadcrumb {
     font-size: 16px;
@@ -511,20 +503,19 @@ $border-radius: 18px;
 
 /* Bottom input */
 .chat-input {
-  position: fixed;
-  bottom: 18px;
-  left: 0;
   width: 100%;
   padding: 0 16px;
+  max-width: 73%;
+  margin: 0 auto;
 
   input {
     width: 95%;
-    height: 44px;
+    height: 62px;
     border-radius: 24px;
     border: none;
     padding: 0 18px;
-    background: $input-bg;
-    font-size: 14px;
+    background: #ffffff;
+    font-size: 16px;
     color: #444;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
@@ -543,7 +534,196 @@ $border-radius: 18px;
 
 // chat css end here
 
+:root {
+  --bg-color: #eb3324;
+  --main-font: 'Work Sans', sans-serif;
+}
 
+.outer {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: white;
+  font-family: var(--main-font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.top-icon {
+  position: absolute;
+  top: 5%;
+}
+
+.stage {
+  width: 100%;
+  height: 400px;
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel {
+  width: 350px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-out;
+}
+
+.item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  backface-visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.5s, opacity 0.5s, filter 0.5s, font-size 0.5s;
+
+  span {
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  &.main {
+    font-size: 52px;
+    font-weight: 400;
+    opacity: 1;
+    filter: blur(0);
+    line-height: 0.9;
+  }
+
+  &.side {
+    font-size: 52px;
+    font-weight: 400;
+    opacity: 0.6;
+    filter: blur(0.3px);
+    line-height: 0.9;
+  }
+
+  &:nth-child(1) { transform: rotateY(0deg) translateZ(450px); }
+  &:nth-child(2) { transform: rotateY(60deg) translateZ(450px); }
+  &:nth-child(3) { transform: rotateY(120deg) translateZ(450px); }
+  &:nth-child(4) { transform: rotateY(180deg) translateZ(450px); }
+  &:nth-child(5) { transform: rotateY(240deg) translateZ(450px); }
+  &:nth-child(6) { transform: rotateY(300deg) translateZ(450px); }
+}
+
+.social-icons {
+  position: absolute;
+  bottom: 6%;
+  display: flex;
+  gap: 20px;
+}
+
+
+  img.logo-trigger.logo1 {
+    filter: brightness(0) saturate(100%) invert(7%) sepia(97%) saturate(7491%) hue-rotate(356deg) brightness(100%) contrast(101%);
+  }
+  .home-page img.logo-trigger.logo1 {
+  filter: brightness(0) saturate(100%) invert(95%) sepia(10%) saturate(300%)
+          hue-rotate(0deg) brightness(100%) contrast(95%);
+}
+
+
+
+.container {
+  text-align: left;
+  padding: 2rem;
+}
+
+.project-name {
+  font-size: 16px;
+  color: #9a9a9a;
+  margin-bottom: 1.2rem;
+}
+
+.headline1 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #ff0033;
+  margin-bottom: 1.8rem;
+}
+
+.btn-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+
+  .btn {
+    border: 1px solid #ff0033;
+    background: #fff;
+    color: #ff0033;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    &:hover {
+      background: #ff0033;
+      color: #fff;
+    }
+  }
+}
+
+.note {
+  color: #ff0033;
+  font-size: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.chat-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+    max-width: 660px;
+    margin: 0 auto;
+    padding-top: 100px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+
+  .chat-btn {
+    border: 1px solid #ff0033;
+    background: transparent;
+    color: #ff0033;
+    border-radius: 20px;
+    padding: 0.4rem 0.8rem;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background: #ff0033;
+      color: #fff;
+    }
+  }
+}
 
 
 

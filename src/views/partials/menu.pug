@@ -3,19 +3,17 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Myth Journey
+    title Myth Journey – Page 1
 
-    // Preconnect for Google Fonts
+    // Fonts
     link(rel="preconnect", href="https://fonts.googleapis.com")
-    link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
-
-    // Work Sans font
+    link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
     link(
-      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap",
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap",
       rel="stylesheet"
     )
 
-    // Your styles
+    // Main CSS
     link(rel="stylesheet", href="assets/css/style.css")
 
     // Font Awesome
@@ -24,67 +22,194 @@ html(lang="en")
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     )
 
-  body
-    // Logo that triggers the overlay
-    .logo-container
-      img.logo-trigger(src="/images/red-arrow-logo.png", alt="Logo")
-
-    // Overlay Page (initially hidden)
-    .overlay
-      .outer
-        .main-container
-          .arrow
-            img(src="/images/menu-arrow.png", alt="Arrow Icon")
-
-          .content
-            .text-group
-              .text.left
-                span.label (01)
-                h2 OPEN
-                h2 STUDIO
-              .text.center
-                span.label (02)
-                h1 MYTH
-                h1 JOURNEY
-              .text.right
-                span.label (03)
-                h2 MYTH
-                h2 CREATION
-
-          .social
-            a(href="#")
-              img(src="/images/facebook-icon.png", alt="Facebook")
-            a(href="#")
-              img(src="/images/linkdin-icon.png", alt="LinkedIn")
-            a(href="#")
-              img(src="/images/instagram-icon.png", alt="Instagram")
-
     // GSAP
     script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js")
 
-    // Main script
+    style.
+      .logo-container.fixed {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 999;
+      }
+
+  body.page1(class=isHome ? 'home-page' : '')
+
+    // =======================
+    // LOGO CONTAINER
+    // =======================
+    .logo-container
+      img.logo-trigger.logo1(src="/images/red-arrow-logo.png", alt="Red Logo")
+
+    // =======================
+    // OVERLAY
+    // =======================
+    .overlay
+      .outer
+        .top-icon.arrow
+          img(src="/images/menu-arrow.png", alt="Close")
+
+        .stage#stage
+          .carousel#carousel
+            .item.side
+              span (05)
+              |  OPEN
+              br
+              |  STUDIO
+            .item.side
+              span (02)
+              |  DESIGN
+              br
+              |  LAB
+            .item.main
+              span (01)
+              |  MYTH
+              br
+              |  JOURNEY
+            .item.side
+              span (03)
+              |  MYTH
+              br
+              |  CREATION
+            .item.side
+              span (04)
+              |  VISION
+              br
+              |  QUEST
+            .item.side
+              span (06)
+              |  FUTURE
+              br
+              |  PROJECT
+
+        .social-icons
+          span
+            img(src="/images/facebook-icon.png", alt="Facebook")
+          span
+            img(src="/images/linkdin-icon.png", alt="LinkedIn")
+          span
+            img(src="/images/instagram-icon.png", alt="Instagram")
+
+    // =====================
+    // CAROUSEL SCRIPT
+    // =====================
+    script.
+      const carousel = document.getElementById('carousel');
+      const items = carousel.querySelectorAll('.item');
+
+      let isDragging = false;
+      let startX = 0;
+      let currentRotation = 0;
+      let dragRotation = 0;
+
+      const sensitivity = 0.2;
+      const itemCount = items.length;
+      const degreePerItem = 360 / itemCount;
+
+      window.addEventListener('mousedown', dragStart);
+      window.addEventListener('mousemove', dragMove);
+      window.addEventListener('mouseup', dragEnd);
+      window.addEventListener('touchstart', e => dragStart(e.touches[0]));
+      window.addEventListener('touchmove', e => dragMove(e.touches[0]));
+      window.addEventListener('touchend', dragEnd);
+
+      function dragStart(e) {
+        isDragging = true;
+        startX = e.pageX;
+        carousel.style.transition = 'none';
+      }
+
+      function dragMove(e) {
+        if (!isDragging) return;
+        const walk = (e.pageX - startX) * sensitivity;
+        dragRotation = currentRotation + walk;
+        carousel.style.transform = `rotateY(${dragRotation}deg)`;
+        updateHighlight(dragRotation);
+      }
+
+      function dragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        currentRotation = Math.round(dragRotation / degreePerItem) * degreePerItem;
+        carousel.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+        carousel.style.transform = `rotateY(${currentRotation}deg)`;
+        updateHighlight(currentRotation);
+      }
+
+      function updateHighlight(rotation) {
+        const normalized = ((rotation % 360) + 360) % 360;
+        const centerIndex = Math.round(normalized / degreePerItem) % itemCount;
+
+        items.forEach((item, index) => {
+          if (index === (itemCount - centerIndex) % itemCount) {
+            item.classList.add('main');
+            item.classList.remove('side');
+          } else {
+            item.classList.add('side');
+            item.classList.remove('main');
+          }
+        });
+      }
+
+    // =====================
+    // OVERLAY OPEN / CLOSE
+    // =====================
     script.
       const overlay = document.querySelector('.overlay');
-      const logo = document.querySelector('.logo-trigger');
+      const logo = document.querySelector('.logo1');
       const arrow = document.querySelector('.arrow img');
 
-      // Hide overlay initially
-      gsap.set(overlay, { y: "-100%", display: "none" });
+      gsap.set(overlay, { y: "100%", display: "none" });
 
-      // Open overlay on logo click
       logo.addEventListener('click', () => {
         overlay.style.display = "block";
         gsap.to(overlay, { y: 0, duration: 1, ease: "power4.out" });
       });
 
-      // Close overlay on arrow click
       arrow.addEventListener('click', () => {
         gsap.to(overlay, {
-          y: "-100%",
+          y: "100%",
           duration: 1,
           ease: "power4.in",
-          onComplete: () => {
-            overlay.style.display = "none";
-          }
+          onComplete: () => overlay.style.display = "none"
         });
+      });
+
+    // =====================
+    // LOGO SCROLL SHOW / HIDE + FIXED POSITION
+    // =====================
+    script.
+      const logoContainer = document.querySelector('.logo-container');
+
+      let lastScrollY = window.scrollY;
+      const scrollThreshold = 10;
+
+      gsap.set(logoContainer, { y: 0, opacity: 1 });
+
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        if (Math.abs(currentScrollY - lastScrollY) < scrollThreshold) return;
+
+        if (currentScrollY > lastScrollY && currentScrollY > 50) {
+          // Scroll DOWN → hide logo and remove fixed
+          logoContainer.classList.remove('fixed');
+          gsap.to(logoContainer, {
+            y: -100,
+            opacity: 0,
+            duration: 0.4,
+            ease: "power3.out"
+          });
+        } else {
+          // Scroll UP → show logo and set fixed
+          logoContainer.classList.add('fixed');
+          gsap.to(logoContainer, {
+            y: 0,
+            opacity: 1,
+            duration: 0.4,
+            ease: "power3.out"
+          });
+        }
+
+        lastScrollY = currentScrollY;
       });
