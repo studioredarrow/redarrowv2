@@ -1,15 +1,20 @@
 extends ../layout
 
 block content
-  section.myth-journey
-    p.intro-message= introMessage
+  .myth-wrapper
+    .myth-header
+      span.breadcrumb > Myth Journey
+      h4.status Pretending to think very hard 🤖...
 
-    .question-buttons
-      each q in questions
-        button.question-btn= q
+    .myth-card
+      img(
+        src="/images/loding-banner-image.png"
+        alt="Thinking illustration"
+      )
 
-    .chat-interface
-      .messages
-      input(type="text", placeholder="Type anything…")
 
-  script(src="/js/mythJourney.js")
+    .chat-input
+      input(
+        type="text"
+        placeholder="Type anything..."
+      )
