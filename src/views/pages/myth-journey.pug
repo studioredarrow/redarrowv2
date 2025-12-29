@@ -2,19 +2,56 @@ extends ../layout
 
 block content
   .myth-wrapper
+    // Header section
     .myth-header
       span.breadcrumb > Myth Journey
       h4.status Pretending to think very hard 🤖...
 
+    // Loading / illustration card
     .myth-card
       img(
         src="/images/loding-banner-image.png"
         alt="Thinking illustration"
       )
 
+    // Main content section
+    main.container
+      p.project-name >Myth Journey
+      h2.headline1
+        | “We do cool things — wanna see?”
+        br
+        | Our work? It slaps. Our story? Even better.
+        br
+        | Pick a door and I’ll open it.
 
-    .chat-input
-      input(
-        type="text"
-        placeholder="Type anything..."
-      )
+      .btn-row
+        button.btn.primary
+          span 📂
+          | Show me your Work
+        button.btn.secondary
+          span 👀
+          | Who even are you?
+        img.banner(
+          src="/images/adults-image.png"
+          alt="ADULTS ONLY I LOVE STORIES"
+        )
+
+      p.note
+        | Is this not what you want? Okay diva, skip the buttons and drop your custom request.
+
+      .chat-buttons
+        button.chat-btn Do you believe in aliens?
+        button.chat-btn I need to talk to the manager
+        button.chat-btn Can’t I just scroll?
+        button.chat-btn.secondary No, tks
+        button.chat-btn.secondary Just surprise me
+        button.chat-btn.secondary Typing is a pain
+        button.chat-btn.secondary
+          span 🧀
+          | Extra Cheese
+
+      .chat-input
+        input(
+          type="text"
+          placeholder="Type anything…"
+        )
