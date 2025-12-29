@@ -24,6 +24,7 @@ router.get("/", async (req, res) => {
       title: "Intro",
       intro,
       prismic: prismicH,
+      isHome: true 
     });
   } catch (err) {
     console.error("Prismic error:", err);

@@ -634,6 +634,11 @@ $border-radius: 18px;
   img.logo-trigger.logo1 {
     filter: brightness(0) saturate(100%) invert(7%) sepia(97%) saturate(7491%) hue-rotate(356deg) brightness(100%) contrast(101%);
   }
+  .home-page img.logo-trigger.logo1 {
+  filter: brightness(0) saturate(100%) invert(95%) sepia(10%) saturate(300%)
+          hue-rotate(0deg) brightness(100%) contrast(95%);
+}
+
 
 
 .container {
