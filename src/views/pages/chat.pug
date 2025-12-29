@@ -1,0 +1,59 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Myth Journey
+    link(rel="stylesheet", href="style.css")
+    script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
+    script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
+
+  body
+    .slider
+      .slides
+        each item, i in ['OPEN STUDIO', 'MYTH JOURNEY', 'MYTH CREATION']
+          .slide(data-index=i)
+            if i === 1
+              .arrow
+                span
+                span
+                span
+            .index (0#{i + 1})
+            h1= item
+
+    footer.social
+      a(href="#") f
+      a(href="#") in
+      a(href="#") ig
+
+    .script
+    const slides = document.querySelectorAll('.slide');
+let current = 1;
+
+slides[current].classList.add('active');
+
+function changeSlide(direction) {
+  slides[current].classList.remove('active');
+
+  current += direction;
+
+  if (current < 0) current = slides.length - 1;
+  if (current >= slides.length) current = 0;
+
+  gsap.fromTo(
+    slides[current],
+    { y: 100, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
+  );
+
+  slides[current].classList.add('active');
+}
+
+window.addEventListener('wheel', (e) => {
+  if (e.deltaY > 0) {
+    changeSlide(1);
+  } else {
+    changeSlide(-1);
+  }
+});
+
