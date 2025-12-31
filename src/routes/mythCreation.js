@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("mythCreation", {
+  res.render("pages/mythCreation", {
     title: "Myth Creation"
   });
 });
