@@ -2,27 +2,38 @@ extends ../layout
 
 block content
   .myth-wrapper
-    // Header section
-    .myth-header
-      span.breadcrumb > Myth Journey
-      h4.status Pretending to think very hard 🤖...
+    // Loader Section (VISIBLE FIRST)
+    .myth-loader#myth-loader
+      .myth-header
+        span.breadcrumb > Myth Journey
+        h4.status
+          if thinkingText
+            != thinkingText
+          else
+            | Pretending to think very hard 🤖...
 
-    // Loading / illustration card
-    .myth-card
-      img(
-        src="/images/loding-banner-image.png"
-        alt="Thinking illustration"
-      )
+      .myth-card
+        if thinkingImage
+          img(
+            src=thinkingImage
+            alt="Thinking illustration"
+          )
+        else
+          img(
+            src="/images/loding-banner-image.png"
+            alt="Thinking illustration"
+          )
 
-    // Main content section
-    main.container
-      p.project-name >Myth Journey
+    // Main content section (HIDDEN INITIALLY)
+    main.container#myth-main.hidden
+      p.project-name > Myth Journey
       h2.headline1
         | “We do cool things — wanna see?”
         br
         | Our work? It slaps. Our story? Even better.
         br
         | Pick a door and I’ll open it.
+
 
       .btn-row
         button.btn.primary
@@ -38,6 +49,7 @@ block content
 
       p.note
         | Is this not what you want? Okay diva, skip the buttons and drop your custom request.
+      .chat-area#chat-area
 
       .chat-buttons
         button.chat-btn Do you believe in aliens?
@@ -51,7 +63,6 @@ block content
           | Extra Cheese
 
       .chat-input
-        input(
-          type="text"
-          placeholder="Type anything…"
-        )
+        input(type="text" placeholder="Type anything…")
+
+  script(src="/js/mythJourney.js")

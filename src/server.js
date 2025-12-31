@@ -4,6 +4,7 @@ const path = require("path");
 const introRoute = require("./routes/index");
 const mythJourneyRoute = require("./routes/mythJourney");
 const loadingRoute = require("./routes/loading");
+const mythCreationRoute = require("./routes/mythCreation");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", introRoute);
 app.use("/", mythJourneyRoute);
 app.use("/", loadingRoute);
+app.use("/myth-creation", mythCreationRoute);
 
 // ✅ Static 404 — MUST be last
 app.use((req, res) => {
