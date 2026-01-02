@@ -14,7 +14,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", introRoute);
-app.use("/", mythJourneyRoute);
+app.use("/myth-journey", mythJourneyRoute);
 app.use("/", loadingRoute);
 app.use("/myth-creation", mythCreationRoute);
 

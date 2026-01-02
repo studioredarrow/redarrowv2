@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { client } = require("../prismic");
 const prismicH = require("@prismicio/helpers");
+const { handleUserMessage } = require("../services/chatEngine");
 
-router.get("/myth-journey", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const thinkingMessages = await client.getAllByType("thinking_message");
 
@@ -28,5 +29,19 @@ router.get("/myth-journey", async (req, res) => {
     });
   }
 });
+
+/**
+ * CHAT API (MOCK)
+ */
+router.post("/chat", express.json(), async (req, res) => {
+  const userMessage = req.body.message;
+  console.log(userMessage,'-----test')
+  const response = await handleUserMessage(userMessage);
+
+  res.json(response);
+});
+
+
+
 
 module.exports = router;

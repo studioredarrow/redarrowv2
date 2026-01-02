@@ -805,6 +805,18 @@ body {
   pointer-events: none;
 }
 
+.chat-message.user {
+  text-align: right;
+  margin: 8px 0;
+  font-weight: 600;
+}
+
+.chat-message.bot {
+  text-align: left;
+  margin: 8px 0;
+  opacity: 0.85;
+}
+
 .cookie-info {
   color: #333;
   max-width: 590px;
