@@ -52,15 +52,13 @@ block content
       .chat-area#chat-area
 
       .chat-buttons
-        button.chat-btn Do you believe in aliens?
-        button.chat-btn I need to talk to the manager
-        button.chat-btn Can’t I just scroll?
-        button.chat-btn.secondary No, tks
-        button.chat-btn.secondary Just surprise me
-        button.chat-btn.secondary Typing is a pain
-        button.chat-btn.secondary
-          span 🧀
-          | Extra Cheese
+        each q in questions
+          button.chat-btn(
+            data-text=q.textResponse
+            data-meme=q.memeResponse
+            data-cta=q.ctaTo
+          ) #{q.question}
+
 
       .chat-input
         input(type="text" placeholder="Type anything…")

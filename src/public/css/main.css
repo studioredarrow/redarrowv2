@@ -1011,6 +1011,21 @@ path {
 }
 
 /* Logo trigger */
+img.chat-meme {
+  width: 342px;
+}
+
+.chat-message.thinking {
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.thinking-image {
+  max-width: 180px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+}
+
 .logo-container {
   display: flex;
   justify-content: center;
