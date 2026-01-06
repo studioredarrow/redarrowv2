@@ -1663,6 +1663,24 @@ img.logo-trigger.logo1 {
   transform: translateX(-50%);
 }
 
+div#chat-area button {
+  border: 1px solid #ff0033;
+  background: #fff;
+  color: #ff0033;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+}
+
 /* Initially hide mobile image */
 .mobile-img {
   display: none;
