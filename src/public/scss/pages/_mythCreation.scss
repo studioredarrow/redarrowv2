@@ -6,13 +6,10 @@ body {
   overflow-x: hidden;
 }
 .container {
-  width: 100%;
-  margin: 0 auto;
-  padding-block: 0px !important;
-  padding: clamp(12px, 3vw, 40px);
-  box-sizing: border-box;
+   max-width: 1220px;
+   margin: 0 auto;
+   padding: 0px !important;
 }
-
 img.mobile-arrow {
     display: none;
 }
@@ -125,7 +122,7 @@ img.mobile-arrow {
   position: relative; 
   margin-block: 60px;
   display: flex;
-  gap: 90px;
+  gap: 100px;
 
   &__label {
    margin-top: 14px;
@@ -317,35 +314,45 @@ ul.services__list li:hover {
 
 .iconic-outer {
     position: sticky;
-    top: -40px;
+    top: 20px;
     left: 0;
     width: 100%;
     z-index: 0;
     height: 100vh;
 }
-.iconic-sections {
-    margin-bottom: 200px;
-}
 .iconic-third img {
-    width: 310px;
+    width: 300px;
 }
-// .iconic-flex {
-//     max-width: 970px;
-//     margin-left: auto;
-// }
+.iconic-flex {
+    max-width: 990px;
+    margin-left: auto;
+}
 .iconic-inner {
   background-color: #f9f5f2;
 }
-// .iconic-sections {
-//     margin-top: 300px;
-// }
-
+.iconic-sections {
+    margin-bottom: 150px;
+}
+.create-outer .outer-btn {
+    margin-left: 200px;
+    margin-block: 50px;
+}
+.border-bottom {
+    padding-top: 40px;
+}
 .iconic-flex {
     gap: 2rem;
 }
 .iconic-content {
   max-width: 500px;
 }
+
+.card.blur img {
+  filter: blur(4px);
+  transition: filter 0.3s;
+}
+
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -618,25 +625,16 @@ p.section-title {
   justify-content: center;
   align-items: center;
 }
-.create-outer .outer-btn {
-    margin-left: 164px;
-    margin-top: 50px;
-}
+
 // footer css start 
 .footer-flex {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  // overflow: hidden;
   padding: 2rem;
   position: relative;
-}
-
-.border-bottom {
-    margin-top: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .footer-line-image {
@@ -662,7 +660,7 @@ p.section-title {
 }
 
 .right-form {
-  // flex: 1 1 40%;
+  flex: 1 1 40%;
   max-width: 50%;
   font-size: 0.9rem;
 
@@ -680,7 +678,7 @@ p.section-title {
     font-weight: 400;
     font-size: 16px;
     line-height: 100%;
-    // padding-bottom: 20px;
+    padding-bottom: 20px;
   }
 
   input[type="email"] {
@@ -795,11 +793,6 @@ img.desktop-arrow {
 }
 /* Responsive */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
-  }
 
   .left-text {
     transform: rotate(-5deg);
@@ -816,11 +809,6 @@ img.desktop-arrow {
 
 // create the chaos css end here
 @media (max-width: 900px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .card {
     width: 90%;
   }
