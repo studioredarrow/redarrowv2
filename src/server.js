@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 
+const menuMiddleware = require("./middleware/menu");
+
 const introRoute = require("./routes/index");
 const mythJourneyRoute = require("./routes/mythJourney");
 const loadingRoute = require("./routes/loading");
@@ -13,6 +15,8 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(menuMiddleware);
 
 app.use("/", introRoute);
 app.use("/myth-journey", mythJourneyRoute);

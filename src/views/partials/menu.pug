@@ -51,59 +51,18 @@ html(lang="en")
 
         .stage#stage
           .carousel#carousel
-            .item.side(
-              data-route="/open-studio"
-              data-label="OPEN STUDIO"
-            )
-              span (05)
-              |  OPEN
-              br
-              |  STUDIO
+            each item, index in menuItems
+              - const isMain = index === 0
 
-            .item.side(
-              data-route="/design-lab"
-              data-label="DESIGN LAB"
-            )
-              span (02)
-              |  DESIGN
-              br
-              |  LAB
-
-            .item.main(
-              data-route="/myth-journey"
-              data-label="MYTH JOURNEY"
-            )
-              span (01)
-              |  MYTH
-              br
-              |  JOURNEY
-
-            .item.side(
-              data-route="/myth-creation"
-              data-label="MYTH CREATION"
-            )
-              span (03)
-              |  MYTH
-              br
-              |  CREATION
-
-            .item.side(
-              data-route="/vision-quest"
-              data-label="VISION QUEST"
-            )
-              span (04)
-              |  VISION
-              br
-              |  QUEST
-
-            .item.side(
-              data-route="/future-project"
-              data-label="FUTURE PROJECT"
-            )
-              span (06)
-              |  FUTURE
-              br
-              |  PROJECT
+              .item(
+                class=isMain ? 'main' : 'side'
+                data-route=item.data.route[0].text
+                data-label=item.data.label.map(b => b.text).join(' ')
+              )
+                span #{String(index + 1).padStart(2, '0')}
+                each block in item.data.label
+                  | #{block.text}
+                  br
 
         .social-icons
           span
