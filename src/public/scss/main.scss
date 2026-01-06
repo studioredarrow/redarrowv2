@@ -1,4 +1,5 @@
 @use "pages/mythCreation";
+@use "pages/about";
 // Google Font
 
         body {
@@ -9,7 +10,7 @@
 
         .logo-container.fixed {
             position: fixed;
-            top: 20px;
+            top: 0px;
             left: 50%;
             z-index: 999;
             width: 100%;

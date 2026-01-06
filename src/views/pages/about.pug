@@ -1,19 +1,105 @@
 extends ../layout
 
 block content
-  section.about-hero
-    h1 About Red Arrow
-    p We are a modern creative collective shaping stories, brands, and digital experiences.
+  .machine
+      // SCREEN
+      .screen
+        video(autoplay muted loop playsinline)
+          source(src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4")
 
-  section.about-content
-    .container
-      h2 Who We Are
-      p
-        Red Arrow is a creative studio focused on blending strategy
+      // COUNTER PANEL
+      .panel
+        .counter-container
+          span.label YEAR
+          #year.counter 2024
 
-      h2 What We Do
-      ul
-        li Brand Identity
-        li Web Experiences
-        li Creative Storytelling
-        li Digital Strategy
+        .counter-container
+          span.label DAYS
+          #days.counter 01
+
+        .counter-container
+          span.label HRS
+          #hours.counter 00
+
+        .counter-container
+          span.label MIN
+          #minutes.counter 00
+
+        .counter-container
+          span.label SEC
+          #seconds.counter 00
+
+        .counter-container
+          span.label SCORE
+          #score.counter.big 8500000
+
+  script.
+      class RollingCounter {
+        constructor(element, initialValue) {
+          this.el = element;
+          this.value = initialValue.toString();
+          this.build();
+        }
+
+        build() {
+          this.el.innerHTML = '';
+          this.columns = [];
+
+          [...this.value].forEach((digit, i) => {
+            const col = document.createElement('div');
+            col.className = 'column';
+            col.dataset.digit = digit;
+
+            col.innerHTML = [...Array(10).keys()].map(d => `<span class="number">${d}</span>`).join('') +
+                            `<span class="number">${digit}</span>`;
+
+            this.el.appendChild(col);
+            this.columns.push(col);
+          });
+        }
+
+        update(newValue) {
+          this.value = newValue.toString().padStart(this.columns.length, '0');
+          this.columns.forEach((col, i) => {
+            const digit = +this.value[i];
+            const offset = -digit * 1 + 'em';
+            col.style.setProperty('--offset', offset);
+
+            col.classList.remove('animate');
+            void col.offsetWidth;
+            col.classList.add('animate');
+          });
+        }
+      }
+
+      // Initialize counters
+      const yearCounter = new RollingCounter(document.getElementById('year'), 2024);
+      const daysCounter = new RollingCounter(document.getElementById('days'), 1);
+      const hoursCounter = new RollingCounter(document.getElementById('hours'), 0);
+      const minutesCounter = new RollingCounter(document.getElementById('minutes'), 0);
+      const secondsCounter = new RollingCounter(document.getElementById('seconds'), 0);
+      const scoreCounter = new RollingCounter(document.getElementById('score'), 8500000);
+
+      let seconds = 0;
+      let minutes = 0;
+      let hours = 0;
+      let days = 1;
+      let score = 8500000;
+
+      function updateCounters() {
+        seconds++;
+        score += Math.floor(Math.random() * 9) + 1;
+
+        if (seconds >= 60) { seconds = 0; minutes++; }
+        if (minutes >= 60) { minutes = 0; hours++; }
+        if (hours >= 24) { hours = 0; days++; }
+
+        yearCounter.update('2024');
+        daysCounter.update(String(days).padStart(2,'0'));
+        hoursCounter.update(String(hours).padStart(2,'0'));
+        minutesCounter.update(String(minutes).padStart(2,'0'));
+        secondsCounter.update(String(seconds).padStart(2,'0'));
+        scoreCounter.update(score);
+      }
+
+      setInterval(updateCounters, 1000);

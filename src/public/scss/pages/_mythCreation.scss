@@ -615,18 +615,22 @@ p.section-title {
   justify-content: center;
   align-items: center;
 }
-
+.create-outer .outer-btn {
+    margin-left: 164px;
+    margin-top: 50px;
+}
 // footer css start 
 .footer-flex {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  // overflow: hidden;
   padding: 2rem;
   position: relative;
 }
-
+.border-bottom {
+    margin-top: 100px;
+}
 .footer-line-image {
   position: absolute;
   bottom: -10px;
@@ -668,7 +672,7 @@ p.section-title {
     font-weight: 400;
     font-size: 16px;
     line-height: 100%;
-    padding-bottom: 20px;
+    // padding-bottom: 20px;
   }
 
   input[type="email"] {
