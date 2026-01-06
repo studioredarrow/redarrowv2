@@ -38,53 +38,54 @@ block content
       .line-3 INFLUENCE
 
   //- ICONIC SECTION 01
-  .iconic-outer
-    .iconic-inner
-      .container
-        .iconic-flex
-          .iconic-item
-            .top-text
-              h5 01
-            .iconic-image
-              img(src="/images/horse-image.png" alt="")
-            .iconic-content
-              h2 Insight
-              p
-                | Every myth begins with Insight - a deep understanding of your business. We explore your realities,
-                | goals, and challenges to uncover your brand’s story and define success. This lays the foundation for a
-                | strategy that aligns with your goals and drives progress.
+  .iconic-sections
+    .iconic-outer
+      .iconic-inner
+        .container
+          .iconic-flex
+            .iconic-item
+              .top-text
+                h5 01
+              .iconic-image
+                img(src="/images/horse-image.png" alt="")
+              .iconic-content
+                h2 Insight
+                p
+                  | Every myth begins with Insight - a deep understanding of your business. We explore your realities,
+                  | goals, and challenges to uncover your brand’s story and define success. This lays the foundation for a
+                  | strategy that aligns with your goals and drives progress.
 
-  //- ICONIC SECTION 02
-  .iconic-outer
-    .iconic-inner
-      .container
-        .iconic-flex
-          .iconic-item
-            .top-text
-              h5 02
-            .iconic-image
-              img(src="/images/strategy-image.png" alt="")
-            .iconic-content
-              h2 Strategy
-              p
-                | With clarity comes direction. We translate insight into structured strategies that guide design,
-                | communication, and growth—ensuring every move strengthens the myth you’re building.
+    //- ICONIC SECTION 02
+    .iconic-outer
+      .iconic-inner
+        .container
+          .iconic-flex
+            .iconic-item
+              .top-text
+                h5 02
+              .iconic-image
+                img(src="/images/strategy-image.png" alt="")
+              .iconic-content
+                h2 Strategy
+                p
+                  | With clarity comes direction. We translate insight into structured strategies that guide design,
+                  | communication, and growth—ensuring every move strengthens the myth you’re building.
 
-  //- ICONIC SECTION 03
-  .iconic-outer
-    .iconic-inner
-      .container
-        .iconic-flex
-          .iconic-item
-            .top-text
-              h5 03
-            .iconic-image
-              img(src="/images/iconic-horse.png" alt="")
-            .iconic-content
-              h2 Creation
-              p
-                | Ideas become reality through execution. We design and build products, systems, and experiences
-                | that embody your strategy and bring your brand’s myth to life.
+    //- ICONIC SECTION 03
+    .iconic-outer
+      .iconic-inner
+        .container
+          .iconic-flex
+            .iconic-item
+              .top-text
+                h5 03
+              .iconic-image
+                img(src="/images/iconic-horse.png" alt="")
+              .iconic-content
+                h2 Creation
+                p
+                  | Ideas become reality through execution. We design and build products, systems, and experiences
+                  | that embody your strategy and bring your brand’s myth to life.
 
   //- SERVICES SECTION
   .container 
@@ -213,7 +214,7 @@ block content
           .create-item
             h3 CREATE CHAOS
           .create-item
-            img(src="/images/red-arrow-rediculous.png" alt="")
+            img(src="/images/footer-top-child-image.png" alt="")
           .create-item-inner
             .create-item-int
               p
@@ -275,30 +276,8 @@ block content
         .footer
           span Terms & Conditions
           span Privacy
-
-  //- SCRIPT: Card Image Slider (click)
-  //- GSAP Scripts
-  script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
-  script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
-  script.
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.fromTo(
-      ".animate-text-unique",
-      { y: 40, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 3.9,
-        ease: "power3.out",
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: ".hero-section-unique",
-          start: "top 70%",
-          toggleActions: "play none none none"
-        }
-      }
-    );
+  
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js")
 
   script.
     document.querySelectorAll('.card').forEach(card => {
@@ -317,24 +296,6 @@ block content
       });
     });
 
-  //- SCRIPT: Animate Text
-  script.
-    document.addEventListener("DOMContentLoaded", () => {
-      const elements = document.querySelectorAll(".animate-text-unique");
-
-      elements.forEach((el, elIndex) => {
-        const text = el.innerText;
-        el.innerHTML = "";
-
-        text.split(" ").forEach((word, index) => {
-          const span = document.createElement("span");
-          span.className = "word";
-          span.style.animationDelay = `${index * 0.08 + elIndex * 0.4}s`;
-          span.innerText = word + " ";
-          el.appendChild(span);
-        });
-      });
-    }); 
 
   //- SCRIPT: Card Image Slider (hover)
   script.
@@ -446,12 +407,95 @@ block content
       });
     });
 
+  script.
+      const textElements = document.querySelectorAll(".animate-text-unique");
 
-        //- Include this at the end of your Pug template, just before </body>
-  
+      textElements.forEach(textElement => {
+        // Split text into words
+        const words = textElement.textContent.split(" ");
+
+        // Wrap each word in a span and add a trailing space
+        const wrappedWords = words.map(word => `<span>${word}&nbsp;</span>`).join("");
+
+        // Put the words back
+        textElement.innerHTML = wrappedWords;
+
+        // Wrap words per "row"
+        function wrapLines(el) {
+          const words = Array.from(el.querySelectorAll("span"));
+          let lines = [];
+          let currentLineTop = words[0].offsetTop;
+          let line = [];
+
+          words.forEach(word => {
+            if (word.offsetTop !== currentLineTop) {
+              lines.push(line);
+              line = [];
+              currentLineTop = word.offsetTop;
+            }
+            line.push(word);
+          });
+
+          lines.push(line);
+
+          // Wrap each line in a div
+          lines.forEach(lineWords => {
+            const lineWrapper = document.createElement("div");
+            lineWrapper.classList.add("line");
+            lineWords[0].parentNode.insertBefore(lineWrapper, lineWords[0]);
+            lineWords.forEach(w => lineWrapper.appendChild(w));
+          });
+        }
+
+        wrapLines(textElement);
+      });
+
+      // Animate all lines with GSAP
+      gsap.to(".line", {
+        duration: 0.8,
+        y: "0%",
+        opacity: 1,
+        stagger: 0.4,
+        ease: "power3.out",
+        overwrite: "auto",
+        onStart: function() {
+          this.targets().forEach(line => {
+            gsap.to(line.querySelectorAll("span"), {y: "0%", opacity: 1, duration: 0.6, stagger: 0.05});
+          });
+        }
+      });
 
 
 
+      //- GSAP Scripts
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js")
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js")
+  script.
+    gsap.registerPlugin(ScrollTrigger);
 
-  
+    const sections = document.querySelectorAll(".iconic-outer");
 
+    // Stack sections with z-index and set initial position
+    sections.forEach((section, i) => {
+      gsap.set(section, { zIndex: i + 1, yPercent: i === 0 ? 0 : 100 });
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".iconic-scroll-container",
+        start: "top top",
+        end: () => `+=${sections.length * 100}%`,
+        scrub: 1,
+        pin: true
+      }
+    });
+
+    sections.forEach((section, i) => {
+      if (i === 0) return; // skip first section
+
+      const prevSection = sections[i - 1];
+
+      // previous section moves up slightly, current slides in
+      tl.to(prevSection, { yPercent: -50, ease: "none" }, i)
+        .to(section, { yPercent: 0, ease: "none" }, i);
+    });
