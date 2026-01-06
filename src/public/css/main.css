@@ -281,10 +281,19 @@ ul.services__list li:hover {
 
 .iconic-outer {
   position: sticky;
-  top: 0;
+  top: 10px;
   left: 0;
   width: 100%;
-  z-index: 0; /* will be overridden by GSAP */
+  z-index: 0;
+  height: 100vh;
+}
+
+.iconic-sections {
+  margin-bottom: 200px;
+}
+
+.iconic-third img {
+  width: 310px;
 }
 
 .iconic-flex {
@@ -294,10 +303,6 @@ ul.services__list li:hover {
 
 .iconic-inner {
   background-color: #f9f5f2;
-}
-
-.iconic-sections {
-  margin-top: 300px;
 }
 
 .iconic-flex {
@@ -318,11 +323,21 @@ ul.services__list li:hover {
     width: 200px;
   }
 }
+.iconic-image img {
+  width: 350px;
+}
+
+.iconic-first img {
+  width: 445px;
+}
+
 .iconic-outer {
   padding-inline: 40px;
 }
 .iconic-outer .iconic-inner .iconic-image {
   text-align: end;
+  position: relative;
+  right: 115px;
 }
 .iconic-outer .iconic-inner .iconic-content h2 {
   font-family: "Work Sans";
