@@ -169,7 +169,9 @@ html(lang="en")
           }
         });
       }
-
+      currentRotation = 0;
+      carousel.style.transform = `rotateY(0deg)`;
+      updateHighlight(0);
 
     // =====================
     // OVERLAY OPEN / CLOSE
