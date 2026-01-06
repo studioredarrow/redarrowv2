@@ -30,7 +30,7 @@ img.mobile-arrow {
 
     .inner-unique {
       h1.animate-text-unique {
-        font-size: 86px;
+        font-size: 83px;
         font-weight: 300;
         line-height: 100%;
         margin-bottom: 1rem;
@@ -77,11 +77,20 @@ img.mobile-arrow {
     }
   }
 }
-.animate-text-unique {
-  opacity: 0;
-  transform: translateY(40px);
-  will-change: transform, opacity;
+
+.animate-text-unique .line {
+  display: block;          /* Each line is block */
+  overflow: hidden;        /* Hide overflow for y animation */
+  opacity: 0;              /* Start hidden */
 }
+
+.animate-text-unique .line span {
+  display: inline-block;   /* Animate each word individually */
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+
 
 /* ===== WORD FADE UP ANIMATION UNIQUE ===== */
 .word-unique {
@@ -226,10 +235,7 @@ ul.services__list li:hover {
 // scroll fade animation start here
 
 // how to we do css start here
-.iconic-flex {
-    max-width: 960px !important;
-    margin-left: auto !important;
-}
+
 .how-outer {
   box-sizing: border-box;
   position: relative;
@@ -297,7 +303,51 @@ ul.services__list li:hover {
     transform: translateY(0);
   }
 }
-/* iconic scss start here */
+
+
+// scroll animation start  here
+.iconic-scroll-container {
+  position: relative;
+  height: 300vh; /* enough space to scroll through 3 sections */
+  overflow: hidden;
+}
+
+.iconic-outer {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 0; /* will be overridden by GSAP */
+}
+.iconic-flex {
+    max-width: 990px;
+    margin-left: auto;
+}
+.iconic-inner {
+  background-color: #f9f5f2;
+}
+.iconic-sections {
+    margin-top: 300px;
+}
+
+.iconic-flex {
+    gap: 2rem;
+}
+.iconic-content {
+  max-width: 500px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .iconic-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+  .iconic-image img {
+    width: 200px;
+  }
+}
+
 
 .iconic-outer {
   padding-inline: 40px;
