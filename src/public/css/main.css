@@ -1758,6 +1758,22 @@ img.logo-trigger.logo1 {
     opacity: 1;
   }
 }
+.overlay,
+.stage,
+.carousel,
+.carousel .item {
+  pointer-events: auto;
+  transform-style: preserve-3d;
+}
+
+.carousel {
+  cursor: grab;
+}
+
+.carousel:active {
+  cursor: grabbing;
+}
+
 .page-404 * {
   margin: 0;
   padding: 0;
