@@ -15,6 +15,7 @@ router.get("/loading", async (req, res) => {
       title: "Loading",
       loading,
       isHome: false,
+      showFooter: false
     });
   } catch (err) {
     console.error("Prismic loading page error:", err);

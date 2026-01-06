@@ -35,7 +35,8 @@ router.get("/", async (req, res) => {
     res.render("pages/myth-journey", {
       thinkingText: thinkingTextHTML,
       thinkingImage: randomMessage.data.image?.url,
-      questions: selectedQuestions
+      questions: selectedQuestions,
+      showFooter: false
     });
   } catch (error) {
     console.error("Prismic error:", error);
@@ -78,7 +79,7 @@ router.get("/thinking/:context", async (req, res) => {
 
     res.json({
       text: prismicH.asHTML(random.data.thinking_text),
-      image: random.data.image?.url || null
+      image: random.data.image?.url || null,
     });
   } catch (err) {
     console.error("Thinking message error", err);
