@@ -5,7 +5,13 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title= title
     link(rel="stylesheet", href="/css/main.css")
+
   body
     include partials/menu
+
     block content
+
+    if showFooter !== false
+      include partials/footer
+
     script(src="/js/menu.js")
