@@ -208,13 +208,11 @@ html(lang="en")
 
           console.log('NAVIGATING →', label);
 
-          window.location.href =
-            `/loading?to=${encodeURIComponent(route)}&label=${encodeURIComponent(label)}`;
+          window.location.replace(
+            `/loading?to=${encodeURIComponent(route)}&label=${encodeURIComponent(label)}`
+          );
         });
       });
-
-
-
 
     // =====================
     // LOGO SCROLL SHOW / HIDE + FIXED POSITION
