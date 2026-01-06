@@ -7,11 +7,9 @@ body {
 }
 
 .container {
-  width: 100%;
+  max-width: 1220px;
   margin: 0 auto;
-  padding-block: 0px !important;
-  padding: clamp(12px, 3vw, 40px);
-  box-sizing: border-box;
+  padding: 0px !important;
 }
 
 img.mobile-arrow {
@@ -112,7 +110,7 @@ img.mobile-arrow {
   position: relative;
   margin-block: 60px;
   display: flex;
-  gap: 90px;
+  gap: 100px;
 }
 .services__label {
   margin-top: 14px;
@@ -283,23 +281,37 @@ ul.services__list li:hover {
 
 .iconic-outer {
   position: sticky;
-  top: -40px;
+  top: 20px;
   left: 0;
   width: 100%;
   z-index: 0;
   height: 100vh;
 }
 
-.iconic-sections {
-  margin-bottom: 200px;
+.iconic-third img {
+  width: 300px;
 }
 
-.iconic-third img {
-  width: 310px;
+.iconic-flex {
+  max-width: 990px;
+  margin-left: auto;
 }
 
 .iconic-inner {
   background-color: #f9f5f2;
+}
+
+.iconic-sections {
+  margin-bottom: 150px;
+}
+
+.create-outer .outer-btn {
+  margin-left: 200px;
+  margin-block: 50px;
+}
+
+.border-bottom {
+  padding-top: 40px;
 }
 
 .iconic-flex {
@@ -308,6 +320,11 @@ ul.services__list li:hover {
 
 .iconic-content {
   max-width: 500px;
+}
+
+.card.blur img {
+  filter: blur(4px);
+  transition: filter 0.3s;
 }
 
 /* Responsive */
@@ -555,11 +572,6 @@ p.section-title {
   align-items: center;
 }
 
-.create-outer .outer-btn {
-  margin-left: 164px;
-  margin-top: 50px;
-}
-
 .footer-flex {
   display: flex;
   flex-wrap: wrap;
@@ -567,13 +579,6 @@ p.section-title {
   align-items: center;
   padding: 2rem;
   position: relative;
-}
-
-.border-bottom {
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .footer-line-image {
@@ -598,6 +603,7 @@ p.section-title {
 }
 
 .right-form {
+  flex: 1 1 40%;
   max-width: 50%;
   font-size: 0.9rem;
 }
@@ -614,6 +620,7 @@ p.section-title {
   font-weight: 400;
   font-size: 16px;
   line-height: 100%;
+  padding-bottom: 20px;
 }
 .right-form input[type=email] {
   width: 345px;
@@ -722,11 +729,6 @@ img.desktop-arrow {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
-  }
   .left-text {
     transform: rotate(-5deg);
     font-size: clamp(2rem, 8vw, 5rem);
@@ -737,10 +739,6 @@ img.desktop-arrow {
   }
 }
 @media (max-width: 900px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
   .card {
     width: 90%;
   }
@@ -1517,7 +1515,7 @@ img.chat-meme {
 
 .outer {
   margin: 0;
-  background-color: var(--bg-color);
+  background-color: #ff0000;
   color: white;
   font-family: var(--main-font);
   display: flex;
