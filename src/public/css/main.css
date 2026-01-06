@@ -9,6 +9,7 @@ body {
 .container {
   width: 100%;
   margin: 0 auto;
+  padding-block: 0px !important;
   padding: clamp(12px, 3vw, 40px);
   box-sizing: border-box;
 }
@@ -297,11 +298,6 @@ ul.services__list li:hover {
   width: 310px;
 }
 
-.iconic-flex {
-  max-width: 970px;
-  margin-left: auto;
-}
-
 .iconic-inner {
   background-color: #f9f5f2;
 }
@@ -575,6 +571,9 @@ p.section-title {
 
 .border-bottom {
   margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer-line-image {
@@ -599,7 +598,6 @@ p.section-title {
 }
 
 .right-form {
-  flex: 1 1 40%;
   max-width: 50%;
   font-size: 0.9rem;
 }
