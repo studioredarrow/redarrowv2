@@ -791,6 +791,13 @@ p.section-title {
 img.desktop-arrow {
     display: block;
 }
+
+video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
 
@@ -803,6 +810,9 @@ img.desktop-arrow {
     width: 100%;
     max-width: 100%;
   }
+  .border-bottom svg {
+    width: 100%;
+}
 }
 
 // footer css end here

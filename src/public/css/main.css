@@ -727,6 +727,12 @@ img.desktop-arrow {
   display: block;
 }
 
+video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .left-text {
@@ -736,6 +742,9 @@ img.desktop-arrow {
   .right-form {
     width: 100%;
     max-width: 100%;
+  }
+  .border-bottom svg {
+    width: 100%;
   }
 }
 @media (max-width: 900px) {
@@ -1725,7 +1734,7 @@ img.chat-meme {
 
 .myth-wrapper {
   margin-top: 80px;
-  background: #fbf7f2;
+  background: #f6f3ee;
   padding: 24px;
   width: 100%;
 }
