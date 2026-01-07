@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  section.page.work-page
+    .container
+      h1 Work
+      p Our selected projects and collaborations.
+
+      .work-grid
+        each item in [1,2,3,4]
+          .work-card
+            h3 Project #{item}
+            p Short description of the project.
