@@ -1,13 +1,188 @@
 extends ../layout
 
 block content
-  section.page.work-page
+  .work-outer
     .container
-      h1 Work
-      p Our selected projects and collaborations.
+      .work-flex
+        .toggle
+          button#gridBtn.active Grid
+          button#listBtn List
 
-      .work-grid
-        each item in [1,2,3,4]
-          .work-card
-            h3 Project #{item}
-            p Short description of the project.
+        .category-links
+          span.category.active(data-filter="all") all brand identity 
+            span.count (9)
+          | ,
+          span.category(data-filter="app") app & website 
+            span.count (8)
+          | ,
+          span.category(data-filter="exhibition") exhibitions 
+            span.count (5)
+          | ,
+          span.category(data-filter="all") product design 
+            span.count (3)
+          | ,
+          span.category(data-filter="exhibition") packaging 
+            span.count (8)
+          | ,
+          span.category(data-filter="all") environment design 
+            span.count (4)
+          | ,
+          span.category(data-filter="exhibition") brand amplification 
+            span.count (8)
+          | ,
+          span.category(data-filter="all") BDC 
+            span.count (8)
+          .absolute-image 
+            img(src="/images/category-image.png", alt="")  
+
+      // GRID VIEW
+      #gridView.grid.active
+        .card(data-category="exhibition")
+          img(src="images/led.png")
+          .card-title LED ESTHETICS
+          .card-desc Exhibition branding project.
+        .card(data-category="app")
+          .dark-img.dark-1
+            img(src="images/medical-img.png")
+          .card-title OREN MEDICAL
+          .card-desc Medical app & website design.
+        .card(data-category="app")
+          .dark-img
+            img(src="/images/kala-image.png")
+          .card-title KALA
+          .card-desc Mobile app & UI design
+        .card(data-category="exhibition")
+          img(src="/images/nuon-image.png")
+          .card-title NUON MEDICAL
+          .card-desc Exhibition branding project.
+        .card(data-category="exhibition")
+          img(src="/images/benji-image.png")
+          .card-title BENJI BISTRO
+          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+        .card(data-category="exhibition")
+          .last-image
+            img(src="")
+          .card-title SVAKOM
+          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+
+      // FIXED IMAGE PREVIEW
+      #imagePreview
+
+      // LIST VIEW
+      #listView.list
+        .canvas
+          .text.led LED ESTHETICS
+          .text.oren OREN MEDICAL
+          .text.kala KALA
+          .text.nuon NUON MEDICAL
+          .text.benji BENJI BISTRO
+          .text.svakom SVAKOM
+          .text.metamorphosis METAMORPHOSIS
+
+  script.
+    document.addEventListener("DOMContentLoaded", () => {
+      const gridBtn = document.getElementById("gridBtn");
+      const listBtn = document.getElementById("listBtn");
+      const gridView = document.getElementById("gridView");
+      const listView = document.getElementById("listView");
+      const categories = document.querySelectorAll(".category");
+      const cards = document.querySelectorAll(".card");
+      const texts = document.querySelectorAll(".text");
+      const imagePreview = document.getElementById("imagePreview");
+
+      // --- TOGGLE VIEWS ---
+      gridBtn.onclick = () => {
+        gridView.classList.add("active");
+        listView.classList.remove("active");
+        gridBtn.classList.add("active");
+        listBtn.classList.remove("active");
+        gsap.to(imagePreview, { opacity: 0 });
+        texts.forEach(t => {
+          t.classList.remove("active");
+          t.classList.remove("blur");
+        });
+      };
+
+      listBtn.onclick = () => {
+        listView.classList.add("active");
+        gridView.classList.remove("active");
+        listBtn.classList.add("active");
+        gridBtn.classList.remove("active");
+
+        gsap.fromTo(texts,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.08, duration: 0.8, ease: "power3.out" }
+        );
+      };
+
+      // --- CATEGORY FILTER ---
+      categories.forEach(cat => {
+        cat.addEventListener("click", () => {
+          categories.forEach(c => c.classList.remove("active"));
+          cat.classList.add("active");
+
+          const filter = cat.dataset.filter;
+          cards.forEach(card => {
+            card.style.display =
+              filter === "all" || card.dataset.category === filter
+                ? "block"
+                : "none";
+          });
+
+          gsap.fromTo(".card",
+            { y: 80, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power3.out" }
+          );
+        });
+      });
+
+      // --- IMAGE MAP ---
+      const textImageMap = {
+        led: { img: "/images/image-slider-2.png", pos: "left" },
+        oren: { img: "/images/image-slider-3.png", pos: "right" },
+        kala: { img: "/images/image-slider-5.png", pos: "center" },
+        nuon: { img: "/images/image-slider-2.png", pos: "left" },
+        benji: { img: "/images/image-slider-5.png", pos: "right" },
+        svakom: { img: "/images/image-slider-3.png", pos: "center" },
+        metamorphosis: { img: "/images/image-slider-2.png", pos: "right" }
+      };
+
+      // --- TEXT HOVER EFFECT ---
+      texts.forEach(text => {
+        const key = text.classList[1];
+        const { img, pos } = textImageMap[key] || {};
+
+        text.addEventListener("mouseenter", () => {
+          texts.forEach(t => {
+            t.classList.remove("active");
+            t.classList.add("blur");
+          });
+
+          text.classList.add("active");
+          text.classList.remove("blur");
+
+          if (!img) return;
+          imagePreview.style.backgroundImage = `url(${img})`;
+          gsap.to(imagePreview, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" });
+
+          switch (pos) {
+            case "left":
+              gsap.set(imagePreview, { left: "15%", top: "50%", x: "-50%", y: "-50%" });
+              break;
+            case "right":
+              gsap.set(imagePreview, { left: "85%", top: "50%", x: "-50%", y: "-50%" });
+              break;
+            default:
+              gsap.set(imagePreview, { left: "50%", top: "50%", x: "-50%", y: "-50%" });
+          }
+        });
+
+        text.addEventListener("mouseleave", () => {
+          gsap.to(imagePreview, { opacity: 0, duration: 0.4 });
+          texts.forEach(t => {
+            t.classList.remove("active");
+            t.classList.remove("blur");
+          });
+        });
+      });
+    });

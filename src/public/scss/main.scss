@@ -1,5 +1,6 @@
 @use "pages/mythCreation";
 @use "pages/about";
+@use "pages/work";
 // Google Font
 
         body {
@@ -979,7 +980,13 @@
         .desktop-img {
             display: block;
         }
-
+        .logo-container.fixed {
+    position: fixed;
+    top: 20px;
+    left: 50% !important;
+    z-index: 999;
+    transform: translateX(-50%) !important;
+}
         /* When screen is 768px or less, hide desktop and show mobile */
         @media (max-width: 768px) {
             .desktop-img {
