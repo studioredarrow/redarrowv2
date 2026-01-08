@@ -916,7 +916,7 @@ body {
   height: 470px;
   object-fit: cover;
 }
-.machine .panel {
+.machine .panel .counter-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -926,17 +926,17 @@ body {
   border-radius: 6px;
   gap: 25px;
 }
-.machine .panel .counter-container {
+.machine .panel .counter-row .counter-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
 }
-.machine .panel .counter-container .label {
+.machine .panel .counter-row .counter-container .label {
   color: #aaa;
   font-size: 10px;
 }
-.machine .panel .counter-container .counter {
+.machine .panel .counter-row .counter-container .counter {
   display: flex;
   overflow: hidden;
   font-family: "Courier New", monospace;
@@ -948,25 +948,25 @@ body {
   box-shadow: inset 0 0 6px #ff0000;
   height: 65px;
 }
-.machine .panel .counter-container .counter.big {
+.machine .panel .counter-row .counter-container .counter.big {
   font-size: 74px;
   padding: 0px 14px;
   height: 72px;
 }
-.machine .panel .counter-container .counter .column {
+.machine .panel .counter-row .counter-container .counter .column {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
   width: 1ch;
 }
-.machine .panel .counter-container .counter .column .number {
+.machine .panel .counter-row .counter-container .counter .column .number {
   display: block;
   height: 1em;
   line-height: 1em;
   text-align: center;
 }
-.machine .panel .counter-container .counter .column.animate {
+.machine .panel .counter-row .counter-container .counter .column.animate {
   animation: roll 0.8s forwards cubic-bezier(0.25, -0.1, 0.75, 1.1);
 }
 
@@ -1254,6 +1254,42 @@ body {
     gap: 16px;
   }
 }
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow: hidden;
+  height: 1em;
+  line-height: 1em;
+  font-size: 48px; /* adjust if needed */
+  font-weight: 600;
+}
+
+.digit {
+  position: relative;
+  width: 0.6em;
+  height: 1em;
+  overflow: hidden;
+}
+
+.digit-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.digit-inner span {
+  display: block;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+}
+
+.counter-suffix {
+  margin-left: 6px;
+  font-size: 0.8em;
+}
+
 body {
   font-family: "Work Sans";
   margin: 0;

@@ -28,7 +28,8 @@ body {
   }
 
   .panel {
-    display: flex;
+   .counter-row{
+      display: flex;
     justify-content: space-between;
     align-items: flex-end;
     background: #000;
@@ -83,10 +84,13 @@ body {
           &.animate {
             animation: roll 0.8s forwards cubic-bezier(.25,-0.1,.75,1.1);
           }
+          
         }
       }
     }
   }
+   }
+    
 }
 
 @keyframes roll {
@@ -402,3 +406,39 @@ body {
 }
 
 // location css end here
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow: hidden;
+  height: 1em;
+  line-height: 1em;
+  font-size: 48px; /* adjust if needed */
+  font-weight: 600;
+}
+
+.digit {
+  position: relative;
+  width: 0.6em;
+  height: 1em;
+  overflow: hidden;
+}
+
+.digit-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.digit-inner span {
+  display: block;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+}
+
+.counter-suffix {
+  margin-left: 6px;
+  font-size: 0.8em;
+}
