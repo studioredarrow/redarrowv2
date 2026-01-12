@@ -1,12 +1,200 @@
 extends ../layout
 
 block content
-  section.page.open-studio-page
-    .container
-      h1 Open Studio
-      p A space where ideas, experiments, and conversations happen.
 
-      .open-studio-content
-        p
-          | Open Studio is where we share ongoing work, thoughts,
-          | and creative explorations with the community.
+  .page-wrapper
+    .details
+      .details-item
+        span.label LOCATION
+        | SAIGON
+      .details-item
+        span.label TIME
+        | 7:00 AM
+
+  .work-outer.open-outer
+    .container
+      .work-flex.open-flex
+        .toggle
+          button#gridBtn.active Grid
+          button#listBtn List
+
+      // ================= GRID VIEW =================
+      #gridView.grid.active
+        .card(data-category="exhibition")
+          img(src="images/led.png")
+          .card-title LED ESTHETICS
+          .card-desc Exhibition branding project.
+
+        .card(data-category="app")
+          .dark-img.dark-1
+            img(src="images/medical-img.png")
+          .card-title OREN MEDICAL
+          .card-desc Medical app & website design.
+
+        .card(data-category="app")
+          .dark-img
+            img(src="/images/kala-image.png")
+          .card-title KALA
+          .card-desc Mobile app & UI design
+
+        .card(data-category="exhibition")
+          img(src="/images/nuon-image.png")
+          .card-title NUON MEDICAL
+          .card-desc Exhibition branding project.
+
+        .card(data-category="exhibition")
+          img(src="/images/benji-image.png")
+          .card-title BENJI BISTRO
+          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+
+        .card(data-category="exhibition")
+          .last-image
+            img(src="")
+          .card-title SVAKOM
+          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+
+      // ================= IMAGE PREVIEW =================
+      #imagePreview
+
+      // ================= LIST VIEW =================
+      #listView.list
+        .canvas
+          .text.led artist's name
+          .text.oren artist's name
+          .text.kala artist's name
+          .text.nuon artist's name
+          .text.benji artist's name
+
+  // ================= GSAP SCRIPT =================
+  script.
+    document.addEventListener("DOMContentLoaded", () => {
+
+      if (typeof gsap === "undefined") {
+        console.error("GSAP NOT LOADED");
+        return;
+      }
+
+      const gridBtn = document.getElementById("gridBtn");
+      const listBtn = document.getElementById("listBtn");
+      const gridView = document.getElementById("gridView");
+      const listView = document.getElementById("listView");
+      const imagePreview = document.getElementById("imagePreview");
+
+      const texts = document.querySelectorAll(".text");
+      const cardTitles = document.querySelectorAll(".card-title");
+      const cardDescs = document.querySelectorAll(".card-desc");
+
+      // ================= GRID TEXT ANIMATION =================
+      const animateGridText = () => {
+        gsap.fromTo(
+          [...cardTitles, ...cardDescs],
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.06,
+            ease: "power3.out"
+          }
+        );
+      };
+
+      // RUN ON LOAD
+      animateGridText();
+
+      // ================= GRID BUTTON =================
+      gridBtn.addEventListener("click", () => {
+        gridView.classList.add("active");
+        listView.classList.remove("active");
+
+        gridBtn.classList.add("active");
+        listBtn.classList.remove("active");
+
+        gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
+
+        texts.forEach(t => t.classList.remove("active", "blur"));
+
+        animateGridText();
+      });
+
+      // ================= LIST BUTTON =================
+      listBtn.addEventListener("click", () => {
+        listView.classList.add("active");
+        gridView.classList.remove("active");
+
+        listBtn.classList.add("active");
+        gridBtn.classList.remove("active");
+
+        requestAnimationFrame(() => {
+          gsap.fromTo(
+            texts,
+            { y: 50, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              stagger: 0.1,
+              ease: "expo.out"
+            }
+          );
+        });
+      });
+
+      // ================= IMAGE MAP =================
+      const textImageMap = {
+        led: { img: "/images/image-slider-2.png", pos: "left" },
+        oren: { img: "/images/image-slider-3.png", pos: "right" },
+        kala: { img: "/images/image-slider-5.png", pos: "center" },
+        nuon: { img: "/images/image-slider-2.png", pos: "right" },
+        benji: { img: "/images/image-slider-5.png", pos: "left" },
+        svakom: { img: "/images/image-slider-3.png", pos: "center" }
+      };
+
+      // ================= LIST HOVER =================
+      texts.forEach(text => {
+        const key = text.classList[1];
+        const { img, pos } = textImageMap[key] || {};
+
+        text.addEventListener("mouseenter", () => {
+          texts.forEach(t => t.classList.add("blur"));
+          text.classList.remove("blur");
+          text.classList.add("active");
+
+          gsap.fromTo(
+            text,
+            { scale: 0.96, opacity: 0.6 },
+            { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out" }
+          );
+
+          if (!img) return;
+
+          imagePreview.style.backgroundImage = `url(${img})`;
+
+          gsap.to(imagePreview, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            ease: "power2.out"
+          });
+
+          const positions = {
+            left: "15%",
+            right: "85%",
+            center: "50%"
+          };
+
+          gsap.set(imagePreview, {
+            left: positions[pos] || "50%",
+            top: "50%",
+            x: "-50%",
+            y: "-50%"
+          });
+        });
+
+        text.addEventListener("mouseleave", () => {
+          gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
+          texts.forEach(t => t.classList.remove("active", "blur"));
+        });
+      });
+
+    });

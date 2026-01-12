@@ -2,27 +2,28 @@ extends ../layout
 
 block content
   //- HERO
-  section.hero-section-unique
-    .outer-unique
-      //- IMAGE
-      .image-container-unique
-        img(src="/images/banner-image.png" alt="Myth Design Image")
-        .label-group-unique
-          span MYTH CREATION
+  .container 
+    section.hero-section-unique
+      .outer-unique
+        //- IMAGE
+        .image-container-unique
+          img(src="/images/banner-image.png" alt="Myth Design Image")
+          .label-group-unique
+            span MYTH CREATION
 
-      //- TEXT
-      .inner-unique
-        h1.animate-text-unique
-          | A MYTH IS A SHARED BELIEF, BUILT WITH FOUNDATIONS.
+        //- TEXT
+        .inner-unique
+          h1.animate-text-unique
+            | A MYTH IS A SHARED BELIEF, BUILT WITH FOUNDATIONS.
 
-        .banner-inner-unique
-          p.animate-text-unique
-            | To establish a myth in the collective imagination, we first lay the strategic foundations
-            | – business models, systems, and structures that keep the brand standing tall.
+          .banner-inner-unique
+            p.animate-text-unique
+              | To establish a myth in the collective imagination, we first lay the strategic foundations
+              | – business models, systems, and structures that keep the brand standing tall.
 
-          p.animate-text-unique
-            | On this base, we ignite inventive engines – transforming ideas into products, tools,
-            | and experiences that can be held, shared, or scaled.
+            p.animate-text-unique
+              | On this base, we ignite inventive engines – transforming ideas into products, tools,
+              | and experiences that can be held, shared, or scaled.
 
   //- VIDEO
   #video-outer
@@ -374,3 +375,53 @@ block content
         tl.to(prevSection, { yPercent: -50, ease: "none" }, i)
           .to(section, { yPercent: 0, ease: "none" }, i);
       });
+
+
+  script.
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.querySelectorAll(".animate-text").forEach(text => {
+
+      // Split text into words
+      const words = text.innerText.split(" ");
+      text.innerHTML = words.map(word => `<span>${word}&nbsp;</span>`).join("");
+
+      const spans = Array.from(text.querySelectorAll("span"));
+
+      // Group words into lines
+      let lines = [];
+      let currentTop = spans[0]?.offsetTop;
+      let line = [];
+
+      spans.forEach(span => {
+        if (span.offsetTop !== currentTop) {
+          lines.push(line);
+          line = [];
+          currentTop = span.offsetTop;
+        }
+        line.push(span);
+      });
+      if (line.length) lines.push(line);
+
+      // Wrap lines
+      lines.forEach(words => {
+        const lineWrap = document.createElement("div");
+        lineWrap.classList.add("line");
+        words[0].parentNode.insertBefore(lineWrap, words[0]);
+        words.forEach(w => lineWrap.appendChild(w));
+      });
+
+      // Animate text on scroll
+      gsap.to(text.querySelectorAll("span"), {
+        scrollTrigger: {
+          trigger: text,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        },
+        y: "0%",
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.04
+      });
+    });

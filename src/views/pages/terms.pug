@@ -1,19 +1,58 @@
 extends ../layout
 
 block content
-  section.page.terms-page
+       // ================= FIXED HEADER =================
+    .fixed-header
+      .header-inner
+        h1 Terms & Conditions
+      .progress-container
+        .progress-bar#progressBar
+
+    // ================= CONTENT =================
     .container
-      h1 Terms & Conditions
+      .terms-container
+        // TOC
+        .toc
+          h2 Table of Contents
+          ul
+            li section's name
+            li section's name
+            li section's name
+            li section's name
+            li section's name
 
-      p
-        | These terms and conditions outline the rules and regulations
-        | for the use of our website.
+        // TERMS
+        .term-section
+          h2 Overview
+          p This website is operated by JK Supply LLC. Throughout the site, the terms “we”, “us” and “our” refer to JK Supply LLC. JK Supply LLC offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.
+          p By visiting our site and/or purchasing something from us, you engage in our “Service” and agree to be bound by the following terms and conditions (“Terms of Service”, “Terms”), including those additional terms and conditions and policies referenced herein and/or available by hyperlink.
+          p Please read these Terms of Service carefully before accessing or using our website.
+          p Any new features or tools which are added to the current store shall also be subject to the Terms of Service.
+          p Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.
 
-      h2 Usage
-      p
-        | By accessing this website, you accept these terms in full.
+          h2 General Conditions
+          p We reserve the right to refuse service to anyone for any reason at any time.
+          p You understand that your content (not including credit card information), may be transferred unencrypted over various networks.
 
-      h2 Intellectual Property
-      p
-        | Unless otherwise stated, we own the intellectual property
-        | rights for all material on this website.
+          h2 Accuracy, completeness and timeliness of information
+          p We are not responsible if information made available on this site is not accurate, complete or current.
+
+          h2 Modifications to the service and prices
+          p Prices for our products are subject to change without notice.
+          p We reserve the right at any time to modify or discontinue the Service without notice.
+
+          h2 Products or services (if applicable)
+          p Certain products or services may be available exclusively online through the website.
+          p We do not warrant that the quality of any products will meet your expectations.
+
+    // ================= JAVASCRIPT =================
+    script.
+      window.addEventListener("scroll", () => {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+
+        const scrollPercent = (scrollTop / scrollHeight) * 100;
+        document.getElementById("progressBar").style.width = scrollPercent + "%";
+      });
