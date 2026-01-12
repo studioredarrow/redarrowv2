@@ -31,76 +31,56 @@ block content
             .team-inner
               h6 OUR TEAM
             .team-header
-              | In a world where ideas become myths, our team is the magic behind the scenes.
-              br
-              | Physically in Asia, virtually next door.
+              != asHTML(page.data.our_team_heading)
 
           .team-grid
-            .team-card
-              img(src="/images/team-1.png", alt="Fred")
-              h3 FRED
-              p Creative Director
+            -
+              const slotInterval = 5;
+              let slotIndex = 0;
 
-            .team-card
-
-            .team-card
-              img(src="/images/team-2.png", alt="Alice")
-              h3 ALICE
-              p Project Manager
-
-            .team-card
-              img(src="/images/team-3.png", alt="Tram Tram")
-              h3 TRAM TRAM
-              p Project Manager
-
-            .team-card
-              img(src="/images/team-4.png", alt="Linn")
-              h3 LINN
-              p Project Manager
-
-            .team-card
-              img(src="/images/team-7.png", alt="Mai Anh")
-              h3 MAI ANH
-              p Designer
-
-            .team-card
-              img(src="/images/team-8.png", alt="Jason")
-              h3 JASON
-              p Designer
-
-            .team-card
-
-            each _ in [1,2,3,4,5]
+            each member, i in teamMembers
+              // TEAM CARD
               .team-card
-                img(src="/images/team-9.png", alt="Thai Tran")
-                h3 THAI TRAN
-                p Designer
+                if member.data.photo
+                  img(
+                    src=member.data.photo.url
+                    alt=member.data.photo.alt || member.data.name
+                  )
+                h3= member.data.name
+                p= member.data.role
 
-            .team-card
 
-            .team-card.add-card
-              | PROJECT MANAGER ASSISTANT
-              br
-              span +
+              // INSERT AVAILABLE SLOT CARD
+              if ((i + 1) % slotInterval === 0 && availableSlots[slotIndex])
+                -
+                  const slot = availableSlots[slotIndex];
+                  slotIndex++;
 
+                .team-card.add-card(class=`status-${slot.data.status}`)
+                  span= slot.data.title
+                  br
+                  if slot.data.cta_label
+                    if slot.data.cta_link && slot.data.cta_link.url
+                      a.slot-cta(href=slot.data.cta_link.url)
+                        = asText(slot.data.cta_label)
+                    else
+                      a.slot-cta(href="#")
+                        = asText(slot.data.cta_label)
+                  else
+                    span +
+                    
   section.info-wrapper
       .info-container
         .info-flex
           .info-block
             span.label Location
             .value
-              p VIETNAM
-              p HONG KONG
+              != asHTML(page.data.location)
 
           .info-block
             span.label Address
             .value
-              p
-                | 36 TRAN QUOC THAO, XUAN HOA
-                br
-                | WARD, HO CHI MINH CITY,
-                br
-                | VIETNAM      
+              != asHTML(page.data.address)
 
   section.hero
     .hero-container
@@ -109,18 +89,18 @@ block content
           span.hero-subtitle CREATIVE COLLECTIVE
         .hero-item  
           h1.hero-title
-            | STEP INSIDE
-            br
-            | CREATING THE
-            br
-            | FUTURE
+              != asHTML(page.data.creative_collective_heading)
+
           .hero-image
-            img(src="/images/about-us-creative.png", alt="Party scene with lobster")
+            img(
+                src=page.data.creative_image.url
+                alt=page.data.creative_image.alt
+              )
           p.hero-description
             | The creators behind the myths, blending strategy and imagination to shape brands that captivate and inspire
             .hero-btn
               button.hero-wrap.hero-oval
-                span.hero-oval__text PING US, WE DARE YOU
+                span.hero-oval__text= asText(page.data.button_text)
                   svg.hero-oval__svg(
                       viewBox="0 0 150 68"
                       xmlns="http://www.w3.org/2000/svg"
