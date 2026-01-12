@@ -1,13 +1,13 @@
 /* ===== HERO SECTION UNIQUE SCSS ===== */
 body {
-  font-family: 'Work Sans';
+  font-family: Work Sans;
   background-color: #f6f3ee;
   color: #111;
   overflow-x: hidden;
 }
 
 .machine {
-  width: 97%;
+  width: 100%;
     background: #686060;
     border-radius: 12px;
     box-shadow: 0 0 30px #686060;
@@ -264,9 +264,6 @@ body {
 }
 
 // hero css start here
-.hero-btn {
-
-}
 .hero-wrap {
   position: relative;
   display: inline-flex;

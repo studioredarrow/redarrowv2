@@ -1,13 +1,283 @@
 extends ../layout
 
 block content
-  section.page.portfolio-page
-    .container
-      h1 Portfolio
-      p A curated collection of our creative output.
+  .benji-wrapper
+      .container
+        .benji-image
+          img(src="/images/benji-banner-image.png", alt="Benji Bistro")
 
-      .portfolio-grid
-        each item in [1,2,3,4,5,6]
-          .portfolio-item
-            .thumb Placeholder Image
-            h3 Project #{item}
+        .benji-hero
+          .benji-content
+            h1.benji-title Benji Bistro
+            p.benji-description
+              | Benji Bistro is a first-of-its-kind hospitality concept — a dog-friendly restaurant where elegance meets
+              | play, designed to bring humans and dogs together in a shared dining experience.
+
+          .benji-services
+            p Creative & Design
+            p Campaigns
+            p Marketing & Branding
+            p Creative Direction & Production
+
+            .benji-absolute
+              img(src="/images/category-portfolio-img.png", alt="")
+
+  .benji-outer
+      .benji-inner
+        .container
+          .benji-flex
+            // Left Column
+            .left
+              .benji-left
+                div
+                  span.label Sector
+                  br
+                  | F&B
+                div
+                  span.label Office
+                  br
+                  | Hongkong
+                div
+                  span.label Partner
+                  br
+                  | owner’s name
+
+              .benji-left
+                div
+                  span.label Project team
+                  br
+                  | member's name
+                  br
+                  | member's name
+                  br
+                  | member's name
+                  br
+                  | member's name
+                  br
+                  | member's name
+                  br
+                  | member's name
+
+            // Right Column
+            .right
+              h2 Challenge
+              p
+                | Develop a complete brand and experience model for a new franchise concept blending lifestyle, community,
+                | and hospitality under one cohesive identity.
+
+              h2 The strategy
+              p
+                | To create a hospitality experience where elegance meets play — a restaurant made for dogs and humans
+                | alike. The vision: to design a brand that redefines connection through shared spaces and emotional
+                | storytelling, blending lifestyle, culture, and companionship into one seamless identity.
+
+              h2 The solution
+              p
+                | Through the Insight Workshop, we defined the balance — 80% for dogs, 20% for humans. From that insight
+                | came a complete identity system: illustrations, typography, and spatial design unified by the dual-type
+                | logo — playful Benji, refined Bistro. Every touchpoint, from events to charity campaigns, reflected this
+                | harmony, resulting in a franchise-ready model opening one new location each month.            
+  
+      section
+        .photo-outer
+          .photo-inner
+            .container
+              .bistro-banner
+                img(src="/images/benji-bistro-img.png", alt="")
+
+              .bistro-flex
+                .bistro-item
+                  img(src="/images/Goldfoil-Red.png", alt="")
+                .bistro-item
+                  img(src="/images/BB-full-logo.png", alt="")
+
+              .bistro-inner-item
+                p Benji Bistro celebrates the joyful bond between dogs and humans through a mirrored dining concept
+
+              .photo-banner
+                h2 Photoshoot
+                p
+                  | Within 12 months, Nuon was featured next to L’Oréal, Estée Lauder,
+                  | Shiseido, Unilever, Coty, LVMH, Amorepacific, and more — establishing
+                  | its place among the most credible names in beauty tech.
+                img(src="/images/gallery-1.png", alt="")
+
+              .photo-flex
+                each imgName in ["/images/gallery-2.png", "/images/gallery-3.png", "/images/gallery-4.png", "/images/gallery-5.png"]
+                  .photo-item
+                    img(src=imgName, alt="")
+
+              .photo-banner
+                .photo-right
+                  h2 Interior
+                  p
+                    | Within 12 months, Nuon was featured next to L’Oréal, Estée Lauder,
+                    | Shiseido, Unilever, Coty, LVMH, Amorepacific, and more — establishing
+                    | its place among the most credible names in beauty tech.
+                img(src="/images/right-gallery-1.png", alt="")
+
+              .photo-flex
+                each imgName in ["/images/right-gallery-2.png", "/images/right-gallery-3.png", "/images/right-gallery-4.png", "/images/right-gallery-5.png"]
+                  .photo-item
+                    img(src=imgName, alt="")
+              .photo-banner
+                img(src="/images/right-gallery-6.png", alt="")  
+
+      section
+        .creative-outer
+          .creative-inner
+            .container
+              .creative-banner
+                h3 Creative Direction & Production
+                p
+                  | Capturing the playful sophistication of Benji Bistro, the visuals blend French-inspired elegance with the
+                  | joyful bond between dogs and their human companions, brought to life through the mirror dining concept.
+              .create-grid
+                .create-item-grid.create-inner-flex
+                  .create-item-int
+                    img(src="/images/create-gallery-1.png", alt="")
+                  .create-item-int
+                    img(src="/images/create-gallery-2.png", alt="")
+                  .create-item-int.create-int
+                    img(src="/images/create-gallery-3.png", alt="")
+                .create-item-grid
+                  img(src="/images/create-gallery-4.png", alt="")
+                .create-item-grid.creater-flex
+                  .create-inner-item
+                    img(src="/images/create-gallery-5.png", alt="")
+                  .create-inner-item
+                    img(src="/images/create-gallery-6.png", alt="") 
+
+      .container              
+        .photo-flex
+          each imgName in ["/images/valentine-image-1.png", "/images/valentine-image-2.png"]
+            .photo-item
+              img(src=imgName, alt="")
+
+        .photo-banner
+          .photo-right
+            h2 Interior
+            p
+              | Within 12 months, Nuon was featured next to L’Oréal, Estée Lauder,
+              | Shiseido, Unilever, Coty, LVMH, Amorepacific, and more — establishing
+              | its place among the most credible names in beauty tech.
+
+      section
+        .event-outer
+          .event-inner
+            .container
+              .event-grid
+                .event-item.event-item-grid
+                  .event-grid-item
+                    img(src="/images/event-img-1.png" alt="")
+                  .event-grid-item
+                    img(src="/images/event-img-2.png" alt="")
+                  .event-grid-item
+                    img(src="/images/event-img-3.png" alt="")
+                  .event-grid-item
+                    img(src="/images/event-img-4.png" alt="")
+                .event-item
+                  img(src="/images/event-img-5.png" alt="")       
+
+      .photo-banner
+        .container
+            .photo-right
+              h2 Event
+              p
+                | Within 12 months, Nuon was featured next to L’Oréal, Estée Lauder,
+                | Shiseido, Unilever, Coty, LVMH, Amorepacific, and more — establishing
+                | its place among the most credible names in beauty tech.  
+
+      section.event-section-new
+        .container 
+          .event-wrapper-new
+            .event-content-new
+              .layout-container-new
+                .event-layout-new
+                  .event-column-new.event-gallery-new
+                    .event-image-box-new
+                      img(src="/images/event-img-6.png", alt="")
+                    .event-image-box-new
+                      img(src="/images/event-img-7.png", alt="")
+                    .event-image-box-new
+                      img(src="/images/event-img-8.png", alt="")
+                    .event-image-box-new
+                      img(src="/images/event-img-9.png", alt="")
+                  .event-column-new.event-single-image-new
+                    img(src="/images/event-img-10.png", alt="") 
+
+      section.related-projects
+        .container
+          h2 Related projects
+
+          .projects-grid
+            .project.center
+              .project-center
+                .project-card
+                p LED ESTHETICS
+
+            .project
+              .project-card
+              p LED ESTHETICS
+
+            .project
+              .project-card
+              p LED ESTHETICS   
+
+
+      // GSAP Core
+  script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
+  script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
+
+  // Page animation
+  script.
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.defaults({
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // HERO ANIMATION
+    const heroTL = gsap.timeline();
+
+    heroTL
+      .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
+      .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
+      .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
+      .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
+      .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
+
+    // TEXT MOMENT
+    gsap.utils.toArray("h2, h3, p").forEach(el => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%"
+        },
+        y: 40,
+        opacity: 0
+      });
+    });
+
+    // IMAGE REVEAL
+    gsap.utils.toArray(".photo-item img, .bistro-item img").forEach(img => {
+      gsap.from(img, {
+        scrollTrigger: {
+          trigger: img,
+          start: "top 85%"
+        },
+        scale: 1.1,
+        opacity: 0
+      });
+    });
+
+    ScrollTrigger.refresh();                  
+
+
+                
+            
+
+
+      
+      

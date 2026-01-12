@@ -1,10 +1,12 @@
 @use "pages/mythCreation";
 @use "pages/about";
 @use "pages/work";
+@use "pages/portfolio";
+@use "pages/open-studio";
 // Google Font
 
         body {
-            font-family: 'Work Sans';
+            font-family: Work Sans;
             margin: 0;
             // overflow: hidden;
         }
@@ -1103,24 +1105,27 @@
 .myth-wrapper {
     padding: 15px;
 }
- .item:nth-child(2) {
-    transform: rotateY(70deg) translateZ(160px);
-}
-.item:nth-child(6) {
-    transform: rotateY(306deg) translateZ(169px);
-}
- .item:nth-child(1) {
-    transform: rotateY(-8deg) translateZ(128px);
-}
-.item:nth-child(3) {
-    transform: rotateY(125deg) translateZ(162px);
-} 
-.item:nth-child(4) {
-    transform: rotateY(185deg) translateZ(170px);
-}
-.item:nth-child(5) {
-    transform: rotateY(247deg) translateZ(170px);
-}   
+//  .item:nth-child(2) {
+//     transform: rotateY(70deg) translateZ(160px);
+// }
+// .item:nth-child(6) {
+//     transform: rotateY(306deg) translateZ(169px);
+// }
+//  .item:nth-child(1) {
+//     transform: rotateY(-8deg) translateZ(128px);
+// }
+// .item:nth-child(3) {
+//     transform: rotateY(125deg) translateZ(162px);
+// } 
+// .item:nth-child(4) {
+//     transform: rotateY(185deg) translateZ(170px);
+// }
+// .item:nth-child(5) {
+//     transform: rotateY(247deg) translateZ(170px);
+// } 
+.container {
+    padding: 0px !important;
+}  
  }
 
 

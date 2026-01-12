@@ -90,17 +90,39 @@ block content
       const texts = document.querySelectorAll(".text");
       const imagePreview = document.getElementById("imagePreview");
 
+      // --- HELPER FUNCTION FOR TEXT ANIMATION ---
+      function animateTexts(textElements) {
+        gsap.fromTo(textElements, 
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+        );
+      }
+
       // --- TOGGLE VIEWS ---
       gridBtn.onclick = () => {
         gridView.classList.add("active");
         listView.classList.remove("active");
         gridBtn.classList.add("active");
         listBtn.classList.remove("active");
-        gsap.to(imagePreview, { opacity: 0 });
+
+        // Hide image preview
+        gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
+
+        // Reset text styles
         texts.forEach(t => {
           t.classList.remove("active");
           t.classList.remove("blur");
+          gsap.set(t, { y: 0, opacity: 1 });
         });
+
+        // Animate grid cards
+        gsap.fromTo(cards,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+        );
+
+        // Animate all text movement
+        animateTexts(texts);
       };
 
       listBtn.onclick = () => {
@@ -109,10 +131,8 @@ block content
         listBtn.classList.add("active");
         gridBtn.classList.remove("active");
 
-        gsap.fromTo(texts,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.08, duration: 0.8, ease: "power3.out" }
-        );
+        // Animate texts in list view with movement
+        animateTexts(texts);
       };
 
       // --- CATEGORY FILTER ---
@@ -129,10 +149,13 @@ block content
                 : "none";
           });
 
-          gsap.fromTo(".card",
+          gsap.fromTo(cards,
             { y: 80, opacity: 0 },
             { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power3.out" }
           );
+
+          // Animate text movement as well
+          animateTexts(texts);
         });
       });
 
@@ -147,7 +170,7 @@ block content
         metamorphosis: { img: "/images/image-slider-2.png", pos: "right" }
       };
 
-      // --- TEXT HOVER EFFECT ---
+      // --- TEXT HOVER EFFECT & MOVEMENT ---
       texts.forEach(text => {
         const key = text.classList[1];
         const { img, pos } = textImageMap[key] || {};
@@ -161,10 +184,18 @@ block content
           text.classList.add("active");
           text.classList.remove("blur");
 
+          // Animate text pop-in movement
+          gsap.fromTo(text,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
+          );
+
+          // Show corresponding image
           if (!img) return;
           imagePreview.style.backgroundImage = `url(${img})`;
           gsap.to(imagePreview, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" });
 
+          // Position image
           switch (pos) {
             case "left":
               gsap.set(imagePreview, { left: "15%", top: "50%", x: "-50%", y: "-50%" });
@@ -179,10 +210,17 @@ block content
 
         text.addEventListener("mouseleave", () => {
           gsap.to(imagePreview, { opacity: 0, duration: 0.4 });
+
           texts.forEach(t => {
             t.classList.remove("active");
             t.classList.remove("blur");
           });
+
+          // Animate text back to resting position smoothly
+          gsap.to(text, { y: 0, opacity: 1, duration: 0.3 });
         });
       });
+
+      // INITIAL ANIMATION ON PAGE LOAD
+      animateTexts(texts);
     });
