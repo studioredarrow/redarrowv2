@@ -51,36 +51,18 @@ html(lang="en")
 
         .stage#stage
           .carousel#carousel
-            .item.side
-              span (05)
-              |  OPEN
-              br
-              |  STUDIO
-            .item.side
-              span (02)
-              |  DESIGN
-              br
-              |  LAB
-            .item.main
-              span (01)
-              |  MYTH
-              br
-              |  JOURNEY
-            .item.side
-              span (03)
-              |  MYTH
-              br
-              |  CREATION
-            .item.side
-              span (04)
-              |  VISION
-              br
-              |  QUEST
-            .item.side
-              span (06)
-              |  FUTURE
-              br
-              |  PROJECT
+            each item, index in menuItems
+              - const isMain = index === 0
+
+              .item(
+                class=isMain ? 'main' : 'side'
+                data-route=item.data.route[0].text
+                data-label=item.data.label.map(b => b.text).join(' ')
+              )
+                span #{String(index + 1).padStart(2, '0')}
+                each block in item.data.label
+                  | #{block.text}
+                  br
 
         .social-icons
           span
@@ -102,39 +84,35 @@ html(lang="en")
       let currentRotation = 0;
       let dragRotation = 0;
 
-      const sensitivity = 0.2;
+      const sensitivity = 0.25;
       const itemCount = items.length;
       const degreePerItem = 360 / itemCount;
 
-      window.addEventListener('mousedown', dragStart);
-      window.addEventListener('mousemove', dragMove);
-      window.addEventListener('mouseup', dragEnd);
-      window.addEventListener('touchstart', e => dragStart(e.touches[0]));
-      window.addEventListener('touchmove', e => dragMove(e.touches[0]));
-      window.addEventListener('touchend', dragEnd);
-
-      function dragStart(e) {
+      // START DRAG
+      carousel.addEventListener('mousedown', (e) => {
         isDragging = true;
-        startX = e.pageX;
+        startX = e.clientX;
         carousel.style.transition = 'none';
-      }
+      });
 
-      function dragMove(e) {
+      // DRAG MOVE (DOCUMENT!)
+      document.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
-        const walk = (e.pageX - startX) * sensitivity;
-        dragRotation = currentRotation + walk;
+        const delta = e.clientX - startX;
+        dragRotation = currentRotation + delta * sensitivity;
         carousel.style.transform = `rotateY(${dragRotation}deg)`;
         updateHighlight(dragRotation);
-      }
+      });
 
-      function dragEnd() {
+      // END DRAG
+      document.addEventListener('mouseup', () => {
         if (!isDragging) return;
         isDragging = false;
         currentRotation = Math.round(dragRotation / degreePerItem) * degreePerItem;
-        carousel.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+        carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
         carousel.style.transform = `rotateY(${currentRotation}deg)`;
         updateHighlight(currentRotation);
-      }
+      });
 
       function updateHighlight(rotation) {
         const normalized = ((rotation % 360) + 360) % 360;
@@ -150,6 +128,9 @@ html(lang="en")
           }
         });
       }
+      currentRotation = 0;
+      carousel.style.transform = `rotateY(0deg)`;
+      updateHighlight(0);
 
     // =====================
     // OVERLAY OPEN / CLOSE
@@ -176,6 +157,25 @@ html(lang="en")
       });
 
     // =====================
+    // MENU ITEM CLICK → LOADING PAGE
+    // =====================
+    script.
+      document.querySelectorAll('.carousel .item').forEach(item => {
+        item.addEventListener('click', () => {
+          if (!item.classList.contains('main')) return;
+
+          const route = item.dataset.route;
+          const label = item.dataset.label;
+
+          console.log('NAVIGATING →', label);
+
+          window.location.replace(
+            `/loading?to=${encodeURIComponent(route)}&label=${encodeURIComponent(label)}`
+          );
+        });
+      });
+
+    // =====================
     // LOGO SCROLL SHOW / HIDE + FIXED POSITION
     // =====================
     script.
@@ -192,7 +192,6 @@ html(lang="en")
         if (Math.abs(currentScrollY - lastScrollY) < scrollThreshold) return;
 
         if (currentScrollY > lastScrollY && currentScrollY > 50) {
-          // Scroll DOWN → hide logo and remove fixed
           logoContainer.classList.remove('fixed');
           gsap.to(logoContainer, {
             y: -100,
@@ -201,7 +200,6 @@ html(lang="en")
             ease: "power3.out"
           });
         } else {
-          // Scroll UP → show logo and set fixed
           logoContainer.classList.add('fixed');
           gsap.to(logoContainer, {
             y: 0,

@@ -1,0 +1,226 @@
+extends ../layout
+
+block content
+  .work-outer
+    .container
+      .work-flex
+        .toggle
+          button#gridBtn.active Grid
+          button#listBtn List
+
+        .category-links
+          span.category.active(data-filter="all") all brand identity 
+            span.count (9)
+          | ,
+          span.category(data-filter="app") app & website 
+            span.count (8)
+          | ,
+          span.category(data-filter="exhibition") exhibitions 
+            span.count (5)
+          | ,
+          span.category(data-filter="all") product design 
+            span.count (3)
+          | ,
+          span.category(data-filter="exhibition") packaging 
+            span.count (8)
+          | ,
+          span.category(data-filter="all") environment design 
+            span.count (4)
+          | ,
+          span.category(data-filter="exhibition") brand amplification 
+            span.count (8)
+          | ,
+          span.category(data-filter="all") BDC 
+            span.count (8)
+          .absolute-image 
+            img(src="/images/category-image.png", alt="")  
+
+      // GRID VIEW
+      #gridView.grid.active
+        .card(data-category="exhibition")
+          img(src="images/led.png")
+          .card-title LED ESTHETICS
+          .card-desc Exhibition branding project.
+        .card(data-category="app")
+          .dark-img.dark-1
+            img(src="images/medical-img.png")
+          .card-title OREN MEDICAL
+          .card-desc Medical app & website design.
+        .card(data-category="app")
+          .dark-img
+            img(src="/images/kala-image.png")
+          .card-title KALA
+          .card-desc Mobile app & UI design
+        .card(data-category="exhibition")
+          img(src="/images/nuon-image.png")
+          .card-title NUON MEDICAL
+          .card-desc Exhibition branding project.
+        .card(data-category="exhibition")
+          img(src="/images/benji-image.png")
+          .card-title BENJI BISTRO
+          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+        .card(data-category="exhibition")
+          .last-image
+            img(src="")
+          .card-title SVAKOM
+          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+
+      // FIXED IMAGE PREVIEW
+      #imagePreview
+
+      // LIST VIEW
+      #listView.list
+        .canvas
+          .text.led LED ESTHETICS
+          .text.oren OREN MEDICAL
+          .text.kala KALA
+          .text.nuon NUON MEDICAL
+          .text.benji BENJI BISTRO
+          .text.svakom SVAKOM
+          .text.metamorphosis METAMORPHOSIS
+
+  script.
+    document.addEventListener("DOMContentLoaded", () => {
+      const gridBtn = document.getElementById("gridBtn");
+      const listBtn = document.getElementById("listBtn");
+      const gridView = document.getElementById("gridView");
+      const listView = document.getElementById("listView");
+      const categories = document.querySelectorAll(".category");
+      const cards = document.querySelectorAll(".card");
+      const texts = document.querySelectorAll(".text");
+      const imagePreview = document.getElementById("imagePreview");
+
+      // --- HELPER FUNCTION FOR TEXT ANIMATION ---
+      function animateTexts(textElements) {
+        gsap.fromTo(textElements, 
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+        );
+      }
+
+      // --- TOGGLE VIEWS ---
+      gridBtn.onclick = () => {
+        gridView.classList.add("active");
+        listView.classList.remove("active");
+        gridBtn.classList.add("active");
+        listBtn.classList.remove("active");
+
+        // Hide image preview
+        gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
+
+        // Reset text styles
+        texts.forEach(t => {
+          t.classList.remove("active");
+          t.classList.remove("blur");
+          gsap.set(t, { y: 0, opacity: 1 });
+        });
+
+        // Animate grid cards
+        gsap.fromTo(cards,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+        );
+
+        // Animate all text movement
+        animateTexts(texts);
+      };
+
+      listBtn.onclick = () => {
+        listView.classList.add("active");
+        gridView.classList.remove("active");
+        listBtn.classList.add("active");
+        gridBtn.classList.remove("active");
+
+        // Animate texts in list view with movement
+        animateTexts(texts);
+      };
+
+      // --- CATEGORY FILTER ---
+      categories.forEach(cat => {
+        cat.addEventListener("click", () => {
+          categories.forEach(c => c.classList.remove("active"));
+          cat.classList.add("active");
+
+          const filter = cat.dataset.filter;
+          cards.forEach(card => {
+            card.style.display =
+              filter === "all" || card.dataset.category === filter
+                ? "block"
+                : "none";
+          });
+
+          gsap.fromTo(cards,
+            { y: 80, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power3.out" }
+          );
+
+          // Animate text movement as well
+          animateTexts(texts);
+        });
+      });
+
+      // --- IMAGE MAP ---
+      const textImageMap = {
+        led: { img: "/images/image-slider-2.png", pos: "left" },
+        oren: { img: "/images/image-slider-3.png", pos: "right" },
+        kala: { img: "/images/image-slider-5.png", pos: "center" },
+        nuon: { img: "/images/image-slider-2.png", pos: "left" },
+        benji: { img: "/images/image-slider-5.png", pos: "right" },
+        svakom: { img: "/images/image-slider-3.png", pos: "center" },
+        metamorphosis: { img: "/images/image-slider-2.png", pos: "right" }
+      };
+
+      // --- TEXT HOVER EFFECT & MOVEMENT ---
+      texts.forEach(text => {
+        const key = text.classList[1];
+        const { img, pos } = textImageMap[key] || {};
+
+        text.addEventListener("mouseenter", () => {
+          texts.forEach(t => {
+            t.classList.remove("active");
+            t.classList.add("blur");
+          });
+
+          text.classList.add("active");
+          text.classList.remove("blur");
+
+          // Animate text pop-in movement
+          gsap.fromTo(text,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
+          );
+
+          // Show corresponding image
+          if (!img) return;
+          imagePreview.style.backgroundImage = `url(${img})`;
+          gsap.to(imagePreview, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" });
+
+          // Position image
+          switch (pos) {
+            case "left":
+              gsap.set(imagePreview, { left: "15%", top: "50%", x: "-50%", y: "-50%" });
+              break;
+            case "right":
+              gsap.set(imagePreview, { left: "85%", top: "50%", x: "-50%", y: "-50%" });
+              break;
+            default:
+              gsap.set(imagePreview, { left: "50%", top: "50%", x: "-50%", y: "-50%" });
+          }
+        });
+
+        text.addEventListener("mouseleave", () => {
+          gsap.to(imagePreview, { opacity: 0, duration: 0.4 });
+
+          texts.forEach(t => {
+            t.classList.remove("active");
+            t.classList.remove("blur");
+          });
+
+          // Animate text back to resting position smoothly
+          gsap.to(text, { y: 0, opacity: 1, duration: 0.3 });
+        });
+      });
+
+      // INITIAL ANIMATION ON PAGE LOAD
+      animateTexts(texts);
+    });

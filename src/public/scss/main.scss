@@ -1,15 +1,19 @@
 @use "pages/mythCreation";
+@use "pages/about";
+@use "pages/work";
+@use "pages/portfolio";
+@use "pages/open-studio";
 // Google Font
 
         body {
-            font-family: 'Work Sans';
+            font-family: Work Sans;
             margin: 0;
             // overflow: hidden;
         }
 
         .logo-container.fixed {
             position: fixed;
-            top: 20px;
+            top: 0px;
             left: 50%;
             z-index: 999;
             width: 100%;
@@ -517,10 +521,10 @@
         $border-radius: 18px;
 
         .myth-wrapper {
-           margin-top: 80px;
-            background: $bg-color;
-            padding: 24px;
-            width: 100%;
+          margin-top: 80px;
+    background: #f6f3ee;
+    padding: 24px;
+    width: 100%;
         }
 
         /* Header */
@@ -604,7 +608,7 @@
 
         .outer {
             margin: 0;
-            background-color: var(--bg-color);
+            background-color: #ff0000;
             color: white;
             font-family: var(--main-font);
             display: flex;
@@ -870,6 +874,21 @@
                 opacity: 1;
             }
         }
+        .overlay,
+        .stage,
+        .carousel,
+        .carousel .item {
+        pointer-events: auto;
+        transform-style: preserve-3d;
+        }
+        .carousel {
+        cursor: grab;
+        }
+
+        .carousel:active {
+        cursor: grabbing;
+        }
+
 
         // 404 css start here
         .page-404 {
@@ -938,22 +957,22 @@
         }
 
         div#chat-area button {
-    border: 1px solid #ff0033;
-    background: #fff;
-    color: #ff0033;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    width: 10%;
-    display: flex;
-    justify-content: center;
-}
+            border: 1px solid #ff0033;
+            background: #fff;
+            color: #ff0033;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            width: 10%;
+            display: flex;
+            justify-content: center;
+        }
         /* Initially hide mobile image */
         .mobile-img {
             display: none;
@@ -963,7 +982,13 @@
         .desktop-img {
             display: block;
         }
-
+        .logo-container.fixed {
+    position: fixed;
+    top: 20px;
+    left: 50% !important;
+    z-index: 999;
+    transform: translateX(-50%) !important;
+}
         /* When screen is 768px or less, hide desktop and show mobile */
         @media (max-width: 768px) {
             .desktop-img {
@@ -1080,24 +1105,27 @@
 .myth-wrapper {
     padding: 15px;
 }
- .item:nth-child(2) {
-    transform: rotateY(70deg) translateZ(160px);
-}
-.item:nth-child(6) {
-    transform: rotateY(306deg) translateZ(169px);
-}
- .item:nth-child(1) {
-    transform: rotateY(-8deg) translateZ(128px);
-}
-.item:nth-child(3) {
-    transform: rotateY(125deg) translateZ(162px);
-} 
-.item:nth-child(4) {
-    transform: rotateY(185deg) translateZ(170px);
-}
-.item:nth-child(5) {
-    transform: rotateY(247deg) translateZ(170px);
-}   
+//  .item:nth-child(2) {
+//     transform: rotateY(70deg) translateZ(160px);
+// }
+// .item:nth-child(6) {
+//     transform: rotateY(306deg) translateZ(169px);
+// }
+//  .item:nth-child(1) {
+//     transform: rotateY(-8deg) translateZ(128px);
+// }
+// .item:nth-child(3) {
+//     transform: rotateY(125deg) translateZ(162px);
+// } 
+// .item:nth-child(4) {
+//     transform: rotateY(185deg) translateZ(170px);
+// }
+// .item:nth-child(5) {
+//     transform: rotateY(247deg) translateZ(170px);
+// } 
+.container {
+    padding: 0px !important;
+}  
  }
 
 
