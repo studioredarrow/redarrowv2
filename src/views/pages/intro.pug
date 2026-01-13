@@ -8,7 +8,7 @@ block content
 
       .actions
         each question in intro.questions
-          button= question
+          button.action-btn(data-question=question)= question
 
       .inner-btn  
         a.journey(href="/myth-journey")= intro.journeyText 
@@ -152,6 +152,18 @@ block content
                 hideCookie();
               });
             }
+        document.querySelectorAll(".action-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const question = btn.dataset.question;
+
+            if (!question) return;
+
+            // Encode to safely pass in URL
+            const encoded = encodeURIComponent(question);
+
+            window.location.href = `/myth-journey?q=${encoded}`;
+          });
+        });
 
 
 
