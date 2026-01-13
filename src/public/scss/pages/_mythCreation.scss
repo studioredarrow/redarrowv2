@@ -8,6 +8,9 @@ body {
 img.mobile-arrow {
     display: none;
 }
+p.animate-text-unique {
+    max-width: 407px;
+}
 .hero-section-unique {
   width: 100%;
   display: flex;
@@ -26,11 +29,12 @@ img.mobile-arrow {
 
     .inner-unique {
       h1.animate-text-unique {
-        font-size: 83px;
+        font-size: 86px;
         font-weight: 300;
         line-height: 100%;
         margin-bottom: 1rem;
         color: #1E1E1E;
+        max-width: 670px;
       }
 
       .banner-inner-unique {
@@ -314,7 +318,7 @@ ul.services__list li:hover {
 
 .iconic-outer {
     position: sticky;
-    top: 20px;
+    top: 0px;
     left: 0;
     width: 100%;
     z-index: 0;
@@ -1001,53 +1005,9 @@ body.page1 {
     }
   }
 
-// container
-/* Tablets */
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
-}
 
-/* Small desktops */
-@media (min-width: 992px) {
   .container {
-    max-width: 960px;
+    max-width: 1220px;
     margin: 0 auto;
     padding: 0 !important;
   }
-}
-
-/* Large desktops */
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
-}
-@media (min-width: 1300px) {
-  .container {
-    max-width: 1340px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
-}
-/* Extra large desktops */
-@media (min-width: 1400px) {
-  .container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
-}
-/* Ultra-wide screens */
-@media (min-width: 1600px) {
-  .container {
-    max-width: 1640px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
-}

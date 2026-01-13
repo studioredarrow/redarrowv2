@@ -17,11 +17,12 @@
             left: 50%;
             z-index: 999;
             width: 100%;
+            background: #f8f5f1;
         }
 
         .wrapper {
             min-height: 100vh;
-            background: #ff0000; // exact red
+            background: #FF0004; // exact red
             display: flex;
             justify-content: center;
             align-items: center;
@@ -83,7 +84,7 @@
                 &:hover {
                     background: white;
                     border-color: #ffffff;
-                    color: #e60000;
+                    color: #FF0004;
                 }
             }
         }
@@ -110,7 +111,7 @@
             /* USER message (right side) */
         .chat-message.user {
             align-self: flex-end;
-            background: #ff0000;
+            background: #FF0004;
             color: #fff;
             // border-bottom-right-radius: 4px;
             }
@@ -125,7 +126,7 @@
             font-weight: 500;
             color: white;
             text-decoration: none;
-            background-color: red;
+            background-color: #FF0004;
             /* Exact same color as your image */
 
             &::after {
@@ -245,7 +246,7 @@
             margin-right: 60px;
 
             .accept {
-                color: #ff4a3d;
+                color: #FF0004;
                 font-weight: 700;
                 text-transform: uppercase;
                 font-size: 16px;
@@ -285,7 +286,7 @@
         .accept {
             position: relative;
             font-weight: 700;
-            color: #e60000;
+            color: #FF0004;
             cursor: pointer;
             text-transform: uppercase;
             font-size: 1.1rem;
@@ -335,7 +336,7 @@
         }
 
         .outer {
-            background: #ff0000;
+            background: #FF0004;
             color: #fff;
             font-family: 'Inter', sans-serif;
             height: 100vh;
@@ -487,7 +488,7 @@
         .hover-oval__text {
             font-size: 18px;
             font-weight: 600;
-            color: red;
+            color: #FF0004;
             position: relative;
             z-index: 2;
             padding-bottom: 30px;
@@ -515,7 +516,7 @@
 
         $bg-color: #fbf7f2;
         $text-muted: #b7b3ad;
-        $text-red: #e0473c;
+        $text-red: #FF0004;
         $card-bg: #ffffff;
         $input-bg: #ffffff;
         $border-radius: 18px;
@@ -567,17 +568,22 @@
                 height: 26px;
             }
         }
-
+.chat {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
         /* Bottom input */
         .chat-input {
             width: 100%;
             padding: 0 16px;
             max-width: 73%;
             margin: 0 auto;
+            position: relative;
 
             input {
-                width: 95%;
-                height: 59px;
+                width: 100%;
+                height: 70px;
                 border-radius: 24px;
                 border: none;
                 padding: 0 18px;
@@ -602,13 +608,13 @@
         // chat css end here
 
         :root {
-            --bg-color: #eb3324;
+            --bg-color: #FF0004;
             --main-font: 'Work Sans', sans-serif;
         }
 
         .outer {
             margin: 0;
-            background-color: #ff0000;
+            background-color: #FF0004;
             color: white;
             font-family: var(--main-font);
             display: flex;
@@ -715,14 +721,13 @@
         }
 
 
-        img.logo-trigger.logo1 {
-            filter: brightness(0) saturate(100%) invert(7%) sepia(97%) saturate(7491%) hue-rotate(356deg) brightness(100%) contrast(101%);
-        }
+       img.logo-trigger.logo1 {
+    filter: brightness(0) saturate(100%) invert(7%) sepia(97%) saturate(7491%) hue-rotate(356deg) brightness(150%) contrast(101%);
+}
 
-        .home-page img.logo-trigger.logo1 {
-            filter: brightness(0) saturate(100%) invert(95%) sepia(10%) saturate(300%) hue-rotate(0deg) brightness(100%) contrast(95%);
-        }
-
+      .home-page img.logo-trigger.logo1 {
+    filter: brightness(0) saturate(100%) invert(95%) sepia(10%) saturate(300%) hue-rotate(0deg) brightness(173%) contrast(100%);
+}
 
 
         .container {
@@ -738,10 +743,10 @@
 
         .headline1 {
             font-size: 20px;
-            font-weight: 500;
-            line-height: 1.6;
-            color: #ff0033;
-            margin-bottom: 1.8rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #FF0004;
+    margin-bottom: 1.8rem;
         }
 
         .btn-row {
@@ -752,9 +757,9 @@
             margin-bottom: 1.5rem;
 
             .btn {
-                border: 1px solid #ff0033;
+                border: 1px solid #FF0004;
                 background: #fff;
-                color: #ff0033;
+                color: #FF0004;
                 border-radius: 20px;
                 padding: 0.5rem 1rem;
                 font-size: 16px;
@@ -766,14 +771,14 @@
                 gap: 0.4rem;
 
                 &:hover {
-                    background: #ff0033;
+                    background: #FF0004;
                     color: #fff;
                 }
             }
         }
 
         .note {
-            color: #ff0033;
+            color: #FF0004;
             font-size: 20px;
             margin-bottom: 1.5rem;
         }
@@ -783,7 +788,7 @@
             flex-wrap: wrap;
             gap: 0.6rem;
             margin-bottom: 1.5rem;
-            max-width: 660px;
+            max-width: 800px;
             margin: 0 auto;
             padding-top: 100px;
             text-align: center;
@@ -792,9 +797,9 @@
             padding-bottom: 10px;
 
             .chat-btn {
-                border: 1px solid #ff0033;
+                border: 1px solid #FF0004;
                 background: transparent;
-                color: #ff0033;
+                color: #FF0004;
                 border-radius: 20px;
                 padding: 0.4rem 0.8rem;
                 font-size: 16px;
@@ -803,7 +808,7 @@
                 transition: all 0.2s ease-in-out;
 
                 &:hover {
-                    background: #ff0033;
+                    background: #FF0004;
                     color: #fff;
                 }
             }
@@ -813,7 +818,7 @@
         .loader-wrapper {
             width: 100vw;
             height: 100vh;
-            background-color: #ff0000;
+            background-color: #FF0004;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -930,7 +935,7 @@
                         color: #333;
 
                         a {
-                            color: #e60023;
+                            color: #FF0004;
                             text-decoration: none;
                             font-weight: 500;
                         }
@@ -957,9 +962,9 @@
         }
 
         div#chat-area button {
-            border: 1px solid #ff0033;
+            border: 1px solid #FF0004;
             background: #fff;
-            color: #ff0033;
+            color: #FF0004;
             border-radius: 20px;
             padding: 0.5rem 1rem;
             font-size: 16px;
@@ -984,12 +989,20 @@
         }
         .logo-container.fixed {
     position: fixed;
-    top: 20px;
+    top: 0px !important;
     left: 50% !important;
     z-index: 999;
     transform: translateX(-50%) !important;
+    background: #f8f5f1;
+    padding-bottom: 15px;
 }
         /* When screen is 768px or less, hide desktop and show mobile */
+      @media (max-width: 1024px) {
+        div#chat-area button {
+    width: 20%;
+}
+      }
+
         @media (max-width: 768px) {
             .desktop-img {
                 display: none;
@@ -1005,6 +1018,7 @@
 }
             .mobile-img {
                 display: block;
+                width: auto !important;
             }
         }
 
@@ -1094,7 +1108,7 @@
     padding: 0px !important;
 }
 .chat-input input {
-    width: 80%;
+    width: 100%;
 }
 .item.side {
     font-size: 40px;
@@ -1105,31 +1119,15 @@
 .myth-wrapper {
     padding: 15px;
 }
-//  .item:nth-child(2) {
-//     transform: rotateY(70deg) translateZ(160px);
-// }
-// .item:nth-child(6) {
-//     transform: rotateY(306deg) translateZ(169px);
-// }
-//  .item:nth-child(1) {
-//     transform: rotateY(-8deg) translateZ(128px);
-// }
-// .item:nth-child(3) {
-//     transform: rotateY(125deg) translateZ(162px);
-// } 
-// .item:nth-child(4) {
-//     transform: rotateY(185deg) translateZ(170px);
-// }
-// .item:nth-child(5) {
-//     transform: rotateY(247deg) translateZ(170px);
-// } 
+div#chat-area button {
+    width: 35%;
+}
 .container {
     padding: 0px !important;
 }  
  }
 
 
-//  main menu in the mobile veiw css start here
 
 
 

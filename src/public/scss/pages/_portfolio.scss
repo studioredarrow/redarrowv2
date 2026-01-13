@@ -394,6 +394,45 @@ body {
   border-radius: 20px;
 }
 
+.benji-services {
+  p:nth-child(4) {
+    @media (max-width: 768px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &::after {
+       content: "+";
+        font-size: 35px;
+        font-weight: 500;
+        line-height: 1;
+        color: #FF0004;
+      }
+    }
+  }
+}
+/* Progress bar wrapper at the top */
+.progress-bar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 9999;
+    background: #BDBDBD;
+}
+/* The actual filling bar */
+.progress-bar {
+    width: 100%;
+    height: 100%;
+    background: #FF0004;
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+
+
+
 /* Responsive */
 @media (max-width: 768px) {
   .event-layout-new {
@@ -503,62 +542,39 @@ body {
 }
 
 
-// container
-/* Tablets */
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
-  
-}
 
-/* Small desktops */
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
-}
 
-/* Large desktops */
-@media (min-width: 1200px) {
+
   .container {
-    max-width: 1200px;
+    max-width: 1220px;
     margin: 0 auto;
     padding: 0 !important;
   }
-}
-@media (min-width: 1300px) {
-  .container {
-    max-width: 1340px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
-}
-/* Extra large desktops */
-@media (min-width: 1400px) {
-  .container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
-}
-/* Ultra-wide screens */
-@media (min-width: 1600px) {
-  .container {
-    max-width: 1640px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
-}
 /* Responsive */
+@media (max-width: 1024px) {
+  .container {
+    padding: 20px !important;
+}
+.create-item-grid.create-inner-flex img {
+    width: auto;
+}
+.create-item-grid img {
+    width: 100%;
+}
+.event-item img {
+    width: 100%;
+    object-fit: contain;
+}
+}
+
 @media (max-width: 900px) {
+  .create-grid {
+    grid-template-columns: repeat(1, 1fr);
+}
   .benji-hero {
     align-items: center;
   }
+
 }
 
 @media (max-width: 768px) {
@@ -567,6 +583,12 @@ body {
     gap: 15px;
     align-items: start;
   }
+    .create-item-int {
+    width: 100%;
+}
+  .create-item-int {
+    width: 100%;
+}
 
   .benji-content {
     width: 100%;
