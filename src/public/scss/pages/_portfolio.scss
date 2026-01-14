@@ -5,7 +5,15 @@
      background: #ffffff;
       font-family: Work Sans;
    }
-
+        .logo-container.fixed {
+    position: fixed;
+    top: 0px !important;
+    left: 50% !important;
+    z-index: 999;
+    transform: translateX(-50%) !important;
+    background: #f8f5f1;
+    padding-bottom: 15px;
+}
 .benji-wrapper {
   font-family: 'Inter', sans-serif;
   color: #111;

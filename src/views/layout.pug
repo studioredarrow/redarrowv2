@@ -5,6 +5,26 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title= title
     link(rel="stylesheet", href="/css/main.css")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap")
+    style.
+      @import url('https://fonts.cdnfonts.com/css/ds-digital');
+      /* Primary DS-Digital font from CDN */
+      @font-face {
+        font-family: 'DS-Digital';
+        src: url('https://fonts.cdnfonts.com/s/15048/DS-DIGIB.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+      /* Fallback: Try local font if CDN fails */
+      @font-face {
+        font-family: 'DS-Digital';
+        src: url('/fonts/DS-DIGIB.woff') format('woff'),
+             url('/fonts/DS-DIGIB.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
 
   body
     include partials/menu
