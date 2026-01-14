@@ -5,9 +5,9 @@ footer
       .create-outer
         .container
           .create-flex
-            .create-item
+            .create-item.mobile-int-inner
               h3 CREATE CHAOS
-            .create-item
+            .create-item.create-img
               img(src="/images/footer-top-child-image.png" alt="")
             .create-item-inner
               .create-item-int
@@ -230,3 +230,79 @@ footer
       });
 
       updateCurve(0);
+
+
+      //- GSAP Scripts
+    //- GSAP Scripts
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js")
+    script.
+      document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- CREATE CHAOS Section Animation ---
+        const createItems = document.querySelectorAll(".create-outer .create-item, .create-outer .create-item-int, .create-outer img");
+        gsap.from(createItems, {
+          scrollTrigger: {
+            trigger: ".create-outer",
+            start: "top 80%",
+            toggleActions: "play none none none"
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out"
+        });
+
+        gsap.from(".image-create-overlay img", {
+          scrollTrigger: {
+            trigger: ".create-outer",
+            start: "top 80%",
+          },
+          scale: 0.8,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out"
+        });
+
+        gsap.from(".fate-oval", {
+          scrollTrigger: {
+            trigger: ".create-outer",
+            start: "top 80%",
+          },
+          y: 20,
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.5,
+          ease: "back.out(1.7)"
+        });
+
+        // --- FOOTER Section Animation ---
+        const footerItems = document.querySelectorAll(".footer-flex .left-text, .footer-flex .right-form, .footer-flex img, .footer-flex input, .footer-flex button");
+        gsap.from(footerItems, {
+          scrollTrigger: {
+            trigger: ".footer-flex",
+            start: "top 80%",
+            toggleActions: "play none none none"
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out"
+        });
+
+        // Animate footer button separately
+        gsap.from(".footer-wrap", {
+          scrollTrigger: {
+            trigger: ".footer-flex",
+            start: "top 80%",
+          },
+          y: 20,
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.5,
+          ease: "back.out(1.7)"
+        });
+      });

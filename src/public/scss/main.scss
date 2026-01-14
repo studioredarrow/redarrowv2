@@ -151,7 +151,7 @@
     transform: translateX(-50%);
     width: 100%;
     max-width: 1120px;
-    background: #f9f8f6;
+    background: #F8F5F1;
     border-radius: 20px 20px 0px 0px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -523,7 +523,7 @@
 
         .myth-wrapper {
           margin-top: 80px;
-    background: #f6f3ee;
+    background: #F8F5F1;
     padding: 24px;
     width: 100%;
         }
@@ -729,17 +729,14 @@
     filter: brightness(0) saturate(100%) invert(95%) sepia(10%) saturate(300%) hue-rotate(0deg) brightness(173%) contrast(100%);
 }
 
-
-        .container {
-            text-align: left;
-            padding: 2rem;
-        }
-
-        .project-name {
-            font-size: 16px;
-            color: #9a9a9a;
-            margin-bottom: 1.2rem;
-        }
+      .project-name {
+    color: #BDBDBD;
+    margin-bottom: 1.2rem;
+    font-family: Work Sans;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+}
 
         .headline1 {
             font-size: 20px;
