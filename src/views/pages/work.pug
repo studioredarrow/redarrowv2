@@ -12,58 +12,40 @@ block content
           span.category.active(data-filter="all") all brand identity 
             span.count (9)
           | ,
-          span.category(data-filter="app") app & website 
+          span.category(data-filter="app-website") app & website 
             span.count (8)
           | ,
           span.category(data-filter="exhibition") exhibitions 
             span.count (5)
           | ,
-          span.category(data-filter="all") product design 
+          span.category(data-filter="product-design") product design 
             span.count (3)
           | ,
-          span.category(data-filter="exhibition") packaging 
+          span.category(data-filter="packaging") packaging 
             span.count (8)
           | ,
-          span.category(data-filter="all") environment design 
+          span.category(data-filter="environment-design") environment design 
             span.count (4)
           | ,
-          span.category(data-filter="exhibition") brand amplification 
+          span.category(data-filter="brand-amplification") brand amplification 
             span.count (8)
           | ,
-          span.category(data-filter="all") BDC 
+          span.category(data-filter="bdc") BDC 
             span.count (8)
           .absolute-image 
             img(src="/images/category-image.png", alt="")  
 
       // GRID VIEW
       #gridView.grid.active
-        .card(data-category="exhibition")
-          img(src="images/led.png")
-          .card-title LED ESTHETICS
-          .card-desc Exhibition branding project.
-        .card(data-category="app")
-          .dark-img.dark-1
-            img(src="images/medical-img.png")
-          .card-title OREN MEDICAL
-          .card-desc Medical app & website design.
-        .card(data-category="app")
-          .dark-img
-            img(src="/images/kala-image.png")
-          .card-title KALA
-          .card-desc Mobile app & UI design
-        .card(data-category="exhibition")
-          img(src="/images/nuon-image.png")
-          .card-title NUON MEDICAL
-          .card-desc Exhibition branding project.
-        .card(data-category="exhibition")
-          img(src="/images/benji-image.png")
-          .card-title BENJI BISTRO
-          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
-        .card(data-category="exhibition")
-          .last-image
-            img(src="")
-          .card-title SVAKOM
-          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+        each item in workItems
+          .card(
+            data-category=item.data.category || 'all'
+          )
+            if item.data.thumbnail
+              img(src=item.data.thumbnail.url, alt=item.data.title)
+            .card-title= item.data.title
+            .card-desc= item.data.short_description
+
 
       // FIXED IMAGE PREVIEW
       #imagePreview
@@ -71,13 +53,14 @@ block content
       // LIST VIEW
       #listView.list
         .canvas
-          .text.led LED ESTHETICS
-          .text.oren OREN MEDICAL
-          .text.kala KALA
-          .text.nuon NUON MEDICAL
-          .text.benji BENJI BISTRO
-          .text.svakom SVAKOM
-          .text.metamorphosis METAMORPHOSIS
+          each item, index in workItems
+            .text(
+              data-category=item.data.category || 'all'
+              data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
+            )= item.data.title
+
+
+
 
   script.
     document.addEventListener("DOMContentLoaded", () => {
@@ -142,38 +125,66 @@ block content
           cat.classList.add("active");
 
           const filter = cat.dataset.filter;
+
+          // GRID
           cards.forEach(card => {
+            const cardCat = card.dataset.category;
             card.style.display =
-              filter === "all" || card.dataset.category === filter
+              filter === "all" || cardCat === filter
                 ? "block"
                 : "none";
           });
 
-          gsap.fromTo(cards,
-            { y: 80, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power3.out" }
-          );
+          // LIST
+          texts.forEach(text => {
+            const textCat = text.dataset.category;
+            text.style.display =
+              filter === "all" || textCat === filter
+                ? "block"
+                : "none";
+          });
 
-          // Animate text movement as well
-          animateTexts(texts);
+          // Animate visible items only
+          gsap.fromTo(
+            [...cards, ...texts].filter(el => el.style.display !== "none"),
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.6, stagger: 0.06, ease: "power3.out" }
+          );
         });
       });
 
-      // --- IMAGE MAP ---
-      const textImageMap = {
-        led: { img: "/images/image-slider-2.png", pos: "left" },
-        oren: { img: "/images/image-slider-3.png", pos: "right" },
-        kala: { img: "/images/image-slider-5.png", pos: "center" },
-        nuon: { img: "/images/image-slider-2.png", pos: "left" },
-        benji: { img: "/images/image-slider-5.png", pos: "right" },
-        svakom: { img: "/images/image-slider-3.png", pos: "center" },
-        metamorphosis: { img: "/images/image-slider-2.png", pos: "right" }
-      };
+
+      const pattern = [
+        { left: 120, top: 70 },
+        { left: 120, top: 140 },
+        { right: 180, top: 200 },
+        { left: 360, top: 260 },
+        { left: 120, top: 330 },
+        { right: 240, top: 390 },
+        { left: 260, top: 460 }
+      ];
+
+      texts.forEach((text, index) => {
+        const pos = pattern[index % pattern.length];
+
+        text.style.top = `${pos.top + Math.floor(index / pattern.length) * 520}px`;
+
+        if (pos.left !== undefined) {
+          text.style.left = `${pos.left}px`;
+          text.style.right = "auto";
+        }
+
+        if (pos.right !== undefined) {
+          text.style.right = `${pos.right}px`;
+          text.style.left = "auto";
+        }
+      });
+
 
       // --- TEXT HOVER EFFECT & MOVEMENT ---
       texts.forEach(text => {
-        const key = text.classList[1];
-        const { img, pos } = textImageMap[key] || {};
+        const img = text.dataset.image;
+
 
         text.addEventListener("mouseenter", () => {
           texts.forEach(t => {
@@ -191,21 +202,25 @@ block content
           );
 
           // Show corresponding image
+          // Show thumbnail image on hover
           if (!img) return;
-          imagePreview.style.backgroundImage = `url(${img})`;
-          gsap.to(imagePreview, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" });
 
-          // Position image
-          switch (pos) {
-            case "left":
-              gsap.set(imagePreview, { left: "15%", top: "50%", x: "-50%", y: "-50%" });
-              break;
-            case "right":
-              gsap.set(imagePreview, { left: "85%", top: "50%", x: "-50%", y: "-50%" });
-              break;
-            default:
-              gsap.set(imagePreview, { left: "50%", top: "50%", x: "-50%", y: "-50%" });
-          }
+          imagePreview.style.backgroundImage = `url(${img})`;
+
+          gsap.set(imagePreview, {
+            left: "50%",
+            top: "50%",
+            x: "-50%",
+            y: "-50%"
+          });
+
+          gsap.to(imagePreview, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            ease: "power2.out"
+          });
+
         });
 
         text.addEventListener("mouseleave", () => {
