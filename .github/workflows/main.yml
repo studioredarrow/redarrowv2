@@ -1,0 +1,42 @@
+name: Deploy Node.js to DigitalOcean
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout the repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # 3️⃣ Install dependencies and build
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build  # if applicable
+
+      # 4️⃣ Deploy via SSH
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: 104.248.3.202
+          username: deploy
+          key_path: .github/deploy_key   # <--- path to your private key
+          port: 22
+          script: |
+            cd /home/deploy/apps/redarrowv2
+            git pull origin main
+            npm install
+            pm2 restart redarrowv2 || pm2 start npm --name "redarrowv2" -- run start
