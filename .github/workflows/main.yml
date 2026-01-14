@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '20'
 
-      # 3️⃣ Install dependencies (no build needed)
+      # 3️⃣ Install dependencies locally (for build if needed)
       - name: Install dependencies
         run: npm install
 
@@ -33,7 +33,7 @@ jobs:
           key_path: .github/deploy_key
           port: 22
           script: |
-            # Ensure folder exists
+            # Ensure deployment folder exists
             mkdir -p /home/deploy/apps/redarrowv2
             cd /home/deploy/apps/redarrowv2
 
@@ -53,10 +53,10 @@ jobs:
               npm install -g pm2
             fi
 
-            # Restart or start the app with PM2
+            # Restart or start the app with PM2 using npm start
             pm2 describe redarrowv2 > /dev/null 2>&1
             if [ $? -eq 0 ]; then
               pm2 restart redarrowv2
             else
-              pm2 start index.js --name "redarrowv2"
+              pm2 start npm --name "redarrowv2" -- run start
             fi
