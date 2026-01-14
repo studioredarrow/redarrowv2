@@ -30,7 +30,7 @@ jobs:
         with:
           host: 104.248.3.202
           username: deploy
-          key_path: deploy_key
+          key_path: .github/deploy_key
           port: 22
           script: |
             # Ensure deployment folder exists
