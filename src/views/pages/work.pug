@@ -63,9 +63,12 @@ block content
 
 
 
+    script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
+    script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
 
     script.
       document.addEventListener("DOMContentLoaded", () => {
+
         const gridBtn = document.getElementById("gridBtn");
         const listBtn = document.getElementById("listBtn");
         const gridView = document.getElementById("gridView");
@@ -75,38 +78,44 @@ block content
         const texts = document.querySelectorAll(".text");
         const imagePreview = document.getElementById("imagePreview");
 
-        // --- HELPER FUNCTION FOR TEXT ANIMATION ---
+        /* ---------------- TEXT ANIMATION ---------------- */
         function animateTexts(textElements) {
-          gsap.fromTo(textElements, 
+          gsap.fromTo(
+            textElements,
             { y: 20, opacity: 0 },
             { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
           );
         }
 
-        // --- TOGGLE VIEWS ---
+        /* ---------------- INSTANT IMAGE HIDE ---------------- */
+        function hideImagePreviewInstant() {
+          gsap.killTweensOf(imagePreview);
+          gsap.set(imagePreview, {
+            opacity: 0,
+            scale: 0.95
+          });
+        }
+
+        /* ---------------- VIEW TOGGLE ---------------- */
         gridBtn.onclick = () => {
           gridView.classList.add("active");
           listView.classList.remove("active");
           gridBtn.classList.add("active");
           listBtn.classList.remove("active");
 
-          // Hide image preview
-          gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
+          hideImagePreviewInstant();
 
-          // Reset text styles
           texts.forEach(t => {
-            t.classList.remove("active");
-            t.classList.remove("blur");
+            t.classList.remove("active", "blur");
             gsap.set(t, { y: 0, opacity: 1 });
           });
 
-          // Animate grid cards
-          gsap.fromTo(cards,
+          gsap.fromTo(
+            cards,
             { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1 }
           );
 
-          // Animate all text movement
           animateTexts(texts);
         };
 
@@ -116,11 +125,11 @@ block content
           listBtn.classList.add("active");
           gridBtn.classList.remove("active");
 
-          // Animate texts in list view with movement
+          hideImagePreviewInstant();
           animateTexts(texts);
         };
 
-        // --- CATEGORY FILTER ---
+        /* ---------------- CATEGORY FILTER ---------------- */
         categories.forEach(cat => {
           cat.addEventListener("click", () => {
             categories.forEach(c => c.classList.remove("active"));
@@ -128,34 +137,31 @@ block content
 
             const filter = cat.dataset.filter;
 
-            // GRID
             cards.forEach(card => {
-              const cardCat = card.dataset.category;
               card.style.display =
-                filter === "all" || cardCat === filter
+                filter === "all" || card.dataset.category === filter
                   ? "block"
                   : "none";
             });
 
-            // LIST
             texts.forEach(text => {
-              const textCat = text.dataset.category;
               text.style.display =
-                filter === "all" || textCat === filter
+                filter === "all" || text.dataset.category === filter
                   ? "block"
                   : "none";
             });
 
-            // Animate visible items only
+            hideImagePreviewInstant();
+
             gsap.fromTo(
               [...cards, ...texts].filter(el => el.style.display !== "none"),
               { y: 40, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.6, stagger: 0.06, ease: "power3.out" }
+              { y: 0, opacity: 1, duration: 0.6, stagger: 0.06 }
             );
           });
         });
 
-
+        /* ---------------- TEXT POSITION ---------------- */
         const pattern = [
           { left: 120, top: 70 },
           { left: 120, top: 140 },
@@ -168,7 +174,6 @@ block content
 
         texts.forEach((text, index) => {
           const pos = pattern[index % pattern.length];
-
           text.style.top = `${pos.top + Math.floor(index / pattern.length) * 520}px`;
 
           if (pos.left !== undefined) {
@@ -182,11 +187,10 @@ block content
           }
         });
 
-
-        // --- TEXT HOVER EFFECT & MOVEMENT ---
+        /* ---------------- HOVER IMAGE PREVIEW ---------------- */
         texts.forEach(text => {
-          const img = text.dataset.image;
 
+          const img = text.dataset.image;
 
           text.addEventListener("mouseenter", () => {
             texts.forEach(t => {
@@ -197,14 +201,6 @@ block content
             text.classList.add("active");
             text.classList.remove("blur");
 
-            // Animate text pop-in movement
-            gsap.fromTo(text,
-              { y: 20, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
-            );
-
-            // Show corresponding image
-            // Show thumbnail image on hover
             if (!img) return;
 
             imagePreview.style.backgroundImage = `url(${img})`;
@@ -213,31 +209,139 @@ block content
               left: "50%",
               top: "50%",
               x: "-50%",
-              y: "-50%"
-            });
-
-            gsap.to(imagePreview, {
-              opacity: 1,
+              y: "-50%",
               scale: 1,
-              duration: 0.5,
-              ease: "power2.out"
+              opacity: 1
             });
-
           });
 
+          /* 🔥 INSTANT REMOVE ON LEAVE */
           text.addEventListener("mouseleave", () => {
-            gsap.to(imagePreview, { opacity: 0, duration: 0.4 });
+            hideImagePreviewInstant();
+            texts.forEach(t => t.classList.remove("active", "blur"));
+          });
 
-            texts.forEach(t => {
-              t.classList.remove("active");
-              t.classList.remove("blur");
-            });
-
-            // Animate text back to resting position smoothly
-            gsap.to(text, { y: 0, opacity: 1, duration: 0.3 });
+          /* 🔥 INSTANT REMOVE ON CLICK */
+          text.addEventListener("click", () => {
+            hideImagePreviewInstant();
           });
         });
 
-        // INITIAL ANIMATION ON PAGE LOAD
+        /* ---------------- INITIAL ---------------- */
+        hideImagePreviewInstant();
         animateTexts(texts);
+
+      });
+
+    script.
+      document.addEventListener("DOMContentLoaded", () => {
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.defaults({
+          duration: 0.9,
+          ease: "power3.out"
+        });
+
+        /* =========================
+          GRID IMAGE REVEAL
+        ========================= */
+        function animateGridImages() {
+          gsap.utils.toArray(".main-grid-img img").forEach(img => {
+            gsap.from(img, {
+              scrollTrigger: {
+                trigger: img,
+                start: "top 85%"
+              },
+              scale: 1.1,
+              opacity: 0
+            });
+          });
+        }
+
+        /* =========================
+          GRID TEXT REVEAL
+        ========================= */
+        function animateGridText() {
+          gsap.utils.toArray(".card-title, .card-desc").forEach(el => {
+            gsap.from(el, {
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%"
+              },
+              y: 40,
+              opacity: 0
+            });
+          });
+        }
+
+        /* =========================
+          REFRESH ALL ANIMATIONS
+        ========================= */
+        function refreshAnimations() {
+          ScrollTrigger.getAll().forEach(st => st.kill());
+          animateGridImages();
+          animateGridText();
+          ScrollTrigger.refresh();
+        }
+
+        /* =========================
+          INITIAL LOAD
+        ========================= */
+        refreshAnimations();
+
+        /* =========================
+          VIEW TOGGLE
+        ========================= */
+        const gridBtn = document.getElementById("gridBtn");
+        const listBtn = document.getElementById("listBtn");
+
+        if (gridBtn && listBtn) {
+          gridBtn.addEventListener("click", () => {
+            setTimeout(refreshAnimations, 50);
+          });
+
+          listBtn.addEventListener("click", () => {
+            setTimeout(refreshAnimations, 50);
+          });
+        }
+
+        /* =========================
+          CATEGORY FILTER
+        ========================= */
+        document.querySelectorAll(".category").forEach(cat => {
+          cat.addEventListener("click", () => {
+            setTimeout(refreshAnimations, 50);
+          });
+        });
+
+      });
+
+
+    
+    script.
+      document.addEventListener("DOMContentLoaded", () => {
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.defaults({
+          duration: 0.8,
+          ease: "power3.out"
+        });
+
+        /* =========================
+          CATEGORY LINKS ANIMATION (staggered)
+        ========================= */
+        const categoryEls = document.querySelectorAll(".category-links .category");
+
+        gsap.from(categoryEls, {
+          scrollTrigger: {
+            trigger: ".category-links",
+            start: "top 90%", // when container comes into view
+          },
+          y: 40,
+          opacity: 0,
+          stagger: 0.1
+        });
+
       });

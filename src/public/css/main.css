@@ -1540,10 +1540,10 @@ span.inner-dot {
   box-sizing: border-box;
 }
 
-.main-gridimg:nth-child(8) {
-  background: #C4C4C4;
-  height: 100%;
-  width: 100%;
+.container {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 !important;
 }
 
 body {
@@ -1552,14 +1552,12 @@ body {
   color: var(--text);
 }
 
-.container {
-  max-width: 1220px;
-  padding: 60px 20px;
-  margin: auto;
-}
-
 .work-outer {
   margin-top: 240px;
+}
+
+.category-links .category {
+  display: inline-block;
 }
 
 .absolute-image {
@@ -1742,7 +1740,10 @@ body {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-/* Text positions */
+.main-work-outer {
+  margin-bottom: 100px;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .category-links {
@@ -1788,13 +1789,12 @@ body {
     margin-top: 180px;
   }
 }
-/* Large desktops */
-.container {
-  max-width: 1220px;
-  margin: 0 auto;
-  padding: 0 !important;
+@media (max-width: 600px) {
+  .category-links {
+    font-size: 20px;
+    width: 330px;
+  }
 }
-
 /* ==============================
    Benji Bistro – Scoped Styles
    ============================== */
@@ -2404,7 +2404,7 @@ body {
   font-weight: 400;
   font-size: 14px;
   line-height: 100%;
-  color: #1E1E1E;
+  color: #1E1E1E !important;
 }
 @media (max-width: 600px) {
   .page-wrapper .details {
@@ -2438,7 +2438,6 @@ body {
 }
 
 .hero1 {
-  max-width: 1093px;
   text-align: center;
   color: #ffffff;
   padding: 20px 20px;
@@ -2832,6 +2831,7 @@ img.chat-meme {
   position: absolute;
   top: 0;
   left: 50%;
+  transform: translateX(-50%) !important;
 }
 
 .logo-trigger {
