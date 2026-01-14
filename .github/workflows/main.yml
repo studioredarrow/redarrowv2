@@ -3,7 +3,7 @@ name: Deploy Node.js to DigitalOcean
 on:
   push:
     branches:
-      - main
+      - dev-expert
 
 jobs:
   deploy:
