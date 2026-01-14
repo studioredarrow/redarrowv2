@@ -38,9 +38,12 @@ block content
 
         // GRID VIEW
         #gridView.grid.active
-          each item in workItems
+          -
+            const gapPattern = ['gap-right', 'gap-center', 'gap-none', 'gap-right'];
+          each item, index in workItems
             .card(
               data-category=item.data.category || 'all'
+              class=gapPattern[index % gapPattern.length]
             )
               if item.data.thumbnail
                 .main-grid-img 
@@ -186,11 +189,13 @@ block content
             text.style.left = "auto";
           }
         });
-
         /* ---------------- HOVER IMAGE PREVIEW ---------------- */
-        texts.forEach(text => {
+        const imagePositionPattern = ["left", "right", "center"];
+
+        texts.forEach((text, index) => {
 
           const img = text.dataset.image;
+          const pos = imagePositionPattern[index % imagePositionPattern.length];
 
           text.addEventListener("mouseenter", () => {
             texts.forEach(t => {
@@ -205,10 +210,22 @@ block content
 
             imagePreview.style.backgroundImage = `url(${img})`;
 
+            // default (center)
+            let left = "50%";
+            let x = "-50%";
+
+            if (pos === "left") {
+              left = "20%";
+            }
+
+            if (pos === "right") {
+              left = "80%";
+            }
+
             gsap.set(imagePreview, {
-              left: "50%",
+              left,
               top: "50%",
-              x: "-50%",
+              x,
               y: "-50%",
               scale: 1,
               opacity: 1
@@ -225,8 +242,8 @@ block content
           text.addEventListener("click", () => {
             hideImagePreviewInstant();
           });
-        });
 
+        });
         /* ---------------- INITIAL ---------------- */
         hideImagePreviewInstant();
         animateTexts(texts);
