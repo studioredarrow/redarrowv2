@@ -1,6 +1,9 @@
 extends ../layout
 
 block content
+  .progress-bar-wrapper
+    .progress-bar
+
   .benji-wrapper
       .container
         .benji-image
@@ -272,8 +275,184 @@ block content
       });
     });
 
-    ScrollTrigger.refresh();                  
+    ScrollTrigger.refresh();           
 
+      // =========================
+  // PAGE ANIMATION + PROGRESS
+  // =========================
+  script.
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.defaults({
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // HERO ANIMATION
+    const heroTL = gsap.timeline();
+    heroTL
+      .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
+      .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
+      .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
+      .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
+      .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
+
+    // TEXT REVEAL
+    gsap.utils.toArray("h2, h3, p").forEach(el => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%"
+        },
+        y: 40,
+        opacity: 0
+      });
+    });
+
+    // IMAGE REVEAL
+    gsap.utils.toArray(".photo-item img, .bistro-item img").forEach(img => {
+      gsap.from(img, {
+        scrollTrigger: {
+          trigger: img,
+          start: "top 85%"
+        },
+        scale: 1.1,
+        opacity: 0
+      });
+    });
+
+    // =========================
+    // SCROLL PROGRESS BAR
+    // =========================
+    gsap.to(".progress-bar", {
+      width: "100%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true
+      }
+    });
+
+    ScrollTrigger.refresh();       
+
+
+    // GSAP ANIMATION + PROGRESS
+  // =========================
+  script.
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.defaults({
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // HERO ANIMATION
+    const heroTL = gsap.timeline();
+    heroTL
+      .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
+      .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
+      .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
+      .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
+      .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
+
+    // TEXT REVEAL
+    gsap.utils.toArray("h2, h3, p").forEach(el => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%"
+        },
+        y: 40,
+        opacity: 0
+      });
+    });
+
+    // =========================
+    // SCROLL PROGRESS BAR (FIXED)
+    // =========================
+    gsap.to(".progress-bar", {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true
+      }
+    });
+
+    ScrollTrigger.refresh();
+
+  script.
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate the progress bar based on scroll
+    gsap.to(".progress-bar", {
+      scaleX: 1,       // Fill from 0 to full width
+      ease: "none",    // Linear, no easing for smooth scroll
+      scrollTrigger: {
+        trigger: document.documentElement, // entire page
+        start: "top top",  // when top of page hits top of viewport
+        end: "bottom bottom", // until bottom of page
+        scrub: true       // smooth animation linked to scroll
+      }
+    });
+
+  script.
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Set progress bar to empty initially
+    gsap.set(".progress-bar", { scaleX: 0 });
+
+    // Animate the progress bar as you scroll
+    gsap.to(".progress-bar", {
+      scaleX: 1,          // fill to full width
+      ease: "none",       // linear fill
+      scrollTrigger: {
+        trigger: document.documentElement, // entire page
+        start: "top+=92 top",  // start 92px from top (below header)
+        end: "bottom bottom",   // end at bottom of page
+        scrub: true             // smooth fill/shrink based on scroll
+      }
+    });
+
+  script.
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Start progress bar at 0
+    gsap.set(".progress-bar", { scaleX: 0 });
+
+    // Animate progress bar based on scroll
+    gsap.to(".progress-bar", {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true
+      }
+    });
+
+    // Change top position of the wrapper depending on scroll direction
+    let lastScroll = window.scrollY;
+
+    window.addEventListener("scroll", () => {
+      const wrapper = document.querySelector(".progress-bar-wrapper");
+      let currentScroll = window.scrollY;
+
+      if(currentScroll > lastScroll){
+        // Scrolling down → stick to top: 0
+        wrapper.style.top = "0px";
+      } else {
+        // Scrolling up → stick to top: 65px
+        wrapper.style.top = "75px";
+      }
+
+      lastScroll = currentScroll;
+    });
 
                 
             

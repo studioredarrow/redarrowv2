@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  function getQueryParam(key) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(key);
+  }
+
   const loader = document.getElementById("myth-loader");
   const mainContent = document.getElementById("myth-main");
   const chatArea = document.getElementById("chat-area");
@@ -7,10 +13,36 @@ document.addEventListener("DOMContentLoaded", () => {
   /* -------------------------------
      PAGE LOAD LOADER (UNCHANGED)
   -------------------------------- */
-  setTimeout(() => {
+  setTimeout(async () => {
     loader.style.display = "none";
     mainContent.classList.remove("hidden");
+
+    const incomingQuestion = getQueryParam("q");
+
+    if (incomingQuestion) {
+      const decoded = decodeURIComponent(incomingQuestion);
+
+      // Show user message
+      addMessage(decoded, "user");
+
+      // Thinking bubble
+      const thinkingBubble = await showThinkingBubble("answer_preparing");
+
+      // First try AI
+      const data = await fetchAIResponse(decoded);
+
+      thinkingBubble.remove();
+
+      if (data.type === "text") addMessage(data.message, "bot");
+      if (data.type === "meme") {
+        addMeme(data.image);
+        if (data.caption) addMessage(data.caption, "bot");
+      }
+      // ✅ CLEAN URL AFTER USING IT
+    window.history.replaceState({}, document.title, "/myth-journey");
+    }
   }, 1500);
+
 
   /* -------------------------------
      CHAT HELPERS

@@ -178,6 +178,7 @@ block content
       .myth-title
         h3 MYTH CREATION
 
+  .container  
       .slider-flex
         // Card 1
         .card.small
@@ -282,66 +283,6 @@ block content
       });
     });
 
-  script.
-      const textElements = document.querySelectorAll(".animate-text-unique");
-
-      textElements.forEach(textElement => {
-        // Split text into words
-        const words = textElement.textContent.split(" ");
-
-        // Wrap each word in a span and add a trailing space
-        const wrappedWords = words.map(word => `<span>${word}&nbsp;</span>`).join("");
-
-        // Put the words back
-        textElement.innerHTML = wrappedWords;
-
-        // Wrap words per "row"
-        function wrapLines(el) {
-          const words = Array.from(el.querySelectorAll("span"));
-          let lines = [];
-          let currentLineTop = words[0].offsetTop;
-          let line = [];
-
-          words.forEach(word => {
-            if (word.offsetTop !== currentLineTop) {
-              lines.push(line);
-              line = [];
-              currentLineTop = word.offsetTop;
-            }
-            line.push(word);
-          });
-
-          lines.push(line);
-
-          // Wrap each line in a div
-          lines.forEach(lineWords => {
-            const lineWrapper = document.createElement("div");
-            lineWrapper.classList.add("line");
-            lineWords[0].parentNode.insertBefore(lineWrapper, lineWords[0]);
-            lineWords.forEach(w => lineWrapper.appendChild(w));
-          });
-        }
-
-        wrapLines(textElement);
-      });
-
-      // Animate all lines with GSAP
-      gsap.to(".line", {
-        duration: 0.8,
-        y: "0%",
-        opacity: 1,
-        stagger: 0.4,
-        ease: "power3.out",
-        overwrite: "auto",
-        onStart: function() {
-          this.targets().forEach(line => {
-            gsap.to(line.querySelectorAll("span"), {y: "0%", opacity: 1, duration: 0.6, stagger: 0.05});
-          });
-        }
-      });
-
-
-
       //- GSAP Scripts
   script(src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js")
   script(src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js")
@@ -425,3 +366,97 @@ block content
         stagger: 0.04
       });
     });
+
+
+  script.
+
+    // Example: Card image slider hover
+    document.querySelectorAll('.card').forEach(card => {
+      const images = Array.from(card.querySelectorAll('img'));
+      let current = 0;
+      let interval;
+
+      images.forEach((img, i) => {
+        img.style.transform = i === 0 ? 'translateY(0)' : 'translateY(100%)';
+      });
+
+      const blurOthers = () => {
+        document.querySelectorAll('.card').forEach(c => {
+          if (c !== card) c.classList.add('blur');
+          else c.classList.remove('blur');
+        });
+      };
+
+      const resetBlur = () => {
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('blur'));
+      };
+
+      card.addEventListener('mouseenter', () => {
+        blurOthers();
+        interval = setInterval(() => {
+          current = (current + 1) % images.length;
+          images.forEach((img, i) => {
+            img.style.transform = i === current ? 'translateY(0)' : 'translateY(100%)';
+          });
+        }, 500);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        clearInterval(interval);
+        resetBlur();
+      });
+
+      card.addEventListener('click', () => {
+        blurOthers();
+        current = (current + 1) % images.length;
+        images.forEach((img, i) => {
+          img.style.transform = i === current ? 'translateY(0)' : 'translateY(100%)';
+        });
+      });
+    });
+
+  script.
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.defaults({
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // HERO ANIMATION
+    const heroTL = gsap.timeline();
+
+    heroTL
+      .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
+      .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
+      .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
+      .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
+      .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
+
+    // SCROLL ANIMATION FOR TEXT
+    gsap.utils.toArray("h2, h3, p").forEach(el => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%"
+        },
+        y: 40,
+        opacity: 0
+      });
+    });
+
+    // SCROLL ANIMATION FOR IMAGES
+    gsap.utils.toArray(".photo-item img, .bistro-item img").forEach(img => {
+      gsap.from(img, {
+        scrollTrigger: {
+          trigger: img,
+          start: "top 85%"
+        },
+        scale: 1.1,
+        opacity: 0
+      });
+    });
+
+    ScrollTrigger.refresh();
+
+    
