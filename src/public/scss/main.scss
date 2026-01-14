@@ -29,7 +29,7 @@
         }
 
         .hero1 {
-            max-width: 1093px;
+            // max-width: 1093px;
             text-align: center;
             color: #ffffff;
             padding: 20px 20px;
@@ -51,7 +51,7 @@
             font-weight: 400;
             line-height: 130%;
             margin-bottom: 40px;
-            margin-top: 130px;
+            margin-top: 80px;
 
             strong {
                 font-weight: 600;
@@ -149,7 +149,7 @@
             bottom: 0px !important;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;
+            width: 81%;
             max-width: 1120px;
             background: #f9f8f6;
             border-radius: 20px 20px 0px 0px;
@@ -441,14 +441,14 @@
         }
 
         .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            // background: #ff0000;
-            position: absolute;
-            top: 0;
-            left: 50%;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) !important;
+}
 
         .logo-trigger {
             cursor: pointer;
@@ -993,7 +993,6 @@
     left: 50% !important;
     z-index: 999;
     transform: translateX(-50%) !important;
-    background: #f8f5f1;
     padding-bottom: 15px;
 }
         /* When screen is 768px or less, hide desktop and show mobile */

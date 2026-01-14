@@ -25,49 +25,114 @@ block content
               )
 
   section.team-sec
-      .team-outer
-        .team-container
-          .team-flex
-            .team-inner
-              h6 OUR TEAM
-            .team-header
-              != asHTML(page.data.our_team_heading)
+    .container 
+        .team-outer
+          .team-container
+            .team-flex
+              .team-inner
+                h6 OUR TEAM
+              .team-header
+                != asHTML(page.data.our_team_heading)
 
-          .team-grid
-            -
-              const slotInterval = 5;
-              let slotIndex = 0;
+            .team-grid
+              -
+                const slotInterval = 5;
+                let slotIndex = 0;
 
-            each member, i in teamMembers
-              // TEAM CARD
-              .team-card
-                if member.data.photo
-                  img(
-                    src=member.data.photo.url
-                    alt=member.data.photo.alt || member.data.name
-                  )
-                h3= member.data.name
-                p= member.data.role
+                // Build flat list of cards with slots mixed in like before
+                const cards = [];
+                for (let i = 0; i < teamMembers.length; i++) {
+                  cards.push({ type: "member", item: teamMembers[i] });
 
+                  if ((i + 1) % slotInterval === 0 && availableSlots[slotIndex]) {
+                    cards.push({ type: "slot", item: availableSlots[slotIndex] });
+                    slotIndex++;
+                  }
+                }
 
-              // INSERT AVAILABLE SLOT CARD
-              if ((i + 1) % slotInterval === 0 && availableSlots[slotIndex])
-                -
-                  const slot = availableSlots[slotIndex];
-                  slotIndex++;
+                // Pattern for empty card positions: [2, 3, 4, 3, 2] repeating
+                const emptyPositions = [2, 3, 4, 3, 2];
+                
+                // Group into rows of 4 cards + 1 empty tile at rotating position
+                const rows = [];
+                let currentRow = [];
+                let rowIndex = 0;
 
-                .team-card.add-card(class=`status-${slot.data.status}`)
-                  span= slot.data.title
-                  br
-                  if slot.data.cta_label
-                    if slot.data.cta_link && slot.data.cta_link.url
-                      a.slot-cta(href=slot.data.cta_link.url)
-                        = asText(slot.data.cta_label)
-                    else
-                      a.slot-cta(href="#")
-                        = asText(slot.data.cta_label)
+                cards.forEach(card => {
+                  if (currentRow.length === 4) {
+                    // Insert empty card at rotating position (1-indexed, so subtract 1 for array index)
+                    const emptyPos = emptyPositions[rowIndex % emptyPositions.length] - 1;
+                    const rowWithEmpty = [];
+                    
+                    // Insert the 4 cards, placing empty at the correct position
+                    let cardIndex = 0;
+                    for (let i = 0; i < 5; i++) {
+                      if (i === emptyPos) {
+                        rowWithEmpty.push({ type: "empty" });
+                      } else if (cardIndex < currentRow.length) {
+                        rowWithEmpty.push(currentRow[cardIndex]);
+                        cardIndex++;
+                      } else {
+                        rowWithEmpty.push({ type: "empty" });
+                      }
+                    }
+                    
+                    rows.push(rowWithEmpty);
+                    currentRow = [];
+                    rowIndex++;
+                  }
+                  currentRow.push(card);
+                });
+
+                // Handle last row
+                if (currentRow.length) {
+                  const emptyPos = emptyPositions[rowIndex % emptyPositions.length] - 1;
+                  const rowWithEmpty = [];
+                  
+                  // Insert the remaining cards, placing empty at the correct position
+                  let cardIndex = 0;
+                  for (let i = 0; i < 5; i++) {
+                    if (i === emptyPos) {
+                      rowWithEmpty.push({ type: "empty" });
+                    } else if (cardIndex < currentRow.length) {
+                      rowWithEmpty.push(currentRow[cardIndex]);
+                      cardIndex++;
+                    } else {
+                      rowWithEmpty.push({ type: "empty" });
+                    }
+                  }
+                  
+                  rows.push(rowWithEmpty);
+                }
+
+              each row in rows
+                each cell in row
+                  if cell.type === "member"
+                    - const member = cell.item;
+                    .team-card
+                      if member.data.photo
+                        img(
+                          src=member.data.photo.url
+                          alt=member.data.photo.alt || member.data.name
+                        )
+                      h3= member.data.name
+                      p= member.data.role
+                  else if cell.type === "slot"
+                    - const slot = cell.item;
+                    .team-card.add-card(class=`status-${slot.data.status}`)
+                      span= slot.data.title
+                      br
+                      if slot.data.cta_label
+                        if slot.data.cta_link && slot.data.cta_link.url
+                          a.slot-cta(href=slot.data.cta_link.url)
+                            = asText(slot.data.cta_label)
+                        else
+                          a.slot-cta(href="#")
+                            = asText(slot.data.cta_label)
+                      else
+                        span.inner-dot +
                   else
-                    span.inner-dot +
+                    .team-card.empty
                     
   section.info-wrapper
       .info-container

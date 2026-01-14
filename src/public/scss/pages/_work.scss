@@ -11,12 +11,22 @@
   padding: 0;
   box-sizing: border-box;
 }
+<<<<<<< HEAD
+ .container {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0 !important;
+  }
+=======
+>>>>>>> parent of 4320aac (merging code)
 
 body {
   background: var(--bg);
   font-family: Work Sans;
   color: var(--text);
 }
+<<<<<<< HEAD
+=======
 
 .container {
   max-width: 1220px;
@@ -24,9 +34,13 @@ body {
   margin: auto;
 }
 
+>>>>>>> parent of 4320aac (merging code)
 .work-outer {
   margin-top: 240px;
 }
+ .category-links .category {
+    display: inline-block; 
+  }
 .absolute-image {
     position: absolute;
     top: -82px;
@@ -38,7 +52,6 @@ body {
   justify-content: space-between;
   align-items: start;
 }
-
 /* Toggle Buttons */
 .toggle {
     display: inline-flex;
@@ -59,12 +72,10 @@ body {
     color: #828282;
     background: transparent;
 }
-
 .toggle button.active {
   background: var(--accent);
   color: white;
 }
-
 /* Categories */
 .category-links {
   max-width: 848px;
@@ -197,19 +208,9 @@ body {
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
-
-/* Text positions */
-// .led { top: 70px; left: 120px; }
-// .oren { top: 140px; left: 120px; }
-// .kala { top: 200px; right: 180px; }
-// .nuon { top: 260px; left: 360px; }
-// .benji { top: 330px; left: 120px; }
-// .svakom { top: 390px; right: 240px; }
-// .metamorphosis { top: 460px; left: 260px; }
-
-
-// responsive css start here
+.main-work-outer {
+    margin-bottom: 100px;
+}
 /* Responsive */
 @media (max-width: 768px) {
 .card {
@@ -244,14 +245,10 @@ body {
     margin-top: 180px;
 }
 }
-// container
-
-
-/* Large desktops */
-
-  .container {
-    max-width: 1220px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
+@media (max-width: 600px) {
+  .category-links {
+    font-size: 20px;
+    width: 330px;
+}
+}
 

@@ -51,19 +51,34 @@ body {
 
       .counter {
         display: flex;
-    overflow: hidden;
-    font-family: "Courier New", monospace;
-    background: #1E1E1E;
-    color: red;
-    padding: 2px 10px;
-    font-size: 74px;
-    border-radius: 4px;
-    height: 76px;
+        overflow: hidden;
+        font-family: "DS-Digital", "Orbitron", monospace;
+        background: #000000;
+        color: #ff0000;
+        padding: 4px 12px;
+        font-size: 74px;
+        font-weight: normal;
+        border-radius: 0;
+        height: auto;
+        min-height: 90px;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 3px;
+        text-shadow: 
+          0 0 4px #ff0000,
+          0 0 8px rgba(255, 0, 0, 0.8),
+          0 0 12px rgba(255, 0, 0, 0.6);
+        box-shadow: none;
+        font-style: normal;
+        -webkit-font-smoothing: none;
+        -moz-osx-font-smoothing: auto;
+        text-rendering: optimizeSpeed;
 
+    
         &.big {
-          font-size: 74px;
-          padding: 0px 14px;
-          height: 72px;
+          font-size: 48px;
+          padding: 2px 10px;
+          min-height: 56px;
         }
 
         .column {
@@ -131,25 +146,31 @@ body {
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  /* Desktop: 4 members + 1 empty/filler per row */
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 25px;
 
   @media (max-width: 1200px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   @media (max-width: 992px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 .team-outer {
     padding-block: 100px;
 }
@@ -157,20 +178,22 @@ span.inner-dot {
     font-size: 64px !important;
 }
 .team-card {
- color: #1E1E1E;
+  color: #1E1E1E;
     font-family: Work Sans;
     font-weight: 500;
     font-size: 20px;
     line-height: 100%;
     text-transform: uppercase;
     margin: 0;
+    display: flex;
+    flex-direction: column;
 
   &:hover {
     transform: translateY(-5px);
   }
 
   img {
-    width: 220px;
+    width: 100%;
     height: 266px;
     object-fit: cover;
     margin-bottom: 10px;
@@ -218,6 +241,14 @@ span.inner-dot {
     line-height: 100%;
     text-transform: uppercase;
     }
+  }
+
+  &.empty {
+    // background: transparent;
+    // border: 1px dashed #e3e3e3;
+    border-radius: 20px;
+    min-height: 266px;
+    transition: none;
   }
 }
 // location css start here
@@ -376,7 +407,6 @@ span.inner-dot {
       color: #fff;
     }
   }
-
   @media (max-width: 768px) {
     .hero-title {
       font-size: 40px;
@@ -397,6 +427,13 @@ span.inner-dot {
 // hero css end here
 
 /* Responsive */
+
+  @media (max-width: 1190px) {
+    .machine .panel .counter-row {
+    flex-wrap: wrap;
+}
+
+  }
 @media (max-width: 768px) {
   .info-flex {
     justify-content: start;
@@ -404,12 +441,35 @@ span.inner-dot {
     padding-inline: 10px;
     flex-direction: column;
   }
-
+.hero-flex {
+    flex-direction: column;
+}
   .info-block {
     gap: 16px;
   }
+  .team-flex {
+    flex-direction: column;
+}
+.team-header {
+    font-size: 20px;
+}
+}
+@media (max-width: 500px) {
+.team-card img {
+    width: 172px;
+    height: 208px;
+}
+.team-outer {
+    padding-block: 45px;
+}
+.team-inner h6 {
+    padding-bottom: 20px;
+}
+.machine .panel .counter-row .counter-container .counter {
+    font-size: 48px
 }
 
+}
 // location css end here
 
 .counter {
@@ -419,8 +479,19 @@ span.inner-dot {
   overflow: hidden;
   height: 1em;
   line-height: 1em;
-  font-size: 48px; /* adjust if needed */
-  font-weight: 600;
+  font-size: 74px;
+  font-weight: normal;
+  font-family: "DS-Digital", "Orbitron", monospace;
+  color: #ff0000;
+  letter-spacing: 3px;
+  text-shadow: 
+    0 0 4px #ff0000,
+    0 0 8px rgba(255, 0, 0, 0.8),
+    0 0 12px rgba(255, 0, 0, 0.6);
+  font-style: normal;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
+  text-rendering: optimizeSpeed;
 }
 
 .digit {
@@ -428,12 +499,32 @@ span.inner-dot {
   width: 0.6em;
   height: 1em;
   overflow: hidden;
+  color: #ff0000;
+  font-family: "DS-Digital", "Orbitron", monospace;
+  font-weight: normal;
+  text-shadow: 
+    0 0 4px #ff0000,
+    0 0 8px rgba(255, 0, 0, 0.8),
+    0 0 12px rgba(255, 0, 0, 0.6);
+  font-style: normal;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
 }
 
 .digit-inner {
   position: absolute;
   top: 0;
   left: 0;
+  font-family: "DS-Digital", "Orbitron", monospace;
+  font-weight: normal;
+  color: #ff0000;
+  text-shadow: 
+    0 0 4px #ff0000,
+    0 0 8px rgba(255, 0, 0, 0.8),
+    0 0 12px rgba(255, 0, 0, 0.6);
+  font-style: normal;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
 }
 
 .digit-inner span {
@@ -441,9 +532,29 @@ span.inner-dot {
   height: 1em;
   line-height: 1em;
   text-align: center;
+  font-family: "DS-Digital", "Orbitron", monospace;
+  font-weight: normal;
+  color: #ff0000;
+  text-shadow: 
+    0 0 4px #ff0000,
+    0 0 8px rgba(255, 0, 0, 0.8),
+    0 0 12px rgba(255, 0, 0, 0.6);
+  font-style: normal;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
 }
 
 .counter-suffix {
   margin-left: 6px;
   font-size: 0.8em;
+  font-family: "DS-Digital", "Orbitron", monospace;
+  font-weight: normal;
+  color: #ff0000;
+  text-shadow: 
+    0 0 4px #ff0000,
+    0 0 8px rgba(255, 0, 0, 0.8),
+    0 0 12px rgba(255, 0, 0, 0.6);
+  font-style: normal;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
 }
