@@ -1,200 +1,252 @@
 extends ../layout
 
 block content
+  .studio-main-outer
+    .page-wrapper
+      .details
+        .details-item
+          span.label LOCATION
+          | SAIGON
+        .details-item
+          span.label TIME
+          | 7:00 AM
 
-  .page-wrapper
-    .details
-      .details-item
-        span.label LOCATION
-        | SAIGON
-      .details-item
-        span.label TIME
-        | 7:00 AM
+    .work-outer.open-outer
+      .container
+        .work-flex.open-flex
+          .toggle
+            button#gridBtn.active Grid
+            button#listBtn List
 
-  .work-outer.open-outer
-    .container
-      .work-flex.open-flex
-        .toggle
-          button#gridBtn.active Grid
-          button#listBtn List
+        // ================= GRID VIEW =================
+        #gridView.grid.active.inner-grid-open
+          .card(data-category="exhibition")
+            img(src="images/led.png")
+            .card-title LED ESTHETICS
+            .card-desc Exhibition branding project.
 
-      // ================= GRID VIEW =================
-      #gridView.grid.active
-        .card(data-category="exhibition")
-          img(src="images/led.png")
-          .card-title LED ESTHETICS
-          .card-desc Exhibition branding project.
+          .card(data-category="app")
+            .dark-img.dark-1
+              img(src="images/medical-img.png")
+            .card-title OREN MEDICAL
+            .card-desc Medical app & website design.
 
-        .card(data-category="app")
-          .dark-img.dark-1
-            img(src="images/medical-img.png")
-          .card-title OREN MEDICAL
-          .card-desc Medical app & website design.
+          .card(data-category="app")
+            .dark-img
+              img(src="/images/kala-image.png")
+            .card-title KALA
+            .card-desc Mobile app & UI design
 
-        .card(data-category="app")
-          .dark-img
-            img(src="/images/kala-image.png")
-          .card-title KALA
-          .card-desc Mobile app & UI design
+          .card(data-category="exhibition")
+            img(src="/images/nuon-image.png")
+            .card-title NUON MEDICAL
+            .card-desc Exhibition branding project.
 
-        .card(data-category="exhibition")
-          img(src="/images/nuon-image.png")
-          .card-title NUON MEDICAL
-          .card-desc Exhibition branding project.
+          .card(data-category="exhibition")
+            img(src="/images/benji-image.png")
+            .card-title BENJI BISTRO
+            .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
 
-        .card(data-category="exhibition")
-          img(src="/images/benji-image.png")
-          .card-title BENJI BISTRO
-          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+          .card(data-category="exhibition")
+            .last-image
+              img(src="")
+            .card-title SVAKOM
+            .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
 
-        .card(data-category="exhibition")
-          .last-image
-            img(src="")
-          .card-title SVAKOM
-          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+        // ================= IMAGE PREVIEW =================
+        #imagePreview
 
-      // ================= IMAGE PREVIEW =================
-      #imagePreview
+        // ================= LIST VIEW =================
+        #listView.list
+          .canvas
+            .text.led artist's name
+            .text.oren artist's name
+            .text.kala artist's name
+            .text.nuon artist's name
+            .text.benji artist's name
 
-      // ================= LIST VIEW =================
-      #listView.list
-        .canvas
-          .text.led artist's name
-          .text.oren artist's name
-          .text.kala artist's name
-          .text.nuon artist's name
-          .text.benji artist's name
+      script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js")
+      script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js")
+      script.
+        document.addEventListener("DOMContentLoaded", () => {
 
-  // ================= GSAP SCRIPT =================
-  script.
-    document.addEventListener("DOMContentLoaded", () => {
-
-      if (typeof gsap === "undefined") {
-        console.error("GSAP NOT LOADED");
-        return;
-      }
-
-      const gridBtn = document.getElementById("gridBtn");
-      const listBtn = document.getElementById("listBtn");
-      const gridView = document.getElementById("gridView");
-      const listView = document.getElementById("listView");
-      const imagePreview = document.getElementById("imagePreview");
-
-      const texts = document.querySelectorAll(".text");
-      const cardTitles = document.querySelectorAll(".card-title");
-      const cardDescs = document.querySelectorAll(".card-desc");
-
-      // ================= GRID TEXT ANIMATION =================
-      const animateGridText = () => {
-        gsap.fromTo(
-          [...cardTitles, ...cardDescs],
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.9,
-            stagger: 0.06,
-            ease: "power3.out"
+          if (typeof gsap === "undefined") {
+            console.error("GSAP NOT LOADED");
+            return;
           }
-        );
-      };
 
-      // RUN ON LOAD
-      animateGridText();
+          gsap.registerPlugin(ScrollTrigger);
 
-      // ================= GRID BUTTON =================
-      gridBtn.addEventListener("click", () => {
-        gridView.classList.add("active");
-        listView.classList.remove("active");
+          const gridBtn = document.getElementById("gridBtn");
+          const listBtn = document.getElementById("listBtn");
+          const gridView = document.getElementById("gridView");
+          const listView = document.getElementById("listView");
+          const imagePreview = document.getElementById("imagePreview");
 
-        gridBtn.classList.add("active");
-        listBtn.classList.remove("active");
+          const texts = document.querySelectorAll(".text");
+          const cardTitles = document.querySelectorAll(".card-title");
+          const cardDescs = document.querySelectorAll(".card-desc");
+          const cards = document.querySelectorAll(".card");
 
-        gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
-
-        texts.forEach(t => t.classList.remove("active", "blur"));
-
-        animateGridText();
-      });
-
-      // ================= LIST BUTTON =================
-      listBtn.addEventListener("click", () => {
-        listView.classList.add("active");
-        gridView.classList.remove("active");
-
-        listBtn.classList.add("active");
-        gridBtn.classList.remove("active");
-
-        requestAnimationFrame(() => {
-          gsap.fromTo(
-            texts,
-            { y: 50, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 1,
-              stagger: 0.1,
-              ease: "expo.out"
-            }
-          );
-        });
-      });
-
-      // ================= IMAGE MAP =================
-      const textImageMap = {
-        led: { img: "/images/image-slider-2.png", pos: "left" },
-        oren: { img: "/images/image-slider-3.png", pos: "right" },
-        kala: { img: "/images/image-slider-5.png", pos: "center" },
-        nuon: { img: "/images/image-slider-2.png", pos: "right" },
-        benji: { img: "/images/image-slider-5.png", pos: "left" },
-        svakom: { img: "/images/image-slider-3.png", pos: "center" }
-      };
-
-      // ================= LIST HOVER =================
-      texts.forEach(text => {
-        const key = text.classList[1];
-        const { img, pos } = textImageMap[key] || {};
-
-        text.addEventListener("mouseenter", () => {
-          texts.forEach(t => t.classList.add("blur"));
-          text.classList.remove("blur");
-          text.classList.add("active");
-
-          gsap.fromTo(
-            text,
-            { scale: 0.96, opacity: 0.6 },
-            { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out" }
-          );
-
-          if (!img) return;
-
-          imagePreview.style.backgroundImage = `url(${img})`;
-
-          gsap.to(imagePreview, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            ease: "power2.out"
-          });
-
-          const positions = {
-            left: "15%",
-            right: "85%",
-            center: "50%"
+          // ================= GRID TEXT ANIMATION =================
+          const animateGridText = () => {
+            gsap.fromTo(
+              [...cardTitles, ...cardDescs],
+              { y: 30, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.9,
+                stagger: 0.06,
+                ease: "power3.out"
+              }
+            );
           };
 
-          gsap.set(imagePreview, {
-            left: positions[pos] || "50%",
-            top: "50%",
-            x: "-50%",
-            y: "-50%"
+          // RUN ON LOAD
+          animateGridText();
+
+          // ================= GRID BUTTON =================
+          gridBtn.addEventListener("click", () => {
+            gridView.classList.add("active");
+            listView.classList.remove("active");
+
+            gridBtn.classList.add("active");
+            listBtn.classList.remove("active");
+
+            gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
+
+            texts.forEach(t => t.classList.remove("active", "blur"));
+
+            animateGridText();
           });
+
+          // ================= LIST BUTTON =================
+          listBtn.addEventListener("click", () => {
+            listView.classList.add("active");
+            gridView.classList.remove("active");
+
+            listBtn.classList.add("active");
+            gridBtn.classList.remove("active");
+
+            requestAnimationFrame(() => {
+              gsap.fromTo(
+                texts,
+                { y: 50, opacity: 0 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 1,
+                  stagger: 0.1,
+                  ease: "expo.out"
+                }
+              );
+            });
+          });
+
+          // ================= IMAGE MAP =================
+          const textImageMap = {
+            led: { img: "/images/image-slider-2.png", pos: "left" },
+            oren: { img: "/images/image-slider-3.png", pos: "right" },
+            kala: { img: "/images/image-slider-5.png", pos: "center" },
+            nuon: { img: "/images/image-slider-2.png", pos: "right" },
+            benji: { img: "/images/image-slider-5.png", pos: "left" },
+            svakom: { img: "/images/image-slider-3.png", pos: "center" }
+          };
+
+          // ================= LIST HOVER =================
+          texts.forEach(text => {
+            const key = text.classList[1];
+            const { img, pos } = textImageMap[key] || {};
+
+            text.addEventListener("mouseenter", () => {
+              texts.forEach(t => t.classList.add("blur"));
+              text.classList.remove("blur");
+              text.classList.add("active");
+
+              gsap.fromTo(
+                text,
+                { scale: 0.96, opacity: 0.6 },
+                { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out" }
+              );
+
+              if (!img) return;
+
+              imagePreview.style.backgroundImage = `url(${img})`;
+
+              gsap.to(imagePreview, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.5,
+                ease: "power2.out"
+              });
+
+              const positions = {
+                left: "15%",
+                right: "85%",
+                center: "50%"
+              };
+
+              gsap.set(imagePreview, {
+                left: positions[pos] || "50%",
+                top: "50%",
+                x: "-50%",
+                y: "-50%"
+              });
+            });
+
+            text.addEventListener("mouseleave", () => {
+              gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
+              texts.forEach(t => t.classList.remove("active", "blur"));
+            });
+          });
+
+          // ================= SCROLL ANIMATION FOR WORK CARDS =================
+          gsap.from(cards, {
+            scrollTrigger: {
+              trigger: ".work-outer",
+              start: "top 85%",
+              toggleActions: "play none none none"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+          });
+
+          // ================= SCROLL ANIMATION FOR TEXTS (WITH GRID/LIST STYLE) =================
+          texts.forEach(text => {
+            gsap.fromTo(
+              text,
+              { y: 50, opacity: 0, scale: 0.96 },
+              {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: 0.7,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: text,
+                  start: "top 90%",
+                  toggleActions: "play none none none"
+                }
+              }
+            );
+          });
+
+          // ================= SCROLL ANIMATION FOR IMAGE PREVIEW =================
+          gsap.from(imagePreview, {
+            scrollTrigger: {
+              trigger: ".work-outer",
+              start: "top 85%",
+              toggleActions: "play none none none"
+            },
+            scale: 0.95,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+          });
+
         });
 
-        text.addEventListener("mouseleave", () => {
-          gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
-          texts.forEach(t => t.classList.remove("active", "blur"));
-        });
-      });
-
-    });

@@ -257,3 +257,99 @@ block content
             }
           });
         });
+
+
+      script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js")
+      script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js")
+
+      script.
+        document.addEventListener("DOMContentLoaded", () => {
+
+          if (!window.gsap) return;
+          gsap.registerPlugin(ScrollTrigger);
+
+          /* ================= SLOW & SMOOTH TEXT ANIMATION ================= */
+
+          const animatedText = gsap.utils.toArray(`
+            .main-about-outer h1,
+            .main-about-outer h3,
+            .main-about-outer h6,
+            .main-about-outer p,
+            .main-about-outer .label,
+            .hero-subtitle,
+            .hero-title,
+            .hero-description
+          `);
+
+          animatedText.forEach(el => {
+            gsap.fromTo(
+              el,
+              { y: 50, opacity: 0 },       // start lower for smooth rise
+              {
+                y: 0,
+                opacity: 1,
+                duration: 1.8,             // slower than before
+                ease: "power2.out",        // softer easing
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top 85%",
+                  toggleActions: "play none none none"
+                }
+              }
+            );
+          });
+
+          /* ================= SLOW TEAM CARD ANIMATION ================= */
+
+          gsap.fromTo(
+            ".team-card:not(.empty)",
+            { y: 80, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1.6,             // slower animation
+              ease: "power2.out",
+              stagger: 0.18,             // slower stagger for smooth cascade
+              scrollTrigger: {
+                trigger: ".team-grid",
+                start: "top 80%"
+              }
+            }
+          );
+
+          /* ================= SLOW INFO BLOCK ANIMATION ================= */
+
+          gsap.fromTo(
+            ".info-block",
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1.4,             // slower
+              ease: "power2.out",
+              stagger: 0.2,              // smooth stagger
+              scrollTrigger: {
+                trigger: ".info-wrapper",
+                start: "top 85%"
+              }
+            }
+          );
+
+          /* ================= SLOW HERO IMAGE ================= */
+
+          gsap.fromTo(
+            ".hero-image img",
+            { scale: 0.97, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 2.8,             // slow reveal
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: ".hero",
+                start: "top 85%"
+              }
+            }
+          );
+
+        });
