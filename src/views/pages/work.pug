@@ -1,241 +1,243 @@
 extends ../layout
 
 block content
-  .work-outer
-    .container
-      .work-flex
-        .toggle
-          button#gridBtn.active Grid
-          button#listBtn List
+  .main-work-outer
+    .work-outer
+      .container
+        .work-flex
+          .toggle
+            button#gridBtn.active Grid
+            button#listBtn List
 
-        .category-links
-          span.category.active(data-filter="all") all brand identity 
-            span.count (9)
-          | ,
-          span.category(data-filter="app-website") app & website 
-            span.count (8)
-          | ,
-          span.category(data-filter="exhibition") exhibitions 
-            span.count (5)
-          | ,
-          span.category(data-filter="product-design") product design 
-            span.count (3)
-          | ,
-          span.category(data-filter="packaging") packaging 
-            span.count (8)
-          | ,
-          span.category(data-filter="environment-design") environment design 
-            span.count (4)
-          | ,
-          span.category(data-filter="brand-amplification") brand amplification 
-            span.count (8)
-          | ,
-          span.category(data-filter="bdc") BDC 
-            span.count (8)
-          .absolute-image 
-            img(src="/images/category-image.png", alt="")  
+          .category-links
+            span.category.active(data-filter="all") all brand identity 
+              span.count (9)
+            | ,
+            span.category(data-filter="app-website") app & website 
+              span.count (8)
+            | ,
+            span.category(data-filter="exhibition") exhibitions 
+              span.count (5)
+            | ,
+            span.category(data-filter="product-design") product design 
+              span.count (3)
+            | ,
+            span.category(data-filter="packaging") packaging 
+              span.count (8)
+            | ,
+            span.category(data-filter="environment-design") environment design 
+              span.count (4)
+            | ,
+            span.category(data-filter="brand-amplification") brand amplification 
+              span.count (8)
+            | ,
+            span.category(data-filter="bdc") BDC 
+              span.count (8)
+            .absolute-image 
+              img(src="/images/category-image.png", alt="")  
 
-      // GRID VIEW
-      #gridView.grid.active
-        each item in workItems
-          .card(
-            data-category=item.data.category || 'all'
-          )
-            if item.data.thumbnail
-              img(src=item.data.thumbnail.url, alt=item.data.title)
-            .card-title= item.data.title
-            .card-desc= item.data.short_description
-
-
-      // FIXED IMAGE PREVIEW
-      #imagePreview
-
-      // LIST VIEW
-      #listView.list
-        .canvas
-          each item, index in workItems
-            .text(
+        // GRID VIEW
+        #gridView.grid.active
+          each item in workItems
+            .card(
               data-category=item.data.category || 'all'
-              data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
-            )= item.data.title
+            )
+              if item.data.thumbnail
+                .main-grid-img 
+                  img(src=item.data.thumbnail.url, alt=item.data.title)
+              .card-title= item.data.title
+              .card-desc= item.data.short_description
+
+
+        // FIXED IMAGE PREVIEW
+        #imagePreview
+
+        // LIST VIEW
+        #listView.list
+          .canvas
+            each item, index in workItems
+              .text(
+                data-category=item.data.category || 'all'
+                data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
+              )= item.data.title
 
 
 
 
-  script.
-    document.addEventListener("DOMContentLoaded", () => {
-      const gridBtn = document.getElementById("gridBtn");
-      const listBtn = document.getElementById("listBtn");
-      const gridView = document.getElementById("gridView");
-      const listView = document.getElementById("listView");
-      const categories = document.querySelectorAll(".category");
-      const cards = document.querySelectorAll(".card");
-      const texts = document.querySelectorAll(".text");
-      const imagePreview = document.getElementById("imagePreview");
+    script.
+      document.addEventListener("DOMContentLoaded", () => {
+        const gridBtn = document.getElementById("gridBtn");
+        const listBtn = document.getElementById("listBtn");
+        const gridView = document.getElementById("gridView");
+        const listView = document.getElementById("listView");
+        const categories = document.querySelectorAll(".category");
+        const cards = document.querySelectorAll(".card");
+        const texts = document.querySelectorAll(".text");
+        const imagePreview = document.getElementById("imagePreview");
 
-      // --- HELPER FUNCTION FOR TEXT ANIMATION ---
-      function animateTexts(textElements) {
-        gsap.fromTo(textElements, 
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
-        );
-      }
-
-      // --- TOGGLE VIEWS ---
-      gridBtn.onclick = () => {
-        gridView.classList.add("active");
-        listView.classList.remove("active");
-        gridBtn.classList.add("active");
-        listBtn.classList.remove("active");
-
-        // Hide image preview
-        gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
-
-        // Reset text styles
-        texts.forEach(t => {
-          t.classList.remove("active");
-          t.classList.remove("blur");
-          gsap.set(t, { y: 0, opacity: 1 });
-        });
-
-        // Animate grid cards
-        gsap.fromTo(cards,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
-        );
-
-        // Animate all text movement
-        animateTexts(texts);
-      };
-
-      listBtn.onclick = () => {
-        listView.classList.add("active");
-        gridView.classList.remove("active");
-        listBtn.classList.add("active");
-        gridBtn.classList.remove("active");
-
-        // Animate texts in list view with movement
-        animateTexts(texts);
-      };
-
-      // --- CATEGORY FILTER ---
-      categories.forEach(cat => {
-        cat.addEventListener("click", () => {
-          categories.forEach(c => c.classList.remove("active"));
-          cat.classList.add("active");
-
-          const filter = cat.dataset.filter;
-
-          // GRID
-          cards.forEach(card => {
-            const cardCat = card.dataset.category;
-            card.style.display =
-              filter === "all" || cardCat === filter
-                ? "block"
-                : "none";
-          });
-
-          // LIST
-          texts.forEach(text => {
-            const textCat = text.dataset.category;
-            text.style.display =
-              filter === "all" || textCat === filter
-                ? "block"
-                : "none";
-          });
-
-          // Animate visible items only
-          gsap.fromTo(
-            [...cards, ...texts].filter(el => el.style.display !== "none"),
-            { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, stagger: 0.06, ease: "power3.out" }
-          );
-        });
-      });
-
-
-      const pattern = [
-        { left: 120, top: 70 },
-        { left: 120, top: 140 },
-        { right: 180, top: 200 },
-        { left: 360, top: 260 },
-        { left: 120, top: 330 },
-        { right: 240, top: 390 },
-        { left: 260, top: 460 }
-      ];
-
-      texts.forEach((text, index) => {
-        const pos = pattern[index % pattern.length];
-
-        text.style.top = `${pos.top + Math.floor(index / pattern.length) * 520}px`;
-
-        if (pos.left !== undefined) {
-          text.style.left = `${pos.left}px`;
-          text.style.right = "auto";
-        }
-
-        if (pos.right !== undefined) {
-          text.style.right = `${pos.right}px`;
-          text.style.left = "auto";
-        }
-      });
-
-
-      // --- TEXT HOVER EFFECT & MOVEMENT ---
-      texts.forEach(text => {
-        const img = text.dataset.image;
-
-
-        text.addEventListener("mouseenter", () => {
-          texts.forEach(t => {
-            t.classList.remove("active");
-            t.classList.add("blur");
-          });
-
-          text.classList.add("active");
-          text.classList.remove("blur");
-
-          // Animate text pop-in movement
-          gsap.fromTo(text,
+        // --- HELPER FUNCTION FOR TEXT ANIMATION ---
+        function animateTexts(textElements) {
+          gsap.fromTo(textElements, 
             { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
+            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
           );
+        }
 
-          // Show corresponding image
-          // Show thumbnail image on hover
-          if (!img) return;
+        // --- TOGGLE VIEWS ---
+        gridBtn.onclick = () => {
+          gridView.classList.add("active");
+          listView.classList.remove("active");
+          gridBtn.classList.add("active");
+          listBtn.classList.remove("active");
 
-          imagePreview.style.backgroundImage = `url(${img})`;
+          // Hide image preview
+          gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
 
-          gsap.set(imagePreview, {
-            left: "50%",
-            top: "50%",
-            x: "-50%",
-            y: "-50%"
-          });
-
-          gsap.to(imagePreview, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            ease: "power2.out"
-          });
-
-        });
-
-        text.addEventListener("mouseleave", () => {
-          gsap.to(imagePreview, { opacity: 0, duration: 0.4 });
-
+          // Reset text styles
           texts.forEach(t => {
             t.classList.remove("active");
             t.classList.remove("blur");
+            gsap.set(t, { y: 0, opacity: 1 });
           });
 
-          // Animate text back to resting position smoothly
-          gsap.to(text, { y: 0, opacity: 1, duration: 0.3 });
-        });
-      });
+          // Animate grid cards
+          gsap.fromTo(cards,
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+          );
 
-      // INITIAL ANIMATION ON PAGE LOAD
-      animateTexts(texts);
-    });
+          // Animate all text movement
+          animateTexts(texts);
+        };
+
+        listBtn.onclick = () => {
+          listView.classList.add("active");
+          gridView.classList.remove("active");
+          listBtn.classList.add("active");
+          gridBtn.classList.remove("active");
+
+          // Animate texts in list view with movement
+          animateTexts(texts);
+        };
+
+        // --- CATEGORY FILTER ---
+        categories.forEach(cat => {
+          cat.addEventListener("click", () => {
+            categories.forEach(c => c.classList.remove("active"));
+            cat.classList.add("active");
+
+            const filter = cat.dataset.filter;
+
+            // GRID
+            cards.forEach(card => {
+              const cardCat = card.dataset.category;
+              card.style.display =
+                filter === "all" || cardCat === filter
+                  ? "block"
+                  : "none";
+            });
+
+            // LIST
+            texts.forEach(text => {
+              const textCat = text.dataset.category;
+              text.style.display =
+                filter === "all" || textCat === filter
+                  ? "block"
+                  : "none";
+            });
+
+            // Animate visible items only
+            gsap.fromTo(
+              [...cards, ...texts].filter(el => el.style.display !== "none"),
+              { y: 40, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.6, stagger: 0.06, ease: "power3.out" }
+            );
+          });
+        });
+
+
+        const pattern = [
+          { left: 120, top: 70 },
+          { left: 120, top: 140 },
+          { right: 180, top: 200 },
+          { left: 360, top: 260 },
+          { left: 120, top: 330 },
+          { right: 240, top: 390 },
+          { left: 260, top: 460 }
+        ];
+
+        texts.forEach((text, index) => {
+          const pos = pattern[index % pattern.length];
+
+          text.style.top = `${pos.top + Math.floor(index / pattern.length) * 520}px`;
+
+          if (pos.left !== undefined) {
+            text.style.left = `${pos.left}px`;
+            text.style.right = "auto";
+          }
+
+          if (pos.right !== undefined) {
+            text.style.right = `${pos.right}px`;
+            text.style.left = "auto";
+          }
+        });
+
+
+        // --- TEXT HOVER EFFECT & MOVEMENT ---
+        texts.forEach(text => {
+          const img = text.dataset.image;
+
+
+          text.addEventListener("mouseenter", () => {
+            texts.forEach(t => {
+              t.classList.remove("active");
+              t.classList.add("blur");
+            });
+
+            text.classList.add("active");
+            text.classList.remove("blur");
+
+            // Animate text pop-in movement
+            gsap.fromTo(text,
+              { y: 20, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
+            );
+
+            // Show corresponding image
+            // Show thumbnail image on hover
+            if (!img) return;
+
+            imagePreview.style.backgroundImage = `url(${img})`;
+
+            gsap.set(imagePreview, {
+              left: "50%",
+              top: "50%",
+              x: "-50%",
+              y: "-50%"
+            });
+
+            gsap.to(imagePreview, {
+              opacity: 1,
+              scale: 1,
+              duration: 0.5,
+              ease: "power2.out"
+            });
+
+          });
+
+          text.addEventListener("mouseleave", () => {
+            gsap.to(imagePreview, { opacity: 0, duration: 0.4 });
+
+            texts.forEach(t => {
+              t.classList.remove("active");
+              t.classList.remove("blur");
+            });
+
+            // Animate text back to resting position smoothly
+            gsap.to(text, { y: 0, opacity: 1, duration: 0.3 });
+          });
+        });
+
+        // INITIAL ANIMATION ON PAGE LOAD
+        animateTexts(texts);
+      });

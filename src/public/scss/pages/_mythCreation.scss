@@ -5,6 +5,14 @@ body {
   color: #111;
   overflow-x: hidden;
 }
+  .container {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0 !important;
+  }
+.main-myth-creation {
+    overflow: hidden;
+}
 img.mobile-arrow {
     display: none;
 }
@@ -577,10 +585,11 @@ p.section-title {
 }
 
 .create-item-inner {
-  display: flex;
-  align-items: center;
-  gap: 65px;
-  margin-left: 80px;
+ display: flex;
+    align-items: center;
+    margin-left: 143px;
+    width: 60%;
+    justify-content: space-around;
 
   .create-item-int {
     p {
@@ -839,6 +848,46 @@ video {
 // footer css end here
 
 // create the chaos css end here
+@media (max-width: 1280px) {
+  .services .fate-wrap {
+    right: 35px;
+}
+.services__note {
+    right: 120px;
+}
+.card {
+    width: auto;
+}
+}
+@media (max-width: 1140px) {
+  .right-form input[type=email] {
+    width: 260px;
+}
+.email-flex {
+    gap: 8px;
+}
+}
+@media (max-width: 1024px) {
+  .right-form input[type=email] {
+    width: 200px;
+}
+.email-flex {
+    gap: 8px;
+}
+.how-outer {
+    gap: 60px;
+    padding-inline: 40px;
+}
+.services {
+    gap: 30px;
+}
+.slider-flex {
+    flex-wrap: wrap;
+}
+.hero-section-unique .outer-unique .inner-unique h1.animate-text-unique {
+    font-size: 48px;
+}
+}
 @media (max-width: 900px) {
   .card {
     width: 90%;
@@ -852,11 +901,23 @@ video {
     .container img {
     width: 100%;
 }
+.create-item-inner {
+    width: 95%;
+}
+.services .fate-wrap {
+    right: -26px;
+}
+.hero-section-unique .outer-unique .inner-unique .banner-inner-unique p.animate-text-unique:first-child {
+    max-width: 100%;
+}
+.iconic-outer {
+    height: 100%;
+}
 .how-outer .headline1 .line-1, .how-outer .headline1 .line-2, .how-outer .headline1 .line-3 {
     font-size: 45px;
 }
 .hero-section-unique .outer-unique {
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 img.mobile-arrow {
     width: 50%;
@@ -871,8 +932,8 @@ img.mobile-arrow {
     flex-direction: column;
 }
 .services__label img {
-    top: -74px;
-    right: -31px;
+    top: -110px;
+    right: -30px;
     left: auto;
 }
 .image-create-overlay {
@@ -885,15 +946,10 @@ img.mobile-arrow {
 .create-outer {
     padding-top: 0px;
 }
-// .container {
-//     overflow: hidden;
-// }
 .hero-section-unique .outer-unique .inner-unique h1.animate-text-unique {
     font-size: 48px;
 }
-// .logo-container {
-//     left: 45% !important;
-// }
+
 .services__note {
     right: 50px;
     bottom: 0px;
@@ -964,9 +1020,6 @@ img.desktop-arrow {
 .services__note {
     bottom: 0px;
 }
-body.page1 {
-    padding-inline: 10px;
-}
 .iconic-outer {
     padding-inline: 0px;
 }
@@ -1003,11 +1056,37 @@ body.page1 {
     .left-section li {
       font-size: 22px;
     }
+    .create-item {
+    width: 95%;
+}
+.main-myth-creation {
+    padding-inline: 20px;
+}
+.text-tab {
+    bottom: 0;
+}
+.click-path {
+    top: -30px !important;
+    left: -56px;
+}
   }
 
+@media (max-width: 600px) {
+.hero-section-unique .outer-unique .image-container-unique {
+    right: -100px;
+}
+.hero-section-unique .outer-unique .inner-unique h1.animate-text-unique {
+    font-size: 48px;
+    max-width: 80%;
+}
+.inner-unique {
+    position: relative;
+}
+.services__label {
+    font-size: 14px;
+}
+img.mobile-arrow {
+    display: block;
+}
+}
 
-  .container {
-    max-width: 1220px;
-    margin: 0 auto;
-    padding: 0 !important;
-  }
