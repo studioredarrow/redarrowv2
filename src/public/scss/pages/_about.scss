@@ -345,7 +345,7 @@ span.inner-dot {
 }
 
 .hero {
-  padding: 80px 0px;
+  padding: 80px 20px;
   font-family: 'Inter', sans-serif;
   text-align: left;
 
@@ -420,10 +420,6 @@ span.inner-dot {
       padding: 10px 20px;
     }
   }
-  .team-inner h6 {
-    padding-bottom: 25px;
-}
-
 }
 .screen img {
     width: 100%;
@@ -469,25 +465,10 @@ span.inner-dot {
 .team-inner h6 {
     padding-bottom: 20px;
 }
-.main-about-outer {
-    padding-inline: 20px;
-}
-.team-card.empty {
-    display: none;
-}
-.team-card.add-card {
-    height: 208px;
-}
 .machine .panel .counter-row .counter-container .counter {
     font-size: 48px
 }
-.team-card.add-card {
-    gap: 10px;
-}
-.machine .panel .counter-row {
-    flex-wrap: wrap;
-    gap: 0;
-}
+
 }
 // location css end here
 
@@ -511,7 +492,6 @@ span.inner-dot {
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: auto;
   text-rendering: optimizeSpeed;
-  border: 1px solid #BDBDBD;
 }
 
 .digit {

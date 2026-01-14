@@ -17,7 +17,7 @@
             left: 50%;
             z-index: 999;
             width: 100%;
-            // background: #f8f5f1;
+            background: #f8f5f1;
         }
 
         .wrapper {
@@ -144,24 +144,24 @@
         }
 
         /* Popup container */
-       .cookie-popup {
-    position: fixed;
-    bottom: 0px !important;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 1120px;
-    background: #f9f8f6;
-    border-radius: 20px 20px 0px 0px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 98px;
-    font-size: 14px;
-    opacity: 0;
-    animation-delay: 0.5s;
-}
+        .cookie-popup {
+            position: fixed;
+            bottom: 0px !important;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 81%;
+            max-width: 1120px;
+            background: #f9f8f6;
+            border-radius: 20px 20px 0px 0px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 98px;
+            font-size: 14px;
+            opacity: 0;
+            animation-delay: 0.5s;
+        }
 
         /* Text + icon section */
         .cookie-text {
@@ -1065,7 +1065,7 @@
                 text-align: right;
                 display: flex !important;
                 flex-direction: row !important;
-                gap: 76px !important;
+                gap: 13px !important;
                 position: relative;
                 top: -8px;
             }
