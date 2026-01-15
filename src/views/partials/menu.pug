@@ -211,3 +211,77 @@ html(lang="en")
 
         lastScrollY = currentScrollY;
       });
+
+
+    script.  
+      const carousel = document.getElementById('carousel');
+      const items = carousel.querySelectorAll('.item');
+
+      let isDragging = false;
+      let startX = 0;
+      let currentRotation = 0;
+      let dragRotation = 0;
+
+      const sensitivity = 0.25;
+      const itemCount = items.length;
+      const degreePerItem = 360 / itemCount;
+
+      // ----- HELPER FUNCTION -----
+      function updateHighlight(rotation) {
+        const normalized = ((rotation % 360) + 360) % 360;
+        const centerIndex = Math.round(normalized / degreePerItem) % itemCount;
+
+        items.forEach((item, index) => {
+          if (index === (itemCount - centerIndex) % itemCount) {
+            item.classList.add('main');
+            item.classList.remove('side');
+          } else {
+            item.classList.add('side');
+            item.classList.remove('main');
+          }
+        });
+      }
+
+      // ----- START DRAG -----
+      function startDrag(clientX) {
+        isDragging = true;
+        startX = clientX;
+        carousel.style.transition = 'none';
+      }
+
+      // ----- DRAGGING -----
+      function onDrag(clientX) {
+        if (!isDragging) return;
+        const delta = clientX - startX;
+        dragRotation = currentRotation + delta * sensitivity;
+        carousel.style.transform = `rotateY(${dragRotation}deg)`;
+        updateHighlight(dragRotation);
+      }
+
+      // ----- END DRAG -----
+      function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        currentRotation = Math.round(dragRotation / degreePerItem) * degreePerItem;
+        carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
+        carousel.style.transform = `rotateY(${currentRotation}deg)`;
+        updateHighlight(currentRotation);
+      }
+
+      // ----- MOUSE EVENTS -----
+      carousel.addEventListener('mousedown', (e) => startDrag(e.clientX));
+      document.addEventListener('mousemove', (e) => onDrag(e.clientX));
+      document.addEventListener('mouseup', endDrag);
+
+      // ----- TOUCH EVENTS -----
+      carousel.addEventListener('touchstart', (e) => startDrag(e.touches[0].clientX));
+      document.addEventListener('touchmove', (e) => {
+        onDrag(e.touches[0].clientX);
+        e.preventDefault(); // Prevent scrolling while dragging
+      }, { passive: false });
+      document.addEventListener('touchend', endDrag);
+
+      // ----- INITIALIZE -----
+      currentRotation = 0;
+      carousel.style.transform = `rotateY(0deg)`;
+      updateHighlight(0);

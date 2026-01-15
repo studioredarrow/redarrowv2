@@ -139,12 +139,12 @@ block content
         .info-container
           .info-flex
             .info-block
-              span.label Location
+              span.label1 Location
               .value
                 != asHTML(page.data.location)
 
             .info-block
-              span.label Address
+              span.label1 Address
               .value
                 != asHTML(page.data.address)
 
@@ -156,6 +156,8 @@ block content
           .hero-item  
             h1.hero-title
                 != asHTML(page.data.creative_collective_heading)
+                .hero-absolute-img
+                  img(src="/images/hang-in-there-image.png", alt="")
 
             .hero-image
               img(
@@ -353,3 +355,6 @@ block content
           );
 
         });
+
+
+        

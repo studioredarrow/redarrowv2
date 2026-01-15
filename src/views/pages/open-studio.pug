@@ -11,41 +11,41 @@ block content
       .details
         .details-item
           span.label LOCATION
-          | SAIGON
+          span#saigon SAIGON 
         .details-item
           span.label TIME
           span#saigonTime 7:00 AM
+        
 
 
     .work-outer.open-outer
       .container
         .work-flex.open-flex
+          #gridView.grid.active.inner-grid-open
+            -
+              const gapPattern = ['gap-right', 'gap-center', 'gap-none', 'gap-right'];
+            each item, index in workItems
+              .card(class=gapPattern[index % gapPattern.length])
+                if item.data.thumbnail
+                  .main-grid-img
+                    img(src=item.data.thumbnail.url, alt=item.data.title)
+                .card-title= item.data.title
+                .card-desc= item.data.short_description
+
+          // ================= IMAGE PREVIEW =================
+          #imagePreview
+
+          // ================= LIST VIEW =================
+          #listView.list
+            .canvas
+              each item in workItems
+                .text(
+                  data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
+                )= item.data.title
+
           .toggle
             button#gridBtn.active Grid
-            button#listBtn List
-
-        // ================= GRID VIEW =================
-        #gridView.grid.active.inner-grid-open
-          -
-            const gapPattern = ['gap-right', 'gap-center', 'gap-none', 'gap-right'];
-          each item, index in workItems
-            .card(class=gapPattern[index % gapPattern.length])
-              if item.data.thumbnail
-                .main-grid-img
-                  img(src=item.data.thumbnail.url, alt=item.data.title)
-              .card-title= item.data.title
-              .card-desc= item.data.short_description
-
-        // ================= IMAGE PREVIEW =================
-        #imagePreview
-
-        // ================= LIST VIEW =================
-        #listView.list
-          .canvas
-            each item in workItems
-              .text(
-                data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
-              )= item.data.title
+            button#listBtn List      
 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js")
@@ -250,3 +250,43 @@ block content
         hideImagePreviewInstant();
         animateGrid();
       });
+
+
+    //- GSAP Core
+    script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
+    script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
+
+    //- Page animation
+    script.
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.defaults({
+        duration: 1,
+        ease: "power3.out"
+      });
+
+      // =========================
+      // HERO ANIMATION
+      // =========================
+      const heroTL = gsap.timeline();
+      heroTL
+        .from(".image-container-unique img", { scale: 1.2, opacity: 0, duration: 1.4 })
+        .from(".animate-text-unique", { y: 80, opacity: 0, stagger: 0.2 }, "-=0.8")
+        .from(".banner-inner-unique ", { y: 60, opacity: 0, stagger: 0.2 }, "-=0.6");
+
+      // =========================
+      // TEXT REVEAL ON SCROLL
+      // =========================
+      gsap.utils.toArray(" h3, .card-title, .card-desc , img, .details-item").forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 70%"
+          },
+          y: 40,
+          opacity: 0
+        });
+      });
+
+      ScrollTrigger.refresh();
+      
