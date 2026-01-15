@@ -41,6 +41,8 @@ block content
           each item, index in workItems
             .card(
               data-category=item.data.category || 'all'
+              onclick=`window.location.href='/portfolio/${item.uid}'`
+              style="cursor: pointer;"
             )
               if item.data.thumbnail
                 .main-grid-img 
@@ -59,6 +61,8 @@ block content
               .text(
                 data-category=item.data.category || 'all'
                 data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
+                onclick=`window.location.href='/portfolio/${item.uid}'`
+                style="cursor: pointer;"
               )= item.data.title
 
 

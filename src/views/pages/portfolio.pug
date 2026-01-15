@@ -4,166 +4,250 @@ block content
   .progress-bar-wrapper
     .progress-bar
 
+  // ================= HERO SECTION =================
   .benji-wrapper
-      .container
+    .container
+
+      // HERO IMAGE
+      if portfolioItem.data.hero_banner_image && portfolioItem.data.hero_banner_image.url
         .benji-image
-          img(src="/images/benji-banner-image.png", alt="Benji Bistro")
+          img(
+            src=portfolioItem.data.hero_banner_image.url
+            alt=portfolioItem.data.hero_title || "Hero image"
+          )
 
-        .benji-hero
-          .benji-content
-            h1.benji-title Benji Bistro
-            p.benji-description
-              | Benji Bistro is a first-of-its-kind hospitality concept — a dog-friendly restaurant where elegance meets
-              | play, designed to bring humans and dogs together in a shared dining experience.
+      // HERO CONTENT
+      .benji-hero
+        .benji-content
+          if portfolioItem.data.hero_title
+            h1.benji-title= portfolioItem.data.hero_title
 
+          if portfolioItem.data.hero_description
+            .benji-description!= asHTML(portfolioItem.data.hero_description)
+
+        // HERO SERVICES
+        if portfolioItem.data.hero_services && portfolioItem.data.hero_services.length
           .benji-services
-            p Creative & Design
-            p Campaigns
-            p Marketing & Branding
-            p Creative Direction & Production
+            each service in portfolioItem.data.hero_services
+              if service.service_name
+                p= service.service_name
 
-            .benji-absolute
-              img(src="/images/category-portfolio-img.png", alt="")
+                .benji-absolute
+                  img(src="/images/category-portfolio-img.png", alt="")
+
 
   .benji-outer
       .benji-inner
         .container
           .benji-flex
-            // Left Column
+
+            // ================= LEFT COLUMN =================
             .left
-              .benji-left
-                div
-                  span.label Sector
-                  br
-                  | F&B
-                div
-                  span.label Office
-                  br
-                  | Hongkong
-                div
-                  span.label Partner
-                  br
-                  | owner’s name
 
+              // PROJECT META
               .benji-left
-                div
-                  span.label Project team
-                  br
-                  | member's name
-                  br
-                  | member's name
-                  br
-                  | member's name
-                  br
-                  | member's name
-                  br
-                  | member's name
-                  br
-                  | member's name
+                if portfolioItem.data.project_sector
+                  div
+                    span.label Sector
+                    br
+                    = portfolioItem.data.project_sector
 
-            // Right Column
+                if portfolioItem.data.project_office
+                  div
+                    span.label Office
+                    br
+                    = portfolioItem.data.project_office
+
+                if portfolioItem.data.project_partner
+                  div
+                    span.label Partner
+                    br
+                    = portfolioItem.data.project_partner
+
+              // PROJECT TEAM
+              if portfolioItem.data.project_team && portfolioItem.data.project_team.length
+                .benji-left
+                  div
+                    span.label Project team
+                    br
+                    each member in portfolioItem.data.project_team
+                      if member.member_name
+                        = member.member_name
+                        br
+
+            // ================= RIGHT COLUMN =================
             .right
-              h2 Challenge
-              p
-                | Develop a complete brand and experience model for a new franchise concept blending lifestyle, community,
-                | and hospitality under one cohesive identity.
 
-              h2 The strategy
-              p
-                | To create a hospitality experience where elegance meets play — a restaurant made for dogs and humans
-                | alike. The vision: to design a brand that redefines connection through shared spaces and emotional
-                | storytelling, blending lifestyle, culture, and companionship into one seamless identity.
+              if portfolioItem.data.challenge_content
+                h2= portfolioItem.data.challenge_title || "Challenge"
+                p!= asHTML(portfolioItem.data.challenge_content)
 
-              h2 The solution
-              p
-                | Through the Insight Workshop, we defined the balance — 80% for dogs, 20% for humans. From that insight
-                | came a complete identity system: illustrations, typography, and spatial design unified by the dual-type
-                | logo — playful Benji, refined Bistro. Every touchpoint, from events to charity campaigns, reflected this
-                | harmony, resulting in a franchise-ready model opening one new location each month.            
+              if portfolioItem.data.strategy_content
+                h2= portfolioItem.data.strategy_title || "The strategy"
+                p!= asHTML(portfolioItem.data.strategy_content)
+
+              if portfolioItem.data.solution_content
+                h2= portfolioItem.data.solution_title || "The solution"
+                p!= asHTML(portfolioItem.data.solution_content)
+
   
       section
         .photo-outer
           .photo-inner
             .container
-              .bistro-banner
-                img(src="/images/benji-bistro-img.png", alt="")
 
-              .bistro-flex
-                .bistro-item
-                  img(src="/images/Goldfoil-Red.png", alt="")
-                .bistro-item
-                  img(src="/images/BB-full-logo.png", alt="")
+              // ================= BRAND BANNER =================
+              if portfolioItem.data.brand_banner_image && portfolioItem.data.brand_banner_image.url
+                .bistro-banner
+                  img(
+                    src=portfolioItem.data.brand_banner_image.url
+                    alt=""
+                  )
 
-              .bistro-inner-item
-                p Benji Bistro celebrates the joyful bond between dogs and humans through a mirrored dining concept
+              // ================= BRAND LOGOS =================
+              if portfolioItem.data.brand_logo_images && portfolioItem.data.brand_logo_images.length
+                .bistro-flex
+                  each logo in portfolioItem.data.brand_logo_images
+                    if logo.logo_image && logo.logo_image.url
+                      .bistro-item
+                        img(src=logo.logo_image.url, alt="")
 
-              .photo-banner
-                h2 Photoshoot
-                p
-                  | Within 12 months, Nuon was featured next to L’Oréal, Estée Lauder,
-                  | Shiseido, Unilever, Coty, LVMH, Amorepacific, and more — establishing
-                  | its place among the most credible names in beauty tech.
-                img(src="/images/gallery-1.png", alt="")
+              // ================= BRAND DESCRIPTION =================
+              if portfolioItem.data.brand_description
+                .bistro-inner-item
+                  p!= asHTML(portfolioItem.data.brand_description)
 
-              .photo-flex
-                each imgName in ["/images/gallery-2.png", "/images/gallery-3.png", "/images/gallery-4.png", "/images/gallery-5.png"]
-                  .photo-item
-                    img(src=imgName, alt="")
+              // ================= PHOTO GALLERIES =================
+              if portfolioItem.data.photo_galleries && portfolioItem.data.photo_galleries.length
+                each gallery in portfolioItem.data.photo_galleries
 
-              .photo-banner
-                .photo-right
-                  h2 Interior
-                  p
-                    | Within 12 months, Nuon was featured next to L’Oréal, Estée Lauder,
-                    | Shiseido, Unilever, Coty, LVMH, Amorepacific, and more — establishing
-                    | its place among the most credible names in beauty tech.
-                img(src="/images/right-gallery-1.png", alt="")
+                  // ---- BANNER LEFT ----
+                  if gallery.gallery_layout === "banner-left"
+                    .photo-banner
+                      if gallery.gallery_title
+                        h2= gallery.gallery_title
+                      if gallery.gallery_description
+                        p!= asHTML(gallery.gallery_description)
+                      if gallery.gallery_banner_image && gallery.gallery_banner_image.url
+                        img(src=gallery.gallery_banner_image.url, alt="")
 
-              .photo-flex
-                each imgName in ["/images/right-gallery-2.png", "/images/right-gallery-3.png", "/images/right-gallery-4.png", "/images/right-gallery-5.png"]
-                  .photo-item
-                    img(src=imgName, alt="")
-              .photo-banner
-                img(src="/images/right-gallery-6.png", alt="")  
+                    .photo-flex
+                      if gallery.gallery_image_1 && gallery.gallery_image_1.url
+                        .photo-item
+                          img(src=gallery.gallery_image_1.url, alt="")
+                      if gallery.gallery_image_2 && gallery.gallery_image_2.url
+                        .photo-item
+                          img(src=gallery.gallery_image_2.url, alt="")
+                      if gallery.gallery_image_3 && gallery.gallery_image_3.url
+                        .photo-item
+                          img(src=gallery.gallery_image_3.url, alt="")
+                      if gallery.gallery_image_4 && gallery.gallery_image_4.url
+                        .photo-item
+                          img(src=gallery.gallery_image_4.url, alt="")
+                      if gallery.gallery_image_5 && gallery.gallery_image_5.url
+                        .photo-item
+                          img(src=gallery.gallery_image_5.url, alt="")
+                      if gallery.gallery_image_6 && gallery.gallery_image_6.url
+                        .photo-item
+                          img(src=gallery.gallery_image_6.url, alt="")
 
-      section
-        .creative-outer
-          .creative-inner
+                  else if gallery.gallery_layout === "banner-right"
+                    .photo-banner
+                      .photo-right
+                        if gallery.gallery_title
+                          h2= gallery.gallery_title
+                        if gallery.gallery_description
+                          p!= asHTML(gallery.gallery_description)
+                      if gallery.gallery_banner_image && gallery.gallery_banner_image.url
+                        img(src=gallery.gallery_banner_image.url, alt="")
+
+                    .photo-flex
+                      if gallery.gallery_image_1 && gallery.gallery_image_1.url
+                        .photo-item
+                          img(src=gallery.gallery_image_1.url, alt="")
+                      if gallery.gallery_image_2 && gallery.gallery_image_2.url
+                        .photo-item
+                          img(src=gallery.gallery_image_2.url, alt="")
+                      if gallery.gallery_image_3 && gallery.gallery_image_3.url
+                        .photo-item
+                          img(src=gallery.gallery_image_3.url, alt="")
+                      if gallery.gallery_image_4 && gallery.gallery_image_4.url
+                        .photo-item
+                          img(src=gallery.gallery_image_4.url, alt="")
+                      if gallery.gallery_image_5 && gallery.gallery_image_5.url
+                        .photo-item
+                          img(src=gallery.gallery_image_5.url, alt="")
+                      if gallery.gallery_image_6 && gallery.gallery_image_6.url
+                        .photo-item
+                          img(src=gallery.gallery_image_6.url, alt="")
+
+                  else if gallery.gallery_layout === "banner-only"
+                    if gallery.gallery_banner_image && gallery.gallery_banner_image.url
+                      .photo-banner
+                        img(src=gallery.gallery_banner_image.url, alt="")
+    
+
+      // ================= CREATIVE SECTION =================
+      if portfolioItem.data.creative_gallery_images && portfolioItem.data.creative_gallery_images.length
+        section
+          .creative-outer
+            .creative-inner
+              .container
+                // ---- TITLE + DESCRIPTION ----
+                .creative-banner
+                  if portfolioItem.data.creative_section_title
+                    h3= portfolioItem.data.creative_section_title
+
+                  if portfolioItem.data.creative_section_description
+                    p!= asHTML(portfolioItem.data.creative_section_description)
+
+                // ---- IMAGE GRID ----
+                .create-grid
+                  // First row (images 1,2,3)
+                  if portfolioItem.data.creative_gallery_images.length >= 3
+                    .create-item-grid.create-inner-flex
+                      each item, i in portfolioItem.data.creative_gallery_images.slice(0, 3)
+                        .create-item-int(class=i === 2 ? 'create-int' : '')
+                          img(
+                            src=item.image.url
+                            alt=item.alt_text || ''
+                          )
+
+                  // Second row (image 4)
+                  if portfolioItem.data.creative_gallery_images.length >= 4
+                    .create-item-grid
+                      img(
+                        src=portfolioItem.data.creative_gallery_images[3].image.url
+                        alt=portfolioItem.data.creative_gallery_images[3].alt_text || ''
+                      )
+
+                  // Third row (images 5 & 6)
+                  if portfolioItem.data.creative_gallery_images.length >= 6
+                    .create-item-grid.creater-flex
+                      each item in portfolioItem.data.creative_gallery_images.slice(4, 6)
+                        .create-inner-item
+                          img(
+                            src=item.image.url
+                            alt=item.alt_text || ''
+                          )
+
+          // ---- VALENTINE IMAGES (7 & 8) ----
+          if portfolioItem.data.creative_gallery_images.length > 6
             .container
-              .creative-banner
-                h3 Creative Direction & Production
-                p
-                  | Capturing the playful sophistication of Benji Bistro, the visuals blend French-inspired elegance with the
-                  | joyful bond between dogs and their human companions, brought to life through the mirror dining concept.
-              .create-grid
-                .create-item-grid.create-inner-flex
-                  .create-item-int
-                    img(src="/images/create-gallery-1.png", alt="")
-                  .create-item-int
-                    img(src="/images/create-gallery-2.png", alt="")
-                  .create-item-int.create-int
-                    img(src="/images/create-gallery-3.png", alt="")
-                .create-item-grid
-                  img(src="/images/create-gallery-4.png", alt="")
-                .create-item-grid.creater-flex
-                  .create-inner-item
-                    img(src="/images/create-gallery-5.png", alt="")
-                  .create-inner-item
-                    img(src="/images/create-gallery-6.png", alt="") 
+              .photo-flex
+                each item in portfolioItem.data.creative_gallery_images.slice(6)
+                  .photo-item
+                    img(
+                      src=item.image.url
+                      alt=item.alt_text || ''
+                    )
 
-      .container              
-        .photo-flex
-          each imgName in ["/images/valentine-image-1.png", "/images/valentine-image-2.png"]
-            .photo-item
-              img(src=imgName, alt="")
 
-        .photo-banner
-          .photo-right
-            h2 Interior
-            p
-              | Within 12 months, Nuon was featured next to L’Oréal, Estée Lauder,
-              | Shiseido, Unilever, Coty, LVMH, Amorepacific, and more — establishing
-              | its place among the most credible names in beauty tech.
+        if portfolioItem.data.additional_photo_sections && portfolioItem.data.additional_photo_sections[0].section_description
+          .photo-banner
+            .photo-right
+              p!= asHTML(portfolioItem.data.additional_photo_sections[0].section_description)
+
 
       section
         .event-outer
@@ -185,47 +269,46 @@ block content
       .photo-banner
         .container
             .photo-right
-              h2 Event
-              p
-                | Within 12 months, Nuon was featured next to L’Oréal, Estée Lauder,
-                | Shiseido, Unilever, Coty, LVMH, Amorepacific, and more — establishing
-                | its place among the most credible names in beauty tech.  
+              if portfolioItem.data.event_section_title
+                    h2= portfolioItem.data.event_section_title
 
-      section.event-section-new
-        .container 
-          .event-wrapper-new
-            .event-content-new
-              .layout-container-new
-                .event-layout-new
-                  .event-column-new.event-gallery-new
-                    .event-image-box-new
-                      img(src="/images/event-img-6.png", alt="")
-                    .event-image-box-new
-                      img(src="/images/event-img-7.png", alt="")
-                    .event-image-box-new
-                      img(src="/images/event-img-8.png", alt="")
-                    .event-image-box-new
-                      img(src="/images/event-img-9.png", alt="")
-                  .event-column-new.event-single-image-new
-                    img(src="/images/event-img-10.png", alt="") 
+              if portfolioItem.data.event_section_description
+                    p!= asHTML(portfolioItem.data.event_section_description)
 
-      section.related-projects
-        .container
-          h2 Related projects
+      if portfolioItem.data.event_gallery_images && portfolioItem.data.event_gallery_images.length > 4
 
-          .projects-grid
-            .project.center
-              .project-center
-                .project-card
-                p LED ESTHETICS
+        section.event-section-new
+          .container
+            .event-wrapper-new
+              .event-content-new
+                .layout-container-new
+                  .event-layout-new
 
-            .project
-              .project-card
-              p LED ESTHETICS
+                    .event-column-new.event-gallery-new
+                      each item in portfolioItem.data.event_gallery_images.slice(0, 4)
+                        if item.image && item.image.url
+                          .event-image-box-new
+                            img(src=item.image.url alt='')
 
-            .project
-              .project-card
-              p LED ESTHETICS   
+                    if portfolioItem.data.event_gallery_images[4] && portfolioItem.data.event_gallery_images[4].image && portfolioItem.data.event_gallery_images[4].image.url
+                      .event-column-new.event-single-image-new
+                        img(
+                          src=portfolioItem.data.event_gallery_images[4].image.url
+                          alt=''
+                        ) 
+
+      if portfolioItem.data.related_projects && portfolioItem.data.related_projects.length
+
+        section.related-projects
+          .container
+            h2 Related projects
+
+            .projects-grid
+              each item in portfolioItem.data.related_projects
+                if item.projects && !item.projects.isBroken
+                  .project
+                    .project-card
+                    p= item.projects.uid.replace('-', ' ').toUpperCase()
 
 
       // GSAP Core

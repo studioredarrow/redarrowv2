@@ -1,19 +1,18 @@
 const { client } = require("../prismic");
 
 async function menuMiddleware(req, res, next) {
-  console.log("👉 MENU MIDDLEWARE HIT:", req.originalUrl);
 
   try {
     const menuItems = await client.getAllByType("menu_page");
 
-    menuItems.forEach((item, i) => {
-      console.log(
-        `#${i + 1}`,
-        item.uid,
-        item.data?.label,
-        item.data?.route
-      );
-    });
+    // menuItems.forEach((item, i) => {
+    //   console.log(
+    //     `#${i + 1}`,
+    //     item.uid,
+    //     item.data?.label,
+    //     item.data?.route
+    //   );
+    // });
 
     res.locals.menuItems = menuItems;
   } catch (err) {
