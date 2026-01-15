@@ -2367,9 +2367,6 @@ body {
   .right-form input[type=email] {
     width: 100%;
   }
-  .grid {
-    gap: 40px;
-  }
   .benji-hero {
     flex-direction: column;
     gap: 15px;
