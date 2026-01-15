@@ -26,10 +26,8 @@ block content
 
         // ================= GRID VIEW =================
         #gridView.grid.active.inner-grid-open
-          -
-            const gapPattern = ['gap-right', 'gap-center', 'gap-none', 'gap-right'];
           each item, index in workItems
-            .card(class=gapPattern[index % gapPattern.length])
+            .card
               if item.data.thumbnail
                 .main-grid-img
                   img(src=item.data.thumbnail.url, alt=item.data.title)

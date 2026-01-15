@@ -38,12 +38,9 @@ block content
 
         // GRID VIEW
         #gridView.grid.active
-          -
-            const gapPattern = ['gap-right', 'gap-center', 'gap-none', 'gap-right'];
           each item, index in workItems
             .card(
               data-category=item.data.category || 'all'
-              class=gapPattern[index % gapPattern.length]
             )
               if item.data.thumbnail
                 .main-grid-img 
