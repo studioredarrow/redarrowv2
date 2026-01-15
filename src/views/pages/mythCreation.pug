@@ -76,9 +76,7 @@ block content
               .iconic-content
                 h2 Strategy
                 p
-                  | With clarity comes direction. We translate insight into structured strategies that guide design,
-                  | communication, and growth—ensuring every move strengthens the myth you’re building.
-
+                  Every myth begins with Insight - a deep understanding of your business. We explore your realities, goals, and challenges to uncover your brand’s story and define success. This lays the foundation for a strategy that aligns with your goals and drives progress.
     //- ICONIC SECTION 03
     .iconic-outer
       .iconic-inner
@@ -90,10 +88,9 @@ block content
               .iconic-image.iconic-third
                 img(src="/images/iconic-horse.png" alt="")
               .iconic-content
-                h2 Creation
+                h2 Magic
                 p
-                  | Ideas become reality through execution. We design and build products, systems, and experiences
-                  | that embody your strategy and bring your brand’s myth to life.
+                  We create a Custom Myth and Horizon Plan - a roadmap blending brand rollout, communications, and campaigns to ensure alignment with your goals and measurable outcomes.
 
   //- SERVICES SECTION
   .container 
@@ -106,30 +103,30 @@ block content
     .services__grid
       ul.services__list
         li
-          span 01
+          span (01)
           | Brand identity
         li
-          span 02
+          span (02)
           | App & website
         li
-          span 03
+          span (03)
           | Exhibitions
         li
-          span 04
+          span (04)
           | Product design
         li
-          span 05
+          span (05)
           | Packaging
 
       ul.services__list
         li
-          span 06
+          span (06)
           | Environment design
         li
-          span 07
+          span (07)
           | Brand amplification
         li
-          span 08
+          span (08)
           | BD consultancy
 
     .outer-btn
@@ -158,18 +155,16 @@ block content
           .image-wrapper
             img(src="/images/logo-slider-3.png" alt="Goodyear")
           .image-wrapper
-            img(src="/images/logo-slider-4.png" alt="Pierre Cardin")
-
-        .allimages1    
-          .image-wrapper1
+            img(src="/images/logo-slider-4.png" alt="Pierre Cardin")  
+          .image-wrapper
             img(src="/images/logo-slider-5.png" alt="KALA")
-          .image-wrapper1
+          .image-wrapper
             img(src="/images/logo-slider-6.png" alt="LED Esthetics")
-          .image-wrapper1
+          .image-wrapper
             img(src="/images/logo-slider-7.png" alt="Balmain Paris")
-          .image-wrapper1 
+          .image-wrapper
             img(src="/images/logo-slider-8.png" alt="Vivienne Westwood")
-          .image-wrapper1 
+          .image-wrapper
             img(src="/images/logo-slider-9.png" alt="Disney")
 
           //- image horizontal animation section start here
@@ -319,56 +314,6 @@ block content
 
 
   script.
-    gsap.registerPlugin(ScrollTrigger);
-
-    document.querySelectorAll(".animate-text").forEach(text => {
-
-      // Split text into words
-      const words = text.innerText.split(" ");
-      text.innerHTML = words.map(word => `<span>${word}&nbsp;</span>`).join("");
-
-      const spans = Array.from(text.querySelectorAll("span"));
-
-      // Group words into lines
-      let lines = [];
-      let currentTop = spans[0]?.offsetTop;
-      let line = [];
-
-      spans.forEach(span => {
-        if (span.offsetTop !== currentTop) {
-          lines.push(line);
-          line = [];
-          currentTop = span.offsetTop;
-        }
-        line.push(span);
-      });
-      if (line.length) lines.push(line);
-
-      // Wrap lines
-      lines.forEach(words => {
-        const lineWrap = document.createElement("div");
-        lineWrap.classList.add("line");
-        words[0].parentNode.insertBefore(lineWrap, words[0]);
-        words.forEach(w => lineWrap.appendChild(w));
-      });
-
-      // Animate text on scroll
-      gsap.to(text.querySelectorAll("span"), {
-        scrollTrigger: {
-          trigger: text,
-          start: "top 85%",
-          toggleActions: "play none none none"
-        },
-        y: "0%",
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.04
-      });
-    });
-
-
-  script.
 
     // Example: Card image slider hover
     document.querySelectorAll('.card').forEach(card => {
@@ -415,6 +360,13 @@ block content
       });
     });
 
+ 
+  
+    //- GSAP Core
+  script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
+  script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
+
+  //- Page animation
   script.
     gsap.registerPlugin(ScrollTrigger);
 
@@ -423,30 +375,33 @@ block content
       ease: "power3.out"
     });
 
+    // =========================
     // HERO ANIMATION
+    // =========================
     const heroTL = gsap.timeline();
-
     heroTL
-      .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
-      .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
-      .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
-      .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
-      .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
+      .from(".image-container-unique img", { scale: 1.2, opacity: 0, duration: 1.4 })
+      .from(".animate-text-unique", { y: 80, opacity: 0, stagger: 0.2 }, "-=0.8")
+      .from(".banner-inner-unique ", { y: 60, opacity: 0, stagger: 0.2 }, "-=0.6");
 
-    // SCROLL ANIMATION FOR TEXT
-    gsap.utils.toArray("h2, h3, p").forEach(el => {
+    // =========================
+    // TEXT REVEAL ON SCROLL
+    // =========================
+    gsap.utils.toArray(" h3, .small-text, .line-1, .line-2, .line-3, li, .title, .subtitle, .services__note").forEach(el => {
       gsap.from(el, {
         scrollTrigger: {
           trigger: el,
-          start: "top 85%"
+          start: "top 50%"
         },
         y: 40,
         opacity: 0
       });
     });
 
-    // SCROLL ANIMATION FOR IMAGES
-    gsap.utils.toArray(".photo-item img, .bistro-item img").forEach(img => {
+    // =========================
+    // IMAGE REVEAL ON SCROLL
+    // =========================
+    gsap.utils.toArray(".iconic-image img, .photo-item img, .bistro-item img").forEach(img => {
       gsap.from(img, {
         scrollTrigger: {
           trigger: img,
@@ -457,6 +412,51 @@ block content
       });
     });
 
-    ScrollTrigger.refresh();
+    // =========================
+    // VIDEO FADE-IN
+    // =========================
+    gsap.utils.toArray("#video-outer video").forEach(video => {
+      gsap.from(video, {
+        scrollTrigger: {
+          trigger: video,
+          start: "top 85%"
+        },
+        opacity: 0,
+        duration: 1.5
+      });
+    });
 
+    // =========================
+    // SCROLL PROGRESS BAR
+    // =========================
+    gsap.set(".progress-bar", { scaleX: 0, transformOrigin: "left center" });
+
+    gsap.to(".progress-bar", {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true
+      }
+    });
+
+    // =========================
+    // PROGRESS BAR POSITION FIX (sticks under header)
+    // =========================
+    let lastScroll = window.scrollY;
+    const wrapper = document.querySelector(".progress-bar-wrapper");
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.scrollY;
+      if(currentScroll > lastScroll){
+        wrapper.style.top = "0px";       // scrolling down
+      } else {
+        wrapper.style.top = "75px";      // scrolling up
+      }
+      lastScroll = currentScroll;
+    });
+
+    ScrollTrigger.refresh();
     

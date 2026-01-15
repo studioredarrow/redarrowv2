@@ -1,200 +1,292 @@
 extends ../layout
 
 block content
+  .studio-main-outer
+    .page-wrapper(
+        data-morning=studioImages && studioImages.data && studioImages.data.morning ? studioImages.data.morning.url : ''
+        data-afternoon=studioImages && studioImages.data && studioImages.data.afternoon ? studioImages.data.afternoon.url : ''
+        data-evening=studioImages && studioImages.data && studioImages.data.evening ? studioImages.data.evening.url : ''
+        data-night=studioImages && studioImages.data && studioImages.data.night ? studioImages.data.night.url : ''
+    )
+      .details
+        .details-item
+          span.label LOCATION
+          span#saigon SAIGON 
+        .details-item
+          span.label TIME
+          span#saigonTime 7:00 AM
+        
 
-  .page-wrapper
-    .details
-      .details-item
-        span.label LOCATION
-        | SAIGON
-      .details-item
-        span.label TIME
-        | 7:00 AM
 
-  .work-outer.open-outer
-    .container
-      .work-flex.open-flex
-        .toggle
-          button#gridBtn.active Grid
-          button#listBtn List
+    .work-outer.open-outer
+      .container
+        .work-flex.open-flex
+          #gridView.grid.active.inner-grid-open
+            -
+              const gapPattern = ['gap-right', 'gap-center', 'gap-none', 'gap-right'];
+            each item, index in workItems
+              .card(class=gapPattern[index % gapPattern.length])
+                if item.data.thumbnail
+                  .main-grid-img
+                    img(src=item.data.thumbnail.url, alt=item.data.title)
+                .card-title= item.data.title
+                .card-desc= item.data.short_description
 
-      // ================= GRID VIEW =================
-      #gridView.grid.active
-        .card(data-category="exhibition")
-          img(src="images/led.png")
-          .card-title LED ESTHETICS
-          .card-desc Exhibition branding project.
+          // ================= IMAGE PREVIEW =================
+          #imagePreview
 
-        .card(data-category="app")
-          .dark-img.dark-1
-            img(src="images/medical-img.png")
-          .card-title OREN MEDICAL
-          .card-desc Medical app & website design.
+          // ================= LIST VIEW =================
+          #listView.list
+            .canvas
+              each item in workItems
+                .text(
+                  data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
+                )= item.data.title
 
-        .card(data-category="app")
-          .dark-img
-            img(src="/images/kala-image.png")
-          .card-title KALA
-          .card-desc Mobile app & UI design
+          .toggle
+            button#gridBtn.active Grid
+            button#listBtn List      
 
-        .card(data-category="exhibition")
-          img(src="/images/nuon-image.png")
-          .card-title NUON MEDICAL
-          .card-desc Exhibition branding project.
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js")
 
-        .card(data-category="exhibition")
-          img(src="/images/benji-image.png")
-          .card-title BENJI BISTRO
-          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+    script.
+      document.addEventListener("DOMContentLoaded", () => {
 
-        .card(data-category="exhibition")
-          .last-image
-            img(src="")
-          .card-title SVAKOM
-          .card-desc An exhibition of Marina Willer’s artworks on Pith sketchbooks at the Design Museum.
+        gsap.registerPlugin(ScrollTrigger);
 
-      // ================= IMAGE PREVIEW =================
-      #imagePreview
+        const gridBtn = document.getElementById("gridBtn");
+        const listBtn = document.getElementById("listBtn");
+        const gridView = document.getElementById("gridView");
+        const listView = document.getElementById("listView");
+        const imagePreview = document.getElementById("imagePreview");
+        const texts = document.querySelectorAll(".text");
+        const cards = document.querySelectorAll(".card");
 
-      // ================= LIST VIEW =================
-      #listView.list
-        .canvas
-          .text.led artist's name
-          .text.oren artist's name
-          .text.kala artist's name
-          .text.nuon artist's name
-          .text.benji artist's name
+        /* ================= SAIGON REAL TIME ================= */
+        const timeEl = document.getElementById("saigonTime");
 
-  // ================= GSAP SCRIPT =================
-  script.
-    document.addEventListener("DOMContentLoaded", () => {
+        function updateSaigonTime() {
+          if (!timeEl) return;
 
-      if (typeof gsap === "undefined") {
-        console.error("GSAP NOT LOADED");
-        return;
-      }
+          const now = new Date();
 
-      const gridBtn = document.getElementById("gridBtn");
-      const listBtn = document.getElementById("listBtn");
-      const gridView = document.getElementById("gridView");
-      const listView = document.getElementById("listView");
-      const imagePreview = document.getElementById("imagePreview");
+          const formatter = new Intl.DateTimeFormat("en-US", {
+            timeZone: "Asia/Ho_Chi_Minh",
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+          });
 
-      const texts = document.querySelectorAll(".text");
-      const cardTitles = document.querySelectorAll(".card-title");
-      const cardDescs = document.querySelectorAll(".card-desc");
+          timeEl.textContent = formatter.format(now);
+        }
 
-      // ================= GRID TEXT ANIMATION =================
-      const animateGridText = () => {
-        gsap.fromTo(
-          [...cardTitles, ...cardDescs],
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.9,
-            stagger: 0.06,
-            ease: "power3.out"
+        // initial run
+        updateSaigonTime();
+
+        // update every minute (real-time feel)
+        setInterval(updateSaigonTime, 60 * 1000);
+
+        /* ================= OPEN STUDIO BACKGROUND ================= */
+        const pageWrapper = document.querySelector(".page-wrapper");
+
+        function updateStudioBackground() {
+          if (!pageWrapper) return;
+
+          const now = new Date();
+
+          // Saigon hour (24h format)
+          const hour = new Intl.DateTimeFormat("en-US", {
+            timeZone: "Asia/Ho_Chi_Minh",
+            hour: "numeric",
+            hour12: false
+          }).format(now);
+
+          let bgImage = "";
+
+          if (hour >= 5 && hour < 12) {
+            bgImage = pageWrapper.dataset.morning;
+          } else if (hour >= 12 && hour < 17) {
+            bgImage = pageWrapper.dataset.afternoon;
+          } else if (hour >= 17 && hour < 20) {
+            bgImage = pageWrapper.dataset.evening;
+          } else {
+            bgImage = pageWrapper.dataset.night;
           }
-        );
-      };
 
-      // RUN ON LOAD
-      animateGridText();
+          if (!bgImage) return;
 
-      // ================= GRID BUTTON =================
-      gridBtn.addEventListener("click", () => {
-        gridView.classList.add("active");
-        listView.classList.remove("active");
+          pageWrapper.style.backgroundImage = `url(${bgImage})`;
+          pageWrapper.style.backgroundSize = "cover";
+          pageWrapper.style.backgroundPosition = "center";
+          pageWrapper.style.backgroundRepeat = "no-repeat";
+        }
 
-        gridBtn.classList.add("active");
-        listBtn.classList.remove("active");
+        // initial run
+        updateStudioBackground();
 
-        gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
+        // update every minute (optional but nice)
+        setInterval(updateStudioBackground, 60 * 1000);
 
-        texts.forEach(t => t.classList.remove("active", "blur"));
 
-        animateGridText();
-      });
 
-      // ================= LIST BUTTON =================
-      listBtn.addEventListener("click", () => {
-        listView.classList.add("active");
-        gridView.classList.remove("active");
+        /* ================= IMAGE HIDE (INSTANT) ================= */
+        function hideImagePreviewInstant() {
+          gsap.killTweensOf(imagePreview);
+          gsap.set(imagePreview, {
+            opacity: 0,
+            scale: 0.95
+          });
+          imagePreview.style.backgroundImage = "none";
+        }
 
-        listBtn.classList.add("active");
-        gridBtn.classList.remove("active");
+        /* ================= GRID ANIMATION ================= */
+        function animateGrid() {
+          gsap.fromTo(
+            cards,
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+          );
+        }
 
-        requestAnimationFrame(() => {
+        /* ================= LIST ANIMATION ================= */
+        function animateList() {
           gsap.fromTo(
             texts,
-            { y: 50, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 1,
-              stagger: 0.1,
-              ease: "expo.out"
-            }
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, stagger: 0.08, ease: "power3.out" }
           );
-        });
-      });
+        }
 
-      // ================= IMAGE MAP =================
-      const textImageMap = {
-        led: { img: "/images/image-slider-2.png", pos: "left" },
-        oren: { img: "/images/image-slider-3.png", pos: "right" },
-        kala: { img: "/images/image-slider-5.png", pos: "center" },
-        nuon: { img: "/images/image-slider-2.png", pos: "right" },
-        benji: { img: "/images/image-slider-5.png", pos: "left" },
-        svakom: { img: "/images/image-slider-3.png", pos: "center" }
-      };
+        /* ================= VIEW TOGGLE ================= */
+        gridBtn.addEventListener("click", () => {
+          gridView.classList.add("active");
+          listView.classList.remove("active");
+          gridBtn.classList.add("active");
+          listBtn.classList.remove("active");
 
-      // ================= LIST HOVER =================
-      texts.forEach(text => {
-        const key = text.classList[1];
-        const { img, pos } = textImageMap[key] || {};
-
-        text.addEventListener("mouseenter", () => {
-          texts.forEach(t => t.classList.add("blur"));
-          text.classList.remove("blur");
-          text.classList.add("active");
-
-          gsap.fromTo(
-            text,
-            { scale: 0.96, opacity: 0.6 },
-            { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out" }
-          );
-
-          if (!img) return;
-
-          imagePreview.style.backgroundImage = `url(${img})`;
-
-          gsap.to(imagePreview, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            ease: "power2.out"
-          });
-
-          const positions = {
-            left: "15%",
-            right: "85%",
-            center: "50%"
-          };
-
-          gsap.set(imagePreview, {
-            left: positions[pos] || "50%",
-            top: "50%",
-            x: "-50%",
-            y: "-50%"
-          });
-        });
-
-        text.addEventListener("mouseleave", () => {
-          gsap.to(imagePreview, { opacity: 0, duration: 0.3 });
+          hideImagePreviewInstant();
           texts.forEach(t => t.classList.remove("active", "blur"));
+
+          animateGrid();
+        });
+
+        listBtn.addEventListener("click", () => {
+          listView.classList.add("active");
+          gridView.classList.remove("active");
+          listBtn.classList.add("active");
+          gridBtn.classList.remove("active");
+
+          hideImagePreviewInstant();
+          animateList();
+        });
+
+        /* ================= TEXT POSITIONS (SAME PATTERN) ================= */
+        const pattern = [
+          { left: 120, top: 70 },
+          { left: 120, top: 140 },
+          { right: 180, top: 200 },
+          { left: 360, top: 260 },
+          { left: 120, top: 330 },
+          { right: 240, top: 390 },
+          { left: 260, top: 460 }
+        ];
+
+        texts.forEach((text, index) => {
+          const pos = pattern[index % pattern.length];
+          text.style.top = `${pos.top + Math.floor(index / pattern.length) * 520}px`;
+
+          if (pos.left !== undefined) {
+            text.style.left = `${pos.left}px`;
+            text.style.right = "auto";
+          }
+
+          if (pos.right !== undefined) {
+            text.style.right = `${pos.right}px`;
+            text.style.left = "auto";
+          }
+        });
+
+        /* ================= LIST HOVER IMAGE ================= */
+        texts.forEach(text => {
+          const img = text.dataset.image;
+
+          text.addEventListener("mouseenter", () => {
+            texts.forEach(t => {
+              t.classList.add("blur");
+              t.classList.remove("active");
+            });
+
+            text.classList.add("active");
+            text.classList.remove("blur");
+
+            if (!img) return;
+
+            imagePreview.style.backgroundImage = `url(${img})`;
+
+            gsap.set(imagePreview, {
+              left: "50%",
+              top: "50%",
+              x: "-50%",
+              y: "-50%",
+              opacity: 1,
+              scale: 1
+            });
+          });
+
+          text.addEventListener("mouseleave", () => {
+            hideImagePreviewInstant();
+            texts.forEach(t => t.classList.remove("active", "blur"));
+          });
+
+          text.addEventListener("click", hideImagePreviewInstant);
+        });
+
+        /* ================= EXTRA SAFETY ================= */
+        listView.addEventListener("mouseleave", hideImagePreviewInstant);
+        imagePreview.addEventListener("mouseleave", hideImagePreviewInstant);
+
+        /* ================= INITIAL ================= */
+        hideImagePreviewInstant();
+        animateGrid();
+      });
+
+
+    //- GSAP Core
+    script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
+    script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
+
+    //- Page animation
+    script.
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.defaults({
+        duration: 1,
+        ease: "power3.out"
+      });
+
+      // =========================
+      // HERO ANIMATION
+      // =========================
+      const heroTL = gsap.timeline();
+      heroTL
+        .from(".image-container-unique img", { scale: 1.2, opacity: 0, duration: 1.4 })
+        .from(".animate-text-unique", { y: 80, opacity: 0, stagger: 0.2 }, "-=0.8")
+        .from(".banner-inner-unique ", { y: 60, opacity: 0, stagger: 0.2 }, "-=0.6");
+
+      // =========================
+      // TEXT REVEAL ON SCROLL
+      // =========================
+      gsap.utils.toArray(" h3, .card-title, .card-desc , img, .details-item").forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 70%"
+          },
+          y: 40,
+          opacity: 0
         });
       });
 
-    });
+      ScrollTrigger.refresh();
+      

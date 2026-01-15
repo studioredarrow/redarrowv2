@@ -1,56 +1,93 @@
- body {
-    //  background: #ffffff;
+  body {
       font-family: Work Sans;
-   }
-.open-flex {
-    display: flex;
-    justify-content: end;
-}
-.open-outer {
-    margin-top: 100px;
-}
+    }
 
-// banner css start here
-.page-wrapper {
-  background-color: #b0b0b0; // gray background
-  height: 100vh; // full viewport height
-  width: 100vw;
-  display: flex;
-  align-items: flex-end; // bottom alignment
-  padding: 20px;
-
-  .details {
-    color: #000;
-    font-size: clamp(12px, 1.5vw, 16px);
-    display: flex;
-    gap: 100px;
-
-    .details-item {
+    .open-flex {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-family: 'Work Sans', sans-serif;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 100%;
-      text-transform: uppercase;
+      gap: 130px;
+    }
 
-      .label {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 100%;
-        color: #1E1E1E !important;
+    .container {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .studio-main-outer {
+      min-height: 100vh;
+      overflow: visible;
+    }
+
+    .work-outer.open-outer {
+      overflow: visible;
+    }
+
+    .open-outer {
+      margin-top: 100px;
+    }
+
+    .inner-grid-open {
+      margin: 0px;
+    }
+
+    // banner css start here
+    .page-wrapper {
+      background-color: #b0b0b0;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+
+      .details {
+        color: white;
+        font-size: clamp(12px, 1.5vw, 16px);
+        display: flex;
+        gap: 70px;
+        margin-bottom: 55px;
+
+        .details-item {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          font-family: 'Work Sans', sans-serif;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 100%;
+          text-transform: uppercase;
+
+          .label {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 100%;
+            color: white !important;
+          }
+        }
+      }
+
+      @media (max-width: 600px) {
+        .details {
+          gap: 25px;
+          margin-bottom: 20px;
+        }
+      }
+
+      .open-outer {
+        margin-top: 0px;
       }
     }
-  }
 
-  @media (max-width: 600px) {
-    .details {
-      flex-direction: column;
-      gap: 5px;
+    @media (max-width: 600px) {
+      .open-outer {
+        margin-top: 10px;
+        padding-inline: 20px;
+      }
+
+      .open-flex {
+        margin-top: 50px;
+      }
+
+      .page-wrapper {
+        height: 100vw;
+      }
     }
-  }
-.open-outer {
-    margin-top: 0px;
-}
-}
