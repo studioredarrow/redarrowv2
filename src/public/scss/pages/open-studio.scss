@@ -67,3 +67,12 @@
 //     display: none;
 //     flex-wrap: wrap;
 // }
+
+.studio-main-outer {
+  min-height: 100vh;
+  overflow: visible;
+}
+
+.work-outer.open-outer {
+  overflow: visible;
+}

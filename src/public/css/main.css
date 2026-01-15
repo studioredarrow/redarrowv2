@@ -13,10 +13,6 @@ body {
   padding: 0 !important;
 }
 
-.main-myth-creation {
-  overflow: hidden;
-}
-
 img.mobile-arrow {
   display: none;
 }
@@ -291,7 +287,7 @@ ul.services__list li:hover {
 }
 .iconic-scroll-container {
   position: relative;
-  height: 300vh; /* enough space to scroll through 3 sections */
+  height: 300vh;
   overflow: hidden;
 }
 
@@ -309,12 +305,12 @@ ul.services__list li:hover {
 }
 
 .iconic-flex {
-  max-width: 990px;
+  max-width: 937px;
   margin-left: auto;
 }
 
 .iconic-inner {
-  background-color: #f6f2ee;
+  background-color: #f9f5f1;
 }
 
 .iconic-sections {
@@ -1731,6 +1727,28 @@ body {
   width: 47%;
 }
 
+/* Dynamic Gap Pattern: right, center, no gap, right (repeating) */
+.grid .card.gap-right {
+  margin-left: 0;
+  margin-right: auto;
+  width: 47%;
+  flex-shrink: 0;
+}
+
+.grid .card.gap-center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 47%;
+  flex-shrink: 0;
+}
+
+.grid .card.gap-none {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  flex-basis: 100%;
+}
+
 .text.active {
   color: #FF0004;
   z-index: 9999;
@@ -1791,6 +1809,14 @@ body {
 @media (max-width: 768px) {
   .card {
     width: 100%;
+  }
+  .grid .card.gap-right,
+  .grid .card.gap-center,
+  .grid .card.gap-none {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    flex-basis: 100%;
   }
   .grid {
     gap: 40px;
@@ -2467,6 +2493,15 @@ body {
     padding-inline: 20px;
   }
 }
+.studio-main-outer {
+  min-height: 100vh;
+  overflow: visible;
+}
+
+.work-outer.open-outer {
+  overflow: visible;
+}
+
 body {
   font-family: Work Sans;
   margin: 0;

@@ -6,8 +6,6 @@ async function menuMiddleware(req, res, next) {
   try {
     const menuItems = await client.getAllByType("menu_page");
 
-    console.log("✅ MENU ITEMS FETCHED COUNT:", menuItems.length);
-
     menuItems.forEach((item, i) => {
       console.log(
         `#${i + 1}`,

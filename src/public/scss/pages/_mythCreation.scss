@@ -10,9 +10,9 @@ body {
     margin: 0 auto;
     padding: 0 !important;
   }
-.main-myth-creation {
-    overflow: hidden;
-}
+// .main-myth-creation {
+//     overflow: hidden;
+// }
 img.mobile-arrow {
     display: none;
 }
@@ -320,7 +320,7 @@ ul.services__list li:hover {
 // scroll animation start  here
 .iconic-scroll-container {
   position: relative;
-  height: 300vh; /* enough space to scroll through 3 sections */
+  height: 300vh;
   overflow: hidden;
 }
 
@@ -336,11 +336,11 @@ ul.services__list li:hover {
     width: 300px;
 }
 .iconic-flex {
-    max-width: 990px;
+    max-width: 937px;
     margin-left: auto;
 }
 .iconic-inner {
-    background-color: #f6f2ee;
+    background-color: #f9f5f1;
 }
 .iconic-sections {
     margin-bottom: 150px;
