@@ -242,6 +242,9 @@
       .category-links {
         max-width: 718px;
       }
+      .work-outer {
+        padding-inline: 20px;
+      }
     }
 
     @media (max-width: 970px) {
@@ -276,10 +279,6 @@
 
       .grid {
         gap: 40px;
-      }
-
-      .main-work-outer {
-        padding-inline: 20px;
       }
 
       .grid img {

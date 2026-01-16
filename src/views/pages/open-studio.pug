@@ -16,8 +16,6 @@ block content
           span.label TIME
           span#saigonTime 7:00 AM
         
-
-
     .work-outer.open-outer
       .container
         .work-flex.open-flex
@@ -25,7 +23,22 @@ block content
             button#gridBtn.active Grid
             button#listBtn List
 
-        // GRID VIEW
+          .grid.grid-inner.active
+            each item, index in workItems
+              .card(
+                data-category=item.data.category || 'all'
+                onclick=`window.location.href='/portfolio/${item.uid}'`
+                style="cursor: pointer;"
+              )
+                if item.data.thumbnail
+                  .main-grid-img 
+                    img(src=item.data.thumbnail.url, alt=item.data.title)
+                .card-title= item.data.title
+                .card-desc= item.data.short_description
+  
+            
+
+      .container
         #gridView.grid.active
           each item, index in workItems
             .card(
@@ -198,7 +211,7 @@ block content
 
         texts.forEach((text, index) => {
           const pos = pattern[index % pattern.length];
-          text.style.top = `${pos.top + Math.floor(index / pattern.length) * 520}px`;
+          text.style.top = `${pos.top + Math.floor(index / pattern.length) * 470}px`;
 
           if (pos.left !== undefined) {
             text.style.left = `${pos.left}px`;
@@ -369,7 +382,7 @@ block content
       // =========================
       // TEXT REVEAL ON SCROLL
       // =========================
-      gsap.utils.toArray(" h3, .card-title, .card-desc , img, .details-item").forEach(el => {
+      gsap.utils.toArray(" h3, .card-title, .card-desc , img").forEach(el => {
         gsap.from(el, {
           scrollTrigger: {
             trigger: el,
@@ -382,3 +395,21 @@ block content
 
       ScrollTrigger.refresh();
       
+
+
+    script.
+      const gridInner = document.querySelector(".grid-inner");
+
+      gridBtn.addEventListener("click", () => {
+        if (gridInner) {
+          gridInner.classList.add("active");
+        }
+      });
+
+      listBtn.addEventListener("click", () => {
+        if (gridInner) {
+          gridInner.classList.remove("active");
+        }
+      });
+ 
+       
