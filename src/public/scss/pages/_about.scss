@@ -149,7 +149,6 @@ body {
 
 .team-grid {
   display: grid;
-  /* Desktop: 4 members + 1 empty/filler per row */
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 25px;
 
@@ -284,6 +283,7 @@ span.inner-dot {
     font-family: Work Sans;
     font-weight: 400;
     line-height: 100%;
+    cursor: pointer;
 }
 .value p:hover {
     color: #FF0004;
@@ -297,10 +297,8 @@ span.inner-dot {
     font-size: 20px;
     line-height: 130%;
     margin: 0px;
+    cursor: pointer;
 
-    // &:nth-child(2) {
-    //   color: #828282;
-    // }
   }
 }
 
@@ -407,7 +405,7 @@ span.inner-dot {
     display: inline-block;
     font-size: 14px;
     font-weight: 700;
-    color: #ff0000; // red CTA like the pic
+    color: #ff0000; 
     text-decoration: none;
     border: 2px solid #ff0000;
     padding: 12px 24px;
@@ -448,13 +446,13 @@ span.inner-dot {
     color: #FF0004;
 }
 .team-img {
-    overflow: hidden; /* Hide anything outside the container */
+    overflow: hidden; 
     display: inline-block; 
     border-radius: 20px;
 }
 
 .team-img img {
-    transition: transform 0.3s ease; /* Smooth hover */
+    transition: transform 0.3s ease; 
     display: block; 
     border-radius: 20px;
 }
@@ -565,8 +563,6 @@ span.inner-dot {
   -moz-osx-font-smoothing: auto;
 }
 
-
-
 /* Responsive */
   @media (max-width: 1220px) {
 .main-about-outer {
@@ -581,18 +577,26 @@ span.inner-dot {
 
   }
 @media (max-width: 768px) {
-  .info-flex {
-    justify-content: start;
-    gap: 20px;
-    padding-inline: 10px;
-    flex-direction: column;
-  }
 .hero-flex {
     flex-direction: column;
 }
+.main-responsive-mobile {
+    display: flex;
+    flex-direction: column-reverse;
+}
   .info-block {
     gap: 16px;
+    flex-direction: column;
   }
+  .info-flex {
+    display: flex;
+    justify-content: end;
+    gap: 90px;
+    padding-inline: 0px;
+}
+  .info-wrapper {
+    padding: 0px;
+}
   .team-flex {
     flex-direction: column;
 }
