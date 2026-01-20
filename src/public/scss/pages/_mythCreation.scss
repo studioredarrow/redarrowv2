@@ -5,6 +5,9 @@
       color: #111;
       overflow-x: hidden;
     }
+    input::placeholder {
+  color: #BDBDBD; /* change to any color you want */
+}
 
     .container {
       max-width: 1220px;
@@ -46,7 +49,7 @@
 
         .inner-unique {
           h1.animate-text-unique {
-            font-size: 86px;
+            font-size: 87px;
             font-weight: 300;
             line-height: 100%;
             margin-bottom: 1rem;
@@ -238,7 +241,7 @@
 
     // how to we do css start here
     .footer a:hover {
-      color: red;
+      color: #FF0004;
     }
 
     .how-outer {
@@ -470,6 +473,8 @@
         line-height: 100%;
         text-transform: uppercase;
         padding-top: 20px;
+        max-width: 76%;
+        color: #1E1E1E;
       }
 
       .subtitle {
@@ -477,6 +482,7 @@
         font-size: 14px;
         line-height: 100%;
         padding-top: 6px;
+        color: #1E1E1E;
       }
     }
 
@@ -619,7 +625,7 @@
       // right: -26px;
 
       .fate-oval__text {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
         color: red;
         position: relative;
@@ -707,18 +713,18 @@
       }
 
       p {
-        color: #555;
+        color: #1E1E1E;
         font-family: Work Sans;
         font-weight: 400;
         font-size: 16px;
         line-height: 100%;
-        padding-bottom: 20px;
+        padding-bottom: 8px;
       }
 
       input[type="email"] {
         width: 345px;
         border: none;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #1E1E1E;
         background: transparent;
         padding-block: 10px;
         color: #BDBDBD;
@@ -802,10 +808,11 @@
     }
 
     .footer-oval__text {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
-      color: red;
+      color: #FF0004;
       position: relative;
+      text-transform: uppercase;
       z-index: 2;
     }
 
@@ -874,10 +881,22 @@
       .right-form input[type=email] {
         width: 200px;
       }
-
+      .create-flex {
+    padding-inline: 20px;
+}
+      .services__grid .services__list li {
+    font-size: 26px;
+}
       .container {
         overflow: hidden;
       }
+      .services__note {
+    right: 80px;
+    bottom: -32px;
+}
+.services .fate-wrap {
+    right: 10px;
+}
 
       .how-outer {
         padding-inline: 20px !important;
@@ -954,7 +973,7 @@
       }
 
       .services .fate-wrap {
-        right: -26px;
+        right: 10px;
       }
 
       .hero-section-unique .outer-unique .inner-unique .banner-inner-unique p.animate-text-unique:first-child {
@@ -1132,6 +1151,7 @@
 
       .services__note {
         bottom: 0px;
+        right: 110px;
       }
 
       .iconic-outer {
@@ -1210,7 +1230,7 @@
       }
 
       .right-form input[type=email] {
-        width: 100%;
+        width: 97%;
       }
 
       img.mobile-arrow {

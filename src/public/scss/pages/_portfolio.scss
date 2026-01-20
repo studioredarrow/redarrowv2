@@ -191,7 +191,7 @@
 
     /* Photo Section */
     .photo-banner {
-      margin-top: 30px;
+      // margin-top: 30px;
 
       h2 {
         font-weight: 500;
@@ -202,12 +202,14 @@
       }
 
       p {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 100%;
-        max-width: 500px;
-        color: #1e1e1e;
-        padding-bottom: 30px;
+         margin: 0;
+    padding: 0;
+    padding-block: 10px;
+    font-family: Work Sans;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    color: #828282;
       }
 
       img {
@@ -440,7 +442,9 @@
         margin-top: 100px;
         padding-inline: 20px;
       }
-
+      .main-portfolio-outer {
+        padding-inline: 20px;
+    }
       .create-item-grid.create-inner-flex img {
         width: auto;
       }

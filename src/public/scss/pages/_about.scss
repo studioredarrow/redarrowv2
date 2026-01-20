@@ -41,7 +41,7 @@ body {
     .counter-container {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: start;
       gap: 6px;
 
       .label {
@@ -133,13 +133,19 @@ body {
     font-weight: 400;
     font-size: 32px;
     line-height: 100%;
-    font-family: "Work Sans", sans-serif;
+    font-family: Work Sans;
     max-width: 665px;
 }
-
+.team-header p {
+    color: #1E1E1E;
+    font-family: Work Sans;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 100%;
+}
 .team-inner {
   h6 {
-    font-family: "Work Sans", sans-serif;
+    font-family: Work Sans;
     font-weight: 600;
     font-size: 16px;
     line-height: 100%;
@@ -265,10 +271,12 @@ span.inner-dot {
 }
 
 .info-flex {
-  display: flex;
-  justify-content: end;
-  gap: 240px;
-  padding-inline: 100px;
+    display: flex;
+    justify-content: end;
+    gap: 240px;
+    max-width: 1024px;
+    margin-left: auto;
+    padding-inline: 50px;
 }
 
 .info-block {
@@ -292,7 +300,7 @@ span.inner-dot {
 .value {
   p {
     letter-spacing: 0.04em;
-    color: #111;
+    color: #1E1E1E;
     font-weight: 500;
     font-size: 20px;
     line-height: 130%;
@@ -376,7 +384,7 @@ span.inner-dot {
   .hero-title {
         margin: 0;
     margin-bottom: 40px;
-    color: #111;
+    color: #1E1E1E;
     font-family: Work Sans;
     font-weight: 300;
     font-size: 88px;
@@ -395,10 +403,12 @@ span.inner-dot {
 
   .hero-description {
     font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-    max-width: 600px;
+    color: #1E1E1E;
+    max-width: 800px;
     margin-bottom: 40px;
+    font-family: Work Sans;
+    font-weight: 400;
+    line-height: 100%;
   }
 
   .hero-cta {
@@ -420,7 +430,7 @@ span.inner-dot {
 
   @media (max-width: 768px) {
     .hero-title {
-      font-size: 40px;
+      font-size: 48px;
     }
 
     .hero-description {
@@ -574,6 +584,9 @@ span.inner-dot {
     .machine .panel .counter-row {
     flex-wrap: wrap;
 }
+.hero-absolute-img {
+    display: none;
+}
 
   }
 @media (max-width: 768px) {
@@ -583,6 +596,16 @@ span.inner-dot {
 .main-responsive-mobile {
     display: flex;
     flex-direction: column-reverse;
+}
+.hero .hero-subtitle {
+    color: #1E1E1E;
+    font-weight: 400;
+}
+.hero .hero-image img {
+    height: 232px;
+}
+.team-header p {
+    font-size: 20px;
 }
   .info-block {
     gap: 16px;
@@ -633,6 +656,12 @@ span.inner-dot {
 .machine .panel .counter-row {
     flex-wrap: wrap;
     gap: 0;
+}
+}
+
+@media (max-width: 380px) {
+  .info-flex {
+    gap: 40px;
 }
 }
 

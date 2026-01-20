@@ -1,545 +1,550 @@
 extends ../layout
 
+//- block variables
+//-   - var headerWhite = true
+//-   - var pageClass = 'portfolio-page'
+
 block content
-  .progress-bar-wrapper
-    .progress-bar
+  .main-portfolio-outer
+    .progress-bar-wrapper
+      .progress-bar
 
-  // ================= HERO SECTION =================
-  .benji-wrapper
-    .container
+    // ================= HERO SECTION =================
+    .benji-wrapper
+      .container
 
-      // HERO IMAGE
-      if portfolioItem.data.hero_banner_image && portfolioItem.data.hero_banner_image.url
-        .benji-image
-          img(
-            src=portfolioItem.data.hero_banner_image.url
-            alt=portfolioItem.data.hero_title || "Hero image"
-          )
+        // HERO IMAGE
+        if portfolioItem.data.hero_banner_image && portfolioItem.data.hero_banner_image.url
+          .benji-image
+            img(
+              src=portfolioItem.data.hero_banner_image.url
+              alt=portfolioItem.data.hero_title || "Hero image"
+            )
 
-      // HERO CONTENT
-      .benji-hero
-        .benji-content
-          if portfolioItem.data.hero_title
-            h1.benji-title= portfolioItem.data.hero_title
+        // HERO CONTENT
+        .benji-hero
+          .benji-content
+            if portfolioItem.data.hero_title
+              h1.benji-title= portfolioItem.data.hero_title
 
-          if portfolioItem.data.hero_description
-            .benji-description!= asHTML(portfolioItem.data.hero_description)
+            if portfolioItem.data.hero_description
+              .benji-description!= asHTML(portfolioItem.data.hero_description)
 
-        // HERO SERVICES
-        if portfolioItem.data.hero_services && portfolioItem.data.hero_services.length
-          .benji-services
-            each service in portfolioItem.data.hero_services
-              if service.service_name
-                p= service.service_name
+          // HERO SERVICES
+          if portfolioItem.data.hero_services && portfolioItem.data.hero_services.length
+            .benji-services
+              each service in portfolioItem.data.hero_services
+                if service.service_name
+                  p= service.service_name
 
-                .benji-absolute
-                  img(src="/images/category-portfolio-img.png", alt="")
+                  .benji-absolute
+                    img(src="/images/category-portfolio-img.png", alt="")
 
 
-  .benji-outer
-      .benji-inner
-        .container
-          .benji-flex
+    .benji-outer
+        .benji-inner
+          .container
+            .benji-flex
 
-            // ================= LEFT COLUMN =================
-            .left
+              // ================= LEFT COLUMN =================
+              .left
 
-              // PROJECT META
-              .benji-left
-                if portfolioItem.data.project_sector
-                  div
-                    span.label Sector
-                    br
-                    = portfolioItem.data.project_sector
-
-                if portfolioItem.data.project_office
-                  div
-                    span.label Office
-                    br
-                    = portfolioItem.data.project_office
-
-                if portfolioItem.data.project_partner
-                  div
-                    span.label Partner
-                    br
-                    = portfolioItem.data.project_partner
-
-              // PROJECT TEAM
-              if portfolioItem.data.project_team && portfolioItem.data.project_team.length
+                // PROJECT META
                 .benji-left
-                  div
-                    span.label Project team
-                    br
-                    each member in portfolioItem.data.project_team
-                      if member.member_name
-                        = member.member_name
-                        br
+                  if portfolioItem.data.project_sector
+                    div
+                      span.label Sector
+                      br
+                      = portfolioItem.data.project_sector
 
-            // ================= RIGHT COLUMN =================
-            .right
+                  if portfolioItem.data.project_office
+                    div
+                      span.label Office
+                      br
+                      = portfolioItem.data.project_office
 
-              if portfolioItem.data.challenge_content
-                h2= portfolioItem.data.challenge_title || "Challenge"
-                p!= asHTML(portfolioItem.data.challenge_content)
+                  if portfolioItem.data.project_partner
+                    div
+                      span.label Partner
+                      br
+                      = portfolioItem.data.project_partner
 
-              if portfolioItem.data.strategy_content
-                h2= portfolioItem.data.strategy_title || "The strategy"
-                p!= asHTML(portfolioItem.data.strategy_content)
+                // PROJECT TEAM
+                if portfolioItem.data.project_team && portfolioItem.data.project_team.length
+                  .benji-left
+                    div
+                      span.label Project team
+                      br
+                      each member in portfolioItem.data.project_team
+                        if member.member_name
+                          = member.member_name
+                          br
 
-              if portfolioItem.data.solution_content
-                h2= portfolioItem.data.solution_title || "The solution"
-                p!= asHTML(portfolioItem.data.solution_content)
+              // ================= RIGHT COLUMN =================
+              .right
 
-  
-      section
-        .photo-outer
-          .photo-inner
-            .container
+                if portfolioItem.data.challenge_content
+                  h2= portfolioItem.data.challenge_title || "Challenge"
+                  p!= asHTML(portfolioItem.data.challenge_content)
 
-              // ================= BRAND BANNER =================
-              if portfolioItem.data.brand_banner_image && portfolioItem.data.brand_banner_image.url
-                .bistro-banner
-                  img(
-                    src=portfolioItem.data.brand_banner_image.url
-                    alt=""
-                  )
+                if portfolioItem.data.strategy_content
+                  h2= portfolioItem.data.strategy_title || "The strategy"
+                  p!= asHTML(portfolioItem.data.strategy_content)
 
-              // ================= BRAND LOGOS =================
-              if portfolioItem.data.brand_logo_images && portfolioItem.data.brand_logo_images.length
-                .bistro-flex
-                  each logo in portfolioItem.data.brand_logo_images
-                    if logo.logo_image && logo.logo_image.url
-                      .bistro-item
-                        img(src=logo.logo_image.url, alt="")
+                if portfolioItem.data.solution_content
+                  h2= portfolioItem.data.solution_title || "The solution"
+                  p!= asHTML(portfolioItem.data.solution_content)
 
-              // ================= BRAND DESCRIPTION =================
-              if portfolioItem.data.brand_description
-                .bistro-inner-item
-                  p!= asHTML(portfolioItem.data.brand_description)
+    
+        section
+          .photo-outer
+            .photo-inner
+              .container
 
-              // ================= PHOTO GALLERIES =================
-              if portfolioItem.data.photo_galleries && portfolioItem.data.photo_galleries.length
-                each gallery in portfolioItem.data.photo_galleries
+                // ================= BRAND BANNER =================
+                if portfolioItem.data.brand_banner_image && portfolioItem.data.brand_banner_image.url
+                  .bistro-banner
+                    img(
+                      src=portfolioItem.data.brand_banner_image.url
+                      alt=""
+                    )
 
-                  // ---- BANNER LEFT ----
-                  if gallery.gallery_layout === "banner-left"
-                    .photo-banner
-                      if gallery.gallery_title
-                        h2= gallery.gallery_title
-                      if gallery.gallery_description
-                        p!= asHTML(gallery.gallery_description)
-                      if gallery.gallery_banner_image && gallery.gallery_banner_image.url
-                        img(src=gallery.gallery_banner_image.url, alt="")
+                // ================= BRAND LOGOS =================
+                if portfolioItem.data.brand_logo_images && portfolioItem.data.brand_logo_images.length
+                  .bistro-flex
+                    each logo in portfolioItem.data.brand_logo_images
+                      if logo.logo_image && logo.logo_image.url
+                        .bistro-item
+                          img(src=logo.logo_image.url, alt="")
 
-                    .photo-flex
-                      if gallery.gallery_image_1 && gallery.gallery_image_1.url
-                        .photo-item
-                          img(src=gallery.gallery_image_1.url, alt="")
-                      if gallery.gallery_image_2 && gallery.gallery_image_2.url
-                        .photo-item
-                          img(src=gallery.gallery_image_2.url, alt="")
-                      if gallery.gallery_image_3 && gallery.gallery_image_3.url
-                        .photo-item
-                          img(src=gallery.gallery_image_3.url, alt="")
-                      if gallery.gallery_image_4 && gallery.gallery_image_4.url
-                        .photo-item
-                          img(src=gallery.gallery_image_4.url, alt="")
-                      if gallery.gallery_image_5 && gallery.gallery_image_5.url
-                        .photo-item
-                          img(src=gallery.gallery_image_5.url, alt="")
-                      if gallery.gallery_image_6 && gallery.gallery_image_6.url
-                        .photo-item
-                          img(src=gallery.gallery_image_6.url, alt="")
+                // ================= BRAND DESCRIPTION =================
+                if portfolioItem.data.brand_description
+                  .bistro-inner-item
+                    p!= asHTML(portfolioItem.data.brand_description)
 
-                  else if gallery.gallery_layout === "banner-right"
-                    .photo-banner
-                      .photo-right
+                // ================= PHOTO GALLERIES =================
+                if portfolioItem.data.photo_galleries && portfolioItem.data.photo_galleries.length
+                  each gallery in portfolioItem.data.photo_galleries
+
+                    // ---- BANNER LEFT ----
+                    if gallery.gallery_layout === "banner-left"
+                      .photo-banner
                         if gallery.gallery_title
                           h2= gallery.gallery_title
                         if gallery.gallery_description
                           p!= asHTML(gallery.gallery_description)
-                      if gallery.gallery_banner_image && gallery.gallery_banner_image.url
-                        img(src=gallery.gallery_banner_image.url, alt="")
+                        if gallery.gallery_banner_image && gallery.gallery_banner_image.url
+                          img(src=gallery.gallery_banner_image.url, alt="")
 
-                    .photo-flex
-                      if gallery.gallery_image_1 && gallery.gallery_image_1.url
-                        .photo-item
-                          img(src=gallery.gallery_image_1.url, alt="")
-                      if gallery.gallery_image_2 && gallery.gallery_image_2.url
-                        .photo-item
-                          img(src=gallery.gallery_image_2.url, alt="")
-                      if gallery.gallery_image_3 && gallery.gallery_image_3.url
-                        .photo-item
-                          img(src=gallery.gallery_image_3.url, alt="")
-                      if gallery.gallery_image_4 && gallery.gallery_image_4.url
-                        .photo-item
-                          img(src=gallery.gallery_image_4.url, alt="")
-                      if gallery.gallery_image_5 && gallery.gallery_image_5.url
-                        .photo-item
-                          img(src=gallery.gallery_image_5.url, alt="")
-                      if gallery.gallery_image_6 && gallery.gallery_image_6.url
-                        .photo-item
-                          img(src=gallery.gallery_image_6.url, alt="")
+                      .photo-flex
+                        if gallery.gallery_image_1 && gallery.gallery_image_1.url
+                          .photo-item
+                            img(src=gallery.gallery_image_1.url, alt="")
+                        if gallery.gallery_image_2 && gallery.gallery_image_2.url
+                          .photo-item
+                            img(src=gallery.gallery_image_2.url, alt="")
+                        if gallery.gallery_image_3 && gallery.gallery_image_3.url
+                          .photo-item
+                            img(src=gallery.gallery_image_3.url, alt="")
+                        if gallery.gallery_image_4 && gallery.gallery_image_4.url
+                          .photo-item
+                            img(src=gallery.gallery_image_4.url, alt="")
+                        if gallery.gallery_image_5 && gallery.gallery_image_5.url
+                          .photo-item
+                            img(src=gallery.gallery_image_5.url, alt="")
+                        if gallery.gallery_image_6 && gallery.gallery_image_6.url
+                          .photo-item
+                            img(src=gallery.gallery_image_6.url, alt="")
 
-                  else if gallery.gallery_layout === "banner-only"
-                    if gallery.gallery_banner_image && gallery.gallery_banner_image.url
+                    else if gallery.gallery_layout === "banner-right"
                       .photo-banner
-                        img(src=gallery.gallery_banner_image.url, alt="")
-    
+                        .photo-right
+                          if gallery.gallery_title
+                            h2= gallery.gallery_title
+                          if gallery.gallery_description
+                            p!= asHTML(gallery.gallery_description)
+                        if gallery.gallery_banner_image && gallery.gallery_banner_image.url
+                          img(src=gallery.gallery_banner_image.url, alt="")
 
-      // ================= CREATIVE SECTION =================
-      if portfolioItem.data.creative_gallery_images && portfolioItem.data.creative_gallery_images.length
-        section
-          .creative-outer
-            .creative-inner
+                      .photo-flex
+                        if gallery.gallery_image_1 && gallery.gallery_image_1.url
+                          .photo-item
+                            img(src=gallery.gallery_image_1.url, alt="")
+                        if gallery.gallery_image_2 && gallery.gallery_image_2.url
+                          .photo-item
+                            img(src=gallery.gallery_image_2.url, alt="")
+                        if gallery.gallery_image_3 && gallery.gallery_image_3.url
+                          .photo-item
+                            img(src=gallery.gallery_image_3.url, alt="")
+                        if gallery.gallery_image_4 && gallery.gallery_image_4.url
+                          .photo-item
+                            img(src=gallery.gallery_image_4.url, alt="")
+                        if gallery.gallery_image_5 && gallery.gallery_image_5.url
+                          .photo-item
+                            img(src=gallery.gallery_image_5.url, alt="")
+                        if gallery.gallery_image_6 && gallery.gallery_image_6.url
+                          .photo-item
+                            img(src=gallery.gallery_image_6.url, alt="")
+
+                    else if gallery.gallery_layout === "banner-only"
+                      if gallery.gallery_banner_image && gallery.gallery_banner_image.url
+                        .photo-banner
+                          img(src=gallery.gallery_banner_image.url, alt="")
+      
+
+        // ================= CREATIVE SECTION =================
+        if portfolioItem.data.creative_gallery_images && portfolioItem.data.creative_gallery_images.length
+          section
+            .creative-outer
+              .creative-inner
+                .container
+                  // ---- TITLE + DESCRIPTION ----
+                  .creative-banner
+                    if portfolioItem.data.creative_section_title
+                      h3= portfolioItem.data.creative_section_title
+
+                    if portfolioItem.data.creative_section_description
+                      p!= asHTML(portfolioItem.data.creative_section_description)
+
+                  // ---- IMAGE GRID ----
+                  .create-grid
+                    // First row (images 1,2,3)
+                    if portfolioItem.data.creative_gallery_images.length >= 3
+                      .create-item-grid.create-inner-flex
+                        each item, i in portfolioItem.data.creative_gallery_images.slice(0, 3)
+                          .create-item-int(class=i === 2 ? 'create-int' : '')
+                            img(
+                              src=item.image.url
+                              alt=item.alt_text || ''
+                            )
+
+                    // Second row (image 4)
+                    if portfolioItem.data.creative_gallery_images.length >= 4
+                      .create-item-grid
+                        img(
+                          src=portfolioItem.data.creative_gallery_images[3].image.url
+                          alt=portfolioItem.data.creative_gallery_images[3].alt_text || ''
+                        )
+
+                    // Third row (images 5 & 6)
+                    if portfolioItem.data.creative_gallery_images.length >= 6
+                      .create-item-grid.creater-flex
+                        each item in portfolioItem.data.creative_gallery_images.slice(4, 6)
+                          .create-inner-item
+                            img(
+                              src=item.image.url
+                              alt=item.alt_text || ''
+                            )
+
+            // ---- VALENTINE IMAGES (7 & 8) ----
+            if portfolioItem.data.creative_gallery_images.length > 6
               .container
-                // ---- TITLE + DESCRIPTION ----
-                .creative-banner
-                  if portfolioItem.data.creative_section_title
-                    h3= portfolioItem.data.creative_section_title
-
-                  if portfolioItem.data.creative_section_description
-                    p!= asHTML(portfolioItem.data.creative_section_description)
-
-                // ---- IMAGE GRID ----
-                .create-grid
-                  // First row (images 1,2,3)
-                  if portfolioItem.data.creative_gallery_images.length >= 3
-                    .create-item-grid.create-inner-flex
-                      each item, i in portfolioItem.data.creative_gallery_images.slice(0, 3)
-                        .create-item-int(class=i === 2 ? 'create-int' : '')
-                          img(
-                            src=item.image.url
-                            alt=item.alt_text || ''
-                          )
-
-                  // Second row (image 4)
-                  if portfolioItem.data.creative_gallery_images.length >= 4
-                    .create-item-grid
+                .photo-flex
+                  each item in portfolioItem.data.creative_gallery_images.slice(6)
+                    .photo-item
                       img(
-                        src=portfolioItem.data.creative_gallery_images[3].image.url
-                        alt=portfolioItem.data.creative_gallery_images[3].alt_text || ''
+                        src=item.image.url
+                        alt=item.alt_text || ''
                       )
 
-                  // Third row (images 5 & 6)
-                  if portfolioItem.data.creative_gallery_images.length >= 6
-                    .create-item-grid.creater-flex
-                      each item in portfolioItem.data.creative_gallery_images.slice(4, 6)
-                        .create-inner-item
+
+          if portfolioItem.data.additional_photo_sections && portfolioItem.data.additional_photo_sections[0].section_description
+            .photo-banner
+              .photo-right
+                p!= asHTML(portfolioItem.data.additional_photo_sections[0].section_description)
+
+
+        section
+          .event-outer
+            .event-inner
+              .container
+                .event-grid
+                  .event-item.event-item-grid
+                    .event-grid-item
+                      img(src="/images/event-img-1.png" alt="")
+                    .event-grid-item
+                      img(src="/images/event-img-2.png" alt="")
+                    .event-grid-item
+                      img(src="/images/event-img-3.png" alt="")
+                    .event-grid-item
+                      img(src="/images/event-img-4.png" alt="")
+                  .event-item
+                    img(src="/images/event-img-5.png" alt="")       
+
+        .photo-banner
+          .container
+              .photo-right
+                if portfolioItem.data.event_section_title
+                      h2= portfolioItem.data.event_section_title
+
+                if portfolioItem.data.event_section_description
+                      p!= asHTML(portfolioItem.data.event_section_description)
+
+        if portfolioItem.data.event_gallery_images && portfolioItem.data.event_gallery_images.length > 4
+
+          section.event-section-new
+            .container
+              .event-wrapper-new
+                .event-content-new
+                  .layout-container-new
+                    .event-layout-new
+
+                      .event-column-new.event-gallery-new
+                        each item in portfolioItem.data.event_gallery_images.slice(0, 4)
+                          if item.image && item.image.url
+                            .event-image-box-new
+                              img(src=item.image.url alt='')
+
+                      if portfolioItem.data.event_gallery_images[4] && portfolioItem.data.event_gallery_images[4].image && portfolioItem.data.event_gallery_images[4].image.url
+                        .event-column-new.event-single-image-new
                           img(
-                            src=item.image.url
-                            alt=item.alt_text || ''
-                          )
+                            src=portfolioItem.data.event_gallery_images[4].image.url
+                            alt=''
+                          ) 
 
-          // ---- VALENTINE IMAGES (7 & 8) ----
-          if portfolioItem.data.creative_gallery_images.length > 6
+        if portfolioItem.data.related_projects && portfolioItem.data.related_projects.length
+
+          section.related-projects
             .container
-              .photo-flex
-                each item in portfolioItem.data.creative_gallery_images.slice(6)
-                  .photo-item
-                    img(
-                      src=item.image.url
-                      alt=item.alt_text || ''
-                    )
+              h2 Related projects
+
+              .projects-grid
+                each item in portfolioItem.data.related_projects
+                  if item.projects && !item.projects.isBroken
+                    .project
+                      .project-card
+                      p= item.projects.uid.replace('-', ' ').toUpperCase()
 
 
-        if portfolioItem.data.additional_photo_sections && portfolioItem.data.additional_photo_sections[0].section_description
-          .photo-banner
-            .photo-right
-              p!= asHTML(portfolioItem.data.additional_photo_sections[0].section_description)
+        // GSAP Core
+    script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
+    script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
 
+    // Page animation
+    script.
+      gsap.registerPlugin(ScrollTrigger);
 
-      section
-        .event-outer
-          .event-inner
-            .container
-              .event-grid
-                .event-item.event-item-grid
-                  .event-grid-item
-                    img(src="/images/event-img-1.png" alt="")
-                  .event-grid-item
-                    img(src="/images/event-img-2.png" alt="")
-                  .event-grid-item
-                    img(src="/images/event-img-3.png" alt="")
-                  .event-grid-item
-                    img(src="/images/event-img-4.png" alt="")
-                .event-item
-                  img(src="/images/event-img-5.png" alt="")       
-
-      .photo-banner
-        .container
-            .photo-right
-              if portfolioItem.data.event_section_title
-                    h2= portfolioItem.data.event_section_title
-
-              if portfolioItem.data.event_section_description
-                    p!= asHTML(portfolioItem.data.event_section_description)
-
-      if portfolioItem.data.event_gallery_images && portfolioItem.data.event_gallery_images.length > 4
-
-        section.event-section-new
-          .container
-            .event-wrapper-new
-              .event-content-new
-                .layout-container-new
-                  .event-layout-new
-
-                    .event-column-new.event-gallery-new
-                      each item in portfolioItem.data.event_gallery_images.slice(0, 4)
-                        if item.image && item.image.url
-                          .event-image-box-new
-                            img(src=item.image.url alt='')
-
-                    if portfolioItem.data.event_gallery_images[4] && portfolioItem.data.event_gallery_images[4].image && portfolioItem.data.event_gallery_images[4].image.url
-                      .event-column-new.event-single-image-new
-                        img(
-                          src=portfolioItem.data.event_gallery_images[4].image.url
-                          alt=''
-                        ) 
-
-      if portfolioItem.data.related_projects && portfolioItem.data.related_projects.length
-
-        section.related-projects
-          .container
-            h2 Related projects
-
-            .projects-grid
-              each item in portfolioItem.data.related_projects
-                if item.projects && !item.projects.isBroken
-                  .project
-                    .project-card
-                    p= item.projects.uid.replace('-', ' ').toUpperCase()
-
-
-      // GSAP Core
-  script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
-  script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
-
-  // Page animation
-  script.
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.defaults({
-      duration: 1,
-      ease: "power3.out"
-    });
-
-    // HERO ANIMATION
-    const heroTL = gsap.timeline();
-
-    heroTL
-      .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
-      .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
-      .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
-      .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
-      .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
-
-    // TEXT MOMENT
-    gsap.utils.toArray("h2, h3, p").forEach(el => {
-      gsap.from(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%"
-        },
-        y: 40,
-        opacity: 0
+      gsap.defaults({
+        duration: 1,
+        ease: "power3.out"
       });
-    });
 
-    // IMAGE REVEAL
-    gsap.utils.toArray(".photo-item img, .bistro-item img").forEach(img => {
-      gsap.from(img, {
-        scrollTrigger: {
-          trigger: img,
-          start: "top 85%"
-        },
-        scale: 1.1,
-        opacity: 0
+      // HERO ANIMATION
+      const heroTL = gsap.timeline();
+
+      heroTL
+        .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
+        .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
+        .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
+        .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
+        .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
+
+      // TEXT MOMENT
+      gsap.utils.toArray("h2, h3, p").forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%"
+          },
+          y: 40,
+          opacity: 0
+        });
       });
-    });
 
-    ScrollTrigger.refresh();           
+      // IMAGE REVEAL
+      gsap.utils.toArray(".photo-item img, .bistro-item img").forEach(img => {
+        gsap.from(img, {
+          scrollTrigger: {
+            trigger: img,
+            start: "top 85%"
+          },
+          scale: 1.1,
+          opacity: 0
+        });
+      });
+
+      ScrollTrigger.refresh();           
+
+        // =========================
+    // PAGE ANIMATION + PROGRESS
+    // =========================
+    script.
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.defaults({
+        duration: 1,
+        ease: "power3.out"
+      });
+
+      // HERO ANIMATION
+      const heroTL = gsap.timeline();
+      heroTL
+        .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
+        .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
+        .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
+        .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
+        .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
+
+      // TEXT REVEAL
+      gsap.utils.toArray("h2, h3, p").forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%"
+          },
+          y: 40,
+          opacity: 0
+        });
+      });
+
+      // IMAGE REVEAL
+      gsap.utils.toArray(".photo-item img, .bistro-item img").forEach(img => {
+        gsap.from(img, {
+          scrollTrigger: {
+            trigger: img,
+            start: "top 85%"
+          },
+          scale: 1.1,
+          opacity: 0
+        });
+      });
 
       // =========================
-  // PAGE ANIMATION + PROGRESS
-  // =========================
-  script.
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.defaults({
-      duration: 1,
-      ease: "power3.out"
-    });
-
-    // HERO ANIMATION
-    const heroTL = gsap.timeline();
-    heroTL
-      .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
-      .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
-      .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
-      .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
-      .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
-
-    // TEXT REVEAL
-    gsap.utils.toArray("h2, h3, p").forEach(el => {
-      gsap.from(el, {
+      // SCROLL PROGRESS BAR
+      // =========================
+      gsap.to(".progress-bar", {
+        width: "100%",
+        ease: "none",
         scrollTrigger: {
-          trigger: el,
-          start: "top 85%"
-        },
-        y: 40,
-        opacity: 0
+          trigger: document.body,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true
+        }
       });
-    });
 
-    // IMAGE REVEAL
-    gsap.utils.toArray(".photo-item img, .bistro-item img").forEach(img => {
-      gsap.from(img, {
+      ScrollTrigger.refresh();       
+
+
+      // GSAP ANIMATION + PROGRESS
+    // =========================
+    script.
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.defaults({
+        duration: 1,
+        ease: "power3.out"
+      });
+
+      // HERO ANIMATION
+      const heroTL = gsap.timeline();
+      heroTL
+        .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
+        .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
+        .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
+        .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
+        .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
+
+      // TEXT REVEAL
+      gsap.utils.toArray("h2, h3, p").forEach(el => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%"
+          },
+          y: 40,
+          opacity: 0
+        });
+      });
+
+      // =========================
+      // SCROLL PROGRESS BAR (FIXED)
+      // =========================
+      gsap.to(".progress-bar", {
+        scaleX: 1,
+        ease: "none",
         scrollTrigger: {
-          trigger: img,
-          start: "top 85%"
-        },
-        scale: 1.1,
-        opacity: 0
+          trigger: document.documentElement,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true
+        }
       });
-    });
 
-    // =========================
-    // SCROLL PROGRESS BAR
-    // =========================
-    gsap.to(".progress-bar", {
-      width: "100%",
-      ease: "none",
-      scrollTrigger: {
-        trigger: document.body,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true
-      }
-    });
+      ScrollTrigger.refresh();
 
-    ScrollTrigger.refresh();       
+    script.
+      gsap.registerPlugin(ScrollTrigger);
 
-
-    // GSAP ANIMATION + PROGRESS
-  // =========================
-  script.
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.defaults({
-      duration: 1,
-      ease: "power3.out"
-    });
-
-    // HERO ANIMATION
-    const heroTL = gsap.timeline();
-    heroTL
-      .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
-      .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
-      .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
-      .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
-      .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
-
-    // TEXT REVEAL
-    gsap.utils.toArray("h2, h3, p").forEach(el => {
-      gsap.from(el, {
+      // Animate the progress bar based on scroll
+      gsap.to(".progress-bar", {
+        scaleX: 1,       // Fill from 0 to full width
+        ease: "none",    // Linear, no easing for smooth scroll
         scrollTrigger: {
-          trigger: el,
-          start: "top 85%"
-        },
-        y: 40,
-        opacity: 0
+          trigger: document.documentElement, // entire page
+          start: "top top",  // when top of page hits top of viewport
+          end: "bottom bottom", // until bottom of page
+          scrub: true       // smooth animation linked to scroll
+        }
       });
-    });
 
-    // =========================
-    // SCROLL PROGRESS BAR (FIXED)
-    // =========================
-    gsap.to(".progress-bar", {
-      scaleX: 1,
-      ease: "none",
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true
-      }
-    });
+    script.
+      gsap.registerPlugin(ScrollTrigger);
 
-    ScrollTrigger.refresh();
+      // Set progress bar to empty initially
+      gsap.set(".progress-bar", { scaleX: 0 });
 
-  script.
-    gsap.registerPlugin(ScrollTrigger);
+      // Animate the progress bar as you scroll
+      gsap.to(".progress-bar", {
+        scaleX: 1,          // fill to full width
+        ease: "none",       // linear fill
+        scrollTrigger: {
+          trigger: document.documentElement, // entire page
+          start: "top+=92 top",  // start 92px from top (below header)
+          end: "bottom bottom",   // end at bottom of page
+          scrub: true             // smooth fill/shrink based on scroll
+        }
+      });
 
-    // Animate the progress bar based on scroll
-    gsap.to(".progress-bar", {
-      scaleX: 1,       // Fill from 0 to full width
-      ease: "none",    // Linear, no easing for smooth scroll
-      scrollTrigger: {
-        trigger: document.documentElement, // entire page
-        start: "top top",  // when top of page hits top of viewport
-        end: "bottom bottom", // until bottom of page
-        scrub: true       // smooth animation linked to scroll
-      }
-    });
+    script.
+      gsap.registerPlugin(ScrollTrigger);
 
-  script.
-    gsap.registerPlugin(ScrollTrigger);
+      // Start progress bar at 0
+      gsap.set(".progress-bar", { scaleX: 0 });
 
-    // Set progress bar to empty initially
-    gsap.set(".progress-bar", { scaleX: 0 });
+      // Animate progress bar based on scroll
+      gsap.to(".progress-bar", {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: document.documentElement,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true
+        }
+      });
 
-    // Animate the progress bar as you scroll
-    gsap.to(".progress-bar", {
-      scaleX: 1,          // fill to full width
-      ease: "none",       // linear fill
-      scrollTrigger: {
-        trigger: document.documentElement, // entire page
-        start: "top+=92 top",  // start 92px from top (below header)
-        end: "bottom bottom",   // end at bottom of page
-        scrub: true             // smooth fill/shrink based on scroll
-      }
-    });
+      // Change top position of the wrapper depending on scroll direction
+      let lastScroll = window.scrollY;
 
-  script.
-    gsap.registerPlugin(ScrollTrigger);
+      window.addEventListener("scroll", () => {
+        const wrapper = document.querySelector(".progress-bar-wrapper");
+        let currentScroll = window.scrollY;
 
-    // Start progress bar at 0
-    gsap.set(".progress-bar", { scaleX: 0 });
+        if(currentScroll > lastScroll){
+          // Scrolling down → stick to top: 0
+          wrapper.style.top = "0px";
+        } else {
+          // Scrolling up → stick to top: 65px
+          wrapper.style.top = "75px";
+        }
 
-    // Animate progress bar based on scroll
-    gsap.to(".progress-bar", {
-      scaleX: 1,
-      ease: "none",
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true
-      }
-    });
+        lastScroll = currentScroll;
+      });
 
-    // Change top position of the wrapper depending on scroll direction
-    let lastScroll = window.scrollY;
-
-    window.addEventListener("scroll", () => {
-      const wrapper = document.querySelector(".progress-bar-wrapper");
-      let currentScroll = window.scrollY;
-
-      if(currentScroll > lastScroll){
-        // Scrolling down → stick to top: 0
-        wrapper.style.top = "0px";
-      } else {
-        // Scrolling up → stick to top: 65px
-        wrapper.style.top = "75px";
-      }
-
-      lastScroll = currentScroll;
-    });
-
-                
-            
+                  
+              
 
 
-      
-      
+        
+        
