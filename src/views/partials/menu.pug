@@ -72,9 +72,7 @@ html(lang="en")
           span
             img(src="/images/instagram-icon.png", alt="Instagram")
 
-    // =====================
-    // CAROUSEL SCRIPT
-    // =====================
+ 
     script.
       const carousel = document.getElementById('carousel');
       const items = carousel.querySelectorAll('.item');
@@ -88,31 +86,44 @@ html(lang="en")
       const itemCount = items.length;
       const degreePerItem = 360 / itemCount;
 
-      // START DRAG
-      carousel.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        carousel.style.transition = 'none';
-      });
+      function getClientX(e) {
+        if (e.type.startsWith('touch')) {
+          return e.touches[0].clientX;
+        }
+        return e.clientX;
+      }
 
-      // DRAG MOVE (DOCUMENT!)
-      document.addEventListener('mousemove', (e) => {
+      function dragStart(e) {
+        isDragging = true;
+        startX = getClientX(e);
+        carousel.style.transition = 'none';
+      }
+
+      carousel.addEventListener('mousedown', dragStart);
+      carousel.addEventListener('touchstart', dragStart, { passive: true });
+
+      function dragMove(e) {
         if (!isDragging) return;
-        const delta = e.clientX - startX;
+        const delta = getClientX(e) - startX;
         dragRotation = currentRotation + delta * sensitivity;
         carousel.style.transform = `rotateY(${dragRotation}deg)`;
         updateHighlight(dragRotation);
-      });
+      }
 
-      // END DRAG
-      document.addEventListener('mouseup', () => {
+      document.addEventListener('mousemove', dragMove);
+      document.addEventListener('touchmove', dragMove, { passive: true });
+
+      function dragEnd() {
         if (!isDragging) return;
         isDragging = false;
         currentRotation = Math.round(dragRotation / degreePerItem) * degreePerItem;
         carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
         carousel.style.transform = `rotateY(${currentRotation}deg)`;
         updateHighlight(currentRotation);
-      });
+      }
+
+      document.addEventListener('mouseup', dragEnd);
+      document.addEventListener('touchend', dragEnd);
 
       function updateHighlight(rotation) {
         const normalized = ((rotation % 360) + 360) % 360;
@@ -128,6 +139,8 @@ html(lang="en")
           }
         });
       }
+
+      // INITIALIZE
       currentRotation = 0;
       carousel.style.transform = `rotateY(0deg)`;
       updateHighlight(0);

@@ -1,0 +1,176 @@
+/* ================= GLOBAL ================= */
+body {
+  font-family: Work Sans;
+  margin: 0;
+  background-color: #f9f7f3;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+/* ================= PAGE CONTAINER ================= */
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ================= FIXED HEADER ================= */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #f9f7f3;
+  z-index: 999;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.header-inner {
+    margin-top: 140px;
+    padding-bottom: 80px;
+
+  h1 {
+    margin: 0;
+    font-family: Work Sans;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 130%;
+    color: #1E1E1E;
+  }
+}
+
+/* ================= PROGRESS BAR ================= */
+  .progress-bar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #f0f0f0;
+      z-index: 9999;
+    }
+
+    .progress-bar {
+      width: 100%; 
+      height: 100%;
+       background-color: #ff0004;
+      transform-origin: left center;
+      transform: scaleX(0); 
+    }
+
+/* ================= TOC ================= */
+.toc {
+  width: 19%;
+  position: sticky;
+  top: 20px;
+  height: 100%;
+
+  h2 {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #1E1E1E;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 6px 0;
+      color: #828282;
+      cursor: pointer;
+
+      &:hover {
+        color: #ff0004;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+/* ================= TERMS CONTENT ================= */
+.terms-container {
+  display: flex;
+  gap: 122px;
+}
+
+.term-section {
+  flex: 1;
+
+  h2 {
+   font-family: Work Sans;
+    margin: 0;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 130%;
+    padding-bottom: 20px;
+    color: #1E1E1E;
+  }
+
+  p {
+    margin-bottom: 20px;
+    font-family: Work Sans;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    color: #1E1E1E;
+  }
+}
+
+/* ================= GSAP TEXT ANIMATION ================= */
+.animate-text {
+  overflow: hidden;
+
+  .line {
+    overflow: hidden;
+  }
+
+  span {
+    display: inline-block;
+    transform: translateY(120%);
+    opacity: 0;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+.term-outer {
+    padding-inline: 20px;
+}
+}
+@media (max-width: 768px) {
+  .terms-container {
+    flex-direction: column;
+    margin-top: 60px;
+    gap: 20px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .toc {
+    width: 100%;
+    position: relative;
+    top: 0;
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      li {
+        margin: 0;
+      }
+    }
+  }
+
+  .header-inner h1 {
+    font-size: 28px;
+  }
+
+  .term-section h2 {
+    font-size: 22px;
+  }
+  .header-inner {
+    padding-bottom: 0px;
+}
+}

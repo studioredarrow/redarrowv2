@@ -3,7 +3,19 @@
     @use "pages/work";
     @use "pages/portfolio";
     @use "pages/open-studio";
+     @use "pages/terms";
     // Google Font
+button {
+  outline: none;
+  box-shadow: none;
+}
+
+button:focus,
+button:focus-visible,
+button:active {
+  outline: none;
+  box-shadow: none;
+}
 
     body {
       font-family: Work Sans;
@@ -12,7 +24,7 @@
 
     .container {
       max-width: 1220px !important;
-      margin: 0 auto !important;
+      margin: auto !important;
       padding: 0;
     }
 
@@ -154,7 +166,7 @@
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
-      max-width: 1120px;
+      max-width: 1220px;
       background: #F8F5F1;
       border-radius: 20px 20px 0px 0px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -271,6 +283,7 @@
         text-transform: uppercase;
         cursor: pointer;
         transition: 0.2s;
+        margin-top: -20px;
 
         &:hover {
           opacity: 0.7;
@@ -286,7 +299,7 @@
       justify-content: center;
       gap: 5px;
       position: relative;
-      font-family: "Inter", sans-serif;
+      // margin-top: 20px;
     }
 
     .accept {
@@ -344,7 +357,6 @@
     .outer {
       background: #FF0004;
       color: #fff;
-      font-family: 'Inter', sans-serif;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -500,6 +512,7 @@
       z-index: 2;
       padding-bottom: 30px;
       padding-top: 8px;
+      text-transform: uppercase;
     }
 
     .hover-oval__svg {
@@ -823,7 +836,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: Arial, Helvetica, sans-serif;
       overflow: hidden;
       position: relative;
 
@@ -1045,6 +1057,12 @@
 
     // Responsive
     @media (max-width: 600px) {
+      .cookie-info h5 {
+    font-size: 12px;
+}
+.cookie-info p {
+    font-size: 14px;
+}
       .banner {
         padding: 2rem 1.5rem;
 
@@ -1079,6 +1097,7 @@
       }
 
       .hover-oval__text {
+        font-size: 16px;
         padding-top: 30px;
       }
 
@@ -1086,7 +1105,7 @@
         text-align: right;
         display: flex !important;
         flex-direction: row !important;
-        gap: 76px !important;
+        gap: 60px !important;
         position: relative;
         top: -8px;
       }
@@ -1118,6 +1137,7 @@
 
       .cookie-buttons .decline {
         font-size: 16px;
+        margin: 0px;
       }
 
       .page-404 .content .error {

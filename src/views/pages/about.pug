@@ -112,6 +112,7 @@ block content
                       - const member = cell.item;
                       .team-card
                         if member.data.photo
+                        .team-img
                           img(
                             src=member.data.photo.url
                             alt=member.data.photo.alt || member.data.name
@@ -355,6 +356,8 @@ block content
           );
 
         });
+
+        
 
 
         
