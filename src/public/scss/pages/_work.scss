@@ -2,7 +2,7 @@
       --bg: #f6f2ee;
       --text: #6b6b6b;
       --dark: #0e1238;
-      --accent: #ff3b3b;
+      --accent: #FF0004;
       --white: #ffffff;
     }
 
@@ -74,7 +74,7 @@
 
     /* Categories */
     .category-links {
-      max-width: 896px;
+      max-width: 822px;
       position: relative;
       color: #828282;
       font-family: Work Sans;
@@ -126,16 +126,24 @@
     }
 
     .grid .card-title {
-      margin-top: 20px;
-      font-size: 20px;
-      color: #000;
-      text-transform: uppercase;
+     margin-top: 20px;
+    color: #1E1E1E;
+    font-family: Work Sans;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    text-transform: uppercase;
     }
 
-    .grid .card-desc {
-      font-size: 14px;
-      color: #999;
-    }
+.grid .card-desc {
+    font-family: Work Sans;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 100%;
+    color: #1E1E1E;
+    padding-top: 5px;
+    max-width: 460px;
+}
 
     .dark-img {
       width: 470px;

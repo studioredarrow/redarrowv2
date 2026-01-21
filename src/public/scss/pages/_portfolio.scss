@@ -5,7 +5,21 @@
       background: #ffffff;
       font-family: Work Sans;
     }
-
+    .ist-photo-banner p {
+    max-width: 49% !important;
+    font-family: Work Sans;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 100% !important;
+    color: #1E1E1E !important;
+}
+    .ist-photo-banner1 p {
+    font-family: Work Sans;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 100% !important;
+    color: #1E1E1E !important;
+}
     .container {
       max-width: 1220px;
       margin: 0 auto;
@@ -191,7 +205,7 @@
 
     /* Photo Section */
     .photo-banner {
-      margin-top: 30px;
+      // margin-top: 30px;
 
       h2 {
         font-weight: 500;
@@ -202,12 +216,14 @@
       }
 
       p {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 100%;
-        max-width: 500px;
-        color: #1e1e1e;
-        padding-bottom: 30px;
+         margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    font-family: Work Sans;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    color: #828282;
       }
 
       img {
@@ -440,7 +456,9 @@
         margin-top: 100px;
         padding-inline: 20px;
       }
-
+      .main-portfolio-outer {
+        padding-inline: 20px;
+    }
       .create-item-grid.create-inner-flex img {
         width: auto;
       }
@@ -507,7 +525,7 @@
 
       .benji-absolute {
         top: -24px;
-        left: -15px;
+        left: 0px;
       }
 
       .benji-description {
@@ -593,6 +611,9 @@
         width: 100%;
         margin-left: auto;
       }
+      .ist-photo-banner p {
+        max-width: 100% !important;
+    }
 
       .project.center {
         justify-content: flex-start;

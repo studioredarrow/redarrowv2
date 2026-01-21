@@ -41,7 +41,7 @@ body {
     .counter-container {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: start;
       gap: 6px;
 
       .label {
@@ -133,13 +133,19 @@ body {
     font-weight: 400;
     font-size: 32px;
     line-height: 100%;
-    font-family: "Work Sans", sans-serif;
+    font-family: Work Sans;
     max-width: 665px;
 }
-
+.team-header p {
+    color: #1E1E1E;
+    font-family: Work Sans;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 100%;
+}
 .team-inner {
   h6 {
-    font-family: "Work Sans", sans-serif;
+    font-family: Work Sans;
     font-weight: 600;
     font-size: 16px;
     line-height: 100%;
@@ -149,7 +155,6 @@ body {
 
 .team-grid {
   display: grid;
-  /* Desktop: 4 members + 1 empty/filler per row */
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 25px;
 
@@ -266,10 +271,12 @@ span.inner-dot {
 }
 
 .info-flex {
-  display: flex;
-  justify-content: end;
-  gap: 240px;
-  padding-inline: 100px;
+    display: flex;
+    justify-content: end;
+    gap: 240px;
+    max-width: 1024px;
+    margin-left: auto;
+    padding-inline: 50px;
 }
 
 .info-block {
@@ -284,6 +291,7 @@ span.inner-dot {
     font-family: Work Sans;
     font-weight: 400;
     line-height: 100%;
+    cursor: pointer;
 }
 .value p:hover {
     color: #FF0004;
@@ -292,15 +300,13 @@ span.inner-dot {
 .value {
   p {
     letter-spacing: 0.04em;
-    color: #111;
+    color: #1E1E1E;
     font-weight: 500;
     font-size: 20px;
     line-height: 130%;
     margin: 0px;
+    cursor: pointer;
 
-    // &:nth-child(2) {
-    //   color: #828282;
-    // }
   }
 }
 
@@ -378,7 +384,7 @@ span.inner-dot {
   .hero-title {
         margin: 0;
     margin-bottom: 40px;
-    color: #111;
+    color: #1E1E1E;
     font-family: Work Sans;
     font-weight: 300;
     font-size: 88px;
@@ -397,17 +403,19 @@ span.inner-dot {
 
   .hero-description {
     font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-    max-width: 600px;
+    color: #1E1E1E;
+    max-width: 800px;
     margin-bottom: 40px;
+    font-family: Work Sans;
+    font-weight: 400;
+    line-height: 100%;
   }
 
   .hero-cta {
     display: inline-block;
     font-size: 14px;
     font-weight: 700;
-    color: #ff0000; // red CTA like the pic
+    color: #ff0000; 
     text-decoration: none;
     border: 2px solid #ff0000;
     padding: 12px 24px;
@@ -422,7 +430,7 @@ span.inner-dot {
 
   @media (max-width: 768px) {
     .hero-title {
-      font-size: 40px;
+      font-size: 48px;
     }
 
     .hero-description {
@@ -448,13 +456,13 @@ span.inner-dot {
     color: #FF0004;
 }
 .team-img {
-    overflow: hidden; /* Hide anything outside the container */
+    overflow: hidden; 
     display: inline-block; 
     border-radius: 20px;
 }
 
 .team-img img {
-    transition: transform 0.3s ease; /* Smooth hover */
+    transition: transform 0.3s ease; 
     display: block; 
     border-radius: 20px;
 }
@@ -565,8 +573,6 @@ span.inner-dot {
   -moz-osx-font-smoothing: auto;
 }
 
-
-
 /* Responsive */
   @media (max-width: 1220px) {
 .main-about-outer {
@@ -578,21 +584,42 @@ span.inner-dot {
     .machine .panel .counter-row {
     flex-wrap: wrap;
 }
+.hero-absolute-img {
+    display: none;
+}
 
   }
 @media (max-width: 768px) {
-  .info-flex {
-    justify-content: start;
-    gap: 20px;
-    padding-inline: 10px;
-    flex-direction: column;
-  }
 .hero-flex {
     flex-direction: column;
 }
+.main-responsive-mobile {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.hero .hero-subtitle {
+    color: #1E1E1E;
+    font-weight: 400;
+}
+.hero .hero-image img {
+    height: 232px;
+}
+.team-header p {
+    font-size: 20px;
+}
   .info-block {
     gap: 16px;
+    flex-direction: column;
   }
+  .info-flex {
+    display: flex;
+    justify-content: end;
+    gap: 90px;
+    padding-inline: 0px;
+}
+  .info-wrapper {
+    padding: 0px;
+}
   .team-flex {
     flex-direction: column;
 }
@@ -629,6 +656,12 @@ span.inner-dot {
 .machine .panel .counter-row {
     flex-wrap: wrap;
     gap: 0;
+}
+}
+
+@media (max-width: 380px) {
+  .info-flex {
+    gap: 40px;
 }
 }
 

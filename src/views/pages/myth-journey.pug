@@ -66,3 +66,57 @@ block content
          img(src="/images/chat-arrow.png", alt="")
 
   script(src="/js/mythJourney.js")
+  //- In your Pug file, at the bottom
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js")
+  script.
+    document.addEventListener("DOMContentLoaded", () => {
+      const loader = document.getElementById("myth-loader");
+      const mainContent = document.getElementById("myth-main");
+
+      const loaderElements = loader.querySelectorAll(".breadcrumb, .status, .myth-card img");
+      const mainElements = mainContent.querySelectorAll("h2, p, .btn-row, img");
+
+      // Hide main content initially
+      gsap.set(mainContent, { opacity: 0, y: 60 });
+
+      // Loader fade-up animation
+      gsap.from(loaderElements, {
+        y: 60,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power2.out",
+        onComplete: showMainContent
+      });
+
+      // Optional: smooth typing effect for loader status text
+      const statusText = loader.querySelector(".status");
+      if (statusText) {
+        const text = statusText.innerText;
+        statusText.innerText = "";
+        let i = 0;
+        const typingInterval = setInterval(() => {
+          statusText.innerText += text[i];
+          i++;
+          if (i >= text.length) clearInterval(typingInterval);
+        }, 50);
+      }
+
+      // Function to fade loader out and fade main content in
+      function showMainContent() {
+        gsap.to(loader, { opacity: 0, duration: 0.5, onComplete: () => loader.style.display = "none" });
+
+        // Fade up main content elements smoothly
+        gsap.to(mainContent, { opacity: 1, duration: 0.5 });
+        gsap.from(mainElements, {
+          y: 60,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      }
+    });
+
+
+

@@ -8,7 +8,6 @@ html
     link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap")
     style.
       @import url('https://fonts.cdnfonts.com/css/ds-digital');
-      /* Primary DS-Digital font from CDN */
       @font-face {
         font-family: 'DS-Digital';
         src: url('https://fonts.cdnfonts.com/s/15048/DS-DIGIB.woff') format('woff');
@@ -16,7 +15,6 @@ html
         font-style: normal;
         font-display: swap;
       }
-      /* Fallback: Try local font if CDN fails */
       @font-face {
         font-family: 'DS-Digital';
         src: url('/fonts/DS-DIGIB.woff') format('woff'),
@@ -26,8 +24,10 @@ html
         font-display: swap;
       }
 
-  body
-    include partials/menu
+  body(class=pageClass)
+    // ✅ header wrapper added with condition
+    header.site-header(class=headerWhite ? 'header--white' : '')
+      include partials/menu
 
     block content
 
