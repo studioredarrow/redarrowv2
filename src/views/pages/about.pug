@@ -121,18 +121,18 @@ block content
                         p= member.data.role
                     else if cell.type === "slot"
                       - const slot = cell.item;
-                      .team-card.add-card(class=`status-${slot.data.status}`)
-                        span= slot.data.title
-                        br
-                        if slot.data.cta_label
-                          if slot.data.cta_link && slot.data.cta_link.url
-                            a.slot-cta(href=slot.data.cta_link.url)
-                              = asText(slot.data.cta_label)
-                          else
-                            a.slot-cta(href="#")
-                              = asText(slot.data.cta_label)
-                        else
-                          span.inner-dot +
+                      a.slot-card(
+                          href=slot.data.cta_link && slot.data.cta_link.url ? slot.data.cta_link.url : "#"
+                          target=slot.data.cta_link && slot.data.cta_link.target || "_self"
+                        )
+                          .team-card.add-card(class=`status-${slot.data.status}`)
+                            span= slot.data.title
+                            br
+                            if slot.data.cta_label
+                              span.slot-cta= asText(slot.data.cta_label)
+                            else
+                              span.inner-dot +
+
                     else
                       .team-card.empty
 

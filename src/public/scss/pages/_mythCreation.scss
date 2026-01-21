@@ -959,6 +959,9 @@
 
     /* Responsive */
     @media (max-width: 768px) {
+        #curveDot {
+      r: 16px; 
+    }
       .container img {
         width: 100%;
       }
@@ -1137,7 +1140,7 @@
       }
 
       .image-wrapper img {
-        width: 115px;
+        width: 85px;
       }
 
       .allimages1 {

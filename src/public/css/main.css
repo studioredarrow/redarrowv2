@@ -857,6 +857,9 @@ video {
 }
 /* Responsive */
 @media (max-width: 768px) {
+  #curveDot {
+    r: 16px;
+  }
   .container img {
     width: 100%;
   }
@@ -996,7 +999,7 @@ video {
     font-size: 32px;
   }
   .image-wrapper img {
-    width: 115px;
+    width: 85px;
   }
   .allimages1 {
     flex-wrap: wrap;
@@ -1714,6 +1717,10 @@ span.inner-dot {
     gap: 40px;
   }
 }
+a {
+  text-decoration: none;
+}
+
 :root {
   --bg: #f6f2ee;
   --text: #6b6b6b;
