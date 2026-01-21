@@ -128,7 +128,7 @@ block content
 
                     // ---- BANNER LEFT ----
                     if gallery.gallery_layout === "banner-left"
-                      .photo-banner
+                      .photo-banner.ist-photo-banner
                         if gallery.gallery_title
                           h2= gallery.gallery_title
                         if gallery.gallery_description
@@ -157,7 +157,7 @@ block content
                             img(src=gallery.gallery_image_6.url, alt="")
 
                     else if gallery.gallery_layout === "banner-right"
-                      .photo-banner
+                      .photo-banner.ist-photo-banner1
                         .photo-right
                           if gallery.gallery_title
                             h2= gallery.gallery_title
@@ -188,7 +188,7 @@ block content
 
                     else if gallery.gallery_layout === "banner-only"
                       if gallery.gallery_banner_image && gallery.gallery_banner_image.url
-                        .photo-banner
+                        .photo-banner.ist-photo-banner1
                           img(src=gallery.gallery_banner_image.url, alt="")
       
 
@@ -249,7 +249,7 @@ block content
 
 
           if portfolioItem.data.additional_photo_sections && portfolioItem.data.additional_photo_sections[0].section_description
-            .photo-banner
+            .photo-banner.ist-photo-banner1
               .photo-right
                 p!= asHTML(portfolioItem.data.additional_photo_sections[0].section_description)
 
@@ -271,7 +271,7 @@ block content
                   .event-item
                     img(src="/images/event-img-5.png" alt="")       
 
-        .photo-banner
+        .photo-banner.ist-photo-banner1
           .container
               .photo-right
                 if portfolioItem.data.event_section_title

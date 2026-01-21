@@ -16,13 +16,13 @@ block content
         h1.animate-text= terms.data.page_title
 
       // ===== MOBILE TOGGLE BUTTON =====
-      .term-toggle
-        button#termsToggle
-          span.text Show Terms
-          span.icon +
+      //- .term-toggle
+      //-   button#termsToggle
+      //-     span.text Show Terms
+      //-     span.icon +
 
       // ===== TERMS CONTENT =====
-      .terms-container#termsContent
+      .terms-container
 
         // ===== TABLE OF CONTENTS =====
         .toc
@@ -83,19 +83,19 @@ block content
       });
 
       // ===== MOBILE SINGLE TOGGLE =====
-      if (window.innerWidth <= 768) {
-        const toggleBtn = document.getElementById("termsToggle");
-        const content = document.getElementById("termsContent");
-        const icon = toggleBtn.querySelector(".icon");
-        const text = toggleBtn.querySelector(".text");
+      //- if (window.innerWidth <= 768) {
+      //-   const toggleBtn = document.getElementById("termsToggle");
+      //-   const content = document.getElementById("termsContent");
+      //-   const icon = toggleBtn.querySelector(".icon");
+      //-   const text = toggleBtn.querySelector(".text");
 
-        toggleBtn.addEventListener("click", () => {
-          content.classList.toggle("open");
-          const isOpen = content.classList.contains("open");
-          icon.textContent = isOpen ? "−" : "+";
-          text.textContent = isOpen ? "Hide Terms" : "Show Terms";
-        });
-      }
+      //-   toggleBtn.addEventListener("click", () => {
+      //-     content.classList.toggle("open");
+      //-     const isOpen = content.classList.contains("open");
+      //-     icon.textContent = isOpen ? "−" : "+";
+      //-     text.textContent = isOpen ? "Hide Terms" : "Show Terms";
+      //-   });
+      //- }
 
       // ===== TOC CLICK SCROLL =====
       document.querySelectorAll(".toc-link").forEach(link => {
