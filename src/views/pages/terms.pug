@@ -1,100 +1,131 @@
 extends ../layout
 
+//- block variables
+//-   - var headerWhite = true
+//-   - var pageClass = 'terms-page'
+
 block content
   .term-outer
+    // ===== PROGRESS BAR =====
     .progress-bar-wrapper
       .progress-bar
 
-    // ================= CONTENT =================
     .container
+      // ===== PAGE HEADER =====
       .header-inner
-        h1.animate-text Terms & Conditions
+        h1.animate-text= terms.data.page_title
 
+      // ===== MOBILE TOGGLE BUTTON =====
+      //- .term-toggle
+      //-   button#termsToggle
+      //-     span.text Show Terms
+      //-     span.icon +
+
+      // ===== TERMS CONTENT =====
       .terms-container
-        // TOC
+
+        // ===== TABLE OF CONTENTS =====
         .toc
           h2.animate-text Table of Contents
           ul
-            li.animate-text section's name
-            li.animate-text section's name
-            li.animate-text section's name
-            li.animate-text section's name
-            li.animate-text section's name
-            li.animate-text section's name
+            each section, index in terms.data.sections
+              li
+                a.animate-text.toc-link(
+                  href=`#section-${index}`
+                  data-target=`section-${index}`
+                )= section.section_title
 
-        // TERMS
+        // ===== TERMS SECTIONS =====
         .term-section
-          h2.animate-text Overview
-          p.animate-text This website is operated by JK Supply LLC. Throughout the site, the terms “we”, “us” and “our” refer to JK Supply LLC.
-          p.animate-text By visiting our site and/or purchasing something from us, you engage in our “Service” and agree to be bound by the following terms and conditions.
-          p.animate-text Please read these Terms of Service carefully before accessing or using our website.
-          p.animate-text Any new features or tools which are added to the current store shall also be subject to the Terms of Service.
-          p.animate-text Our store is hosted on Shopify Inc.
+          each section, index in terms.data.sections
+            h2.animate-text(id=`section-${index}`)= section.section_title
 
-          h2.animate-text General Conditions
-          p.animate-text We reserve the right to refuse service to anyone for any reason at any time.
-          p.animate-text You understand that your content may be transferred unencrypted.
+            each block in section.section_content
+              if block.type === "paragraph"
+                p.animate-text= block.text
 
-          h2.animate-text Accuracy, completeness and timeliness of information
-          p.animate-text We are not responsible if information made available on this site is not accurate.
+  // ================= SCRIPTS =================
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js")
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js")
 
-          h2.animate-text Modifications to the service and prices
-          p.animate-text Prices for our products are subject to change without notice.
-          p.animate-text We reserve the right at any time to modify or discontinue the Service.
-          p.animate-text We shall not be liable for any modification or discontinuance.
+  script.
+    document.addEventListener("DOMContentLoaded", function () {
+      if (!window.gsap || !window.ScrollTrigger) return;
 
-          h2.animate-text Products or services (if applicable)
-          p.animate-text Certain products or services may be available exclusively online.
-          p.animate-text We have made every effort to display accurately the colors of our products.
-          p.animate-text We reserve the right to limit sales or discontinue products.
-          p.animate-text We do not warrant that the quality of products will meet expectations.
+      gsap.registerPlugin(ScrollTrigger);
 
+      // ===== PROGRESS BAR =====
+      gsap.to(".progress-bar", {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: {
+          start: 0,
+          end: () => document.documentElement.scrollHeight - window.innerHeight,
+          scrub: true
+        }
+      });
 
-    // ================= SCRIPTS =================
-    script(src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js")
-    script(src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js")
-
-    script.
-      document.addEventListener("DOMContentLoaded", function () {
-        if (!window.gsap || !window.ScrollTrigger) return;
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        // ================= PROGRESS BAR =================
-        gsap.to(".progress-bar", {
-          scaleX: 1,
-          ease: "none",
+      // ===== TEXT ANIMATION =====
+      gsap.utils.toArray(".animate-text").forEach((elem, i) => {
+        gsap.from(elem, {
+          opacity: 0,
+          y: 50,
+          scale: 0.95,
+          duration: 0.8,
+          ease: "power3.out",
           scrollTrigger: {
-            start: 0,
-            end: () => document.documentElement.scrollHeight - window.innerHeight,
-            scrub: true
-          }
+            trigger: elem,
+            start: "top 85%",
+            toggleActions: "play none none none"
+          },
+          delay: i * 0.05
         });
+      });
 
-        // ================= PROGRESS BAR TOP SCROLL =================
-        let lastScroll = window.pageYOffset || document.documentElement.scrollTop;
-        const progressWrapper = document.querySelector(".progress-bar-wrapper");
+      // ===== MOBILE SINGLE TOGGLE =====
+      //- if (window.innerWidth <= 768) {
+      //-   const toggleBtn = document.getElementById("termsToggle");
+      //-   const content = document.getElementById("termsContent");
+      //-   const icon = toggleBtn.querySelector(".icon");
+      //-   const text = toggleBtn.querySelector(".text");
 
-        window.addEventListener("scroll", () => {
-          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-          progressWrapper.style.top = currentScroll < lastScroll ? "75px" : "0px";
-          lastScroll = currentScroll <= 0 ? 0 : currentScroll;
-        });
+      //-   toggleBtn.addEventListener("click", () => {
+      //-     content.classList.toggle("open");
+      //-     const isOpen = content.classList.contains("open");
+      //-     icon.textContent = isOpen ? "−" : "+";
+      //-     text.textContent = isOpen ? "Hide Terms" : "Show Terms";
+      //-   });
+      //- }
 
-        // ================= TEXT ANIMATION =================
-        gsap.utils.toArray(".animate-text").forEach((elem, i) => {
-          gsap.from(elem, {
-            opacity: 0,
-            y: 50,
-            scale: 0.95,
-            duration: 0.8,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: elem,
-              start: "top 85%",
-              toggleActions: "play none none none"
-            },
-            delay: i * 0.05
+      // ===== TOC CLICK SCROLL =====
+      document.querySelectorAll(".toc-link").forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          const targetId = link.dataset.target;
+          const targetEl = document.getElementById(targetId);
+
+          if (!targetEl) return;
+
+          window.scrollTo({
+            top: targetEl.offsetTop - 80, // adjust for header height
+            behavior: "smooth"
           });
         });
       });
+
+      // ===== TOC ACTIVE STATE ON SCROLL =====
+      gsap.utils.toArray(".term-section h2").forEach((section, index) => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top center",
+          onEnter: () => setActive(index),
+          onEnterBack: () => setActive(index)
+        });
+      });
+
+      function setActive(index) {
+        document.querySelectorAll(".toc-link").forEach((link, i) => {
+          link.classList.toggle("active", i === index);
+        });
+      }
+    });
