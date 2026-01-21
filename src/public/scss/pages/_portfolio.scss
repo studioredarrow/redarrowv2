@@ -457,7 +457,7 @@
         padding-inline: 20px;
       }
       .main-portfolio-outer {
-        padding-inline: 20px;
+        padding-inline: 10px;
     }
       .create-item-grid.create-inner-flex img {
         width: auto;
@@ -659,11 +659,18 @@
     }
 
     @media (max-width: 500px) {
-      .bistro-item img {
-        width: 173px;
-      }
+      // .bistro-item img {
+      //   width: 173px;
+      // }
 
       .left div {
         margin-top: 10px;
       }
+      .bistro-inner-item p {
+    font-size: 16px;
+    padding-bottom: 20px;
+}
+.bistro-banner {
+    padding-block: 50px;
+}
     }

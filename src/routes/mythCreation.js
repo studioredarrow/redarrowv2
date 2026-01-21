@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     title: page?.data?.hero_title || "Myth Creation",
     page: page || { data: {} },   // <-- prevents Pug undefined errors
     showFooter: true,
-    hideCreateOuter: true
+    // hideCreateOuter: true
   });
 });
 
