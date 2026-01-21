@@ -816,7 +816,7 @@ video {
   .outer-unique {
     padding-inline: 20px;
   }
-  .section-clients {
+  p.section-title {
     padding-inline: 20px;
   }
   .services {
@@ -1057,6 +1057,30 @@ video {
   .hero-section-unique .outer-unique .image-container-unique {
     right: -100px;
   }
+  .allimages {
+    gap: 20px;
+  }
+  .iconic-sections {
+    margin-bottom: 30px;
+  }
+  .curve-wrapper {
+    padding-block: 30px;
+  }
+  .create-outer .outer-btn {
+    margin-left: 130px !important;
+  }
+  .create-outer .fate-wrap .fate-oval__svg {
+    position: absolute;
+    width: 148px !important;
+    height: 62px !important;
+    pointer-events: none;
+  }
+  .image-wrapper {
+    width: 26%;
+  }
+  .image-wrapper img {
+    width: 100px;
+  }
   .hero-section-unique .outer-unique .inner-unique h1.animate-text-unique {
     font-size: 48px;
     max-width: 80%;
@@ -1072,6 +1096,9 @@ video {
   }
   img.mobile-arrow {
     display: block;
+  }
+  .section-clients {
+    padding-block: 45px !important;
   }
 }
 /* ===== HERO SECTION UNIQUE SCSS ===== */
@@ -2425,7 +2452,7 @@ body {
     padding-inline: 20px;
   }
   .main-portfolio-outer {
-    padding-inline: 20px;
+    padding-inline: 10px;
   }
   .create-item-grid.create-inner-flex img {
     width: auto;
@@ -2582,11 +2609,15 @@ body {
   }
 }
 @media (max-width: 500px) {
-  .bistro-item img {
-    width: 173px;
-  }
   .left div {
     margin-top: 10px;
+  }
+  .bistro-inner-item p {
+    font-size: 16px;
+    padding-bottom: 20px;
+  }
+  .bistro-banner {
+    padding-block: 50px;
   }
 }
 body {
