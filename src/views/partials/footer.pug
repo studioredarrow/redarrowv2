@@ -189,21 +189,21 @@ footer
           );
         }
 
-        svg.addEventListener("mousemove", (e) => {
+        function handleMove(clientX, clientY) {
           const rect = svg.getBoundingClientRect();
 
-          const mouseX = ((e.clientX - rect.left) / rect.width) * 1000;
-          const mouseY = ((e.clientY - rect.top) / rect.height) * 200;
+          const x = ((clientX - rect.left) / rect.width) * 1000;
+          const y = ((clientY - rect.top) / rect.height) * 200;
 
           gsap.to(dot, {
-            cx: mouseX,
-            cy: mouseY,
+            cx: x,
+            cy: y,
             duration: 0.15,
             ease: "power3.out"
           });
 
           const centerY = rect.height / 2;
-          const offset = (e.clientY - rect.top - centerY) / centerY;
+          const offset = (clientY - rect.top - centerY) / centerY;
 
           const bend = gsap.utils.clamp(
             -MAX_BEND,
@@ -215,6 +215,15 @@ footer
             duration: 0.3,
             onUpdate: () => updateCurve(bend)
           });
+        }
+
+        // MOUSE EVENTS
+        svg.addEventListener("mousemove", (e) => {
+          handleMove(e.clientX, e.clientY);
+        });
+
+        svg.addEventListener("mouseenter", () => {
+          gsap.to(dot, { opacity: 1, duration: 0.2 });
         });
 
         svg.addEventListener("mouseleave", () => {
@@ -227,12 +236,31 @@ footer
           gsap.to(dot, { opacity: 0, duration: 0.2 });
         });
 
-        svg.addEventListener("mouseenter", () => {
+        // TOUCH EVENTS
+        svg.addEventListener("touchstart", (e) => {
+          e.preventDefault();
+          const touch = e.touches[0];
           gsap.to(dot, { opacity: 1, duration: 0.2 });
+          handleMove(touch.clientX, touch.clientY);
+        }, { passive: false });
+
+        svg.addEventListener("touchmove", (e) => {
+          e.preventDefault();
+          const touch = e.touches[0];
+          handleMove(touch.clientX, touch.clientY);
+        }, { passive: false });
+
+        svg.addEventListener("touchend", () => {
+          gsap.to({}, {
+            duration: 1,
+            ease: "elastic.out(1, 0.4)",
+            onUpdate: () => updateCurve(0)
+          });
+
+          gsap.to(dot, { opacity: 0, duration: 0.2 });
         });
 
         updateCurve(0);
-
 
         //- GSAP Scripts
       //- GSAP Scripts

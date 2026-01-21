@@ -905,10 +905,9 @@
       .outer-unique {
         padding-inline: 20px;
       }
-
-      .section-clients {
+      p.section-title {
         padding-inline: 20px;
-      }
+    }
 
       .services {
         padding-inline: 20px;
@@ -960,6 +959,9 @@
 
     /* Responsive */
     @media (max-width: 768px) {
+        #curveDot {
+      r: 16px; 
+    }
       .container img {
         width: 100%;
       }
@@ -1138,7 +1140,7 @@
       }
 
       .image-wrapper img {
-        width: 115px;
+        width: 85px;
       }
 
       .allimages1 {
@@ -1215,7 +1217,30 @@
       .hero-section-unique .outer-unique .image-container-unique {
         right: -100px;
       }
-
+            .allimages {
+          gap: 20px;
+      }
+      .iconic-sections {
+          margin-bottom: 30px;
+      }
+      .curve-wrapper {
+        padding-block: 30px;
+    }
+      .create-outer .outer-btn {
+          margin-left: 130px !important;
+      }
+      .create-outer .fate-wrap .fate-oval__svg {
+          position: absolute;
+          width: 148px !important;
+          height: 62px !important;
+          pointer-events: none;
+      }
+      .image-wrapper {
+          width: 26%;
+      }
+      .image-wrapper img {
+          width: 100px;
+      }
       .hero-section-unique .outer-unique .inner-unique h1.animate-text-unique {
         font-size: 48px;
         max-width: 80%;
@@ -1236,4 +1261,7 @@
       img.mobile-arrow {
         display: block;
       }
+      .section-clients {
+        padding-block: 45px !important;
+    }
     }
