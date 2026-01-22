@@ -250,8 +250,9 @@ block content
 
           if portfolioItem.data.additional_photo_sections && portfolioItem.data.additional_photo_sections[0].section_description
             .photo-banner.ist-photo-banner1
-              .photo-right
-                p!= asHTML(portfolioItem.data.additional_photo_sections[0].section_description)
+              .container 
+                .photo-right
+                  p!= asHTML(portfolioItem.data.additional_photo_sections[0].section_description)
 
 
         section
