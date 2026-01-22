@@ -132,7 +132,12 @@ block content
                             a.slot-cta(href="#")
                               = asText(slot.data.cta_label)
                         else
-                          span.inner-dot +
+                          span.inner-dot 
+                            svg(width="42", height="42", viewBox="0 0 42 42", fill="none", xmlns="http://www.w3.org/2000/svg")
+                              path(d="M22.7139 2.12305H19.7139V40.3067H22.7139V2.12305Z", fill="white")
+                              path(d="M39.6846 19.0918V22.0918H1.50094V19.0918H39.6846Z", fill="white")
+
+
                     else
                       .team-card.empty
 
@@ -142,7 +147,7 @@ block content
             .info-flex
               .info-block
                 span.label1 Location
-                .value
+                .value.value1
                   != asHTML(page.data.location)
 
               .info-block
