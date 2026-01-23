@@ -1088,8 +1088,8 @@ video {
   }
   .create-outer .fate-wrap .fate-oval__svg {
     position: absolute;
-    width: 148px !important;
-    height: 62px !important;
+    width: 206px !important;
+    height: 79px !important;
     pointer-events: none;
   }
   .image-wrapper {
@@ -1226,7 +1226,7 @@ body {
 
 .team-flex {
   display: flex;
-  justify-content: space-between;
+  gap: 34%;
 }
 
 .team-header {
@@ -1710,6 +1710,12 @@ span.inner-dot svg {
     width: 172px;
     height: 208px;
   }
+  .machine .panel .counter-row .counter-container .counter {
+    min-height: 55px;
+  }
+  .machine .screen video {
+    height: auto;
+  }
   .team-outer {
     padding-block: 45px;
   }
@@ -1731,9 +1737,13 @@ span.inner-dot svg {
   .team-card.add-card {
     gap: 10px;
   }
+  .hero {
+    padding: 25px 0px;
+    margin-bottom: 80px;
+  }
   .machine .panel .counter-row {
     flex-wrap: wrap;
-    gap: 0;
+    gap: 25px;
   }
 }
 @media (max-width: 380px) {
@@ -2129,7 +2139,7 @@ body {
 }
 
 .benji-content {
-  width: 70%;
+  width: 69%;
 }
 
 /* Image */
@@ -2162,6 +2172,7 @@ body {
 
 .benji-services {
   position: relative;
+  width: 18%;
 }
 .benji-services p {
   color: #1e1e1e;
@@ -2623,10 +2634,17 @@ body {
   .project-card {
     max-width: 100%;
   }
+  .benji-services {
+    width: 100%;
+  }
 }
 @media (max-width: 600px) {
   .event-grid {
     grid-template-columns: 1fr;
+  }
+  .bistro-item img {
+    width: 100%;
+    height: 200px;
   }
   .event-item-grid {
     grid-template-columns: 1fr;
@@ -3798,7 +3816,7 @@ img.logo-trigger.logo1 {
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 .btn-row .btn {
   border: 1px solid #ff0004;
@@ -3833,7 +3851,7 @@ img.logo-trigger.logo1 {
   gap: 0.6rem;
   margin-bottom: 1.5rem;
   margin: 0 auto;
-  padding-top: 100px;
+  padding-top: 12rem;
   text-align: center;
   justify-content: center;
   align-items: center;

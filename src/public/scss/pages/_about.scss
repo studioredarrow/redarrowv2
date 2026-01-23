@@ -125,7 +125,7 @@ body {
 
 .team-flex {
   display: flex;
-  justify-content: space-between;
+  gap: 34%;
 }
 
 .team-header {
@@ -633,6 +633,12 @@ span.inner-dot svg {
     width: 172px;
     height: 208px;
   }
+  .machine .panel .counter-row .counter-container .counter {
+    min-height: 55px;
+  }
+  .machine .screen video {
+    height: auto;
+  }
   .team-outer {
     padding-block: 45px;
   }
@@ -654,17 +660,21 @@ span.inner-dot svg {
   .team-card.add-card {
     gap: 10px;
   }
+  .hero {
+    padding: 25px 0px;
+    margin-bottom: 80px;
+  }
   .machine .panel .counter-row {
     flex-wrap: wrap;
-    gap: 0;
+    gap: 25px;
   }
 }
 
 @media (max-width: 380px) {
   .info-flex {
     gap: 40px;
+  }
 }
-} 
 a {
   text-decoration: none;
 }
