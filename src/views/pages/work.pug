@@ -168,17 +168,17 @@ block content
         /* ---------------- TEXT POSITION ---------------- */
         const pattern = [
           { left: 120, top: 70 },
-          { left: 240, top: 140 },
-          { right: 40, top: 210 },
-          { left: 360, top: 270 },
-          { left: 120, top: 340 },
-          { right: 250, top: 400 },
-          { left: 260, top: 470 }
+          { left: 240, top: 165 },
+          { right: 40, top: 255 },
+          { left: 360, top: 350 },
+          { left: 120, top: 450 },
+          { right: 250, top: 530 },
+          { left: 260, top: 610 }
         ];
 
         texts.forEach((text, index) => {
           const pos = pattern[index % pattern.length];
-          text.style.top = `${pos.top + Math.floor(index / pattern.length) * 470}px`;
+          text.style.top = `${pos.top + Math.floor(index / pattern.length) * 630}px`;
 
           if (pos.left !== undefined) {
             text.style.left = `${pos.left}px`;

@@ -43,6 +43,7 @@ p.animate-text-unique {
   align-items: center;
   justify-content: center;
   padding-block: 60px;
+  height: 100vh;
 }
 .hero-section-unique .outer-unique {
   width: 100%;
@@ -3130,6 +3131,12 @@ body {
   display: none;
 }
 
+.hero1 .footer-oval__svg {
+  bottom: -22px !important;
+  left: 55%;
+  width: 220px;
+}
+
 .chat-area {
   margin-top: 24px;
   padding-inline: 20px;
@@ -3155,7 +3162,6 @@ body {
 
 .journey {
   display: inline-block;
-  font-size: 16px;
   padding: 10px 20px;
   position: relative;
   text-transform: uppercase;
@@ -3163,6 +3169,14 @@ body {
   color: white;
   text-decoration: none;
   background-color: #ff0004;
+  font-family: Work Sans;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
   /* Exact same color as your image */
 }
 .journey::after {
@@ -3240,7 +3254,10 @@ body {
 .chat-message.user {
   text-align: right;
   margin: 8px 0;
-  font-weight: 600;
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
 }
 
 .chat-message.bot {
@@ -3469,6 +3486,7 @@ img.chat-meme {
   top: 20px !important;
   left: 50%;
   transform: translateX(-50%) !important;
+  background-color: #f8f5f1 !important;
 }
 
 .logo-trigger {
@@ -3606,6 +3624,12 @@ img.chat-meme {
 
 .myth-text a {
   background: none;
+  font-family: Work Sans;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 /* Bottom input */
@@ -3623,9 +3647,12 @@ img.chat-meme {
   border: none;
   padding: 0 18px;
   background: #ffffff;
-  font-size: 16px;
-  color: #444;
+  color: #bdbdbd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
 }
 .chat-input input::placeholder {
   color: #c0c0c0;
@@ -3840,7 +3867,7 @@ img.logo-trigger.logo1 {
   top: -50px;
   font-size: 40px;
   color: #ffffff;
-  animation: arrowMove 2s infinite linear;
+  animation: arrowMove 4s infinite linear;
 }
 .loader-wrapper .arrow img {
   height: auto;
@@ -3977,6 +4004,7 @@ div#chat-area button {
 }
 
 .logo-container.fixed {
+  background-color: #f8f5f1 !important;
   position: fixed;
   left: 50% !important;
   z-index: 999;

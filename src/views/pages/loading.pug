@@ -6,6 +6,15 @@ block content
       img(src="/images/loading-page-arrow.png", alt="arrow")
     .loader-text #{label}
 
+    style.
+            .logo-container {
+              background-color: transparent !important;
+            }
+            .logo-container.fixed {
+              background-color: transparent !important;
+            }
+
+
   script.
     setTimeout(() => {
       window.location.replace("#{targetUrl}");
