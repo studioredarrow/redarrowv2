@@ -33,8 +33,7 @@ html(lang="en")
         z-index: 999;
       }
 
-  body.page1(class=isHome ? 'home-page' : '')
-
+  body.page1
     // =======================
     // LOGO CONTAINER
     // =======================
@@ -53,7 +52,6 @@ html(lang="en")
           .carousel#carousel
             each item, index in menuItems
               - const isMain = index === 0
-
               .item(
                 class=isMain ? 'main' : 'side'
                 data-route=item.data.route[0].text
@@ -72,59 +70,20 @@ html(lang="en")
           span
             img(src="/images/instagram-icon.png", alt="Instagram")
 
- 
     script.
+      // =======================
+      // CLICK TO MOVE THE SLIDER
+      // =======================
       const carousel = document.getElementById('carousel');
       const items = carousel.querySelectorAll('.item');
-
-      let isDragging = false;
-      let startX = 0;
-      let currentRotation = 0;
-      let dragRotation = 0;
 
       const sensitivity = 0.25;
       const itemCount = items.length;
       const degreePerItem = 360 / itemCount;
 
-      function getClientX(e) {
-        if (e.type.startsWith('touch')) {
-          return e.touches[0].clientX;
-        }
-        return e.clientX;
-      }
+      let currentRotation = 0;
 
-      function dragStart(e) {
-        isDragging = true;
-        startX = getClientX(e);
-        carousel.style.transition = 'none';
-      }
-
-      carousel.addEventListener('mousedown', dragStart);
-      carousel.addEventListener('touchstart', dragStart, { passive: true });
-
-      function dragMove(e) {
-        if (!isDragging) return;
-        const delta = getClientX(e) - startX;
-        dragRotation = currentRotation + delta * sensitivity;
-        carousel.style.transform = `rotateY(${dragRotation}deg)`;
-        updateHighlight(dragRotation);
-      }
-
-      document.addEventListener('mousemove', dragMove);
-      document.addEventListener('touchmove', dragMove, { passive: true });
-
-      function dragEnd() {
-        if (!isDragging) return;
-        isDragging = false;
-        currentRotation = Math.round(dragRotation / degreePerItem) * degreePerItem;
-        carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
-        carousel.style.transform = `rotateY(${currentRotation}deg)`;
-        updateHighlight(currentRotation);
-      }
-
-      document.addEventListener('mouseup', dragEnd);
-      document.addEventListener('touchend', dragEnd);
-
+      // Helper function to update the highlight on clicked item
       function updateHighlight(rotation) {
         const normalized = ((rotation % 360) + 360) % 360;
         const centerIndex = Math.round(normalized / degreePerItem) % itemCount;
@@ -140,15 +99,46 @@ html(lang="en")
         });
       }
 
-      // INITIALIZE
-      currentRotation = 0;
+      // Function to find the center item based on the rotation
+      function getCenterItem(rotation) {
+        const normalizedRotation = (rotation % 360 + 360) % 360;
+        const centerIndex = Math.round(normalizedRotation / degreePerItem) % itemCount;
+        return items[centerIndex];
+      }
+
+      // Click event listener for each item
+      document.querySelectorAll('.carousel .item').forEach(item => {
+        item.addEventListener('click', () => {
+          const route = item.dataset.route;
+          const label = item.dataset.label;
+
+          console.log('NAVIGATING →', label);
+
+          // Calculate the rotation based on clicked item index
+          const itemIndex = Array.from(items).indexOf(item);
+          const targetRotation = degreePerItem * itemIndex;
+
+          // Apply the rotation with smooth transition
+          carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
+          carousel.style.transform = `rotateY(${targetRotation}deg)`;
+
+          // Update the highlighted item
+          updateHighlight(targetRotation);
+
+          // Ensure correct route linking for the clicked item (center or side)
+          window.location.replace(
+            `/loading?to=${encodeURIComponent(route)}&label=${encodeURIComponent(label)}`
+          );
+        });
+      });
+
+      // Initialize the carousel to show the first item
       carousel.style.transform = `rotateY(0deg)`;
       updateHighlight(0);
 
-    // =====================
-    // OVERLAY OPEN / CLOSE
-    // =====================
-    script.
+      // =======================
+      // OVERLAY OPEN / CLOSE
+      // =======================
       const overlay = document.querySelector('.overlay');
       const logo = document.querySelector('.logo1');
       const arrow = document.querySelector('.arrow img');
@@ -169,29 +159,9 @@ html(lang="en")
         });
       });
 
-    // =====================
-    // MENU ITEM CLICK → LOADING PAGE
-    // =====================
-    script.
-      document.querySelectorAll('.carousel .item').forEach(item => {
-        item.addEventListener('click', () => {
-          if (!item.classList.contains('main')) return;
-
-          const route = item.dataset.route;
-          const label = item.dataset.label;
-
-          console.log('NAVIGATING →', label);
-
-          window.location.replace(
-            `/loading?to=${encodeURIComponent(route)}&label=${encodeURIComponent(label)}`
-          );
-        });
-      });
-
-    // =====================
-    // LOGO SCROLL SHOW / HIDE + FIXED POSITION
-    // =====================
-    script.
+      // =======================
+      // LOGO SCROLL SHOW / HIDE + FIXED POSITION
+      // =======================
       const logoContainer = document.querySelector('.logo-container');
 
       let lastScrollY = window.scrollY;
@@ -224,77 +194,3 @@ html(lang="en")
 
         lastScrollY = currentScrollY;
       });
-
-
-    script.  
-      const carousel = document.getElementById('carousel');
-      const items = carousel.querySelectorAll('.item');
-
-      let isDragging = false;
-      let startX = 0;
-      let currentRotation = 0;
-      let dragRotation = 0;
-
-      const sensitivity = 0.25;
-      const itemCount = items.length;
-      const degreePerItem = 360 / itemCount;
-
-      // ----- HELPER FUNCTION -----
-      function updateHighlight(rotation) {
-        const normalized = ((rotation % 360) + 360) % 360;
-        const centerIndex = Math.round(normalized / degreePerItem) % itemCount;
-
-        items.forEach((item, index) => {
-          if (index === (itemCount - centerIndex) % itemCount) {
-            item.classList.add('main');
-            item.classList.remove('side');
-          } else {
-            item.classList.add('side');
-            item.classList.remove('main');
-          }
-        });
-      }
-
-      // ----- START DRAG -----
-      function startDrag(clientX) {
-        isDragging = true;
-        startX = clientX;
-        carousel.style.transition = 'none';
-      }
-
-      // ----- DRAGGING -----
-      function onDrag(clientX) {
-        if (!isDragging) return;
-        const delta = clientX - startX;
-        dragRotation = currentRotation + delta * sensitivity;
-        carousel.style.transform = `rotateY(${dragRotation}deg)`;
-        updateHighlight(dragRotation);
-      }
-
-      // ----- END DRAG -----
-      function endDrag() {
-        if (!isDragging) return;
-        isDragging = false;
-        currentRotation = Math.round(dragRotation / degreePerItem) * degreePerItem;
-        carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
-        carousel.style.transform = `rotateY(${currentRotation}deg)`;
-        updateHighlight(currentRotation);
-      }
-
-      // ----- MOUSE EVENTS -----
-      carousel.addEventListener('mousedown', (e) => startDrag(e.clientX));
-      document.addEventListener('mousemove', (e) => onDrag(e.clientX));
-      document.addEventListener('mouseup', endDrag);
-
-      // ----- TOUCH EVENTS -----
-      carousel.addEventListener('touchstart', (e) => startDrag(e.touches[0].clientX));
-      document.addEventListener('touchmove', (e) => {
-        onDrag(e.touches[0].clientX);
-        e.preventDefault(); // Prevent scrolling while dragging
-      }, { passive: false });
-      document.addEventListener('touchend', endDrag);
-
-      // ----- INITIALIZE -----
-      currentRotation = 0;
-      carousel.style.transform = `rotateY(0deg)`;
-      updateHighlight(0);
