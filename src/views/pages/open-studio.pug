@@ -64,7 +64,16 @@ block content
                 data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
                 onclick=`window.location.href='/portfolio/${item.uid}'`
                 style="cursor: pointer;"
-              )= item.data.title      
+              )= item.data.title   
+
+
+        style.
+            .logo-container {
+              background-color: transparent !important;
+            }
+            .logo-container.fixed {
+              background-color: transparent !important;
+            }        
 
     script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
     script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
@@ -199,14 +208,14 @@ block content
         };
 
         /* ---------------- TEXT POSITION ---------------- */
-        const pattern = [
+     const pattern = [
           { left: 120, top: 70 },
-          { left: 120, top: 140 },
-          { right: 180, top: 200 },
-          { left: 360, top: 260 },
-          { left: 120, top: 330 },
-          { right: 240, top: 390 },
-          { left: 260, top: 460 }
+          { left: 240, top: 165 },
+          { right: 40, top: 255 },
+          { left: 360, top: 350 },
+          { left: 120, top: 450 },
+          { right: 250, top: 600 },
+          { left: 260, top: 665 }
         ];
 
         texts.forEach((text, index) => {

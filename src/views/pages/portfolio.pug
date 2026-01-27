@@ -179,13 +179,13 @@ block content
                         if gallery.gallery_image_4 && gallery.gallery_image_4.url
                           .photo-item
                             img(src=gallery.gallery_image_4.url, alt="")
-                        if gallery.gallery_image_5 && gallery.gallery_image_5.url
-                          .photo-item
-                            img(src=gallery.gallery_image_5.url, alt="")
                         if gallery.gallery_image_6 && gallery.gallery_image_6.url
                           .photo-item
                             img(src=gallery.gallery_image_6.url, alt="")
 
+                      if gallery.gallery_image_5 && gallery.gallery_image_5.url
+                          img(src=gallery.gallery_image_5.url, alt="")                    
+                      
                     else if gallery.gallery_layout === "banner-only"
                       if gallery.gallery_banner_image && gallery.gallery_banner_image.url
                         .photo-banner.ist-photo-banner1
@@ -252,25 +252,57 @@ block content
             .photo-banner.ist-photo-banner1
               .container 
                 .photo-right
-                  p!= asHTML(portfolioItem.data.additional_photo_sections[0].section_description)
+                  //- h2= portfolioItem.data.additional_photo_sections[0].section_title
+                  .bistro-inner-item
+                    p!= asHTML(portfolioItem.data.additional_photo_sections[0].section_description)
+
+        if additional_photo_sections && additional_photo_sections.length
+          each section in additional_photo_sections
+            section.event-outer(class=section.section_layout)
+              .event-inner
+                .container
+                  .event-grid
+
+                    if section.section_layout === 'flex-grid'
+                      .event-item.event-item-grid
+                        each imgField in [section.section_image_1, section.section_image_2, section.section_image_3, section.section_image_4]
+                          if imgField && imgField.url
+                            .event-grid-item
+                              img(src=imgField.url alt=imgField.alt || '')
+
+                      if section.section_image_5 && section.section_image_5.url
+                        .event-item
+                          img(src=section.section_image_5.url alt=imgField.alt || '')
+
+                    else if section.section_layout === 'banner-right'
+                      .event-item.event-item-grid
+                        each imgField in [section.section_image_1,section.section_image_2,section.section_image_3,section.section_image_4 ]
+                          if imgField && imgField.url
+                            .event-grid-item
+                              img(src=imgField.url alt=imgField.alt || '')
+
+                      if section.section_image_5 && section.section_image_5.url
+                        .event-item.banner-right
+                          img(src=section.section_image_5.url alt=section.section_image_5.alt || '')
 
 
-        section
-          .event-outer
-            .event-inner
-              .container
-                .event-grid
-                  .event-item.event-item-grid
-                    .event-grid-item
-                      img(src="/images/event-img-1.png" alt="")
-                    .event-grid-item
-                      img(src="/images/event-img-2.png" alt="")
-                    .event-grid-item
-                      img(src="/images/event-img-3.png" alt="")
-                    .event-grid-item
-                      img(src="/images/event-img-4.png" alt="")
-                  .event-item
-                    img(src="/images/event-img-5.png" alt="")       
+                    else if section.section_layout === 'banner-left'
+                      .event-item.banner-left
+                        if section.section_image_1 && section.section_image_1.url
+                          img(
+                            src=section.section_image_1.url
+                            alt=section.section_image_1.alt || ''
+                          )
+
+                    else if section.section_layout === 'single-banner'
+                      .event-item.single-banner
+                        if section.section_image_1 && section.section_image_1.url
+                          img(
+                            src=section.section_image_1.url
+                            alt=section.section_image_1.alt || ''
+                          )
+
+    
 
         .photo-banner.ist-photo-banner1
           .container
@@ -545,6 +577,8 @@ block content
 
         lastScroll = currentScroll;
       });
+
+      
 
                   
               

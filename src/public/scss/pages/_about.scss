@@ -10,7 +10,7 @@ body {
   width: 100%;
   background: #424242;
   border-radius: 12px;
-  box-shadow: 0 0 30px #424242;
+  // box-shadow: 0 0 30px #424242;
   padding: 10px;
   margin-top: 100px !important;
   margin: 0 auto;
@@ -125,7 +125,7 @@ body {
 
 .team-flex {
   display: flex;
-  justify-content: space-between;
+  gap: 34%;
 }
 
 .team-header {
@@ -183,10 +183,17 @@ body {
 }
 span.inner-dot {
   font-size: 64px !important;
+  text-align: center;
 }
 span.inner-dot svg {
   fill: white;
   filter: brightness(0) invert(1);
+}
+.status-open p {
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 14px;
+  color: #FFFFFF !important;
 }
 .team-card {
   color: #1e1e1e;
@@ -236,13 +243,13 @@ span.inner-dot svg {
   &.add-card {
     background: #ff0004;
     color: #fff;
-    align-items: center;
+    // align-items: center;
     cursor: pointer;
     font-family: "Work Sans", sans-serif;
     font-weight: 500;
     font-size: 20px;
     text-transform: uppercase;
-    gap: 30px;
+    gap: 6px;
     padding: 10px 10px;
     height: 265px;
     display: flex;
@@ -633,6 +640,12 @@ span.inner-dot svg {
     width: 172px;
     height: 208px;
   }
+  .machine .panel .counter-row .counter-container .counter {
+    min-height: 55px;
+  }
+  .machine .screen video {
+    height: auto;
+  }
   .team-outer {
     padding-block: 45px;
   }
@@ -654,17 +667,25 @@ span.inner-dot svg {
   .team-card.add-card {
     gap: 10px;
   }
+  .hero {
+    padding: 25px 0px;
+    margin-bottom: 80px;
+  }
   .machine .panel .counter-row {
     flex-wrap: wrap;
-    gap: 0;
+    gap: 25px;
   }
 }
 
 @media (max-width: 380px) {
   .info-flex {
     gap: 40px;
+  }
 }
-} 
 a {
   text-decoration: none;
+}
+
+.hero-absolute-img img {
+  width: 124px;
 }
