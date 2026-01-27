@@ -306,6 +306,7 @@ ul.services__list li:hover {
   width: 100%;
   z-index: 0;
   height: 100vh;
+  padding-top: 30px;
 }
 
 .iconic-third img {
@@ -577,6 +578,7 @@ p.section-title {
   color: red;
   position: relative;
   z-index: 2;
+  text-transform: uppercase;
 }
 .fate-wrap .fate-oval__svg {
   position: absolute;
@@ -609,6 +611,7 @@ p.section-title {
   padding: 16px 24px;
   position: absolute;
   right: -26px;
+  opacity: 1 !important;
 }
 
 .footer-flex {
@@ -618,10 +621,10 @@ p.section-title {
   position: relative;
 }
 
-.footer-line-image {
+.footer-line-image img {
   position: absolute;
-  bottom: -25px;
-  left: -108px;
+  bottom: -30px;
+  left: -93px;
 }
 
 .left-text {
@@ -632,7 +635,7 @@ p.section-title {
   flex-direction: column;
   gap: 0.2em;
   position: relative;
-  right: 10px;
+  right: 60px;
   bottom: -30px;
 }
 .left-text span {
@@ -687,6 +690,22 @@ p.section-title {
   display: flex;
   align-items: center;
   gap: 45px;
+}
+
+.image-wrapper img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.services__note {
+  position: absolute;
+  right: 70px;
+  bottom: 10px !important;
+  color: #1e1e1e;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 100%;
+  text-align: right;
 }
 
 .footer-btn-flex {
@@ -1088,8 +1107,8 @@ video {
   }
   .create-outer .fate-wrap .fate-oval__svg {
     position: absolute;
-    width: 148px !important;
-    height: 62px !important;
+    width: 206px !important;
+    height: 79px !important;
     pointer-events: none;
   }
   .image-wrapper {
@@ -1130,7 +1149,6 @@ body {
   width: 100%;
   background: #424242;
   border-radius: 12px;
-  box-shadow: 0 0 30px #424242;
   padding: 10px;
   margin-top: 100px !important;
   margin: 0 auto;
@@ -1226,7 +1244,7 @@ body {
 
 .team-flex {
   display: flex;
-  justify-content: space-between;
+  gap: 34%;
 }
 
 .team-header {
@@ -1717,6 +1735,12 @@ span.inner-dot svg {
     width: 172px;
     height: 208px;
   }
+  .machine .panel .counter-row .counter-container .counter {
+    min-height: 55px;
+  }
+  .machine .screen video {
+    height: auto;
+  }
   .team-outer {
     padding-block: 45px;
   }
@@ -1738,9 +1762,13 @@ span.inner-dot svg {
   .team-card.add-card {
     gap: 10px;
   }
+  .hero {
+    padding: 25px 0px;
+    margin-bottom: 80px;
+  }
   .machine .panel .counter-row {
     flex-wrap: wrap;
-    gap: 0;
+    gap: 25px;
   }
 }
 @media (max-width: 380px) {
@@ -2000,10 +2028,6 @@ body {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.main-work-outer {
-  margin-bottom: 100px;
-}
-
 /* Responsive */
 @media (max-width: 1100px) {
   .category-links {
@@ -2031,7 +2055,7 @@ body {
     width: 100%;
   }
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     gap: 40px;
   }
   .grid .card {
@@ -2136,7 +2160,7 @@ body {
 }
 
 .benji-content {
-  width: 70%;
+  width: 69%;
 }
 
 /* Image */
@@ -2169,6 +2193,7 @@ body {
 
 .benji-services {
   position: relative;
+  width: 18%;
 }
 .benji-services p {
   color: #1e1e1e;
@@ -2399,8 +2424,10 @@ body {
   grid-column: 1/-1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: self-start;
+  justify-content: start;
+  width: 58%;
+  margin-left: auto;
 }
 .project p {
   margin-top: 12px;
@@ -2535,6 +2562,13 @@ body {
   .right-form input[type=email] {
     width: 100%;
   }
+  .photo-item img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .project.center {
+    width: 100%;
+  }
   .benji-hero {
     flex-direction: column;
     gap: 15px;
@@ -2640,10 +2674,17 @@ body {
   .project-card {
     max-width: 100%;
   }
+  .benji-services {
+    width: 100%;
+  }
 }
 @media (max-width: 600px) {
   .event-grid {
     grid-template-columns: 1fr;
+  }
+  .bistro-item img {
+    width: 100%;
+    height: 200px;
   }
   .event-item-grid {
     grid-template-columns: 1fr;
@@ -3815,7 +3856,7 @@ img.logo-trigger.logo1 {
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 .btn-row .btn {
   border: 1px solid #ff0004;
@@ -3850,7 +3891,7 @@ img.logo-trigger.logo1 {
   gap: 0.6rem;
   margin-bottom: 1.5rem;
   margin: 0 auto;
-  padding-top: 100px;
+  padding-top: 12rem;
   text-align: center;
   justify-content: center;
   align-items: center;
