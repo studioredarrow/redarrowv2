@@ -40,6 +40,7 @@ p.animate-text-unique {
   align-items: center;
   justify-content: center;
   padding-block: 60px;
+  height: 100vh;
 
   .outer-unique {
     width: 100%;
@@ -240,8 +241,6 @@ ul.services__list li:hover {
 .card:hover {
   color: #ff0004;
 }
-
-// scroll fade animation start here
 
 // how to we do css start here
 .footer a:hover {
@@ -624,8 +623,6 @@ p.section-title {
   border: none;
   cursor: pointer;
   padding: 16px 24px;
-  // position: absolute;
-  // right: -26px;
 
   .fate-oval__text {
     font-size: 16px;
