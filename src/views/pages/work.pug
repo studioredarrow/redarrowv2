@@ -39,7 +39,22 @@ block content
         // GRID VIEW
         #gridView.grid.active
           each item, index in workItems
+            - var rowIndex = Math.floor(index / 2)
+            - var positionInRow = index % 2
+            - var gapPosition = rowIndex % 3
+            - var gridColClass = ''
+            - if (gapPosition === 0) {
+            -   // Row 1: card1, card2, gap (cards in cols 1-2 and 3-4, gap in col 5)
+            -   gridColClass = positionInRow === 0 ? 'col-1' : 'col-3'
+            - } else if (gapPosition === 1) {
+            -   // Row 2: card1, gap, card2 (card1 in cols 1-2, gap in col 3, card2 in cols 4-5)
+            -   gridColClass = positionInRow === 0 ? 'col-1' : 'col-4'
+            - } else {
+            -   // Row 3: gap, card1, card2 (gap in col 1, cards in cols 2-3 and 4-5)
+            -   gridColClass = positionInRow === 0 ? 'col-5' : 'col-4'
+            - }
             .card(
+              class=gridColClass
               data-category=item.data.category || 'all'
               onclick=`window.location.href='/portfolio/${item.uid}'`
               style="cursor: pointer;"
