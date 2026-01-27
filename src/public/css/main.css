@@ -621,10 +621,10 @@ p.section-title {
   position: relative;
 }
 
-.footer-line-image {
+.footer-line-image img {
   position: absolute;
-  bottom: -25px;
-  left: -108px;
+  bottom: -30px;
+  left: -93px;
 }
 
 .left-text {
