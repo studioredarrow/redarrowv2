@@ -127,6 +127,8 @@ block content
                         )
                           .team-card.add-card(class=`status-${slot.data.status}`)
                             span= slot.data.title
+                            if slot.data.role_location
+                              span!= asHTML(slot.data.role_location)
                             br
                             if slot.data.cta_label
                               span.slot-cta= asText(slot.data.cta_label)
@@ -159,7 +161,7 @@ block content
               h1.hero-title
                   != asHTML(page.data.creative_collective_heading)
                   .hero-absolute-img
-                    img(src="/images/hang-in-there-image.png", alt="")
+                    img(src="/images/hang_it_here.png", alt="")
 
               .hero-image
                 img(

@@ -183,10 +183,17 @@ body {
 }
 span.inner-dot {
   font-size: 64px !important;
+  text-align: center;
 }
 span.inner-dot svg {
   fill: white;
   filter: brightness(0) invert(1);
+}
+.status-open p {
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 14px;
+  color: #FFFFFF !important;
 }
 .team-card {
   color: #1e1e1e;
@@ -236,13 +243,13 @@ span.inner-dot svg {
   &.add-card {
     background: #ff0004;
     color: #fff;
-    align-items: center;
+    // align-items: center;
     cursor: pointer;
     font-family: "Work Sans", sans-serif;
     font-weight: 500;
     font-size: 20px;
     text-transform: uppercase;
-    gap: 30px;
+    gap: 6px;
     padding: 10px 10px;
     height: 265px;
     display: flex;
@@ -667,4 +674,8 @@ span.inner-dot svg {
 } 
 a {
   text-decoration: none;
+}
+
+.hero-absolute-img img {
+  width: 124px;
 }
