@@ -353,7 +353,11 @@ body {
   &.center {
     grid-column: 1 / -1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: self-start;
+    justify-content: start;
+    width: 58%;
+    margin-left: auto;
   }
 
   p {
@@ -491,6 +495,13 @@ body {
 
 @media (max-width: 768px) {
   .right-form input[type="email"] {
+    width: 100%;
+  }
+  .photo-item img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .project.center {
     width: 100%;
   }
 

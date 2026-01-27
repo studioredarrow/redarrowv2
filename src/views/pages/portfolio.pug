@@ -310,9 +310,12 @@ block content
               h2 Related projects
 
               .projects-grid
+                - var projectIndex = 0
                 each item in portfolioItem.data.related_projects
                   if item.projects && !item.projects.isBroken
-                    .project
+                    - var isFirst = projectIndex === 0
+                    - projectIndex++
+                    .project(class=isFirst ? 'center' : '')
                       .project-card
                       p= item.projects.uid.replace('-', ' ').toUpperCase()
 
@@ -542,6 +545,8 @@ block content
 
         lastScroll = currentScroll;
       });
+
+      
 
                   
               

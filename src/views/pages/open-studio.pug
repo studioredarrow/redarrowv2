@@ -23,25 +23,25 @@ block content
             button#gridBtn.active Grid
             button#listBtn List
 
-          .grid.grid-inner.active
-            each item, index in workItems
-              .card(
-                data-category=item.data.category || 'all'
-                onclick=`window.location.href='/portfolio/${item.uid}'`
-                style="cursor: pointer;"
-              )
-                if item.data.thumbnail
-                  .main-grid-img 
-                    img(src=item.data.thumbnail.url, alt=item.data.title)
-                .card-title= item.data.title
-                .card-desc= item.data.short_description
-  
-            
-
       .container
         #gridView.grid.active
           each item, index in workItems
+            - var rowIndex = Math.floor(index / 2)
+            - var positionInRow = index % 2
+            - var gapPosition = rowIndex % 3
+            - var gridColClass = ''
+            - if (gapPosition === 0) {
+            -   // Row 1: card1, card2, gap (cards in cols 1-2 and 3-4, gap in col 5)
+            -   gridColClass = positionInRow === 0 ? 'col-1' : 'col-3'
+            - } else if (gapPosition === 1) {
+            -   // Row 2: card1, gap, card2 (card1 in cols 1-2, gap in col 3, card2 in cols 4-5)
+            -   gridColClass = positionInRow === 0 ? 'col-1' : 'col-4'
+            - } else {
+            -   // Row 3: gap, card1, card2 (gap in col 1, cards in cols 2-3 and 4-5)
+            -   gridColClass = positionInRow === 0 ? 'col-5' : 'col-4'
+            - }
             .card(
+              class=gridColClass
               data-category=item.data.category || 'all'
               onclick=`window.location.href='/portfolio/${item.uid}'`
               style="cursor: pointer;"
@@ -64,7 +64,16 @@ block content
                 data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
                 onclick=`window.location.href='/portfolio/${item.uid}'`
                 style="cursor: pointer;"
-              )= item.data.title      
+              )= item.data.title   
+
+
+        style.
+            .logo-container {
+              background-color: transparent !important;
+            }
+            .logo-container.fixed {
+              background-color: transparent !important;
+            }        
 
     script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
     script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
@@ -199,14 +208,14 @@ block content
         };
 
         /* ---------------- TEXT POSITION ---------------- */
-        const pattern = [
+     const pattern = [
           { left: 120, top: 70 },
-          { left: 120, top: 140 },
-          { right: 180, top: 200 },
-          { left: 360, top: 260 },
-          { left: 120, top: 330 },
-          { right: 240, top: 390 },
-          { left: 260, top: 460 }
+          { left: 240, top: 165 },
+          { right: 40, top: 255 },
+          { left: 360, top: 350 },
+          { left: 120, top: 450 },
+          { right: 250, top: 600 },
+          { left: 260, top: 665 }
         ];
 
         texts.forEach((text, index) => {
@@ -394,22 +403,5 @@ block content
       });
 
       ScrollTrigger.refresh();
-      
-
-
-    script.
-      const gridInner = document.querySelector(".grid-inner");
-
-      gridBtn.addEventListener("click", () => {
-        if (gridInner) {
-          gridInner.classList.add("active");
-        }
-      });
-
-      listBtn.addEventListener("click", () => {
-        if (gridInner) {
-          gridInner.classList.remove("active");
-        }
-      });
  
        

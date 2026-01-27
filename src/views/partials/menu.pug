@@ -106,29 +106,75 @@ html(lang="en")
         return items[centerIndex];
       }
 
+      // Function to check if an item is currently centered
+      function isItemCentered(item) {
+        return item.classList.contains('main');
+      }
+
       // Click event listener for each item
       document.querySelectorAll('.carousel .item').forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (e) => {
           const route = item.dataset.route;
           const label = item.dataset.label;
 
-          console.log('NAVIGATING →', label);
+          // Check if the clicked item is already centered BEFORE updating
+          const isCentered = isItemCentered(item);
 
-          // Calculate the rotation based on clicked item index
+          // Get the clicked item's index
           const itemIndex = Array.from(items).indexOf(item);
-          const targetRotation = degreePerItem * itemIndex;
 
-          // Apply the rotation with smooth transition
-          carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
-          carousel.style.transform = `rotateY(${targetRotation}deg)`;
+          // Calculate the absolute rotation needed to center the clicked item
+          // Based on updateHighlight logic: when rotation = centerIndex * degreePerItem,
+          // the item at index (itemCount - centerIndex) % itemCount is centered
+          // So to center itemIndex, we need: centerIndex = (itemCount - itemIndex) % itemCount
+          const targetCenterIndex = (itemCount - itemIndex) % itemCount;
+          const absoluteTargetRotation = targetCenterIndex * degreePerItem;
 
-          // Update the highlighted item
-          updateHighlight(targetRotation);
+          // Normalize current rotation to 0-360 range
+          const normalizedCurrent = ((currentRotation % 360) + 360) % 360;
 
-          // Ensure correct route linking for the clicked item (center or side)
-          window.location.replace(
-            `/loading?to=${encodeURIComponent(route)}&label=${encodeURIComponent(label)}`
-          );
+          // Find the shortest rotation path from current to target
+          // Try both directions and pick the shorter one
+          let rotationDelta1 = absoluteTargetRotation - normalizedCurrent;
+          let rotationDelta2 = rotationDelta1 > 0 ? rotationDelta1 - 360 : rotationDelta1 + 360;
+          
+          // Choose the shorter path
+          let rotationDelta = Math.abs(rotationDelta1) < Math.abs(rotationDelta2) ? rotationDelta1 : rotationDelta2;
+
+          // Calculate the new target rotation (add delta to current, not normalized)
+          const targetRotation = currentRotation + rotationDelta;
+
+          // Only navigate if the item was already centered
+          if (isCentered) {
+            console.log('NAVIGATING →', label);
+            // Apply the rotation with smooth transition
+            carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
+            carousel.style.transform = `rotateY(${targetRotation}deg)`;
+
+            // Update the highlighted item
+            updateHighlight(targetRotation);
+
+            // Update current rotation
+            currentRotation = targetRotation;
+
+            // Navigate after a short delay to allow the transition to start
+            setTimeout(() => {
+              window.location.replace(
+                `/loading?to=${encodeURIComponent(route)}&label=${encodeURIComponent(label)}`
+              );
+            }, 100);
+          } else {
+            console.log('SCROLLING TO CENTER →', label);
+            // Item is not centered, just scroll it to center (no navigation)
+            carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
+            carousel.style.transform = `rotateY(${targetRotation}deg)`;
+
+            // Update the highlighted item
+            updateHighlight(targetRotation);
+
+            // Update current rotation
+            currentRotation = targetRotation;
+          }
         });
       });
 
