@@ -347,13 +347,15 @@ body {
   align-items: start;
 }
 
-/* Center top card */
-.project {
-  &.center {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: center;
-  }
+    /* Center top card */
+    .project {
+      &.center {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
 
   p {
     margin-top: 12px;
