@@ -11,6 +11,11 @@ span.counter-suffix {
 .seven-segment-counter {
   height: 100px;
 }
+.create-item.create-img img {
+  width: 212px;
+  height: 220px;
+  object-fit: contain;
+}
 .machine {
   width: 100%;
   background: #424242;
