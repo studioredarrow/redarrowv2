@@ -179,6 +179,14 @@ block content
               window.location.href = `/myth-journey?q=${encoded}`;
             });
           });
+      script.
+        (function () {
+          if (localStorage.getItem("hasSeenIndex")) {
+            window.location.href = "/myth-journey";
+          } else {
+            localStorage.setItem("hasSeenIndex", "true");
+          }
+        })();
 
 
 
