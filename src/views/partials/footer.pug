@@ -7,7 +7,8 @@ footer
                 .create-item.mobile-int-inner
                   h3 CREATE CHAOS
                 .create-item.create-img
-                  img(src="/images/footer-top-child-image.png" alt="")
+                  if randomFooterAd
+                    img(src=randomFooterAd alt="Advertisement")
                 .create-item-inner
                   .create-item-int
                     p
