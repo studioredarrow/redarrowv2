@@ -1,0 +1,368 @@
+extends ../layout
+
+//- Mixin for a single seven-segment digit
+mixin sevenSegmentDigit(digit)
+  - var segments = { "0": [1,1,1,1,1,1,0], "1": [0,1,1,0,0,0,0], "2": [1,1,0,1,1,0,1], "3": [1,1,1,1,0,0,1], "4": [0,1,1,0,0,1,1], "5": [1,0,1,1,0,1,1], "6": [1,0,1,1,1,1,1], "7": [1,1,1,0,0,0,0], "8": [1,1,1,1,1,1,1], "9": [1,1,1,1,0,1,1] }
+  - var segs = segments[digit] || [0,0,0,0,0,0,0]
+  .seven-segment-digit
+    .segment.segment-a(class=segs[0] ? "segment-on" : "segment-off")
+    .segment.segment-b(class=segs[1] ? "segment-on" : "segment-off")
+    .segment.segment-c(class=segs[2] ? "segment-on" : "segment-off")
+    .segment.segment-d(class=segs[3] ? "segment-on" : "segment-off")
+    .segment.segment-e(class=segs[4] ? "segment-on" : "segment-off")
+    .segment.segment-f(class=segs[5] ? "segment-on" : "segment-off")
+    .segment.segment-g(class=segs[6] ? "segment-on" : "segment-off")
+
+//- Mixin for multiple digits
+mixin sevenSegmentNumber(number)
+  .seven-segment-display
+    each digit in number.toString().split("")
+      +sevenSegmentDigit(digit)
+
+block content
+  .counter-display
+    .display-wrapper
+      //- Year Block
+      .display-panel(data-target="2021")
+        +sevenSegmentNumber("0")
+      
+      //- Day Block
+      .display-panel(data-target="24")
+        +sevenSegmentNumber("0")
+      
+      //- From Block
+      .display-block
+        span.label From
+        .display-panel(data-target="00")
+          +sevenSegmentNumber("0")
+      
+      //- To Block
+      .display-block
+        span.label To
+        .display-panel(data-target="01")
+          +sevenSegmentNumber("0")
+      
+      //- Number Block
+      .display-panel(data-target="21")
+        +sevenSegmentNumber("0")
+      
+      //- Counter Block
+      .display-panel#counter-display(data-target="8500000")
+        +sevenSegmentNumber("0")
+        .plus-sign
+          .plus-horizontal
+          .plus-vertical
+
+  style.
+    :root {
+      --background: hsl(0, 0%, 4%);
+      --led-red: hsl(0, 100%, 50%);
+      --led-red-dim: hsl(0, 100%, 15%);
+      --led-glow: hsl(0, 100%, 50%);
+      --display-bg: hsl(0, 0%, 6%);
+      --display-border: hsl(0, 0%, 18%);
+      --muted-foreground: hsl(0, 0%, 45%);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: var(--background);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .counter-display {
+      width: 100%;
+    }
+    
+    .display-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    
+    .display-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .label {
+      color: var(--muted-foreground);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .display-panel {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(180deg, var(--display-bg) 0%, hsl(0, 0%, 4%) 100%);
+      border: 1px solid var(--display-border);
+      border-radius: 0.75rem;
+      box-shadow: 
+        inset 0 2px 4px hsla(0, 0%, 0%, 0.5),
+        0 4px 20px hsla(0, 0%, 0%, 0.8);
+    }
+    
+    .seven-segment-display {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    .seven-segment-digit {
+      position: relative;
+      width: 38px;
+      height: 68px;
+    }
+    
+    /* Segment base styles */
+    .segment {
+      position: absolute;
+      transition: all 0.05s ease;
+    }
+    
+    .segment-on {
+      background: var(--led-red);
+      box-shadow: 
+        0 0 8px var(--led-glow),
+        0 0 16px hsla(0, 100%, 50%, 0.7),
+        0 0 24px hsla(0, 100%, 50%, 0.5),
+        0 0 32px hsla(0, 100%, 50%, 0.3);
+    }
+    
+    .segment-off {
+      background: var(--led-red-dim);
+    }
+    
+    /* Horizontal segments (A, D, G) */
+    .segment-a,
+    .segment-d,
+    .segment-g {
+      width: 27px;
+      height: 7px;
+      left: 5.5px;
+      clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    }
+    
+    .segment-a { top: 0; }
+    .segment-d { bottom: 0; }
+    .segment-g { top: 30.5px; }
+    
+    /* Vertical segments (B, C, E, F) */
+    .segment-b,
+    .segment-c,
+    .segment-e,
+    .segment-f {
+      width: 7px;
+      height: 27px;
+      clip-path: polygon(0% 10%, 50% 0%, 100% 10%, 100% 90%, 50% 100%, 0% 90%);
+    }
+    
+    .segment-b { top: 5px; right: 0; }
+    .segment-c { top: 35px; right: 0; }
+    .segment-e { top: 35px; left: 0; }
+    .segment-f { top: 5px; left: 0; }
+    
+    /* Plus sign */
+    .plus-sign {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 21px;
+      height: 68px;
+    }
+    
+    .plus-horizontal,
+    .plus-vertical {
+      position: absolute;
+      background: var(--led-red);
+      box-shadow: 
+        0 0 8px var(--led-glow),
+        0 0 16px hsla(0, 100%, 50%, 0.7),
+        0 0 24px hsla(0, 100%, 50%, 0.5),
+        0 0 32px hsla(0, 100%, 50%, 0.3);
+    }
+    
+    .plus-horizontal {
+      width: 21px;
+      height: 7px;
+      clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    }
+    
+    .plus-vertical {
+      width: 7px;
+      height: 21px;
+      clip-path: polygon(0% 10%, 50% 0%, 100% 10%, 100% 90%, 50% 100%, 0% 90%);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .display-wrapper {
+        gap: 1rem;
+      }
+      
+      .seven-segment-digit {
+        width: 30px;
+        height: 54px;
+      }
+      
+      .segment-a, .segment-d, .segment-g {
+        width: 21px;
+        height: 5px;
+        left: 4.5px;
+      }
+      
+      .segment-g { top: 24.5px; }
+      
+      .segment-b, .segment-c, .segment-e, .segment-f {
+        width: 5px;
+        height: 21px;
+      }
+      
+      .segment-b { top: 4px; }
+      .segment-c { top: 28px; }
+      .segment-e { top: 28px; }
+      .segment-f { top: 4px; }
+    }
+
+  script.
+    // Segment mapping for updating digits dynamically
+    const segmentMap = {
+      "0": [1,1,1,1,1,1,0], "1": [0,1,1,0,0,0,0], "2": [1,1,0,1,1,0,1], 
+      "3": [1,1,1,1,0,0,1], "4": [0,1,1,0,0,1,1], "5": [1,0,1,1,0,1,1], 
+      "6": [1,0,1,1,1,1,1], "7": [1,1,1,0,0,0,0], "8": [1,1,1,1,1,1,1], 
+      "9": [1,1,1,1,0,1,1]
+    };
+
+    function updateDigit(digitElement, digit) {
+      const segs = segmentMap[digit] || [0,0,0,0,0,0,0];
+      const segments = digitElement.querySelectorAll('.segment');
+      const segmentClasses = ['segment-a', 'segment-b', 'segment-c', 'segment-d', 'segment-e', 'segment-f', 'segment-g'];
+      
+      segments.forEach((seg, index) => {
+        if (index < segmentClasses.length) {
+          seg.className = `segment ${segmentClasses[index]} ${segs[index] ? 'segment-on' : 'segment-off'}`;
+        }
+      });
+    }
+
+    function createDigit(digit) {
+      const segs = segmentMap[digit] || [0,0,0,0,0,0,0];
+      const segmentClasses = ['segment-a', 'segment-b', 'segment-c', 'segment-d', 'segment-e', 'segment-f', 'segment-g'];
+      
+      const digitElement = document.createElement('div');
+      digitElement.className = 'seven-segment-digit';
+      
+      segmentClasses.forEach((segClass, i) => {
+        const seg = document.createElement('div');
+        seg.className = `segment ${segClass} ${segs[i] ? 'segment-on' : 'segment-off'}`;
+        digitElement.appendChild(seg);
+      });
+      
+      return digitElement;
+    }
+
+    function updateDisplay(displayElement, number) {
+      if (!displayElement) return;
+      
+      const numberStr = number.toString().split('');
+      let digits = Array.from(displayElement.querySelectorAll('.seven-segment-digit'));
+      
+      // Update or create digits
+      numberStr.forEach((digit, index) => {
+        if (digits[index]) {
+          updateDigit(digits[index], digit);
+        } else {
+          const newDigit = createDigit(digit);
+          displayElement.appendChild(newDigit);
+        }
+      });
+      
+      // Remove extra digits if number got shorter
+      digits = Array.from(displayElement.querySelectorAll('.seven-segment-digit'));
+      while (digits.length > numberStr.length) {
+        digits[digits.length - 1].remove();
+        digits.pop();
+      }
+    }
+
+    // Counter animation functionality
+    function animateCounter(startValue, endValue, duration, displayElement, targetString) {
+      if (!displayElement) return;
+      
+      const startTime = performance.now();
+      const difference = endValue - startValue;
+      const targetLength = targetString ? targetString.length : endValue.toString().length;
+      
+      function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation (ease-out)
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        
+        const currentValue = Math.floor(startValue + (difference * easeOut));
+        
+        // Format the value to match target length (for leading zeros)
+        let displayValue = currentValue.toString();
+        if (targetString && targetString.length > displayValue.length && targetString.startsWith('0')) {
+          displayValue = displayValue.padStart(targetLength, '0');
+        }
+        
+        updateDisplay(displayElement, displayValue);
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          // Ensure final value is set with proper formatting
+          if (targetString && targetString.length > endValue.toString().length && targetString.startsWith('0')) {
+            updateDisplay(displayElement, targetString);
+          } else {
+            updateDisplay(displayElement, endValue);
+          }
+        }
+      }
+      
+      requestAnimationFrame(updateCounter);
+    }
+
+    function initCounters() {
+      // Get all display panels with data-target attribute
+      const displayPanels = document.querySelectorAll('.display-panel[data-target]');
+      
+      displayPanels.forEach((panel) => {
+        const targetValueStr = panel.getAttribute('data-target');
+        const targetValue = parseInt(targetValueStr, 10);
+        const displayElement = panel.querySelector('.seven-segment-display');
+        
+        if (displayElement && !isNaN(targetValue)) {
+          const animationDuration = 3000; // 3 seconds
+          
+          // Start animation from 0 to target value
+          animateCounter(0, targetValue, animationDuration, displayElement, targetValueStr);
+        }
+      });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCounters);
+    } else {
+      initCounters();
+    }

@@ -12,6 +12,7 @@ const workRoutes = require("./routes/work");
 const openStudioRoutes = require("./routes/openStudio");
 const portfolioRoutes = require("./routes/portfolio");
 const termsRoutes = require("./routes/terms");
+const counterDisplayRoute = require("./routes/counterDisplay");
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/", workRoutes);
 app.use("/", openStudioRoutes);
 app.use("/", portfolioRoutes);
 app.use("/", termsRoutes);
+app.use("/", counterDisplayRoute);
 
 // ✅ Static 404 — MUST be last
 app.use((req, res) => {

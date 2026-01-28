@@ -1,5 +1,24 @@
 extends ../layout
 
+//- Mixin for a single seven-segment digit
+mixin sevenSegmentDigit(digit)
+  - var segments = { "0": [1,1,1,1,1,1,0], "1": [0,1,1,0,0,0,0], "2": [1,1,0,1,1,0,1], "3": [1,1,1,1,0,0,1], "4": [0,1,1,0,0,1,1], "5": [1,0,1,1,0,1,1], "6": [1,0,1,1,1,1,1], "7": [1,1,1,0,0,0,0], "8": [1,1,1,1,1,1,1], "9": [1,1,1,1,0,1,1] }
+  - var segs = segments[digit] || [0,0,0,0,0,0,0]
+  .seven-segment-digit
+    .segment.segment-a(class=segs[0] ? "segment-on" : "segment-off")
+    .segment.segment-b(class=segs[1] ? "segment-on" : "segment-off")
+    .segment.segment-c(class=segs[2] ? "segment-on" : "segment-off")
+    .segment.segment-d(class=segs[3] ? "segment-on" : "segment-off")
+    .segment.segment-e(class=segs[4] ? "segment-on" : "segment-off")
+    .segment.segment-f(class=segs[5] ? "segment-on" : "segment-off")
+    .segment.segment-g(class=segs[6] ? "segment-on" : "segment-off")
+
+//- Mixin for multiple digits
+mixin sevenSegmentNumber(number)
+  .seven-segment-display
+    each digit in number.toString().split("")
+      +sevenSegmentDigit(digit)
+
 block content
   .main-about-outer
     .container
@@ -17,13 +36,18 @@ block content
         .panel
           .counter-row
             each item, i in page.data.counter_items
+              - var labelText = asText(item.label).toLowerCase()
+              - var isFromTo = labelText === 'from' || labelText === 'to'
               .counter-container
                 span.label= asText(item.label)
-                .counter(
-                  data-start= item.value_start
-                  data-end= item.value_end
+                .display-panel.seven-segment-counter(
+                  data-target= item.value_end
                   data-suffix= asText(item.suffix)
+                  data-pad-to-two= isFromTo ? "true" : "false"
                 )
+                  +sevenSegmentNumber("0")
+                  if asText(item.suffix)
+                    span.counter-suffix= asText(item.suffix)
 
     section.team-sec
       .container 
@@ -217,52 +241,382 @@ block content
             });
           });      
 
+      // Seven-segment display styles and scripts
+      style.
+        :root {
+          --led-red: hsl(0, 100%, 50%);
+          --led-red-dim: rgb(32 30 30);
+          --led-glow: hsl(0, 100%, 50%);
+          --display-bg: hsl(0, 0%, 6%);
+          --display-border: hsl(0, 0%, 18%);
+        }
+        
+        .seven-segment-counter {
+              display: inline-flex;
+              align-items: center;
+              gap: 0.25rem;
+              padding: 0.75rem 1rem;
+              background: linear-gradient(180deg, var(--display-bg) 0%, hsl(0, 0%, 4%) 100%);
+              border: 1px solid #bdbdbd;
+              /* border-radius: 0.75rem; */
+              box-shadow: inset 0 2px 4px hsla(0, 0%, 0%, 0.5),
+              0 4px 20px hsla(0, 0%, 0%, 0.8);
+          }
+        
+        .seven-segment-display {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        
+        .seven-segment-digit {
+          position: relative;
+          width: 38px;
+          height: 68px;
+        }
+        
+        .segment {
+          position: absolute;
+          transition: all 0.05s ease;
+        }
+        
+        .segment-on {
+          background: var(--led-red);
+          box-shadow: 
+            0 0 8px var(--led-glow),
+            0 0 16px hsla(0, 100%, 50%, 0.7),
+            0 0 24px hsla(0, 100%, 50%, 0.5),
+            0 0 32px hsla(0, 100%, 50%, 0.3);
+        }
+        
+        .segment-off {
+          background: var(--led-red-dim);
+        }
+        
+        .segment-a,
+        .segment-d,
+        .segment-g {
+          width: 27px;
+          height: 7px;
+          left: 5.5px;
+          clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+        }
+        
+        .segment-a { top: 0; }
+        .segment-d { bottom: 0; }
+        .segment-g { top: 30.5px; }
+        
+        .segment-b,
+        .segment-c,
+        .segment-e,
+        .segment-f {
+          width: 7px;
+          height: 27px;
+          clip-path: polygon(0% 10%, 50% 0%, 100% 10%, 100% 90%, 50% 100%, 0% 90%);
+        }
+        
+        .segment-b { top: 5px; right: 0; }
+        .segment-c { top: 35px; right: 0; }
+        .segment-e { top: 35px; left: 0; }
+        .segment-f { top: 5px; left: 0; }
+        
+        .counter-suffix {
+          margin-left: 6px;
+          font-size: 0.8em;
+          font-family: "DS-Digital", "Orbitron", monospace;
+          font-weight: normal;
+          color: var(--led-red);
+          text-shadow:
+            0 0 4px var(--led-red),
+            0 0 8px hsla(0, 100%, 50%, 0.8),
+            0 0 12px hsla(0, 100%, 50%, 0.6);
+        }
+        
+        .counter-row .counter-container:last-child .counter-suffix {
+          font-size: 1.5em;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+          .counter-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+          }
+          
+          .counter-container {
+            flex: 0 0 calc(50% - 0.5rem);
+            max-width: calc(50% - 0.5rem);
+            min-width: 0;
+          }
+          
+          /* Reorder for mobile: SINCE goes to row 2, MYTH comes to row 1 */
+          /* Row 1: CREATORS (2), FROM (3), TO (4), MYTH (5) */
+          .counter-container:nth-child(2) { order: 1; }
+          .counter-container:nth-child(3) { order: 2; }
+          .counter-container:nth-child(4) { order: 3; }
+          .counter-container:nth-child(5) { order: 4; }
+          
+          /* Row 2: SINCE (1), SUMMONED (6) */
+          .counter-container:nth-child(1) { order: 5; }
+          .counter-container:nth-child(6) { order: 6; }
+          
+          .counter-container:nth-child(1),
+          .counter-container:nth-child(2),
+          .counter-container:nth-child(3),
+          .counter-container:nth-child(4),
+          .counter-container:nth-child(5),
+          .counter-container:nth-child(6) {
+            flex: 0 0 calc(50% - 0.5rem);
+            max-width: calc(50% - 0.5rem);
+          }
+          
+          .counter-container:last-child {
+            margin-left: 30px;
+          }
+          
+          .seven-segment-counter {
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            justify-content: center;
+          }
+          
+          .seven-segment-digit {
+            width: 28px;
+            height: 50px;
+          }
+          
+          .segment-a,
+          .segment-d,
+          .segment-g {
+            width: 20px;
+            height: 5px;
+            left: 4px;
+          }
+          
+          .segment-g { top: 22.5px; }
+          
+          .segment-b,
+          .segment-c,
+          .segment-e,
+          .segment-f {
+            width: 5px;
+            height: 20px;
+          }
+          
+          .segment-b { top: 4px; }
+          .segment-c { top: 26px; }
+          .segment-e { top: 26px; }
+          .segment-f { top: 4px; }
+        }
+        
+        @media (max-width: 480px) {
+          .counter-container {
+            flex: 0 0 calc(50% - 0.5rem);
+            max-width: calc(50% - 0.5rem);
+          }
+          
+          .seven-segment-digit {
+            width: 24px;
+            height: 42px;
+          }
+          
+          .segment-a,
+          .segment-d,
+          .segment-g {
+            width: 17px;
+            height: 4px;
+            left: 3.5px;
+          }
+          
+          .segment-g { top: 19px; }
+          
+          .segment-b,
+          .segment-c,
+          .segment-e,
+          .segment-f {
+            width: 4px;
+            height: 17px;
+          }
+          
+          .segment-b { top: 3px; }
+          .segment-c { top: 22px; }
+          .segment-e { top: 22px; }
+          .segment-f { top: 3px; }
+        }
+
       script.
-        document.addEventListener("DOMContentLoaded", () => {
-          document.querySelectorAll(".counter").forEach(counter => {
-            const end = String(counter.dataset.end || "0");
-            const start = String(counter.dataset.start || "0").padStart(end.length, "0");
-            const suffix = counter.dataset.suffix || "";
+        // Segment mapping for updating digits dynamically
+        const segmentMap = {
+          "0": [1,1,1,1,1,1,0], "1": [0,1,1,0,0,0,0], "2": [1,1,0,1,1,0,1], 
+          "3": [1,1,1,1,0,0,1], "4": [0,1,1,0,0,1,1], "5": [1,0,1,1,0,1,1], 
+          "6": [1,0,1,1,1,1,1], "7": [1,1,1,0,0,0,0], "8": [1,1,1,1,1,1,1], 
+          "9": [1,1,1,1,0,1,1]
+        };
 
-            counter.innerHTML = "";
-
-            end.split("").forEach((endDigit, index) => {
-              const digit = document.createElement("div");
-              digit.className = "digit";
-
-              const inner = document.createElement("div");
-              inner.className = "digit-inner";
-
-              for (let i = 0; i <= 9; i++) {
-                const span = document.createElement("span");
-                span.textContent = i;
-                inner.appendChild(span);
-              }
-
-              digit.appendChild(inner);
-              counter.appendChild(digit);
-
-              // wait for layout so height is correct
-              requestAnimationFrame(() => {
-                const digitHeight = inner.firstChild.offsetHeight;
-
-                gsap.to(inner, {
-                  y: -digitHeight * Number(endDigit),
-                  duration: 1.4,
-                  ease: "power2.out",
-                  delay: index * 0.08 // subtle stagger, feels premium
-                });
-              });
-            });
-
-            if (suffix) {
-              const s = document.createElement("span");
-              s.className = "counter-suffix";
-              s.textContent = suffix;
-              counter.appendChild(s);
+        function updateDigit(digitElement, digit) {
+          const segs = segmentMap[digit] || [0,0,0,0,0,0,0];
+          const segments = digitElement.querySelectorAll('.segment');
+          const segmentClasses = ['segment-a', 'segment-b', 'segment-c', 'segment-d', 'segment-e', 'segment-f', 'segment-g'];
+          
+          segments.forEach((seg, index) => {
+            if (index < segmentClasses.length) {
+              seg.className = `segment ${segmentClasses[index]} ${segs[index] ? 'segment-on' : 'segment-off'}`;
             }
           });
-        });
+        }
+
+        function createDigit(digit) {
+          const segs = segmentMap[digit] || [0,0,0,0,0,0,0];
+          const segmentClasses = ['segment-a', 'segment-b', 'segment-c', 'segment-d', 'segment-e', 'segment-f', 'segment-g'];
+          
+          const digitElement = document.createElement('div');
+          digitElement.className = 'seven-segment-digit';
+          
+          segmentClasses.forEach((segClass, i) => {
+            const seg = document.createElement('div');
+            seg.className = `segment ${segClass} ${segs[i] ? 'segment-on' : 'segment-off'}`;
+            digitElement.appendChild(seg);
+          });
+          
+          return digitElement;
+        }
+
+        function updateDisplay(displayElement, number, dimFirstZero) {
+          if (!displayElement) return;
+          
+          const numberStr = number.toString().split('');
+          let digits = Array.from(displayElement.querySelectorAll('.seven-segment-digit'));
+          
+          // Update or create digits
+          numberStr.forEach((digit, index) => {
+            if (digits[index]) {
+              // If dimFirstZero is true and this is the first digit and it's 0, dim it
+              if (dimFirstZero && index === 0 && digit === '0') {
+                dimDigit(digits[index]);
+              } else {
+                updateDigit(digits[index], digit);
+              }
+            } else {
+              const newDigit = createDigit(digit);
+              // If dimFirstZero is true and this is the first digit and it's 0, dim it
+              if (dimFirstZero && index === 0 && digit === '0') {
+                dimDigit(newDigit);
+              }
+              displayElement.appendChild(newDigit);
+            }
+          });
+          
+          // Remove extra digits if number got shorter
+          digits = Array.from(displayElement.querySelectorAll('.seven-segment-digit'));
+          while (digits.length > numberStr.length) {
+            digits[digits.length - 1].remove();
+            digits.pop();
+          }
+        }
+        
+        function dimDigit(digitElement) {
+          // Turn off all segments to dim the digit
+          const segments = digitElement.querySelectorAll('.segment');
+          segments.forEach((seg) => {
+            seg.className = seg.className.replace('segment-on', 'segment-off');
+          });
+        }
+
+        // Counter animation functionality
+        function animateCounter(startValue, endValue, duration, displayElement, targetString, padToTwo) {
+          if (!displayElement) return;
+          
+          const startTime = performance.now();
+          const difference = endValue - startValue;
+          let targetLength = targetString ? targetString.length : endValue.toString().length;
+          
+          // If padToTwo is true, ensure we always use 2 digits
+          if (padToTwo && targetLength < 2) {
+            targetLength = 2;
+          }
+          
+          function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function for smooth animation (ease-out)
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            
+            const currentValue = Math.floor(startValue + (difference * easeOut));
+            
+            // Format the value - pad to 2 digits if needed for FROM/TO
+            let displayValue = currentValue.toString();
+            if (padToTwo && displayValue.length < 2) {
+              displayValue = displayValue.padStart(2, '0');
+            } else if (targetString && targetString.length > displayValue.length && targetString.startsWith('0')) {
+              displayValue = displayValue.padStart(targetLength, '0');
+            }
+            
+            // Dim first zero if padToTwo is true
+            updateDisplay(displayElement, displayValue, padToTwo);
+            
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              // Ensure final value is set with proper formatting
+              let finalValue = endValue.toString();
+              if (padToTwo && finalValue.length < 2) {
+                finalValue = finalValue.padStart(2, '0');
+              } else if (targetString && targetString.length > endValue.toString().length && targetString.startsWith('0')) {
+                finalValue = targetString;
+              }
+              updateDisplay(displayElement, finalValue, padToTwo);
+            }
+          }
+          
+          requestAnimationFrame(updateCounter);
+        }
+
+        function initCounters() {
+          // Get all display panels with data-target attribute
+          const displayPanels = document.querySelectorAll('.seven-segment-counter[data-target]');
+          
+          displayPanels.forEach((panel) => {
+            const targetValueStr = panel.getAttribute('data-target');
+            const targetValue = parseInt(targetValueStr, 10);
+            const displayElement = panel.querySelector('.seven-segment-display');
+            const padToTwo = panel.getAttribute('data-pad-to-two') === 'true';
+            
+            if (displayElement && !isNaN(targetValue)) {
+              // Format initial display - pad to 2 digits if needed for FROM/TO
+              if (padToTwo) {
+                // Add a leading zero and dim it
+                const firstDigit = displayElement.querySelector('.seven-segment-digit');
+                if (firstDigit) {
+                  // Create a new zero digit before the existing one
+                  const leadingZero = createDigit('0');
+                  dimDigit(leadingZero);
+                  displayElement.insertBefore(leadingZero, firstDigit);
+                }
+              }
+              
+              const animationDuration = 3000; // 3 seconds
+              
+              // Format target value - pad to 2 digits if needed for FROM/TO
+              let formattedTarget = targetValueStr;
+              if (padToTwo && targetValueStr.length < 2) {
+                formattedTarget = targetValueStr.padStart(2, '0');
+              }
+              
+              // Start animation from 0 to target value
+              animateCounter(0, targetValue, animationDuration, displayElement, formattedTarget, padToTwo);
+            }
+          });
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initCounters);
+        } else {
+          initCounters();
+        }
 
 
       script(src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js")
