@@ -635,7 +635,7 @@ p.section-title {
   flex-direction: column;
   gap: 0.2em;
   position: relative;
-  right: 60px;
+  right: 170px;
   bottom: -30px;
 }
 .left-text span {
@@ -646,6 +646,7 @@ p.section-title {
   flex: 1 1 40%;
   max-width: 50%;
   font-size: 0.9rem;
+  height: 278px;
 }
 .right-form h1 {
   margin-bottom: 0.5rem;
