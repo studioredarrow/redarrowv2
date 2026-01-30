@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const menuMiddleware = require("./middleware/menu");
-
+const randomAdMiddleware = require("./middleware/randomAdMiddleware");
 const introRoute = require("./routes/index");
 const mythJourneyRoute = require("./routes/mythJourney");
 const loadingRoute = require("./routes/loading");
@@ -12,6 +12,7 @@ const workRoutes = require("./routes/work");
 const openStudioRoutes = require("./routes/openStudio");
 const portfolioRoutes = require("./routes/portfolio");
 const termsRoutes = require("./routes/terms");
+const counterDisplayRoute = require("./routes/counterDisplay");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(menuMiddleware);
+app.use(randomAdMiddleware);
 
 app.use("/", introRoute);
 app.use("/myth-journey", mythJourneyRoute);
@@ -31,6 +33,7 @@ app.use("/", workRoutes);
 app.use("/", openStudioRoutes);
 app.use("/", portfolioRoutes);
 app.use("/", termsRoutes);
+app.use("/", counterDisplayRoute);
 
 // ✅ Static 404 — MUST be last
 app.use((req, res) => {

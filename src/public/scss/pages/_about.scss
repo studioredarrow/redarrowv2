@@ -5,15 +5,28 @@ body {
   color: #111;
   overflow-x: hidden;
 }
-
+span.counter-suffix {
+  font-size: 74px !important;
+}
+.seven-segment-counter {
+  height: 100px;
+}
+.create-item.create-img img {
+  width: 212px;
+  height: 220px;
+  object-fit: contain;
+}
 .machine {
   width: 100%;
   background: #424242;
   border-radius: 12px;
   // box-shadow: 0 0 30px #424242;
-  padding: 10px;
+  padding: 20px;
   margin-top: 100px !important;
   margin: 0 auto;
+  box-shadow:
+  inset 6px -6px 12px rgba(0, 0, 0, 0.8),   /* left + bottom (dark) */
+  inset -6px 6px 12px rgba(134, 131, 123, 0.9); /* top + right (light) */
 
   .screen {
     border: 4px solid #333;
@@ -29,14 +42,14 @@ body {
 
   .panel {
     .counter-row {
-      display: flex;
       justify-content: space-between;
-      align-items: flex-end;
-      // background: #686060;
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 6px;
-      gap: 25px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    gap: 25px;
 
       .counter-container {
         display: flex;
@@ -183,10 +196,17 @@ body {
 }
 span.inner-dot {
   font-size: 64px !important;
+  text-align: center;
 }
 span.inner-dot svg {
   fill: white;
   filter: brightness(0) invert(1);
+}
+.status-open p {
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 14px;
+  color: #FFFFFF !important;
 }
 .team-card {
   color: #1e1e1e;
@@ -236,13 +256,13 @@ span.inner-dot svg {
   &.add-card {
     background: #ff0004;
     color: #fff;
-    align-items: center;
+    // align-items: center;
     cursor: pointer;
     font-family: "Work Sans", sans-serif;
     font-weight: 500;
     font-size: 20px;
     text-transform: uppercase;
-    gap: 30px;
+    gap: 6px;
     padding: 10px 10px;
     height: 265px;
     display: flex;
@@ -299,7 +319,7 @@ span.inner-dot svg {
   line-height: 100%;
   cursor: pointer;
 }
-.value p:hover {
+.value1 p:hover {
   color: #ff0004;
 }
 
@@ -580,13 +600,19 @@ span.inner-dot svg {
   .main-about-outer {
     padding-inline: 20px;
   }
+  .machine .panel .counter-row {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 @media (max-width: 1190px) {
   .machine .panel .counter-row {
     flex-wrap: wrap;
   }
-  .hero-absolute-img {
+  .machine .panel .counter-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .hero-absolute-img {  
     display: none;
   }
 }
@@ -594,6 +620,11 @@ span.inner-dot svg {
   .hero-flex {
     flex-direction: column;
   }
+  .seven-segment-counter {
+    padding: 5px !important;
+    width: auto !important;
+    justify-content: center !important;
+}
   .main-responsive-mobile {
     display: flex;
     flex-direction: column-reverse;
@@ -624,6 +655,9 @@ span.inner-dot svg {
   .team-flex {
     flex-direction: column;
   }
+  .machine .panel .counter-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
   .team-header {
     font-size: 20px;
   }
@@ -633,6 +667,22 @@ span.inner-dot svg {
     width: 172px;
     height: 208px;
   }
+  .machine {
+    padding: 10px;
+}
+
+.team-card.add-card {
+  gap: 0px !important;
+}
+.machine .panel .counter-row {
+  grid-template-columns: repeat(4, 1fr);
+}
+.seven-segment-counter {
+  height: 60px;
+}
+.machine .panel .counter-row {
+  padding: 0px;
+}
   .machine .panel .counter-row .counter-container .counter {
     min-height: 55px;
   }
@@ -677,4 +727,8 @@ span.inner-dot svg {
 }
 a {
   text-decoration: none;
+}
+
+.hero-absolute-img img {
+  width: 124px;
 }

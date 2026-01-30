@@ -194,16 +194,17 @@ body {
 }
 
 .bistro-inner-item {
-  max-width: 569px;
+  max-width: 612px;
   margin-left: auto;
   margin-top: 15px;
 
   p {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 100%;
-    text-transform: uppercase;
-    color: #828282;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+    padding-bottom: 20px !important;
+    line-height: 100% !important;
+    text-transform: uppercase !important;
+    color: #828282 !important;
   }
 }
 
@@ -383,6 +384,13 @@ body {
 .project-center {
   width: 60%;
   margin-left: auto;
+}
+
+.project.center p {
+  width: 100%;
+  max-width: 470px;   /* same as card */
+  margin: 12px auto 0; /* centers the text block */
+  text-align: left;   /* aligns text to card start */
 }
 
 .photo-item img {

@@ -657,9 +657,9 @@ p.section-title {
 }
 
 // footer css start
-// .footer-bottom {
-//   background-image: url(/images/bottom-footer-image-new.png);
-// }
+.footer-bottom {
+  background-image: url(/images/footer-right-side-image.png);
+}
 .services .fate-wrap {
   position: relative;
   display: inline-flex;
@@ -683,10 +683,15 @@ p.section-title {
 
 .footer-line-image img {
   position: absolute;
-  bottom: -30px;
+  bottom: -105px;
   left: -93px;
 }
-
+.footer-bottom {
+  background-image: url(/images/footer-right-side-image.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 410px;
+}
 .left-text {
   color: #e30613;
   font-weight: 700;
@@ -707,7 +712,7 @@ p.section-title {
   flex: 1 1 40%;
   max-width: 50%;
   font-size: 0.9rem;
-  height: 278px;
+  height: 285px;
 
   h1 {
     margin-bottom: 0.5rem;
