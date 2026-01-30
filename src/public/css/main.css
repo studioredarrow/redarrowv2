@@ -1515,6 +1515,16 @@ span.inner-dot svg {
   left: 53%;
 }
 
+.image-create-overlay {
+  height: 100%;
+  margin: 0 auto;
+  width: 65%;
+}
+
+.image-create-overlay img {
+  width: 100%;
+}
+
 .hero {
   padding: 80px 0px;
   text-align: left;
