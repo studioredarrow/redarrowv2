@@ -40,8 +40,10 @@ jobs:
             if [ ! -d ".git" ]; then
               git clone https://github.com/<YOUR_USERNAME>/<YOUR_REPO>.git .
             else
-              git reset --hard
-              git pull origin main
+              git fetch origin
+              git checkout main
+              git reset --hard origin/main
+              git clean -fd
             fi
             # Install dependencies on server
             npm install
