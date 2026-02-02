@@ -13,30 +13,40 @@ block content
             span.category.active(data-filter="all") all
             | ,
             span.category(data-filter="brand-identity") brand identity 
-              span.count (9)
+              span.count (#{counts['brand-identity'] || 0})
             | ,
             span.category(data-filter="app-website") app & website 
-              span.count (8)
+              span.count (#{counts['app-website'] || 0})
             | ,
             span.category(data-filter="exhibition") exhibitions 
-              span.count (5)
+              span.count (#{counts['exhibition'] || 0})
             | ,
             span.category(data-filter="product-design") product design 
-              span.count (3)
+              span.count (#{counts['product-design'] || 0})
             | ,
             span.category(data-filter="packaging") packaging 
-              span.count (8)
+              span.count (#{counts['packaging'] || 0})
             | ,
             span.category(data-filter="environment-design") environment design 
-              span.count (4)
+              span.count (#{counts['environment-design'] || 0})
             | ,
             span.category(data-filter="brand-amplification") brand amplification 
-              span.count (8)
+              span.count (#{counts['brand-amplification'] || 0})
             | ,
             span.category(data-filter="bdc") BDC 
-              span.count (8)
+              span.count (#{counts['bdc'] || 0})
             .absolute-image 
-              img(src="/images/category-image.png", alt="")  
+              img(src="/images/category-image.png", alt="")
+              
+          style.
+            .category.active .count {
+              color: inherit;
+              opacity: 1;
+            }
+            .category .count {
+              opacity: 0.6;
+              transition: opacity 0.3s ease;
+            }
 
         // GRID VIEW
         #gridView.grid.active
@@ -83,300 +93,264 @@ block content
               )= item.data.title
 
 
-
     script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
     script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
 
     script.
       document.addEventListener("DOMContentLoaded", () => {
+        gsap.registerPlugin(ScrollTrigger);
 
+        // --- Elements ---
         const gridBtn = document.getElementById("gridBtn");
         const listBtn = document.getElementById("listBtn");
         const gridView = document.getElementById("gridView");
         const listView = document.getElementById("listView");
-        const categories = document.querySelectorAll(".category");
-        const cards = document.querySelectorAll(".card");
-        const texts = document.querySelectorAll(".text");
+        const categoryBtns = document.querySelectorAll(".category-links .category");
         const imagePreview = document.getElementById("imagePreview");
+        
+        // Items
+        let cards = document.querySelectorAll(".card");
+        let listItems = document.querySelectorAll(".text");
 
-        /* ---------------- TEXT ANIMATION ---------------- */
-        function animateTexts(textElements) {
-          gsap.fromTo(
-            textElements,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
-          );
-        }
+        // --- Config ---
+        const gsapDefaults = { duration: 0.8, ease: "power3.out" };
+        gsap.defaults(gsapDefaults);
 
-        /* ---------------- INSTANT IMAGE HIDE ---------------- */
+        // --- Helper: Hide Image Preview ---
         function hideImagePreviewInstant() {
+          if (!imagePreview) return;
           gsap.killTweensOf(imagePreview);
-          gsap.set(imagePreview, {
-            opacity: 0,
-            scale: 0.95
-          });
+          gsap.set(imagePreview, { opacity: 0, scale: 0.95, display: 'none' });
         }
 
-        /* ---------------- VIEW TOGGLE ---------------- */
-        gridBtn.onclick = () => {
-          gridView.classList.add("active");
-          listView.classList.remove("active");
-          gridBtn.classList.add("active");
-          listBtn.classList.remove("active");
-
-          hideImagePreviewInstant();
-
-          texts.forEach(t => {
-            t.classList.remove("active", "blur");
-            gsap.set(t, { y: 0, opacity: 1 });
-          });
-
-          gsap.fromTo(
-            cards,
-            { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1 }
-          );
-
-          animateTexts(texts);
-        };
-
-        listBtn.onclick = () => {
-          listView.classList.add("active");
-          gridView.classList.remove("active");
-          listBtn.classList.add("active");
-          gridBtn.classList.remove("active");
-
-          hideImagePreviewInstant();
-          animateTexts(texts);
-        };
-
-        /* ---------------- CATEGORY FILTER ---------------- */
-        categories.forEach(cat => {
-          cat.addEventListener("click", () => {
-            categories.forEach(c => c.classList.remove("active"));
-            cat.classList.add("active");
-
-            const filter = cat.dataset.filter;
-
-            cards.forEach(card => {
-              card.style.display =
-                filter === "all" || card.dataset.category === filter
-                  ? "block"
-                  : "none";
-            });
-
-            texts.forEach(text => {
-              text.style.display =
-                filter === "all" || text.dataset.category === filter
-                  ? "block"
-                  : "none";
-            });
-
-            hideImagePreviewInstant();
-
-            gsap.fromTo(
-              [...cards, ...texts].filter(el => el.style.display !== "none"),
-              { y: 40, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.6, stagger: 0.06 }
-            );
-          });
-        });
-
-        /* ---------------- TEXT POSITION ---------------- */
-        const pattern = [
-          { left: 120, top: 70 },
-          { left: 240, top: 165 },
-          { right: 40, top: 255 },
-          { left: 360, top: 350 },
-          { left: 120, top: 450 },
-          { right: 250, top: 530 },
-          { left: 260, top: 610 }
-        ];
-
-        texts.forEach((text, index) => {
-          const pos = pattern[index % pattern.length];
-          text.style.top = `${pos.top + Math.floor(index / pattern.length) * 630}px`;
-
-          if (pos.left !== undefined) {
-            text.style.left = `${pos.left}px`;
-            text.style.right = "auto";
-          }
-
-          if (pos.right !== undefined) {
-            text.style.right = `${pos.right}px`;
-            text.style.left = "auto";
-          }
-        });
-        /* ---------------- HOVER IMAGE PREVIEW ---------------- */
-        const imagePositionPattern = ["left", "right", "center"];
-
-        texts.forEach((text, index) => {
-
-          const img = text.dataset.image;
-          const pos = imagePositionPattern[index % imagePositionPattern.length];
-
-          text.addEventListener("mouseenter", () => {
-            texts.forEach(t => {
-              t.classList.remove("active");
-              t.classList.add("blur");
-            });
-
-            text.classList.add("active");
-            text.classList.remove("blur");
-
-            if (!img) return;
-
-            imagePreview.style.backgroundImage = `url(${img})`;
-
-            // default (center)
-            let left = "50%";
-            let x = "-50%";
-
-            if (pos === "left") {
-              left = "20%";
-            }
-
-            if (pos === "right") {
-              left = "80%";
-            }
-
-            gsap.set(imagePreview, {
-              left,
-              top: "50%",
-              x,
-              y: "-50%",
-              scale: 1,
-              opacity: 1
-            });
-          });
-
-          /* 🔥 INSTANT REMOVE ON LEAVE */
-          text.addEventListener("mouseleave", () => {
-            hideImagePreviewInstant();
-            texts.forEach(t => t.classList.remove("active", "blur"));
-          });
-
-          /* 🔥 INSTANT REMOVE ON CLICK */
-          text.addEventListener("click", () => {
-            hideImagePreviewInstant();
-          });
-
-        });
-        /* ---------------- INITIAL ---------------- */
-        hideImagePreviewInstant();
-        animateTexts(texts);
-
-      });
-
-    script.
-      document.addEventListener("DOMContentLoaded", () => {
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.defaults({
-          duration: 0.9,
-          ease: "power3.out"
-        });
-
-        /* =========================
-          GRID IMAGE REVEAL
-        ========================= */
-        function animateGridImages() {
-          gsap.utils.toArray(".main-grid-img img").forEach(img => {
-            gsap.from(img, {
-              scrollTrigger: {
-                trigger: img,
-                start: "top 85%"
-              },
-              scale: 1.1,
-              opacity: 0
-            });
-          });
-        }
-
-        /* =========================
-          GRID TEXT REVEAL
-        ========================= */
-        function animateGridText() {
-          gsap.utils.toArray(".card-title, .card-desc").forEach(el => {
-            gsap.from(el, {
-              scrollTrigger: {
-                trigger: el,
-                start: "top 85%"
-              },
-              y: 40,
-              opacity: 0
-            });
-          });
-        }
-
-        /* =========================
-          REFRESH ALL ANIMATIONS
-        ========================= */
-        function refreshAnimations() {
-          ScrollTrigger.getAll().forEach(st => st.kill());
-          animateGridImages();
-          animateGridText();
+        // --- Helper: Refresh ScrollTrigger ---
+        function refreshScrollTrigger() {
           ScrollTrigger.refresh();
         }
 
-        /* =========================
-          INITIAL LOAD
-        ========================= */
-        refreshAnimations();
+        // --- Animation: Initial/Re-entry ---
+        function animateContainer(elements) {
+          if (!elements.length) return;
+          gsap.fromTo(elements, 
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.6, stagger: 0.05, clearProps: "transform,opacity" }
+          );
+        }
 
-        /* =========================
-          VIEW TOGGLE
-        ========================= */
-        const gridBtn = document.getElementById("gridBtn");
-        const listBtn = document.getElementById("listBtn");
-
-        if (gridBtn && listBtn) {
-          gridBtn.addEventListener("click", () => {
-            setTimeout(refreshAnimations, 50);
-          });
-
-          listBtn.addEventListener("click", () => {
-            setTimeout(refreshAnimations, 50);
+        // --- Animation: Categories ---
+        function animateCategories() {
+          gsap.from(categoryBtns, {
+            y: 30, opacity: 0, stagger: 0.05, duration: 0.6, delay: 0.2
           });
         }
 
-        /* =========================
-          CATEGORY FILTER
-        ========================= */
-        document.querySelectorAll(".category").forEach(cat => {
-          cat.addEventListener("click", () => {
-            setTimeout(refreshAnimations, 50);
+        // --- Core: Filtering ---
+        function applyFilter(category) {
+          const filterVal = category.trim().toLowerCase();
+          
+          // Filter Grid Cards
+          let visibleCards = [];
+          cards.forEach(card => {
+            const cardCat = (card.dataset.category || "all").trim().toLowerCase();
+            if (filterVal === "all" || cardCat === filterVal) {
+              card.style.display = "block";
+              visibleCards.push(card);
+            } else {
+              card.style.display = "none";
+            }
+          });
+
+          // Filter List Items
+          let visibleTexts = [];
+          listItems.forEach(item => {
+            const itemCat = (item.dataset.category || "all").trim().toLowerCase();
+            if (filterVal === "all" || itemCat === filterVal) {
+              item.style.display = "block";
+              visibleTexts.push(item);
+            } else {
+              item.style.display = "none";
+            }
+          });
+
+          // Re-run animations on visible elements and resize containers
+          const isGrid = gridView.classList.contains("active");
+          if (isGrid) {
+            animateContainer(visibleCards);
+          } else {
+            animateContainer(visibleTexts);
+            repositionListItems(visibleTexts);
+          }
+          
+          // Ensure footer isn't floating in space if content is short
+          // The CSS should handle min-height, but let's encourage it.
+          
+          setTimeout(refreshScrollTrigger, 100); 
+        }
+
+        // --- Core: Logic for List View Positioning ---
+        function repositionListItems(visibleItems) {
+           const pattern = [
+            { left: 120, top: 70 },
+            { left: 240, top: 165 },
+            { right: 40, top: 255 },
+            { left: 360, top: 350 },
+            { left: 120, top: 450 },
+            { right: 250, top: 530 },
+            { left: 260, top: 610 }
+          ];
+          
+          let maxTop = 0;
+          const cycleHeight = 630;
+
+          visibleItems.forEach((text, index) => {
+             const pos = pattern[index % pattern.length];
+             // Reset
+             text.style.left = '';
+             text.style.right = '';
+             text.style.top = '';
+
+             const calculatedTop = pos.top + Math.floor(index / pattern.length) * cycleHeight;
+             text.style.top = `${calculatedTop}px`;
+             
+             if (calculatedTop > maxTop) maxTop = calculatedTop;
+
+             if (pos.left !== undefined) {
+               text.style.left = `${pos.left}px`;
+               text.style.right = "auto";
+             } else if (pos.right !== undefined) {
+               text.style.right = `${pos.right}px`;
+               text.style.left = "auto";
+             }
+          });
+          
+          // Adjust container height
+          if (visibleItems.length > 0) {
+            // Add some padding ~ 150px
+            listView.style.minHeight = (maxTop + 200) + 'px';
+            listView.style.height = 'auto'; // ensure it expands
+          } else {
+             listView.style.minHeight = '50vh'; 
+          }
+        }
+
+        // --- Event Listeners: Category Buttons ---
+        categoryBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+             if(btn.classList.contains('active')) return;
+
+            categoryBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            
+            const filter = btn.dataset.filter;
+            applyFilter(filter);
           });
         });
 
-      });
+        // --- Event Listeners: View Toggles ---
+        if (gridBtn && listBtn) {
+          gridBtn.addEventListener("click", () => {
+            if (gridBtn.classList.contains("active")) return;
+            
+            gridBtn.classList.add("active");
+            listBtn.classList.remove("active");
+            
+            gridView.classList.add("active");
+            listView.classList.remove("active");
+            
+            hideImagePreviewInstant();
+            
+            const activeCatBtn = document.querySelector(".category-links .category.active");
+            const currentFilter = activeCatBtn ? activeCatBtn.dataset.filter : "all";
+            applyFilter(currentFilter);
+          });
 
+          listBtn.addEventListener("click", () => {
+            if (listBtn.classList.contains("active")) return;
+            
+            listBtn.classList.add("active");
+            gridBtn.classList.remove("active");
+            
+            listView.classList.add("active");
+            gridView.classList.remove("active");
+            
+            hideImagePreviewInstant();
+            
+            const activeCatBtn = document.querySelector(".category-links .category.active");
+            const currentFilter = activeCatBtn ? activeCatBtn.dataset.filter : "all";
+            applyFilter(currentFilter);
+          });
+        }
 
-    
-    script.
-      document.addEventListener("DOMContentLoaded", () => {
+        // --- Hover Effects for List Items ---
+        const imagePositionPattern = ["left", "right", "center"];
+        listItems.forEach((text, index) => {
+          const imgUrl = text.dataset.image;
+          // Use stable index logic? 
+          // The hover animation position logic in original code depended on original index.
+          // Let's stick to simple cycle.
+          const pos = imagePositionPattern[index % imagePositionPattern.length];
 
-        gsap.registerPlugin(ScrollTrigger);
+          text.addEventListener("mouseenter", () => {
+            if (!listView.classList.contains("active")) return; 
+            
+            listItems.forEach(t => {
+               if (t !== text && t.style.display !== 'none') {
+                 t.classList.add("blur");
+                 t.classList.remove("active");
+               }
+            });
+            text.classList.remove("blur");
+            text.classList.add("active");
 
-        gsap.defaults({
-          duration: 0.8,
-          ease: "power3.out"
+            if (imgUrl && imagePreview) {
+               imagePreview.style.backgroundImage = `url(${imgUrl})`;
+               imagePreview.style.display = 'block';
+
+               let leftVal = "50%";
+               if (pos === "left") leftVal = "20%";
+               if (pos === "right") leftVal = "80%";
+               
+               gsap.to(imagePreview, {
+                 duration: 0.4,
+                 left: leftVal,
+                 top: "50%",
+                 x: "-50%",
+                 y: "-50%",
+                 scale: 1,
+                 opacity: 1
+               });
+            }
+          });
+
+          text.addEventListener("mouseleave", () => {
+             hideImagePreviewInstant();
+             listItems.forEach(t => t.classList.remove("blur", "active"));
+          });
         });
 
-        /* =========================
-          CATEGORY LINKS ANIMATION (staggered)
-        ========================= */
-        const categoryEls = document.querySelectorAll(".category-links .category");
+        // --- Init ---
+        animateCategories();
 
-        gsap.from(categoryEls, {
-          scrollTrigger: {
-            trigger: ".category-links",
-            start: "top 90%", // when container comes into view
-          },
-          y: 40,
-          opacity: 0,
-          stagger: 0.1
-        });
-
+        // Check for URL param ?category=...
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlMethod = urlParams.get("category");
+        
+        if (urlMethod) {
+          // Find matching button to set active state
+          const targetBtn = Array.from(categoryBtns).find(btn => btn.dataset.filter === urlMethod.trim().toLowerCase());
+          
+          if (targetBtn) {
+            categoryBtns.forEach(b => b.classList.remove("active"));
+            targetBtn.classList.add("active");
+            applyFilter(urlMethod);
+          } else {
+            // If invalid category or not found, default to all
+            applyFilter("all");
+          }
+        } else {
+          // Default: all
+          applyFilter("all");
+        }
+        
+        window.addEventListener("load", refreshScrollTrigger);
       });
