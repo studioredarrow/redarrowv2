@@ -3,10 +3,7 @@ extends ../layout
 block content
   .studio-main-outer
     .page-wrapper(
-        data-morning=studioImages && studioImages.data && studioImages.data.morning ? studioImages.data.morning.url : ''
-        data-afternoon=studioImages && studioImages.data && studioImages.data.afternoon ? studioImages.data.afternoon.url : ''
-        data-evening=studioImages && studioImages.data && studioImages.data.evening ? studioImages.data.evening.url : ''
-        data-night=studioImages && studioImages.data && studioImages.data.night ? studioImages.data.night.url : ''
+      data-studio-images=JSON.stringify(studioImages.data.hourly_images)
     )
       .details
         .details-item
@@ -119,28 +116,43 @@ block content
         const pageWrapper = document.querySelector(".page-wrapper");
 
         function updateStudioBackground() {
+          const pageWrapper = document.querySelector(".page-wrapper");
           if (!pageWrapper) return;
+
+          const raw = pageWrapper.dataset.studioImages;
+          if (!raw) return;
+
+          let studioImages;
+          try {
+            studioImages = JSON.parse(raw);
+          } catch (e) {
+            console.error("Invalid studio image JSON", e);
+            return;
+          }
 
           const now = new Date();
 
-          // Saigon hour (24h format)
-          const hour = new Intl.DateTimeFormat("en-US", {
-            timeZone: "Asia/Ho_Chi_Minh",
-            hour: "numeric",
-            hour12: false
-          }).format(now);
+          const hour = Number(
+            new Intl.DateTimeFormat("en-US", {
+              timeZone: "Asia/Ho_Chi_Minh",
+              hour: "numeric",
+              hour12: false
+            }).format(now)
+          );
 
-          let bgImage = "";
+          const hourCount = hour + 1; // 0 → 1, 13 → 14
 
-          if (hour >= 5 && hour < 12) {
-            bgImage = pageWrapper.dataset.morning;
-          } else if (hour >= 12 && hour < 17) {
-            bgImage = pageWrapper.dataset.afternoon;
-          } else if (hour >= 17 && hour < 20) {
-            bgImage = pageWrapper.dataset.evening;
-          } else {
-            bgImage = pageWrapper.dataset.night;
-          }
+          const currentEntry = studioImages.find(
+            img => Number(img.hour_count) === hourCount
+          );
+
+          if (!currentEntry) return;
+
+          const isMobile = window.innerWidth <= 768;
+
+          const bgImage = isMobile
+            ? currentEntry.image_for_mobile?.url
+            : currentEntry.image_for_desktop?.url;
 
           if (!bgImage) return;
 
@@ -149,6 +161,7 @@ block content
           pageWrapper.style.backgroundPosition = "center";
           pageWrapper.style.backgroundRepeat = "no-repeat";
         }
+
 
         // initial run
         updateStudioBackground();

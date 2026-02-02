@@ -60,6 +60,7 @@ p.animate-text-unique {
   margin-bottom: 1rem;
   color: #1e1e1e;
   max-width: 670px;
+  text-transform: uppercase;
 }
 .hero-section-unique .outer-unique .inner-unique .banner-inner-unique {
   display: flex;
@@ -600,18 +601,28 @@ p.section-title {
   align-items: center;
 }
 
+.footer-bottom {
+  background-image: url(/images/footer-right-side-image.png);
+}
+
+ul.services__list a {
+  color: #1e1e1e;
+}
+
 .services .fate-wrap {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
+  /* display: inline-flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* background: transparent; */
   border: none;
   cursor: pointer;
   padding: 16px 24px;
   position: absolute;
   right: -26px;
   opacity: 1 !important;
+  transform: rotate(-180deg) !important;
+  bottom: -84px !important;
 }
 
 .footer-flex {
@@ -623,8 +634,15 @@ p.section-title {
 
 .footer-line-image img {
   position: absolute;
-  bottom: -30px;
+  bottom: -105px;
   left: -93px;
+}
+
+.footer-bottom {
+  background-image: url(/images/footer-right-side-image.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 410px;
 }
 
 .left-text {
@@ -635,7 +653,7 @@ p.section-title {
   flex-direction: column;
   gap: 0.2em;
   position: relative;
-  right: 60px;
+  right: 170px;
   bottom: -30px;
 }
 .left-text span {
@@ -646,6 +664,7 @@ p.section-title {
   flex: 1 1 40%;
   max-width: 50%;
   font-size: 0.9rem;
+  height: 285px;
 }
 .right-form h1 {
   margin-bottom: 0.5rem;
@@ -700,7 +719,7 @@ p.section-title {
 .services__note {
   position: absolute;
   right: 70px;
-  bottom: 10px !important;
+  bottom: -18px !important;
   color: #1e1e1e;
   font-weight: 300;
   font-size: 14px;
@@ -1444,7 +1463,7 @@ span.inner-dot svg {
   cursor: pointer;
 }
 
-.value p:hover {
+.value1 p:hover {
   color: #ff0004;
 }
 
@@ -1501,6 +1520,16 @@ span.inner-dot svg {
   position: absolute;
   top: 11px;
   left: 53%;
+}
+
+.image-create-overlay {
+  height: 100%;
+  margin: 0 auto;
+  width: 65%;
+}
+
+.image-create-overlay img {
+  width: 100%;
 }
 
 .hero {

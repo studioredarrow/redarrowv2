@@ -1,23 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const { client } = require("../prismic"); // make sure this path is correct
+const { client } = require("../prismic");
+const prismicH = require("@prismicio/helpers");
 
 router.get("/", async (req, res) => {
-  let page = null;
+  let pageData = {};
 
   try {
-    // Try fetching Prismic content
-    page = await client.getSingle("myth_creation_page");
+    const page = await client.getSingle("myth_creation_page");
+    pageData = page?.data || {};
   } catch (error) {
     console.error("❌ Prismic fetch failed (Myth Creation):", error.message);
   }
-  console.log(page);
-  // Always render the page (no crash)
+
   res.render("pages/mythCreation", {
-    title: page?.data?.hero_title || "Myth Creation",
-    page: page || { data: {} },   // <-- prevents Pug undefined errors
+    title: pageData.hero_title || "Myth Creation",
+    page: pageData,              // 👈 pass only data, not full doc
     showFooter: true,
-    // hideCreateOuter: true
+    asHTML: prismicH.asHTML,
   });
 });
 

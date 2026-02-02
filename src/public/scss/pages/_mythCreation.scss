@@ -58,6 +58,7 @@ p.animate-text-unique {
         margin-bottom: 1rem;
         color: #1e1e1e;
         max-width: 670px;
+        text-transform: uppercase;
       }
 
       .banner-inner-unique {
@@ -657,18 +658,26 @@ p.section-title {
 }
 
 // footer css start
+.footer-bottom {
+  background-image: url(/images/footer-right-side-image.png);
+}
+ul.services__list a {
+  color: #1e1e1e;
+}
 .services .fate-wrap {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
+  /* display: inline-flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* background: transparent; */
   border: none;
   cursor: pointer;
   padding: 16px 24px;
   position: absolute;
   right: -26px;
   opacity: 1 !important;
+  transform: rotate(-180deg) !important;
+  bottom: -84px !important;
 }
 
 .footer-flex {
@@ -680,10 +689,15 @@ p.section-title {
 
 .footer-line-image img {
   position: absolute;
-  bottom: -30px;
+  bottom: -105px;
   left: -93px;
 }
-
+.footer-bottom {
+  background-image: url(/images/footer-right-side-image.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 410px;
+}
 .left-text {
   color: #e30613;
   font-weight: 700;
@@ -692,7 +706,7 @@ p.section-title {
   flex-direction: column;
   gap: 0.2em;
   position: relative;
-  right: 60px;
+  right: 170px;
   bottom: -30px;
 
   span {
@@ -704,6 +718,7 @@ p.section-title {
   flex: 1 1 40%;
   max-width: 50%;
   font-size: 0.9rem;
+  height: 285px;
 
   h1 {
     margin-bottom: 0.5rem;
@@ -760,7 +775,7 @@ p.section-title {
 .services__note {
   position: absolute;
   right: 70px;
-  bottom: 10px !important;
+  bottom: -18px !important;
   color: #1e1e1e;
   font-weight: 300;
   font-size: 14px;
