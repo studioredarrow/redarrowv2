@@ -2831,6 +2831,31 @@ body {
   transform: scale(1.1) !important;
 }
 
+/* --- Added Layout for Card Bottom --- */
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px; /* Adjust spacing as needed */
+  font-family: inherit; /* Inherit font from parent/body */
+}
+
+.card-title {
+  flex: 1;
+  text-align: left;
+  /* styles from card-title if needed */
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.card-desc {
+  /* margin-left: auto; */ /* flex justify-between handles this */
+  text-align: right;
+  white-space: nowrap; /* Keep year on one line */
+  /* styles from card-desc if needed */
+  color: #000; /* or inherit */
+}
+
 .container {
   max-width: 1220px;
   margin: auto;
@@ -2847,7 +2872,7 @@ body {
 }
 
 .open-outer {
-  margin-top: 100px;
+  margin-top: 0;
 }
 
 .inner-grid-open {

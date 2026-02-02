@@ -22,32 +22,35 @@ block content
 
       .container
         #gridView.grid.active
-          each item, index in workItems
-            - var rowIndex = Math.floor(index / 2)
-            - var positionInRow = index % 2
-            - var gapPosition = rowIndex % 3
-            - var gridColClass = ''
-            - if (gapPosition === 0) {
-            -   // Row 1: card1, card2, gap (cards in cols 1-2 and 3-4, gap in col 5)
-            -   gridColClass = positionInRow === 0 ? 'col-1' : 'col-3'
-            - } else if (gapPosition === 1) {
-            -   // Row 2: card1, gap, card2 (card1 in cols 1-2, gap in col 3, card2 in cols 4-5)
-            -   gridColClass = positionInRow === 0 ? 'col-1' : 'col-4'
-            - } else {
-            -   // Row 3: gap, card1, card2 (gap in col 1, cards in cols 2-3 and 4-5)
-            -   gridColClass = positionInRow === 0 ? 'col-5' : 'col-4'
-            - }
-            .card(
-              class=gridColClass
-              data-category=item.data.category || 'all'
-              onclick=`window.location.href='/portfolio/${item.uid}'`
-              style="cursor: pointer;"
-            )
-              if item.data.thumbnail
-                .main-grid-img 
-                  img(src=item.data.thumbnail.url, alt=item.data.title)
-              .card-title= item.data.title
-              .card-desc= item.data.short_description
+          //- Use exhibitions array from studioImages (expecting data.exhibitions)
+          if studioImages.data.exhibitions && studioImages.data.exhibitions.length
+            each item, index in studioImages.data.exhibitions
+              - var rowIndex = Math.floor(index / 2)
+              - var positionInRow = index % 2
+              - var gapPosition = rowIndex % 3
+              - var gridColClass = ''
+              - if (gapPosition === 0) {
+              -   gridColClass = positionInRow === 0 ? 'col-1' : 'col-3'
+              - } else if (gapPosition === 1) {
+              -   gridColClass = positionInRow === 0 ? 'col-1' : 'col-4'
+              - } else {
+              -   gridColClass = positionInRow === 0 ? 'col-5' : 'col-4'
+              - }
+              //- No clickable link requested for now, or use "#"
+              .card(
+                class=gridColClass
+                style="cursor: default;"
+              )
+                if item.image && item.image.url
+                  .main-grid-img 
+                    img(src=item.image.url, alt=item.artist_name || 'Exhibition Image')
+                
+                //- New Flex Container
+                .card-bottom(style="display: flex; justify-content: space-between;")
+                  if item.artist_name
+                    .card-title= item.artist_name
+                  if item.year
+                    .card-desc= item.year
 
         // FIXED IMAGE PREVIEW
         #imagePreview
@@ -55,13 +58,12 @@ block content
         // LIST VIEW
         #listView.list
           .canvas
-            each item, index in workItems
-              .text(
-                data-category=item.data.category || 'all'
-                data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
-                onclick=`window.location.href='/portfolio/${item.uid}'`
-                style="cursor: pointer;"
-              )= item.data.title   
+            if studioImages.data.exhibitions && studioImages.data.exhibitions.length
+              each item, index in studioImages.data.exhibitions
+                .text(
+                  data-image=item.image ? item.image.url : ''
+                  style="cursor: default;"
+                )= item.artist_name || 'Untitled'
 
 
         style.
@@ -85,53 +87,45 @@ block content
         const gridView = document.getElementById("gridView");
         const listView = document.getElementById("listView");
         const imagePreview = document.getElementById("imagePreview");
+        
         const texts = document.querySelectorAll(".text");
+        // We re-query cards/images inside logic usually? Or use references.
+        // But since they are static for now:
         const cards = document.querySelectorAll(".card");
+        const gridImages = document.querySelectorAll(".main-grid-img img");
+        const gridTexts = document.querySelectorAll(".card-title, .card-desc, .card-bottom");
+
 
         /* ================= SAIGON REAL TIME ================= */
         const timeEl = document.getElementById("saigonTime");
 
         function updateSaigonTime() {
           if (!timeEl) return;
-
           const now = new Date();
-
           const formatter = new Intl.DateTimeFormat("en-US", {
             timeZone: "Asia/Ho_Chi_Minh",
             hour: "numeric",
             minute: "2-digit",
             hour12: true
           });
-
           timeEl.textContent = formatter.format(now);
         }
-
-        // initial run
         updateSaigonTime();
-
-        // update every minute (real-time feel)
         setInterval(updateSaigonTime, 60 * 1000);
 
         /* ================= OPEN STUDIO BACKGROUND ================= */
         const pageWrapper = document.querySelector(".page-wrapper");
 
         function updateStudioBackground() {
-          const pageWrapper = document.querySelector(".page-wrapper");
-          if (!pageWrapper) return;
-
-          const raw = pageWrapper.dataset.studioImages;
-          if (!raw) return;
-
+          if (!pageWrapper || !pageWrapper.dataset.studioImages) return;
           let studioImages;
           try {
-            studioImages = JSON.parse(raw);
+            studioImages = JSON.parse(pageWrapper.dataset.studioImages);
           } catch (e) {
-            console.error("Invalid studio image JSON", e);
             return;
           }
 
           const now = new Date();
-
           const hour = Number(
             new Intl.DateTimeFormat("en-US", {
               timeZone: "Asia/Ho_Chi_Minh",
@@ -139,7 +133,6 @@ block content
               hour12: false
             }).format(now)
           );
-
           const hourCount = hour + 1; // 0 → 1, 13 → 14
 
           const currentEntry = studioImages.find(
@@ -149,10 +142,7 @@ block content
           if (!currentEntry) return;
 
           const isMobile = window.innerWidth <= 768;
-
-          // Handle possible typo in Prismic data: imagr_for_desktop vs image_for_desktop
           const desktopImage = currentEntry.image_for_desktop || currentEntry.imagr_for_desktop;
-          
           const bgImage = isMobile
             ? currentEntry.image_for_mobile?.url
             : desktopImage?.url;
@@ -164,68 +154,143 @@ block content
           pageWrapper.style.backgroundPosition = "center";
           pageWrapper.style.backgroundRepeat = "no-repeat";
         }
-
-
-
-        // initial run
         updateStudioBackground();
-
-        // update every minute (optional but nice)
         setInterval(updateStudioBackground, 60 * 1000);
 
-        /* ---------------- TEXT ANIMATION ---------------- */
+        /* ================= ANIMATION & VIEW TOGGLE ================= */
+        
+        // --- 1. Animation Functions ---
+        
         function animateTexts(textElements) {
-          gsap.fromTo(
-            textElements,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+          if(!textElements.length) return;
+          // Ensure they are visible before animating
+           gsap.set(textElements, { display: 'block', opacity: 0, y: 20 });
+           
+           gsap.to(textElements, { 
+             y: 0, 
+             opacity: 1, 
+             duration: 0.8, 
+             stagger: 0.1, 
+             ease: "power3.out",
+             onStart: () => {
+                // Ensure parent container is active
+                listView.classList.add("active");
+             } 
+           });
+        }
+        
+        function animateGridEntrance() {
+          // Animate cards staggering in
+          // Ensure children inside cards are visible 
+          gsap.set(gridTexts, { opacity: 1, y: 0, clearProps: 'all' });
+          gsap.set(gridImages, { opacity: 1, scale: 1, clearProps: 'all' });
+          
+          gsap.fromTo(cards, 
+             { y: 40, opacity: 0 },
+             { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
           );
         }
 
-        /* ---------------- INSTANT IMAGE HIDE ---------------- */
+        // --- 2. Initial ScrollTrigger Setup (Only runs on Load) ---
+         // If we switch views, we might kill these triggers or refresh them.
+        function initScrollTriggers() {
+           // We only want these triggers if we are in Grid mode initially?
+           // Actually, if we just want entrance animations on scroll:
+           
+           ScrollTrigger.getAll().forEach(st => st.kill());
+           
+           // Grid Images
+           gsap.utils.toArray(".main-grid-img img").forEach(img => {
+             gsap.from(img, {
+               scrollTrigger: {
+                 trigger: img,
+                 start: "top 90%"
+               },
+               scale: 1.1,
+               opacity: 0,
+               duration: 0.9,
+               ease: "power3.out"
+             });
+           });
+           
+           // Grid Text
+           gsap.utils.toArray(".card-title, .card-desc, .card-bottom").forEach(el => {
+             gsap.from(el, {
+               scrollTrigger: {
+                 trigger: el,
+                 start: "top 90%"
+               },
+               y: 30,
+               opacity: 0,
+               duration: 0.9,
+               ease: "power3.out"
+             });
+           });
+           
+           ScrollTrigger.refresh();
+        }
+
+        // --- 3. View Toggle Logic ---
+        
         function hideImagePreviewInstant() {
           gsap.killTweensOf(imagePreview);
-          gsap.set(imagePreview, {
-            opacity: 0,
-            scale: 0.95
-          });
+          gsap.set(imagePreview, { opacity: 0, scale: 0.95 });
         }
 
-        /* ---------------- VIEW TOGGLE ---------------- */
-        gridBtn.onclick = () => {
-          gridView.classList.add("active");
-          listView.classList.remove("active");
-          gridBtn.classList.add("active");
-          listBtn.classList.remove("active");
+        if (gridBtn && listBtn) {
+          
+          gridBtn.onclick = () => {
+            if (gridBtn.classList.contains("active")) return;
+            
+            // Switch State
+            gridBtn.classList.add("active");
+            listBtn.classList.remove("active");
+            gridView.classList.add("active");
+            listView.classList.remove("active");
+            
+            hideImagePreviewInstant();
 
-          hideImagePreviewInstant();
+            // Reset List Animations
+            gsap.killTweensOf(texts);
+            
+            // Show Grid
+            // IMPORTANT: If we rely on ScrollTrigger for *initial* load, we need to be careful here.
+            // If the user scrolls down, toggle -> list -> toggle -> grid.
+            // We should just play a simple entrance animation for the visible set.
+            // We can KILL all scrolltriggers to avoid them snapping things back to hidden.
+            ScrollTrigger.getAll().forEach(st => st.kill());
+            
+            animateGridEntrance();
+          };
 
-          texts.forEach(t => {
-            t.classList.remove("active", "blur");
-            gsap.set(t, { y: 0, opacity: 1 });
-          });
+          listBtn.onclick = () => {
+             if (listBtn.classList.contains("active")) return;
+             
+             // Switch State
+             listBtn.classList.add("active");
+             gridBtn.classList.remove("active");
+             listView.classList.add("active");
+             gridView.classList.remove("active");
+             
+             hideImagePreviewInstant();
+             
+             // Reset Grid Animations
+             gsap.killTweensOf(cards);
+             
+             // Show List
+             animateTexts(texts);
+          };
+        }
 
-          gsap.fromTo(
-            cards,
-            { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1 }
-          );
+        /* ================= INITIAL LOAD ================= */
+        hideImagePreviewInstant();
+        // Default is Grid View active
+        // Initialize ScrollTriggers for the first load experience
+        initScrollTriggers();
 
-          animateTexts(texts);
-        };
-
-        listBtn.onclick = () => {
-          listView.classList.add("active");
-          gridView.classList.remove("active");
-          listBtn.classList.add("active");
-          gridBtn.classList.remove("active");
-
-          hideImagePreviewInstant();
-          animateTexts(texts);
-        };
-
-        /* ---------------- TEXT POSITION ---------------- */
-     const pattern = [
+        
+        /* ---------------- LIST VIEW HOVER EFFECTS ---------------- */
+        const pattern = [
           { left: 120, top: 70 },
           { left: 240, top: 165 },
           { right: 40, top: 255 },
@@ -243,147 +308,47 @@ block content
             text.style.left = `${pos.left}px`;
             text.style.right = "auto";
           }
-
           if (pos.right !== undefined) {
             text.style.right = `${pos.right}px`;
             text.style.left = "auto";
           }
-        });
-
-        /* ---------------- HOVER IMAGE PREVIEW ---------------- */
-        const imagePositionPattern = ["left", "right", "center"];
-
-        texts.forEach((text, index) => {
-
+          
+          // Hover
           const img = text.dataset.image;
-          const pos = imagePositionPattern[index % imagePositionPattern.length];
-
+          const imagePositionPattern = ["left", "right", "center"];
+          const imgPos = imagePositionPattern[index % imagePositionPattern.length];
+          
           text.addEventListener("mouseenter", () => {
-            texts.forEach(t => {
-              t.classList.remove("active");
-              t.classList.add("blur");
+            if(!listView.classList.contains('active')) return;
+            
+            texts.forEach(t => { 
+                if(t !== text) { t.classList.remove("active"); t.classList.add("blur"); }
             });
-
             text.classList.add("active");
             text.classList.remove("blur");
 
-            if (!img) return;
+            if (img) {
+              imagePreview.style.backgroundImage = `url(${img})`;
+              let left = "50%";
+              if (imgPos === "left") left = "20%";
+              if (imgPos === "right") left = "80%";
 
-            imagePreview.style.backgroundImage = `url(${img})`;
-
-            // default (center)
-            let left = "50%";
-            let x = "-50%";
-
-            if (pos === "left") {
-              left = "20%";
+              gsap.to(imagePreview, {
+                left, top: "50%", x: "-50%", y: "-50%",
+                scale: 1, opacity: 1, duration: 0.4
+              });
             }
-
-            if (pos === "right") {
-              left = "80%";
-            }
-
-            gsap.set(imagePreview, {
-              left,
-              top: "50%",
-              x,
-              y: "-50%",
-              scale: 1,
-              opacity: 1
-            });
           });
-
-          /* 🔥 INSTANT REMOVE ON LEAVE */
+          
           text.addEventListener("mouseleave", () => {
+             hideImagePreviewInstant();
+             texts.forEach(t => t.classList.remove("active", "blur"));
+          });
+          
+           text.addEventListener("click", () => {
             hideImagePreviewInstant();
-            texts.forEach(t => t.classList.remove("active", "blur"));
           });
-
-          /* 🔥 INSTANT REMOVE ON CLICK */
-          text.addEventListener("click", () => {
-            hideImagePreviewInstant();
-          });
-
         });
-        /* ---------------- INITIAL ---------------- */
-        hideImagePreviewInstant();
-        animateTexts(texts);
-
-      });
-
-
-    script.
-      document.addEventListener("DOMContentLoaded", () => {
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.defaults({
-          duration: 0.9,
-          ease: "power3.out"
-        });
-
-        /* =========================
-          GRID IMAGE REVEAL
-        ========================= */
-        function animateGridImages() {
-          gsap.utils.toArray(".main-grid-img img").forEach(img => {
-            gsap.from(img, {
-              scrollTrigger: {
-                trigger: img,
-                start: "top 85%"
-              },
-              scale: 1.1,
-              opacity: 0
-            });
-          });
-        }
-
-        /* =========================
-          GRID TEXT REVEAL
-        ========================= */
-        function animateGridText() {
-          gsap.utils.toArray(".card-title, .card-desc").forEach(el => {
-            gsap.from(el, {
-              scrollTrigger: {
-                trigger: el,
-                start: "top 85%"
-              },
-              y: 40,
-              opacity: 0
-            });
-          });
-        }
-
-        /* =========================
-          REFRESH ALL ANIMATIONS
-        ========================= */
-        function refreshAnimations() {
-          ScrollTrigger.getAll().forEach(st => st.kill());
-          animateGridImages();
-          animateGridText();
-          ScrollTrigger.refresh();
-        }
-
-        /* =========================
-          INITIAL LOAD
-        ========================= */
-        refreshAnimations();
-
-        /* =========================
-          VIEW TOGGLE
-        ========================= */
-        const gridBtn = document.getElementById("gridBtn");
-        const listBtn = document.getElementById("listBtn");
-
-        if (gridBtn && listBtn) {
-          gridBtn.addEventListener("click", () => {
-            setTimeout(refreshAnimations, 50);
-          });
-
-          listBtn.addEventListener("click", () => {
-            setTimeout(refreshAnimations, 50);
-          });
-        }
 
       });
 
