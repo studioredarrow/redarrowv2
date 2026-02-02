@@ -3,7 +3,7 @@ extends ../layout
 block content
   .studio-main-outer
     .page-wrapper(
-      data-studio-images=JSON.stringify(studioImages.data.hourly_images)
+      data-studio-images=JSON.stringify(studioImages.data.images_for_24_hours)
     )
       .details
         .details-item
@@ -150,9 +150,12 @@ block content
 
           const isMobile = window.innerWidth <= 768;
 
+          // Handle possible typo in Prismic data: imagr_for_desktop vs image_for_desktop
+          const desktopImage = currentEntry.image_for_desktop || currentEntry.imagr_for_desktop;
+          
           const bgImage = isMobile
             ? currentEntry.image_for_mobile?.url
-            : currentEntry.image_for_desktop?.url;
+            : desktopImage?.url;
 
           if (!bgImage) return;
 
@@ -161,6 +164,7 @@ block content
           pageWrapper.style.backgroundPosition = "center";
           pageWrapper.style.backgroundRepeat = "no-repeat";
         }
+
 
 
         // initial run
