@@ -58,6 +58,7 @@ p.animate-text-unique {
         margin-bottom: 1rem;
         color: #1e1e1e;
         max-width: 670px;
+        text-transform: uppercase;
       }
 
       .banner-inner-unique {
@@ -660,18 +661,23 @@ p.section-title {
 .footer-bottom {
   background-image: url(/images/footer-right-side-image.png);
 }
+ul.services__list a {
+  color: #1e1e1e;
+}
 .services .fate-wrap {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
+  /* display: inline-flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* background: transparent; */
   border: none;
   cursor: pointer;
   padding: 16px 24px;
   position: absolute;
   right: -26px;
   opacity: 1 !important;
+  transform: rotate(-180deg) !important;
+  bottom: -84px !important;
 }
 
 .footer-flex {
@@ -769,7 +775,7 @@ p.section-title {
 .services__note {
   position: absolute;
   right: 70px;
-  bottom: 10px !important;
+  bottom: -18px !important;
   color: #1e1e1e;
   font-weight: 300;
   font-size: 14px;
