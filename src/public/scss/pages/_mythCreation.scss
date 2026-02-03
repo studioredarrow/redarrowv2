@@ -5,8 +5,10 @@ body {
   color: #111;
   overflow-x: hidden;
 }
+
 input::placeholder {
-  color: #bdbdbd; /* change to any color you want */
+  color: #bdbdbd;
+  /* change to any color you want */
 }
 
 .container {
@@ -30,6 +32,7 @@ img.mobile-arrow {
 div#video-outer {
   padding-bottom: 100px !important;
 }
+
 p.animate-text-unique {
   max-width: 407px;
 }
@@ -224,9 +227,11 @@ p.animate-text-unique {
   top: 45px !important;
   left: -56px;
 }
+
 .desktop-logo {
   width: 220px;
 }
+
 ul.services__list span:hover {
   color: #ff0004;
 }
@@ -349,9 +354,11 @@ ul.services__list li:hover {
   max-width: 955px;
   margin-left: auto;
 }
+
 .card:hover div {
   color: #ff0004;
 }
+
 .iconic-inner {
   background-color: #f9f5f1;
 }
@@ -373,6 +380,7 @@ ul.services__list li:hover {
 
 .iconic-flex {
   gap: 2rem;
+  padding-top: 30px;
 }
 
 .iconic-content {
@@ -661,9 +669,11 @@ p.section-title {
 .footer-bottom {
   background-image: url(/images/footer-right-side-image.png);
 }
+
 ul.services__list a {
   color: #1e1e1e;
 }
+
 .services .fate-wrap {
   position: relative;
   /* display: inline-flex; */
@@ -689,15 +699,17 @@ ul.services__list a {
 
 .footer-line-image img {
   position: absolute;
-  bottom: -105px;
+  bottom: -134px !important;
   left: -93px;
 }
+
 .footer-bottom {
   background-image: url(/images/footer-right-side-image.png);
   background-repeat: no-repeat;
   background-size: contain;
-  height: 410px;
+  height: 420px;
 }
+
 .left-text {
   color: #e30613;
   font-weight: 700;
@@ -768,10 +780,12 @@ ul.services__list a {
   align-items: center;
   gap: 45px;
 }
+
 .image-wrapper img {
   width: 100%;
   object-fit: cover;
 }
+
 .services__note {
   position: absolute;
   right: 70px;
@@ -782,6 +796,7 @@ ul.services__list a {
   line-height: 100%;
   text-align: right;
 }
+
 .footer-btn-flex {
   display: flex;
   flex-direction: column;
@@ -883,9 +898,11 @@ video {
     transform: rotate(-5deg);
     font-size: clamp(2rem, 8vw, 5rem);
   }
+
   .right-form button {
     margin-bottom: 30px;
   }
+
   .right-form {
     width: 100%;
     max-width: 100%;
@@ -910,19 +927,24 @@ video {
   .right-form input[type="email"] {
     width: 200px;
   }
+
   .create-flex {
     padding-inline: 20px;
   }
+
   .services__grid .services__list li {
     font-size: 26px;
   }
+
   .container {
     overflow: hidden;
   }
+
   .services__note {
     right: 80px;
     bottom: -32px;
   }
+
   .services .fate-wrap {
     right: 10px;
   }
@@ -934,6 +956,7 @@ video {
   .outer-unique {
     padding-inline: 20px;
   }
+
   p.section-title {
     padding-inline: 20px;
   }
@@ -982,6 +1005,16 @@ video {
   .card {
     width: 90%;
   }
+
+  .footer-bottom {
+    background-image: none !important;
+  }
+
+  .left-text {
+    display: block !important;
+    right: 27px;
+    bottom: -38px;
+  }
 }
 
 // slider horizental css start here
@@ -991,6 +1024,12 @@ video {
   #curveDot {
     r: 16px;
   }
+
+  .services .fate-wrap {
+    bottom: 0px !important;
+    right: -25px !important;
+  }
+
   .container img {
     width: 100%;
   }
@@ -1007,11 +1046,7 @@ video {
     right: 10px;
   }
 
-  .hero-section-unique
-    .outer-unique
-    .inner-unique
-    .banner-inner-unique
-    p.animate-text-unique:first-child {
+  .hero-section-unique .outer-unique .inner-unique .banner-inner-unique p.animate-text-unique:first-child {
     max-width: 100%;
   }
 
@@ -1030,7 +1065,7 @@ video {
   }
 
   .create-item-inner .create-item-int:nth-child(1) p {
-    max-width: 146px;
+    max-width: 160px;
   }
 
   .hero-section-unique .outer-unique {
@@ -1043,6 +1078,7 @@ video {
 
   .create-flex {
     position: relative;
+    padding: 0px;
   }
 
   .create-img {
@@ -1185,8 +1221,8 @@ video {
   }
 
   .services__note {
-    bottom: 0px;
-    right: 110px;
+    bottom: -10px !important;
+    right: 70px;
   }
 
   .iconic-outer {
@@ -1250,18 +1286,29 @@ video {
   .hero-section-unique .outer-unique .image-container-unique {
     right: -100px;
   }
+
   .allimages {
     gap: 20px;
   }
+
   .iconic-sections {
     margin-bottom: 30px;
   }
+
   .curve-wrapper {
     padding-block: 30px;
   }
+
   .create-outer .outer-btn {
     margin-left: 130px !important;
   }
+
+  .create-item.create-img img {
+    width: 181px;
+    height: 190px;
+    object-fit: contain;
+  }
+
   .create-outer .fate-wrap .fate-oval__svg {
     position: absolute;
     width: 206px !important;
@@ -1272,9 +1319,11 @@ video {
   .image-wrapper {
     width: 26%;
   }
+
   .image-wrapper img {
     width: 100px;
   }
+
   .hero-section-unique .outer-unique .inner-unique h1.animate-text-unique {
     font-size: 48px;
     max-width: 80%;
@@ -1295,7 +1344,12 @@ video {
   img.mobile-arrow {
     display: block;
   }
+
   .section-clients {
     padding-block: 45px !important;
   }
+}
+
+.left-text {
+  display: none;
 }

@@ -5,6 +5,12 @@ body {
   background: #ffffff;
   font-family: Work Sans;
 }
+
+.inner-photo img {
+  border-radius: 20px;
+  margin-top: 15px;
+}
+
 .ist-photo-banner p {
   max-width: 49% !important;
   font-family: Work Sans;
@@ -13,6 +19,7 @@ body {
   line-height: 100% !important;
   color: #1e1e1e !important;
 }
+
 .ist-photo-banner1 p {
   font-family: Work Sans;
   font-weight: 400 !important;
@@ -20,6 +27,7 @@ body {
   line-height: 100% !important;
   color: #1e1e1e !important;
 }
+
 .container {
   max-width: 1220px;
   margin: 0 auto;
@@ -56,6 +64,7 @@ body {
   margin-block: 30px;
   justify-content: space-between;
 }
+
 .benji-content {
   width: 69%;
 }
@@ -177,9 +186,11 @@ body {
   justify-content: space-around;
   gap: 20px;
 }
+
 .photo-banner img {
   margin-top: 25px;
 }
+
 .bistro-item {
   img {
     border-radius: 20px;
@@ -271,10 +282,10 @@ body {
 
 .create-inner-flex {
   display: flex;
-  gap: 30px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: start;
+  gap: 2px 30px;
 }
 
 .creative-banner {
@@ -388,9 +399,10 @@ body {
 
 .project.center p {
   width: 100%;
-  max-width: 470px;   /* same as card */
-  margin: 12px auto 0; /* centers the text block */
-  text-align: left;   /* aligns text to card start */
+  max-width: 470px;
+  /* centers the text block */
+  text-align: left;
+  /* aligns text to card start */
 }
 
 .photo-item img {
@@ -474,9 +486,11 @@ body {
     margin-top: 100px;
     padding-inline: 20px;
   }
+
   .main-portfolio-outer {
     padding-inline: 10px;
   }
+
   .create-item-grid.create-inner-flex img {
     width: auto;
   }
@@ -505,10 +519,12 @@ body {
   .right-form input[type="email"] {
     width: 100%;
   }
+
   .photo-item img {
     width: 100% !important;
     height: auto !important;
   }
+
   .project.center {
     width: 100%;
   }
@@ -635,6 +651,7 @@ body {
     width: 100%;
     margin-left: auto;
   }
+
   .ist-photo-banner p {
     max-width: 100% !important;
   }
@@ -646,6 +663,7 @@ body {
   .project-card {
     max-width: 100%;
   }
+
   .benji-services {
     width: 100%;
   }
@@ -655,6 +673,7 @@ body {
   .event-grid {
     grid-template-columns: 1fr;
   }
+
   .bistro-item img {
     width: 100%;
     height: 200px;
@@ -697,10 +716,12 @@ body {
   .left div {
     margin-top: 10px;
   }
+
   .bistro-inner-item p {
     font-size: 16px;
     padding-bottom: 20px;
   }
+
   .bistro-banner {
     padding-block: 50px;
   }

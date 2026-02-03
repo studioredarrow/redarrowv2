@@ -5,17 +5,31 @@ body {
   color: #111;
   overflow-x: hidden;
 }
+
 span.counter-suffix {
   font-size: 74px !important;
 }
+
 .seven-segment-counter {
-  height: 100px;
+  background: #1E1E1E !important;
+  height: 90px !important;
+  box-shadow: none !important;
 }
+
+.segment-off {
+  background: #120000 !important;
+}
+
+.segment-on {
+  background: #FF0004 !important;
+}
+
 .create-item.create-img img {
   width: 212px;
   height: 220px;
   object-fit: contain;
 }
+
 .machine {
   width: 100%;
   background: #424242;
@@ -25,8 +39,10 @@ span.counter-suffix {
   margin-top: 100px !important;
   margin: 0 auto;
   box-shadow:
-  inset 6px -6px 12px rgba(0, 0, 0, 0.8),   /* left + bottom (dark) */
-  inset -6px 6px 12px rgba(134, 131, 123, 0.9); /* top + right (light) */
+    inset 6px -6px 12px rgba(0, 0, 0, 0.8),
+    /* left + bottom (dark) */
+    inset -6px 6px 12px rgba(134, 131, 123, 0.9);
+  /* top + right (light) */
 
   .screen {
     border: 4px solid #333;
@@ -43,13 +59,13 @@ span.counter-suffix {
   .panel {
     .counter-row {
       justify-content: space-between;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    align-items: center;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 6px;
-    gap: 25px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      align-items: center;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      gap: 25px;
 
       .counter-container {
         display: flex;
@@ -124,6 +140,7 @@ span.counter-suffix {
   from {
     transform: translateY(0);
   }
+
   to {
     transform: translateY(var(--offset));
   }
@@ -150,6 +167,7 @@ span.counter-suffix {
   font-family: Work Sans;
   max-width: 710px;
 }
+
 .team-header p {
   color: #1e1e1e;
   font-family: Work Sans;
@@ -157,6 +175,7 @@ span.counter-suffix {
   font-size: 32px;
   line-height: 100%;
 }
+
 .team-inner {
   h6 {
     font-family: Work Sans;
@@ -194,20 +213,24 @@ span.counter-suffix {
 .team-outer {
   padding-block: 100px;
 }
+
 span.inner-dot {
   font-size: 64px !important;
   text-align: center;
 }
+
 span.inner-dot svg {
   fill: white;
   filter: brightness(0) invert(1);
 }
+
 .status-open p {
   font-family: Work Sans;
   font-weight: 400;
   font-size: 14px;
   color: #FFFFFF !important;
 }
+
 .team-card {
   color: #1e1e1e;
   font-family: Work Sans;
@@ -284,6 +307,7 @@ span.inner-dot svg {
     transition: none;
   }
 }
+
 // location css start here
 .info-wrapper {
   width: 100%;
@@ -294,6 +318,7 @@ span.inner-dot svg {
   max-width: 1220px;
   margin: 0 auto;
 }
+
 .value.value1 p:nth-child(2) {
   color: #828282;
 }
@@ -306,10 +331,12 @@ span.inner-dot svg {
   margin-left: auto;
   padding-inline: 50px;
 }
+
 .info-block {
   display: flex;
   gap: 60px;
 }
+
 .label1 {
   color: #1e1e1e !important;
   min-width: 70px;
@@ -319,6 +346,7 @@ span.inner-dot svg {
   line-height: 100%;
   cursor: pointer;
 }
+
 .value1 p:hover {
   color: #ff0004;
 }
@@ -377,19 +405,23 @@ span.inner-dot svg {
   justify-content: space-between;
   align-items: start;
 }
+
 .hero-absolute-img {
   position: absolute;
   top: 11px;
   left: 53%;
 }
+
 .image-create-overlay {
   height: 100%;
   margin: 0 auto;
   width: 65%;
 }
+
 .image-create-overlay img {
   width: 100%;
 }
+
 .hero {
   padding: 80px 0px;
   text-align: left;
@@ -471,19 +503,24 @@ span.inner-dot svg {
       padding: 10px 20px;
     }
   }
+
   .team-inner h6 {
     padding-bottom: 25px;
   }
 }
+
 .screen img {
   width: 100%;
 }
+
 .team-card:hover h3 {
   color: #ff0004;
 }
+
 .team-card:hover p {
   color: #ff0004;
 }
+
 .team-img {
   overflow: hidden;
   display: inline-block;
@@ -499,6 +536,7 @@ span.inner-dot svg {
 .team-img img:hover {
   transform: scale(1.1);
 }
+
 .hero-image {
   overflow: hidden;
   display: inline-block;
@@ -510,6 +548,7 @@ span.inner-dot svg {
   display: block;
   border-radius: 20px;
 }
+
 .hero-image img:hover {
   transform: scale(1.1);
 }
@@ -607,6 +646,7 @@ span.inner-dot svg {
   .main-about-outer {
     padding-inline: 20px;
   }
+
   .machine .panel .counter-row {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -616,111 +656,141 @@ span.inner-dot svg {
   .machine .panel .counter-row {
     flex-wrap: wrap;
   }
+
   .machine .panel .counter-row {
     grid-template-columns: repeat(4, 1fr);
   }
-  .hero-absolute-img {  
+
+  .hero-absolute-img {
     display: none;
   }
 }
+
 @media (max-width: 768px) {
   .hero-flex {
     flex-direction: column;
   }
+
   .seven-segment-counter {
     padding: 5px !important;
     width: auto !important;
     justify-content: center !important;
-}
+  }
+
   .main-responsive-mobile {
     display: flex;
     flex-direction: column-reverse;
   }
+
   .hero .hero-subtitle {
     color: #1e1e1e;
     font-weight: 400;
   }
+
   .hero .hero-image img {
     height: 232px;
   }
+
   .team-header p {
     font-size: 20px;
   }
+
   .info-block {
     gap: 16px;
     flex-direction: column;
   }
+
   .info-flex {
     display: flex;
     justify-content: end;
     gap: 90px;
     padding-inline: 0px;
   }
+
   .info-wrapper {
     padding: 0px;
   }
+
   .team-flex {
     flex-direction: column;
   }
+
   .machine .panel .counter-row {
     grid-template-columns: repeat(4, 1fr);
   }
+
   .team-header {
     font-size: 20px;
   }
 }
+
 @media (max-width: 500px) {
   .team-card img {
     width: 172px;
     height: 208px;
   }
+
   .machine {
     padding: 10px;
-}
+  }
 
-.team-card.add-card {
-  gap: 0px !important;
-}
-.machine .panel .counter-row {
-  grid-template-columns: repeat(4, 1fr);
-}
-.seven-segment-counter {
-  height: 60px;
-}
-.machine .panel .counter-row {
-  padding: 0px;
-}
+  .team-card.add-card {
+    gap: 0px !important;
+  }
+
+  .machine .panel .counter-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .seven-segment-counter {
+    height: 60px;
+  }
+
+  .machine .panel .counter-row {
+    padding: 0px;
+  }
+
   .machine .panel .counter-row .counter-container .counter {
     min-height: 55px;
   }
+
   .machine .screen video {
     height: auto;
   }
+
   .team-outer {
     padding-block: 45px;
   }
+
   .team-inner h6 {
     padding-bottom: 20px;
   }
+
   .main-about-outer {
     padding-inline: 20px;
   }
+
   .team-card.empty {
     display: none;
   }
+
   .team-card.add-card {
     height: 208px;
   }
+
   .machine .panel .counter-row .counter-container .counter {
     font-size: 48px;
   }
+
   .team-card.add-card {
     gap: 10px;
   }
+
   .hero {
     padding: 25px 0px;
     margin-bottom: 80px;
   }
+
   .machine .panel .counter-row {
     flex-wrap: wrap;
     gap: 25px;
@@ -732,6 +802,7 @@ span.inner-dot svg {
     gap: 40px;
   }
 }
+
 a {
   text-decoration: none;
 }
