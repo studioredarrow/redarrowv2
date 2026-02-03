@@ -352,6 +352,37 @@ span.inner-dot svg {
 }
 
 .value {
+
+  // Styles for location switcher
+  &.location-toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .location-btn {
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: #828282;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #828282;
+    margin-bottom: 10px;
+
+    &:hover {
+      color: #FF0004;
+    }
+
+    &.active {
+      color: #1e1e1e;
+      font-weight: 600;
+    }
+  }
+
+  .separator {
+    display: none;
+  }
+
   p {
     letter-spacing: 0.04em;
     color: #1e1e1e;
@@ -359,7 +390,7 @@ span.inner-dot svg {
     font-size: 20px;
     line-height: 130%;
     margin: 0px;
-    cursor: pointer;
+    text-transform: uppercase;
   }
 }
 

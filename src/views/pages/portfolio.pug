@@ -123,41 +123,6 @@ block content
                     p!= asHTML(portfolioItem.data.brand_description)
 
                 // ================= PHOTO GALLERIES =================
-                //- DYNAMIC SECTIONS 1-6
-                - for (var i = 1; i <= 6; i++)
-                  - var sTitle = portfolioItem.data[`section_${i}_title`]
-                  - var sDesc = portfolioItem.data[`section_${i}_description`]
-                  - var sBanner = portfolioItem.data[`section_${i}_banner`]
-                  - var sImages = portfolioItem.data[`section_${i}_image`]
-
-                  if (sTitle || sDesc || (sBanner && sBanner.length) || (sImages && sImages.length))
-                    //- Use existing classes to match style
-                    section
-                      .photo-banner.ist-photo-banner1
-                         if sTitle || sDesc
-                           .photo-right
-                             if sTitle
-                               h2= sTitle
-                             if sDesc
-                               p= sDesc 
-
-                         //- TOP BANNER (Banner index 0)
-                         if sBanner && sBanner.length > 0 && sBanner[0].image && sBanner[0].image.url
-                           img(src=sBanner[0].image.url, alt="")
-
-                      //- IMAGE GRID (2 columns via .photo-flex)
-                      if sImages && sImages.length
-                        .photo-flex
-                          each imgItem in sImages
-                            if imgItem.image && imgItem.image.url
-                              .photo-item
-                                img(src=imgItem.image.url, alt="")
-
-                      //- BOTTOM BANNER (Banner index 1)
-                      if sBanner && sBanner.length > 1 && sBanner[1].image && sBanner[1].image.url
-                        .photo-banner.ist-photo-banner1
-                          img(src=sBanner[1].image.url, alt="")
-                
                 if portfolioItem.data.photo_galleries && portfolioItem.data.photo_galleries.length
                   each gallery in portfolioItem.data.photo_galleries
 
