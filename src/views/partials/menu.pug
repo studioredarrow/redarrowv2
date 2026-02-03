@@ -191,9 +191,16 @@ html(lang="en")
 
       gsap.set(overlay, { y: "100%", display: "none" });
 
+      // Get progress bar wrapper (used on portfolio page)
+      const progressBarWrapper = document.querySelector('.progress-bar-wrapper');
+
       logo.addEventListener('click', () => {
         overlay.style.display = "block";
         gsap.to(overlay, { y: 0, duration: 1, ease: "power4.out" });
+        // Hide progress bar when menu opens
+        if (progressBarWrapper) {
+          progressBarWrapper.style.display = "none";
+        }
       });
 
       arrow.addEventListener('click', () => {
@@ -201,7 +208,13 @@ html(lang="en")
           y: "100%",
           duration: 1,
           ease: "power4.in",
-          onComplete: () => overlay.style.display = "none"
+          onComplete: () => {
+            overlay.style.display = "none";
+            // Show progress bar when menu closes
+            if (progressBarWrapper) {
+              progressBarWrapper.style.display = "block";
+            }
+          }
         });
       });
 
