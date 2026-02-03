@@ -1502,6 +1502,30 @@ span.inner-dot svg {
   color: #ff0004;
 }
 
+.value.location-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+.value .location-btn {
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: #828282;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #828282;
+  margin-bottom: 10px;
+}
+.value .location-btn:hover {
+  color: #FF0004;
+}
+.value .location-btn.active {
+  color: #1e1e1e;
+  font-weight: 600;
+}
+.value .separator {
+  display: none;
+}
 .value p {
   letter-spacing: 0.04em;
   color: #1e1e1e;
@@ -1509,7 +1533,7 @@ span.inner-dot svg {
   font-size: 20px;
   line-height: 130%;
   margin: 0px;
-  cursor: pointer;
+  text-transform: uppercase;
 }
 
 .hero-wrap {

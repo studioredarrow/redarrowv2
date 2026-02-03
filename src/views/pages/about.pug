@@ -75,8 +75,8 @@ block content
                     }
                   }
 
-                  // Pattern for empty card positions: [2, 3, 4, 3, 2] repeating
-                  const emptyPositions = [2, 3, 4, 3, 2];
+                  // Pattern for empty card positions: [2, 3, 4, 3] repeating
+                  const emptyPositions = [2, 3, 4, 3];
                   
                   // Group into rows of 4 cards + 1 empty tile at rotating position
                   const rows = [];
@@ -168,13 +168,28 @@ block content
             .info-flex
               .info-block
                 span.label1 Location
-                .value.value1
-                  != asHTML(page.data.location)
+                .value.value1.location-toggles
+                  if page.data.location_address && page.data.location_address.length
+                    each item, index in page.data.location_address
+                      span.location-btn(
+                        data-index=index 
+                        class=index === 0 ? "active" : ""
+                      )= asText(item.location) 
+                  else
+                     != asHTML(page.data.location)
 
               .info-block
                 span.label1 Address
-                .value
-                  != asHTML(page.data.address)
+                .value.address-display
+                  if page.data.location_address && page.data.location_address.length
+                    each item, index in page.data.location_address
+                      .address-content(
+                        data-index=index
+                        style=index === 0 ? "display: block" : "display: none"
+                      )
+                        != asHTML(item.address)
+                  else
+                    != asHTML(page.data.address)
 
       section.hero
         .hero-container
@@ -713,6 +728,30 @@ block content
           );
 
         });
+        
+        // Location-Address Switcher
+        const locBtns = document.querySelectorAll('.location-btn');
+        const addrContents = document.querySelectorAll('.address-content');
+
+        if(locBtns.length && addrContents.length){
+          locBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+               // Remove active class from all
+               locBtns.forEach(b => b.classList.remove('active'));
+               // Add to clicked
+               btn.classList.add('active');
+
+               const index = btn.getAttribute('data-index');
+
+               // Hide all addresses
+               addrContents.forEach(addr => addr.style.display = 'none');
+               
+               // Show target address
+               const target = document.querySelector(`.address-content[data-index="${index}"]`);
+               if(target) target.style.display = 'block';
+            });
+          });
+        }
 
         
 
