@@ -52,12 +52,13 @@ html(lang="en")
           .carousel#carousel
             each item, index in menuItems
               - const isMain = index === 0
+              - const displayOrder = item.data.order || (index + 1)
               .item(
                 class=isMain ? 'main' : 'side'
                 data-route=item.data.route[0].text
                 data-label=item.data.label.map(b => b.text).join(' ')
               )
-                span #{String(index + 1).padStart(2, '0')}
+                span #{String(displayOrder).padStart(2, '0')}
                 each block in item.data.label
                   | #{block.text}
                   br
