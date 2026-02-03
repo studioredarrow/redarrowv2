@@ -303,7 +303,12 @@ block content
             0 0 24px hsla(0, 100%, 50%, 0.5),
             0 0 32px hsla(0, 100%, 50%, 0.3);
         }
-        
+        .segment-on {
+          font-family: "DS-Digital", "Orbitron", monospace;
+          font-weight: normal;
+          color: var(--led-red);
+          box-shadow: 0px 2px 8px 0px #FF0004;
+        }
         .segment-off {
           background: var(--led-red-dim);
         }
@@ -314,7 +319,6 @@ block content
           width: 27px;
           height: 7px;
           left: 5.5px;
-          clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
         }
         
         .segment-a { top: 0; }
@@ -327,7 +331,6 @@ block content
         .segment-f {
           width: 7px;
           height: 27px;
-          clip-path: polygon(0% 10%, 50% 0%, 100% 10%, 100% 90%, 50% 100%, 0% 90%);
         }
         
         .segment-b { top: 5px; right: 0; }
