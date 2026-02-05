@@ -83,32 +83,42 @@ html(lang="en")
 
       const sensitivity = 0.25;
       const itemCount = items.length;
-      const degreePerItem = 360 / itemCount;
-
-      let currentRotation = 0;
-
-      // Helper function to update the highlight on clicked item
-      function updateHighlight(rotation) {
-        const normalized = ((rotation % 360) + 360) % 360;
-        const centerIndex = Math.round(normalized / degreePerItem) % itemCount;
-
+      const translateZ = 450;
+      
+      // Track which item is currently centered (0-indexed)
+      let centeredIndex = 0;
+      
+      // Position items so only 3 are visible: prev (-60°), current (0°), next (60°)
+      // Other items go to back (180°) to hide them
+      function repositionItems(centerIdx) {
+        const prevIdx = (centerIdx - 1 + itemCount) % itemCount;
+        const nextIdx = (centerIdx + 1) % itemCount;
+        
         items.forEach((item, index) => {
-          if (index === (itemCount - centerIndex) % itemCount) {
+          let angle;
+          if (index === centerIdx) {
+            angle = 0;  // Center
             item.classList.add('main');
             item.classList.remove('side');
+          } else if (index === prevIdx) {
+            angle = -60;  // Left side (previous)
+            item.classList.add('side');
+            item.classList.remove('main');
+          } else if (index === nextIdx) {
+            angle = 60;   // Right side (next)
+            item.classList.add('side');
+            item.classList.remove('main');
           } else {
+            angle = 180;  // Hidden at back
             item.classList.add('side');
             item.classList.remove('main');
           }
+          item.style.transform = `rotateY(${angle}deg) translateZ(${translateZ}px)`;
         });
       }
-
-      // Function to find the center item based on the rotation
-      function getCenterItem(rotation) {
-        const normalizedRotation = (rotation % 360 + 360) % 360;
-        const centerIndex = Math.round(normalizedRotation / degreePerItem) % itemCount;
-        return items[centerIndex];
-      }
+      
+      // Apply initial positioning with item 0 centered
+      repositionItems(0);
 
       // Function to check if an item is currently centered
       function isItemCentered(item) {
@@ -121,70 +131,35 @@ html(lang="en")
           const route = item.dataset.route;
           const label = item.dataset.label;
 
-          // Check if the clicked item is already centered BEFORE updating
+          // Check if the clicked item is already centered
           const isCentered = isItemCentered(item);
-
-          // Get the clicked item's index
           const itemIndex = Array.from(items).indexOf(item);
 
-          // Calculate the absolute rotation needed to center the clicked item
-          // Based on updateHighlight logic: when rotation = centerIndex * degreePerItem,
-          // the item at index (itemCount - centerIndex) % itemCount is centered
-          // So to center itemIndex, we need: centerIndex = (itemCount - itemIndex) % itemCount
-          const targetCenterIndex = (itemCount - itemIndex) % itemCount;
-          const absoluteTargetRotation = targetCenterIndex * degreePerItem;
-
-          // Normalize current rotation to 0-360 range
-          const normalizedCurrent = ((currentRotation % 360) + 360) % 360;
-
-          // Find the shortest rotation path from current to target
-          // Try both directions and pick the shorter one
-          let rotationDelta1 = absoluteTargetRotation - normalizedCurrent;
-          let rotationDelta2 = rotationDelta1 > 0 ? rotationDelta1 - 360 : rotationDelta1 + 360;
-          
-          // Choose the shorter path
-          let rotationDelta = Math.abs(rotationDelta1) < Math.abs(rotationDelta2) ? rotationDelta1 : rotationDelta2;
-
-          // Calculate the new target rotation (add delta to current, not normalized)
-          const targetRotation = currentRotation + rotationDelta;
-
-          // Only navigate if the item was already centered
           if (isCentered) {
+            // Navigate to the page
             console.log('NAVIGATING →', label);
-            // Apply the rotation with smooth transition
-            carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
-            carousel.style.transform = `rotateY(${targetRotation}deg)`;
-
-            // Update the highlighted item
-            updateHighlight(targetRotation);
-
-            // Update current rotation
-            currentRotation = targetRotation;
-
-            // Navigate after a short delay to allow the transition to start
             setTimeout(() => {
               window.location.replace(
                 `/loading?to=${encodeURIComponent(route)}&label=${encodeURIComponent(label)}`
               );
             }, 100);
           } else {
+            // Center this item and reposition all items
             console.log('SCROLLING TO CENTER →', label);
-            // Item is not centered, just scroll it to center (no navigation)
-            carousel.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
-            carousel.style.transform = `rotateY(${targetRotation}deg)`;
-
-            // Update the highlighted item
-            updateHighlight(targetRotation);
-
-            // Update current rotation
-            currentRotation = targetRotation;
+            centeredIndex = itemIndex;
+            
+            // Add transition to items for smooth animation
+            items.forEach(i => {
+              i.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
+            });
+            
+            repositionItems(centeredIndex);
           }
         });
       });
 
-      // Initialize the carousel to show the first item
+      // Initialize the carousel (no rotation on container needed)
       carousel.style.transform = `rotateY(0deg)`;
-      updateHighlight(0);
 
       // =======================
       // OVERLAY OPEN / CLOSE
