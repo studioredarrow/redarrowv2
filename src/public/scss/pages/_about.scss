@@ -365,9 +365,10 @@ span.inner-dot svg {
     transition: color 0.3s ease;
     color: #828282;
     text-transform: uppercase;
-    font-weight: 500;
-    color: #828282;
     margin-bottom: 10px;
+    font-family: Work Sans;
+    font-size: 20px;
+    line-height: 130%;
 
     &:hover {
       color: #FF0004;
