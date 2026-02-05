@@ -1,149 +1,174 @@
   body {
-      font-family: Work Sans;
-    }
+    font-family: Work Sans;
+  }
 
-    .open-flex {
-      display: flex;
-      gap: 130px;
-      flex-direction: row-reverse;
-    }
-    .grid-inner {
+  .open-flex {
+    display: flex;
+    gap: 130px;
+    flex-direction: row-reverse;
+  }
+
+  .grid-inner {
     margin-top: 0px;
-}
-.card:hover .card-desc {
+  }
+
+  .card:hover .card-desc {
     color: #FF0004;
-}
-.card:hover .card-title {
+  }
+
+  .card:hover .card-title {
     color: #FF0004;
-}
-.main-grid-img {
-    overflow: hidden; /* Hide anything outside the container */
-    display: inline-block; 
+  }
+
+  .main-grid-img {
+    overflow: hidden;
+    /* Hide anything outside the container */
+    display: inline-block;
     border-radius: 20px;
-}
+  }
 
-.main-grid-img img {
-    transition: transform 0.3s ease; /* Smooth hover */
-    display: block; 
+  .main-grid-img img {
+    transition: transform 0.3s ease;
+    /* Smooth hover */
+    display: block;
     border-radius: 20px;
-}
+  }
 
-.main-grid-img img:hover {
-    transform: scale(1.1) !important; 
-}
+  .main-grid-img img:hover {
+    transform: scale(1.1) !important;
+  }
 
-/* --- Added Layout for Card Bottom --- */
-.card-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 10px; /* Adjust spacing as needed */
-  font-family: inherit; /* Inherit font from parent/body */
-}
+  /* --- Added Layout for Card Bottom --- */
+  .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+    /* Adjust spacing as needed */
+    font-family: inherit;
+    /* Inherit font from parent/body */
+  }
 
-.card-title {
-  flex: 1;
-  text-align: left;
-  /* styles from card-title if needed */
-  font-weight: 500;
-  text-transform: uppercase;
-}
+  .card-title {
+    flex: 1;
+    text-align: left;
+    /* styles from card-title if needed */
+    font-weight: 500;
+    text-transform: uppercase;
+  }
 
-.card-desc {
-  /* margin-left: auto; */ /* flex justify-between handles this */
-  text-align: right;
-  white-space: nowrap; /* Keep year on one line */
-  /* styles from card-desc if needed */
-  color: #000; /* or inherit */
-}
+  .card-desc {
+    /* margin-left: auto; */
+    /* flex justify-between handles this */
+    text-align: right;
+    white-space: nowrap;
+    /* Keep year on one line */
+    /* styles from card-desc if needed */
+    color: #000;
+    /* or inherit */
+  }
 
 
-    .container {
-      max-width: 1220px;
-      margin: auto;
-      padding: 0;
+  .container {
+    max-width: 1220px;
+    margin: auto;
+    padding: 0;
+  }
+
+  .studio-main-outer {
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .work-outer.open-outer {
+    overflow: visible;
+  }
+
+  .open-outer {
+    // margin-top: 100px;
+    margin-top: 0;
+  }
+
+  .inner-grid-open {
+    margin: 0px;
+  }
+
+  .studio-open {
+    margin-right: auto;
+    display: flex;
+    justify-content: end;
+    position: relative;
+    top: -7px;
+    right: -9px;
+  }
+
+  .studio-open img {
+    max-width: 155px;
+  }
+
+  // banner css start here
+  .page-wrapper {
+    background-color: #b0b0b0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+
+    .details {
+      color: white;
+      font-size: clamp(12px, 1.5vw, 16px);
+      display: flex;
+      gap: 70px;
+      margin-bottom: 30px;
+
+      .details-item {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-family: Work Sans;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 100%;
+
+        .label {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 100%;
+          color: white !important;
+        }
+      }
     }
 
-    .studio-main-outer {
-      min-height: 100vh;
-      overflow: visible;
-    }
-
-    .work-outer.open-outer {
-      overflow: visible;
+    @media (max-width: 600px) {
+      .details {
+        gap: 25px;
+        margin-bottom: 20px;
+      }
     }
 
     .open-outer {
-      // margin-top: 100px;
-      margin-top: 0;
+      margin-top: 0px;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .open-flex .card {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .open-outer {
+      margin-top: 10px;
+      padding-inline: 20px;
     }
 
-    .inner-grid-open {
-      margin: 0px;
+    .open-flex {
+      margin-top: 50px;
     }
 
-    // banner css start here
     .page-wrapper {
-      background-color: #b0b0b0;
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      align-items: flex-end;
-      padding: 40px;
-
-      .details {
-        color: white;
-        font-size: clamp(12px, 1.5vw, 16px);
-        display: flex;
-        gap: 70px;
-        margin-bottom: 30px;
-
-        .details-item {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          font-family: Work Sans;
-          font-weight: 500;
-          font-size: 20px;
-          line-height: 100%;
-          text-transform: uppercase;
-
-          .label {
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 100%;
-            color: white !important;
-          }
-        }
-      }
-
-      @media (max-width: 600px) {
-        .details {
-          gap: 25px;
-          margin-bottom: 20px;
-        }
-      }
-
-      .open-outer {
-        margin-top: 0px;
-      }
+      height: 100vw;
     }
-      @media (max-width: 1000px) {
-       .open-flex .card {
-    width: 100%;
-}
-    }
-    @media (max-width: 600px) {
-      .open-outer {
-        margin-top: 10px;
-        padding-inline: 20px;
-      }
-
-      .open-flex {
-        margin-top: 50px;
-      }
-
-      .page-wrapper {
-        height: 100vw;
-      }
-    }
+  }

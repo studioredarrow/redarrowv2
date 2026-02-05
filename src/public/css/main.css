@@ -1512,9 +1512,10 @@ span.inner-dot svg {
   transition: color 0.3s ease;
   color: #828282;
   text-transform: uppercase;
-  font-weight: 500;
-  color: #828282;
   margin-bottom: 10px;
+  font-family: Work Sans;
+  font-size: 20px;
+  line-height: 130%;
 }
 .value .location-btn:hover {
   color: #FF0004;
@@ -2898,13 +2899,15 @@ body {
 }
 
 .main-grid-img {
-  overflow: hidden; /* Hide anything outside the container */
+  overflow: hidden;
+  /* Hide anything outside the container */
   display: inline-block;
   border-radius: 20px;
 }
 
 .main-grid-img img {
-  transition: transform 0.3s ease; /* Smooth hover */
+  transition: transform 0.3s ease;
+  /* Smooth hover */
   display: block;
   border-radius: 20px;
 }
@@ -2918,8 +2921,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 10px; /* Adjust spacing as needed */
-  font-family: inherit; /* Inherit font from parent/body */
+  margin-top: 10px;
+  /* Adjust spacing as needed */
+  font-family: inherit;
+  /* Inherit font from parent/body */
 }
 
 .card-title {
@@ -2931,11 +2936,14 @@ body {
 }
 
 .card-desc {
-  /* margin-left: auto; */ /* flex justify-between handles this */
+  /* margin-left: auto; */
+  /* flex justify-between handles this */
   text-align: right;
-  white-space: nowrap; /* Keep year on one line */
+  white-space: nowrap;
+  /* Keep year on one line */
   /* styles from card-desc if needed */
-  color: #000; /* or inherit */
+  color: #000;
+  /* or inherit */
 }
 
 .container {
@@ -2961,6 +2969,19 @@ body {
   margin: 0px;
 }
 
+.studio-open {
+  margin-right: auto;
+  display: flex;
+  justify-content: end;
+  position: relative;
+  top: -7px;
+  right: -9px;
+}
+
+.studio-open img {
+  max-width: 155px;
+}
+
 .page-wrapper {
   background-color: #b0b0b0;
   height: 100vh;
@@ -2984,7 +3005,6 @@ body {
   font-weight: 500;
   font-size: 20px;
   line-height: 100%;
-  text-transform: uppercase;
 }
 .page-wrapper .details .details-item .label {
   font-weight: 400;
@@ -3127,7 +3147,7 @@ body {
   font-family: Work Sans;
   font-weight: 400;
   font-size: 16px;
-  line-height: 18px;
+  line-height: 140%;
   color: #1E1E1E;
 }
 
@@ -4111,7 +4131,7 @@ img.logo-trigger.logo1 {
   top: -50px;
   font-size: 40px;
   color: #ffffff;
-  animation: arrowMove 4s infinite linear;
+  animation: arrowMove 2s infinite linear;
 }
 .loader-wrapper .arrow img {
   height: auto;

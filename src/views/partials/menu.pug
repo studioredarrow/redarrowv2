@@ -58,18 +58,21 @@ html(lang="en")
                 data-route=item.data.route[0].text
                 data-label=item.data.label.map(b => b.text).join(' ')
               )
-                span #{String(displayOrder).padStart(2, '0')}
+                span (#{String(displayOrder).padStart(2, '0')})
                 each block in item.data.label
                   | #{block.text}
                   br
 
         .social-icons
           span
-            img(src="/images/facebook-icon.png", alt="Facebook")
+            a(href="https://www.facebook.com/StudioRedArrow/")
+              img(src="/images/facebook-icon.png", alt="Facebook")
           span
-            img(src="/images/linkdin-icon.png", alt="LinkedIn")
+            a(href="https://www.linkedin.com/company/red-arrow-limited")
+              img(src="/images/linkdin-icon.png", alt="LinkedIn")
           span
-            img(src="/images/instagram-icon.png", alt="Instagram")
+            a(href="https://www.instagram.com/studioredarrow/")
+             img(src="/images/instagram-icon.png", alt="Instagram")
 
     script.
       // =======================
