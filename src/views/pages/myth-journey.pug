@@ -28,24 +28,25 @@ block content
     main.container#myth-main.hidden
       p.project-name > Myth Journey
       h2.headline1
-        | “We do cool things — wanna see?”
+        | I was not expecting visitors.
         br
-        | Our work? It slaps. Our story? Even better.
+        | Anyway.
         br
-        | Pick a door and I’ll open it.
+        | Work or lore?
 
 
       .btn-row
-        button.btn.primary
+        a.btn.primary(href="/work")
           span 📂
           | Show me your Work
-        button.btn.secondary
+        a.btn.secondary(href="/about-us")
           span 👀
           | Who even are you?
-        img.banner(
-          src="/images/adults-image.png"
-          alt="ADULTS ONLY I LOVE STORIES"
-        )
+        a.banner-link#random-banner(href="#")
+          img.banner(
+            src="/images/adults-image.png"
+            alt="ADULTS ONLY I LOVE STORIES"
+          )
 
       p.note
         | Is this not what you want? Okay diva, skip the buttons and drop your custom request.
@@ -75,6 +76,13 @@ block content
 
       const loaderElements = loader.querySelectorAll(".breadcrumb, .status, .myth-card img");
       const mainElements = mainContent.querySelectorAll("h2, p, .btn-row, img");
+      const randomPages = [
+        "/about-us",
+        "/myth-creation",
+        "/work",
+        "/open-studio",
+        "/terms-and-conditions"
+      ];
 
       // Hide main content initially
       gsap.set(mainContent, { opacity: 0, y: 60 });
@@ -88,6 +96,13 @@ block content
         ease: "power2.out",
         onComplete: showMainContent
       });
+
+      const bannerLink = document.getElementById("random-banner");
+
+        if (bannerLink) {
+          const randomIndex = Math.floor(Math.random() * randomPages.length);
+          bannerLink.href = randomPages[randomIndex];
+        }
 
       // Optional: smooth typing effect for loader status text
       const statusText = loader.querySelector(".status");
