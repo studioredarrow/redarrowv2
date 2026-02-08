@@ -34,10 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
       thinkingBubble.remove();
 
       if (data.type === "text") addMessage(data.message, "bot");
-      if (data.type === "meme") {
-        addMeme(data.image);
-        if (data.caption) addMessage(data.caption, "bot");
-      }
+      if (data.type === "meme" && data.meme) {
+        addMeme(data.meme.image);
+        if (data.meme.caption) addMessage(data.meme.caption, "bot");
+      }      
       // ✅ CLEAN URL AFTER USING IT
     window.history.replaceState({}, document.title, "/myth-journey");
     }
@@ -130,10 +130,10 @@ document.addEventListener("DOMContentLoaded", () => {
       thinkingBubble.remove();
 
       if (data.type === "text") addMessage(data.message, "bot");
-      if (data.type === "meme") {
-        addMeme(data.image);
-        if (data.caption) addMessage(data.caption, "bot");
-      }
+      if (data.type === "meme" && data.meme) {
+        addMeme(data.meme.image);
+        if (data.meme.caption) addMessage(data.meme.caption, "bot");
+      }      
     }
   });
 
@@ -169,10 +169,10 @@ document.addEventListener("DOMContentLoaded", () => {
       thinkingBubble.remove();
 
       if (data.type === "text") addMessage(data.message, "bot");
-      if (data.type === "meme") {
-        addMeme(data.image);
-        if (data.caption) addMessage(data.caption, "bot");
-      }
+      if (data.type === "meme" && data.meme) {
+        addMeme(data.meme.image);
+        if (data.meme.caption) addMessage(data.meme.caption, "bot");
+      }      
       if (ctaTo) addCTA(ctaTo);
     });
   });

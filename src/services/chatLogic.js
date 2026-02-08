@@ -71,7 +71,7 @@ function buildResponse(intent) {
     return {
       type: "meme",
       meme: {
-        image: "/images/memes/confused.gif",
+        image: "/images/adults-image.png",
         caption: "I have no idea what that means, but I support you."
       }
     };
