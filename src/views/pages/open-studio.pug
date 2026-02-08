@@ -39,7 +39,8 @@ block content
               -   gridColClass = positionInRow === 0 ? 'col-5' : 'col-4'
               - }
               //- No clickable link requested for now, or use "#"
-              .card(
+              a.card(
+                href=`/open-studio/${item.slug}`
                 class=gridColClass
                 style="cursor: default;"
               )
