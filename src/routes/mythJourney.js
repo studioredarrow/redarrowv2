@@ -22,9 +22,9 @@ router.get("/", async (req, res) => {
     );
     const questions = await client.getAllByType("suggested_question");
 
-    // shuffle + pick 7
+    // shuffle + pick 4
     const shuffled = questions.sort(() => 0.5 - Math.random());
-    const selectedQuestions = shuffled.slice(0, 7).map(q => ({
+    const selectedQuestions = shuffled.slice(0, 4).map(q => ({
       question: q.data.question?.[0]?.text || "",
       textResponse: q.data.text__response?.[0]?.text || "",
       memeResponse: q.data.meme_response?.url || null,
