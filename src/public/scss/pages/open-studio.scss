@@ -7,11 +7,46 @@
     gap: 130px;
     flex-direction: row-reverse;
   }
-
+.text1 {
+    position: absolute;
+    font-size: 50px;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #1e1e1e;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
   .grid-inner {
     margin-top: 0px;
   }
-
+.grid .card-desc1 {
+    color: #1e1e1e;
+    padding-top: 5px;
+    max-width: 460px;
+    font-family: Work Sans;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: right;
+    text-transform: uppercase;
+}
+.grid .card-title1 {
+    margin-top: 5px;
+    color: #1e1e1e;
+    font-family: Work Sans;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    text-transform: uppercase;
+}
+.card-bottom1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-top: 10px;
+    font-family: inherit;
+}
+.grid .card-title
   .card:hover .card-desc {
     color: #FF0004;
   }
@@ -42,7 +77,7 @@
   .card-bottom {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin-top: 10px;
     /* Adjust spacing as needed */
     font-family: inherit;
