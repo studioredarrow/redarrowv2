@@ -207,58 +207,120 @@ block content
         h3= page.section_heading_bottom
 
   .container
-    .slider-flex
-      if page.card_images.length
+    .slider-wrapper
+      .slider-flex
+        if page.card_images.length
 
-        each card, index in page.card_images
-          -
-            const sizeClass =
-              index === 0 ? 'small' :
-              index === 1 ? 'large' :
-              'medium';
+          each card, index in page.card_images
+            -
+              const sizeClass =
+                index === 0 ? 'small' :
+                index === 1 ? 'large' :
+                'medium';
 
-            const imageClass =
-              index === 0 ? 'image-card1' :
-              index === 1 ? 'image-card2' :
-              'image-card3';
+              const imageClass =
+                index === 0 ? 'image-card1' :
+                index === 1 ? 'image-card2' :
+                'image-card3';
 
-          .card(class=sizeClass)
-            div(class=imageClass)
-              if card.image1.url
-                img(src=card.image1.url alt=card.image1.alt || "")
-              if card.image2.url
-                img(src=card.image2.url alt=card.image2.alt || "")
-              if card.image3.url
-                img(src=card.image3.url alt=card.image3.alt || "")
-              if card.image4.url
-                img(src=card.image4.url alt=card.image4.alt || "")
-              if card.image5.url
-                img(src=card.image5.url alt=card.image5.alt || "")
+           
+            .card(class=sizeClass)
+              div(class=imageClass)
+                if card.image1.url
+                  img(src=card.image1.url alt=card.image1.alt || "")
+                if card.image2.url
+                  img(src=card.image2.url alt=card.image2.alt || "")
+                if card.image3.url
+                  img(src=card.image3.url alt=card.image3.alt || "")
+                if card.image4.url
+                  img(src=card.image4.url alt=card.image4.alt || "")
+                if card.image5.url
+                  img(src=card.image5.url alt=card.image5.alt || "")
 
-            if card.title
-              .title= card.title
+              if card.title
+                .title= card.title
 
-            if card.subtitle
-              .subtitle= card.subtitle
+              if card.subtitle
+                .subtitle= card.subtitle
+
+            if page.card_images.length
+
+          each card, index in page.card_images
+            -
+              const sizeClass =
+                index === 0 ? 'small' :
+                index === 1 ? 'large' :
+                'medium';
+
+              const imageClass =
+                index === 0 ? 'image-card1' :
+                index === 1 ? 'image-card2' :
+                'image-card3';
+
+           
+            .card(class=sizeClass)
+              div(class=imageClass)
+                if card.image1.url
+                  img(src=card.image1.url alt=card.image1.alt || "")
+                if card.image2.url
+                  img(src=card.image2.url alt=card.image2.alt || "")
+                if card.image3.url
+                  img(src=card.image3.url alt=card.image3.alt || "")
+                if card.image4.url
+                  img(src=card.image4.url alt=card.image4.alt || "")
+                if card.image5.url
+                  img(src=card.image5.url alt=card.image5.alt || "")
+
+              if card.title
+                .title= card.title
+
+              if card.subtitle
+                .subtitle= card.subtitle   
+
+    .scroll-progress
+      .scroll-progress-bar          
 
 
+    script.
+      document.addEventListener('DOMContentLoaded', () => {
+        const slider = document.querySelector('.slider-flex');
+        const progressBar = document.querySelector('.scroll-progress-bar');
 
-  script.
-    document.querySelectorAll('.card').forEach(card => {
-      const img = card.querySelector('img');
-      const images = card.dataset.images?.split(',');
-      let index = 0;
+        if (!slider || !progressBar) return;
 
-      if (!images) return;
+        const SPEED = 50; // 🔥 3 = medium, 5 = fast, 8 = very fast
 
-      card.addEventListener('click', () => {
-        index = (index + 1) % images.length;
-        img.classList.remove('image-change');
-        void img.offsetWidth;
-        img.src = images[index];
-        img.classList.add('image-change');
+        slider.addEventListener('wheel', (e) => {
+          e.preventDefault();
+          slider.scrollLeft += e.deltaY * SPEED;
+        }, { passive: false });
+
+        slider.addEventListener('scroll', () => {
+          const maxScroll = slider.scrollWidth - slider.clientWidth;
+          if (maxScroll <= 0) return;
+
+          const progress = (slider.scrollLeft / maxScroll) * 100;
+          progressBar.style.width = progress + '%';
+        });
       });
-    });
+
+
+    script.
+      document.querySelectorAll('.card').forEach(card => {
+        const img = card.querySelector('img');
+        const images = card.dataset.images?.split(',');
+        let index = 0;
+
+        if (!images) return;
+
+        card.addEventListener('click', () => {
+          index = (index + 1) % images.length;
+          img.classList.remove('image-change');
+          void img.offsetWidth;
+          img.src = images[index];
+          img.classList.add('image-change');
+        });
+      });
 
 
   script.
