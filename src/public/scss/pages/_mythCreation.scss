@@ -112,7 +112,7 @@ p.animate-text-unique {
     justify-content: space-between;
     align-items: center;
     gap: 40px;
-    margin-top: 50px;
+    margin-top: 100px;
 
     .inner-unique {
       h1.animate-text-unique {
@@ -353,16 +353,18 @@ ul.services__list li:hover {
 
       // Hand-drawn underline
       &::after {
-        content: "";
-        position: absolute;
-        left: 86px;
-        bottom: 0px;
-        width: 300px;
-        height: 80px;
-        border: 1px solid #d94a3a;
-        border-radius: 50%;
-        transform: rotate(-3deg);
-        pointer-events: none;
+         content: "";
+    position: absolute;
+    left: 86px;
+    bottom: 0px;
+    width: 300px;
+    height: 80px;
+    background-image: url('/images/influnce-circle.svg'); /* Replace with your image URL */
+    background-size: cover; /* Make image fit the element */
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(-3deg);
+    pointer-events: none;
       }
     }
   }
@@ -414,7 +416,7 @@ ul.services__list li:hover {
 .iconic-flex {
   max-width: 955px;
   margin-left: auto;
-  height: 100vh;
+  height: 100%;
 }
 
 .card:hover div {
@@ -547,7 +549,7 @@ p.section-title {
     line-height: 100%;
     text-transform: uppercase;
     padding-top: 20px;
-    max-width: 76%;
+    max-width: 90%;
     color: #1e1e1e;
   }
 
@@ -1100,6 +1102,7 @@ video {
 
   .create-item-inner {
     width: 95%;
+    margin-top: 0px;
   }
 
   .services .fate-wrap {
@@ -1238,7 +1241,8 @@ video {
   }
 
   .slider-flex {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: initial;
   }
 
   .image-card2 {

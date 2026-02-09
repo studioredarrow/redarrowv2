@@ -19,7 +19,9 @@ body {
   line-height: 100% !important;
   color: #1e1e1e !important;
 }
-
+.benji-image img {
+    height: 512px !important;
+}
 .ist-photo-banner1 p {
   font-family: Work Sans;
   font-weight: 400 !important;
@@ -267,7 +269,8 @@ body {
 .create-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 10px;
+  align-items: center;
 }
 
 .creative-banner {
@@ -309,9 +312,10 @@ body {
 }
 
 .creater-flex {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    row-gap: 2px;
 }
 
 .create-item-int {
@@ -334,9 +338,10 @@ body {
 }
 
 .event-item-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    row-gap: 2px;
 }
 
 // here is the project css start here
@@ -420,9 +425,10 @@ body {
 }
 
 .event-gallery-new {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    row-gap: 2px;
 }
 
 .event-column-new.event-single-image-new {
@@ -430,7 +436,7 @@ body {
 }
 
 .event-gallery-new {
-  width: 71%;
+  width: 69%;
 }
 
 .event-image-box-new img,

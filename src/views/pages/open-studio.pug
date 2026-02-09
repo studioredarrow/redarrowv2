@@ -49,11 +49,11 @@ block content
                     img(src=item.image.url, alt=item.artist_name || 'Exhibition Image')
                 
                 //- New Flex Container
-                .card-bottom(style="display: flex; justify-content: space-between;")
+                .card-bottom1(style="display: flex; justify-content: space-between;")
                   if item.artist_name
-                    .card-title= item.artist_name
+                    .card-title1= item.artist_name
                   if item.year
-                    .card-desc= item.year
+                    .card-desc1= item.year
 
         // FIXED IMAGE PREVIEW
         #imagePreview
@@ -63,7 +63,7 @@ block content
           .canvas
             if studioImages.data.exhibitions && studioImages.data.exhibitions.length
               each item, index in studioImages.data.exhibitions
-                .text(
+                .text.text1(
                   data-image=item.image ? item.image.url : ''
                   style="cursor: default;"
                 )= item.artist_name || 'Untitled'

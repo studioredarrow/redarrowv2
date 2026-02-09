@@ -755,6 +755,9 @@ span.inner-dot svg {
   .team-header {
     font-size: 20px;
   }
+  .value .location-btn.active {
+    color: #FF0004 !important;
+}
 }
 
 @media (max-width: 500px) {

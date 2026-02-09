@@ -288,12 +288,24 @@ block content
 
         if (!slider || !progressBar) return;
 
-        const SPEED = 50; // 🔥 3 = medium, 5 = fast, 8 = very fast
+        const SPEED = 0.6; // smoother + safer
 
-        slider.addEventListener('wheel', (e) => {
-          e.preventDefault();
-          slider.scrollLeft += e.deltaY * SPEED;
-        }, { passive: false });
+        // DESKTOP ONLY
+        if (window.innerWidth > 991) {
+          slider.addEventListener('wheel', (e) => {
+            const isAtStart = slider.scrollLeft === 0;
+            const isAtEnd =
+              slider.scrollLeft + slider.clientWidth >= slider.scrollWidth;
+
+            // Allow page scroll when slider ends
+            if ((e.deltaY < 0 && isAtStart) || (e.deltaY > 0 && isAtEnd)) {
+              return;
+            }
+
+            e.preventDefault();
+            slider.scrollLeft += e.deltaY * slider.clientWidth * SPEED;
+          }, { passive: false });
+        }
 
         slider.addEventListener('scroll', () => {
           const maxScroll = slider.scrollWidth - slider.clientWidth;
@@ -303,6 +315,7 @@ block content
           progressBar.style.width = progress + '%';
         });
       });
+
 
 
     script.
