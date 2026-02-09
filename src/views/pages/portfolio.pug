@@ -350,7 +350,9 @@ block content
                     - projectIndex++
                     .project(class=isFirst ? 'center' : '')
                       .project-card
-                      p= item.projects.uid.replace('-', ' ').toUpperCase()
+                      - var rawUid = item.projects && item.projects.uid ? item.projects.uid : item.uid || ''
+                      p= rawUid.replace(/-/g, ' ').toUpperCase()
+
 
 
         // GSAP Core

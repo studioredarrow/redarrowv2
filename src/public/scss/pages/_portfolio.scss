@@ -205,13 +205,13 @@ body {
 }
 
 .bistro-inner-item {
-  max-width: 612px;
+  max-width: 590px;
   margin-left: auto;
   margin-top: 15px;
 
   p {
     font-weight: 500 !important;
-    font-size: 20px !important;
+    font-size: 18px !important;
     padding-bottom: 20px !important;
     line-height: 100% !important;
     text-transform: uppercase !important;
@@ -326,6 +326,7 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
+  align-items: center;
 
   img {
     border-radius: 20px;
@@ -415,6 +416,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  align-items: center;
 }
 
 .event-gallery-new {
