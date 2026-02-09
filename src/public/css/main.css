@@ -499,7 +499,7 @@ p.section-title {
   line-height: 100%;
   text-transform: uppercase;
   padding-top: 20px;
-  max-width: 76%;
+  max-width: 90%;
   color: #1e1e1e;
 }
 .card .subtitle {
@@ -2324,6 +2324,10 @@ body {
 .inner-photo img {
   border-radius: 20px;
   margin-top: 15px;
+}
+
+.benji-image img {
+  height: 512px !important;
 }
 
 .ist-photo-banner p {
