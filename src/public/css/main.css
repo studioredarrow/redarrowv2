@@ -111,7 +111,7 @@ p.animate-text-unique {
   justify-content: space-between;
   align-items: center;
   gap: 40px;
-  margin-top: 50px;
+  margin-top: 100px;
 }
 .hero-section-unique .outer-unique .inner-unique h1.animate-text-unique {
   font-size: 87px;
@@ -328,8 +328,10 @@ ul.services__list li:hover {
   bottom: 0px;
   width: 300px;
   height: 80px;
-  border: 1px solid #d94a3a;
-  border-radius: 50%;
+  background-image: url("/images/influnce-circle.svg"); /* Replace with your image URL */
+  background-size: cover; /* Make image fit the element */
+  background-repeat: no-repeat;
+  background-position: center;
   transform: rotate(-3deg);
   pointer-events: none;
 }
@@ -377,7 +379,7 @@ ul.services__list li:hover {
 .iconic-flex {
   max-width: 955px;
   margin-left: auto;
-  height: 100vh;
+  height: 100%;
 }
 
 .card:hover div {
@@ -992,6 +994,7 @@ video {
   }
   .create-item-inner {
     width: 95%;
+    margin-top: 0px;
   }
   .services .fate-wrap {
     right: 10px;
@@ -1101,7 +1104,8 @@ video {
     display: none;
   }
   .slider-flex {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: initial;
   }
   .image-card2 {
     width: 100%;
@@ -1911,6 +1915,9 @@ span.inner-dot svg {
   .team-header {
     font-size: 20px;
   }
+  .value .location-btn.active {
+    color: #FF0004 !important;
+  }
 }
 @media (max-width: 500px) {
   .team-card img {
@@ -2339,6 +2346,10 @@ body {
   color: #1e1e1e !important;
 }
 
+.benji-image img {
+  height: 512px !important;
+}
+
 .ist-photo-banner1 p {
   font-family: Work Sans;
   font-weight: 400 !important;
@@ -2559,7 +2570,8 @@ body {
 .create-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 10px;
+  align-items: center;
 }
 
 .creative-banner {
@@ -2599,6 +2611,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  row-gap: 2px;
 }
 
 .create-item-int {
@@ -2622,6 +2635,7 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+  row-gap: 2px;
 }
 
 .related-projects {
@@ -2701,6 +2715,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  row-gap: 2px;
 }
 
 .event-column-new.event-single-image-new {
@@ -2708,7 +2723,7 @@ body {
 }
 
 .event-gallery-new {
-  width: 71%;
+  width: 69%;
 }
 
 .event-image-box-new img,
@@ -2955,11 +2970,51 @@ body {
   flex-direction: row-reverse;
 }
 
+.text1 {
+  position: absolute;
+  font-size: 50px;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #1e1e1e;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
 .grid-inner {
   margin-top: 0px;
 }
 
-.card:hover .card-desc {
+.grid .card-desc1 {
+  color: #1e1e1e;
+  padding-top: 5px;
+  max-width: 460px;
+  font-family: Work Sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.grid .card-title1 {
+  margin-top: 5px;
+  color: #1e1e1e;
+  font-family: Work Sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+.card-bottom1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: 10px;
+  font-family: inherit;
+}
+
+.grid .card-title .card:hover .card-desc {
   color: #FF0004;
 }
 
@@ -2989,7 +3044,7 @@ body {
 .card-bottom {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-top: 10px;
   /* Adjust spacing as needed */
   font-family: inherit;
