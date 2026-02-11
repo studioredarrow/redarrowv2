@@ -207,8 +207,7 @@ block content
                     src=page.data.creative_image.url
                     alt=page.data.creative_image.alt
                   )
-              p.hero-description
-                | The creators behind the myths, blending strategy and imagination to shape brands that captivate and inspire
+              p.hero-description= page.data.image_description
                 .hero-btn
                   button.hero-wrap.hero-oval
                     span.hero-oval__text= asText(page.data.button_text)
