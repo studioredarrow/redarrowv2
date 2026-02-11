@@ -20,3 +20,4 @@ router.get("/terms-and-conditions", async (req, res) => {
 });
 
 module.exports = router;
+
