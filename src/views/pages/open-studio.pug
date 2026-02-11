@@ -46,12 +46,12 @@ block content
               )
                 if item.image && item.image.url
                   .main-grid-img 
-                    img(src=item.image.url, alt=item.artist_name || 'Exhibition Image')
+                    img(src=item.image.url, alt=item.exhibition_title || 'Exhibition Image')
                 
                 //- New Flex Container
                 .card-bottom1(style="display: flex; justify-content: space-between;")
-                  if item.artist_name
-                    .card-title1= item.artist_name
+                  if item.exhibition_title
+                    .card-title1= item.exhibition_title
                   if item.year
                     .card-desc1= item.year
 
