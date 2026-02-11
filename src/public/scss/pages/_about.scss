@@ -5,6 +5,19 @@ body {
   color: #111;
   overflow-x: hidden;
 }
+    /* Load DS-Digital font */
+    @font-face {
+      font-family: 'DS-Digital';
+      src: url('fonts/DS-Digital.woff2') format('woff2'),
+           url('fonts/DS-Digital.woff') format('woff'),
+           url('fonts/DS-Digital.ttf') format('truetype');
+      font-weight: 400;
+      font-style: italic;
+    }
+
+.seven-segment-digit {
+  font-family: 'DS-Digital', monospace;
+}
 
 span.counter-suffix {
   font-size: 74px !important;
@@ -173,7 +186,7 @@ span.counter-suffix {
   font-family: Work Sans;
   font-weight: 400;
   font-size: 32px;
-  line-height: 100%;
+  line-height: 125%;
 }
 
 .team-inner {
@@ -368,6 +381,7 @@ span.inner-dot svg {
     margin-bottom: 10px;
     font-family: Work Sans;
     font-size: 20px;
+    font-weight: 500;
     line-height: 130%;
 
     &:hover {
@@ -376,7 +390,6 @@ span.inner-dot svg {
 
     &.active {
       color: #1e1e1e;
-      font-weight: 600;
     }
   }
 
@@ -473,6 +486,7 @@ span.inner-dot svg {
     font-weight: 600;
     font-size: 16px;
     line-height: 100%;
+    margin-top: 15px;
   }
 
   .hero-title {
@@ -558,7 +572,9 @@ span.inner-dot svg {
   display: inline-block;
   border-radius: 20px;
 }
-
+.team-inner {
+    width: 28%;
+}
 .team-img img {
   transition: transform 0.3s ease;
   display: block;
