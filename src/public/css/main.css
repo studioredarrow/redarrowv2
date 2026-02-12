@@ -1261,28 +1261,6 @@ body {
   font-weight: 400;
   font-style: italic;
 }
-.seven-segment-digit {
-  font-family: "DS-Digital", monospace;
-}
-
-span.counter-suffix {
-  font-size: 74px !important;
-}
-
-.seven-segment-counter {
-  background: #1E1E1E !important;
-  height: 90px !important;
-  box-shadow: none !important;
-}
-
-.segment-off {
-  background: #120000 !important;
-}
-
-.segment-on {
-  background: #FF0004 !important;
-}
-
 .create-item.create-img img {
   width: 212px;
   height: 220px;
@@ -1300,9 +1278,12 @@ span.counter-suffix {
   /* top + right (light) */
 }
 .machine .screen {
-  border: 4px solid #333;
-  border-radius: 8px;
+  border-bottom: 3px solid #686662;
+  border-left: 3px solid #686662;
+  border-radius: 2px;
   overflow: hidden;
+  border-right: 4px solid black;
+  border-top: 4px solid black;
 }
 .machine .screen video {
   width: 100%;
@@ -1312,7 +1293,7 @@ span.counter-suffix {
 .machine .panel .counter-row {
   justify-content: space-between;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 1fr 1fr auto auto 1fr 1fr;
   align-items: center;
   margin-top: 10px;
   padding: 10px;
@@ -1889,7 +1870,7 @@ span.inner-dot svg {
   .hero-flex {
     flex-direction: column;
   }
-  .seven-segment-counter {
+  .counter-text {
     padding: 5px !important;
     width: auto !important;
     justify-content: center !important;
@@ -1926,7 +1907,39 @@ span.inner-dot svg {
     flex-direction: column;
   }
   .machine .panel .counter-row {
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+  }
+  .machine .panel .counter-row .counter-container {
+    flex-grow: 1;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(2) {
+    order: 1;
+    width: 22%;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(3) {
+    order: 2;
+    width: 15%;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(4) {
+    order: 3;
+    width: 15%;
+    margin-left: 0;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(5) {
+    order: 4;
+    width: 22%;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(1) {
+    order: 5;
+    width: 45%;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(6) {
+    order: 6;
+    width: 45%;
   }
   .team-header {
     font-size: 20px;
@@ -1947,13 +1960,8 @@ span.inner-dot svg {
     gap: 0px !important;
   }
   .machine .panel .counter-row {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .seven-segment-counter {
-    height: 60px;
-  }
-  .machine .panel .counter-row {
     padding: 0px;
+    gap: 10px;
   }
   .machine .panel .counter-row .counter-container .counter {
     min-height: 55px;
@@ -1985,10 +1993,6 @@ span.inner-dot svg {
   .hero {
     padding: 25px 0px;
     margin-bottom: 80px;
-  }
-  .machine .panel .counter-row {
-    flex-wrap: wrap;
-    gap: 25px;
   }
 }
 @media (max-width: 380px) {
