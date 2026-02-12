@@ -18,11 +18,13 @@ body {
   overflow-x: auto;
   scroll-behavior: smooth;
   padding-bottom: 24px;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .slider-flex::-webkit-scrollbar {
-  display: none; /* Chrome */
+  display: none;
+  /* Chrome */
 }
 
 .card {
@@ -328,8 +330,10 @@ ul.services__list li:hover {
   bottom: 0px;
   width: 300px;
   height: 80px;
-  background-image: url("/images/influnce-circle.svg"); /* Replace with your image URL */
-  background-size: cover; /* Make image fit the element */
+  background-image: url("/images/influnce-circle.svg");
+  /* Replace with your image URL */
+  background-size: cover;
+  /* Make image fit the element */
   background-repeat: no-repeat;
   background-position: center;
   transform: rotate(-3deg);
@@ -563,7 +567,13 @@ p.section-title {
 .image-create-overlay {
   position: absolute;
   right: 110px;
-  top: -80px;
+  top: -137px;
+}
+
+.image-create-overlay img {
+  width: 100%;
+  position: absolute;
+  top: -170px;
 }
 
 .create-outer {
@@ -613,7 +623,7 @@ p.section-title {
 
 .create-item-inner {
   display: flex;
-  margin-left: 143px;
+  margin-left: 73px;
   width: 60%;
   justify-content: space-around;
   margin-top: 22px;
@@ -2350,6 +2360,7 @@ body {
 .inner-photo img {
   border-radius: 20px;
   margin-top: 15px;
+  width: 100%;
 }
 
 .benji-image img {
@@ -2456,17 +2467,18 @@ body {
   line-height: 130%;
 }
 
-.benji-absolute {
-  position: absolute;
-  top: -48px;
-  left: 0;
-}
-
 .benji-flex {
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
   gap: 40px;
+}
+
+.benji-absolute img {
+  position: absolute;
+  top: -157px;
+  left: -53px;
+  width: 137%;
 }
 
 .left,
@@ -4005,10 +4017,11 @@ img.chat-meme {
   height: 26px;
 }
 
-.chat {
+.chat img {
+  width: 10%;
   position: absolute;
-  top: 20px;
-  right: 30px;
+  top: -16px;
+  right: -4px;
 }
 
 .chat-input {
