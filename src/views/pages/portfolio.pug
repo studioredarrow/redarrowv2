@@ -84,15 +84,15 @@ block content
               .right
 
                 if portfolioItem.data.challenge_content
-                  h2= portfolioItem.data.challenge_title || "Challenge"
+                  h2= portfolioItem.data.challenge_title
                   p!= asHTML(portfolioItem.data.challenge_content)
 
                 if portfolioItem.data.strategy_content
-                  h2= portfolioItem.data.strategy_title || "The strategy"
+                  h2= portfolioItem.data.strategy_title
                   p!= asHTML(portfolioItem.data.strategy_content)
 
                 if portfolioItem.data.solution_content
-                  h2= portfolioItem.data.solution_title || "The solution"
+                  h2= portfolioItem.data.solution_title
                   p!= asHTML(portfolioItem.data.solution_content)
 
     

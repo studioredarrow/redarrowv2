@@ -2522,8 +2522,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 574px;
+  height: 100%;
   margin-block: 50px;
+  width: 100%;
 }
 .bistro-banner img {
   border-radius: 20px;
