@@ -18,10 +18,13 @@ body {
   scroll-behavior: smooth;
   padding-bottom: 24px;
 
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 .slider-flex::-webkit-scrollbar {
-  display: none; /* Chrome */
+  display: none;
+  /* Chrome */
 }
 
 .card {
@@ -32,9 +35,11 @@ body {
 .card.small {
   width: 220px;
 }
+
 .card.medium {
   width: 345px;
 }
+
 .card.large {
   width: 595px;
 }
@@ -353,18 +358,20 @@ ul.services__list li:hover {
 
       // Hand-drawn underline
       &::after {
-         content: "";
-    position: absolute;
-    left: 86px;
-    bottom: 0px;
-    width: 300px;
-    height: 80px;
-    background-image: url('/images/influnce-circle.svg'); /* Replace with your image URL */
-    background-size: cover; /* Make image fit the element */
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: rotate(-3deg);
-    pointer-events: none;
+        content: "";
+        position: absolute;
+        left: 86px;
+        bottom: 0px;
+        width: 300px;
+        height: 80px;
+        background-image: url('/images/influnce-circle.svg');
+        /* Replace with your image URL */
+        background-size: cover;
+        /* Make image fit the element */
+        background-repeat: no-repeat;
+        background-position: center;
+        transform: rotate(-3deg);
+        pointer-events: none;
       }
     }
   }
@@ -617,7 +624,13 @@ p.section-title {
 .image-create-overlay {
   position: absolute;
   right: 110px;
-  top: -80px;
+  top: -137px;
+}
+
+.image-create-overlay img {
+  width: 100%;
+  position: absolute;
+  top: -170px;
 }
 
 .create-outer {
@@ -671,7 +684,7 @@ p.section-title {
 
 .create-item-inner {
   display: flex;
-  margin-left: 143px;
+  margin-left: 73px;
   width: 60%;
   justify-content: space-around;
   margin-top: 22px;
@@ -1143,10 +1156,11 @@ video {
     position: relative;
     padding: 0px;
     height: 328px;
-}
-.image-create-overlay {
-  width: 80%;
-}
+  }
+
+  .image-create-overlay {
+    width: 80%;
+  }
 
   .create-img {
     position: absolute;
@@ -1158,7 +1172,7 @@ video {
     position: relative;
     top: -121px;
     left: 20px;
-}
+  }
 
   .create-item-inner {
     align-items: start;
@@ -1182,7 +1196,7 @@ video {
   .image-create-overlay {
     right: 25px;
     top: 73px;
-}
+  }
 
   .footer-oval__svg {
     width: 110px;

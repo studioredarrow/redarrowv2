@@ -258,14 +258,14 @@ body {
 }
 
 .chat-message.bot {
-    text-align: left;
-    margin: 8px 0;
-    opacity: 0.85;
-    font-family: Work Sans;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 100%;
-    color: #FF0004;
+  text-align: left;
+  margin: 8px 0;
+  opacity: 0.85;
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  color: #FF0004;
 }
 
 .cookie-info {
@@ -630,10 +630,11 @@ $border-radius: 18px;
   }
 }
 
-.chat {
+.chat img {
+  width: 10%;
   position: absolute;
-  top: 20px;
-  right: 30px;
+  top: -16px;
+  right: -4px;
 }
 
 .chat-input {
@@ -1147,9 +1148,11 @@ div#chat-area button {
   .cookie-info p {
     font-size: 14px;
   }
-.note {
+
+  .note {
     max-width: 100%;
-}
+  }
+
   .page-404 .content .message {
     margin-top: -40px;
   }

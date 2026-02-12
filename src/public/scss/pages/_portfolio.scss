@@ -9,10 +9,13 @@ body {
 .inner-photo img {
   border-radius: 20px;
   margin-top: 15px;
+  width: 100%;
 }
+
 .benji-image img {
   height: 512px !important;
 }
+
 .ist-photo-banner p {
   max-width: 49% !important;
   font-family: Work Sans;
@@ -21,9 +24,11 @@ body {
   line-height: 100% !important;
   color: #1e1e1e !important;
 }
+
 .benji-image img {
-    height: 512px !important;
+  height: 512px !important;
 }
+
 .ist-photo-banner1 p {
   font-family: Work Sans;
   font-weight: 400 !important;
@@ -116,18 +121,19 @@ body {
   }
 }
 
-.benji-absolute {
-  position: absolute;
-  top: -48px;
-  left: 0;
-}
-
 // here is the scroll tab on mobile css start here
 .benji-flex {
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
   gap: 40px;
+}
+
+.benji-absolute img {
+  position: absolute;
+  top: -157px;
+  left: -53px;
+  width: 137%;
 }
 
 .left,
@@ -314,10 +320,10 @@ body {
 }
 
 .creater-flex {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    row-gap: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  row-gap: 2px;
 }
 
 .create-item-int {
@@ -340,10 +346,10 @@ body {
 }
 
 .event-item-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    row-gap: 2px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  row-gap: 2px;
 }
 
 // here is the project css start here
@@ -427,10 +433,10 @@ body {
 }
 
 .event-gallery-new {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    row-gap: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  row-gap: 2px;
 }
 
 .event-column-new.event-single-image-new {
