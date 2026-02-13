@@ -39,9 +39,10 @@ body {
 
 .absolute-image {
   position: absolute;
-  top: -82px;
-  left: -62px;
-  z-index: -1;
+  z-index: 1;
+  top: -374px;
+  left: -215px;
+  width: 90%;
 }
 
 .work-flex {
