@@ -2528,6 +2528,8 @@ body {
 }
 .bistro-banner img {
   border-radius: 20px;
+  width: 100%;
+  height: 574px;
 }
 
 .bistro-flex {
