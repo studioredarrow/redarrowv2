@@ -13,6 +13,7 @@ const openStudioRoutes = require("./routes/openStudio");
 const portfolioRoutes = require("./routes/portfolio");
 const termsRoutes = require("./routes/terms");
 const counterDisplayRoute = require("./routes/counterDisplay");
+const formRoute = require("./routes/form");
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(menuMiddleware);
 app.use(randomAdMiddleware);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use("/", introRoute);
 app.use("/myth-journey", mythJourneyRoute);
@@ -34,6 +37,7 @@ app.use("/", openStudioRoutes);
 app.use("/", portfolioRoutes);
 app.use("/", termsRoutes);
 app.use("/", counterDisplayRoute);
+app.use("/", formRoute);
 
 // ✅ Static 404 — MUST be last
 app.use((req, res) => {
