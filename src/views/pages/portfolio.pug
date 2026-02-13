@@ -375,8 +375,6 @@ block content
         .from(".benji-image img", { scale: 1.2, opacity: 0, duration: 1.4 })
         .from(".benji-title", { y: 80, opacity: 0 }, "-=0.8")
         .from(".benji-description", { y: 60, opacity: 0 }, "-=0.6")
-        .from(".benji-services p", { y: 40, opacity: 0, stagger: 0.15 }, "-=0.4")
-        .from(".benji-absolute img", { scale: 0.8, opacity: 0 }, "-=0.8");
 
       // TEXT MOMENT
       gsap.utils.toArray("h2, h3, p").forEach(el => {
