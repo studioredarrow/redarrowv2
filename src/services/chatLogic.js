@@ -40,9 +40,44 @@ function isMeaningful(intent) {
 }
 
 /**
- * 3️⃣ RANDOM AD (TEMP MOCK — replace with Prismic later)
+ * 3️⃣ MEMEIC CTA LABELS
  */
-function getRandomAd() {
+const MEMEIC_LABELS = [
+  "Witness",
+  "Manifest This",
+  "Enter The Void",
+  "Chaos Mode",
+  "Ascend",
+  "Bet",
+  "No Cap",
+  "Gas",
+  "Real Talk",
+  "Stay Mad",
+  "Based",
+  "Understandable",
+  "Aight",
+  "Cook",
+  "Say Less",
+  "Vibe Check",
+  "Main Character Energy"
+];
+
+function getRandomMemeicLabel() {
+  return MEMEIC_LABELS[Math.floor(Math.random() * MEMEIC_LABELS.length)];
+}
+
+/**
+ * 4️⃣ RANDOM AD (fetch from Prismic list)
+ */
+function getRandomAd(adsList = [], targetRoute = "#") {
+  if (adsList && adsList.length > 0) {
+    const randomAd = adsList[Math.floor(Math.random() * adsList.length)];
+    return {
+      image: randomAd.data.fake_ad?.url || "/images/ads/ad-1.webp",
+      route: targetRoute
+    };
+  }
+
   const ads = [
     {
       image: "/images/ads/ad-1.webp",
@@ -65,7 +100,7 @@ function getRandomAd() {
  * 4️⃣ RESPONSE BUILDER
  * - Always returns a normalized shape
  */
-function buildResponse(intent) {
+function buildResponse(intent, adsList = [], targetRoute = "#", suggestedQuestions = []) {
   // 🧨 NON-MEANINGFUL → MEME
   if (!isMeaningful(intent)) {
     return {
@@ -82,7 +117,7 @@ function buildResponse(intent) {
     type: "text",
     message: "",
     primaryCta: null,
-    ad: getRandomAd(),
+    ad: getRandomAd(adsList, targetRoute),
     nextPrompts: []
   };
 
@@ -172,10 +207,21 @@ function buildResponse(intent) {
       ];
   }
 
+  // Final override with Prismic questions if available
+  // This ensures that even specific intents respect the Prismic source
+  if (suggestedQuestions && suggestedQuestions.length > 0) {
+    const shuffled = [...suggestedQuestions].sort(() => 0.5 - Math.random());
+    response.nextPrompts = shuffled.slice(0, 3).map(q => {
+      // Priority: Rich Text field 'question' -> Key Text field 'question' -> fallback
+      return q.data?.question?.[0]?.text || q.data?.question || "What else?";
+    });
+  }
+
   return response;
 }
 
 module.exports = {
   classifyMessage,
-  buildResponse
+  buildResponse,
+  getRandomMemeicLabel
 };

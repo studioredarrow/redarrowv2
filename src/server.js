@@ -3,6 +3,7 @@ const path = require("path");
 
 const menuMiddleware = require("./middleware/menu");
 const randomAdMiddleware = require("./middleware/randomAdMiddleware");
+const suggestedQuestionsMiddleware = require("./middleware/suggestedQuestions");
 const introRoute = require("./routes/index");
 const mythJourneyRoute = require("./routes/mythJourney");
 const loadingRoute = require("./routes/loading");
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(menuMiddleware);
 app.use(randomAdMiddleware);
+app.use(suggestedQuestionsMiddleware);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

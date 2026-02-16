@@ -3873,8 +3873,10 @@ body {
   margin-top: 24px;
   padding-inline: 20px;
   display: flex;
-  flex-direction: column;
   gap: 12px;
+  flex-wrap: wrap;
+  align-items: self-start;
+  flex-direction: column;
 }
 
 .chat-message {
@@ -4725,11 +4727,10 @@ div#chat-area button {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  width: 10%;
-  display: flex;
+  width: auto;
   justify-content: center;
 }
 
@@ -4930,11 +4931,77 @@ div#chat-area button {
     transform: rotateY(180deg) translateZ(160px);
   }
   .item:nth-child(5) {
-    transform: rotateY(240deg) translateZ(160px);
+    right: auto !important;
   }
-  .item:nth-child(6) {
-    transform: rotateY(300deg) translateZ(160px);
+  .page-404 {
+    overflow: hidden;
+    padding-bottom: 120px;
   }
+  .mobile-img {
+    display: block;
+    width: auto !important;
+  }
+}
+.chat-cta {
+  width: auto !important;
+  display: inline-flex !important;
+  margin-left: 10px;
+  margin-bottom: 12px;
+  padding: 8px 20px !important;
+}
+
+.chat-ad-link {
+  display: block;
+  margin: 12px 0 12px 0;
+  max-width: 100%;
+}
+.chat-ad-link img.chat-ad-banner {
+  width: 100%;
+  max-width: 350px;
+  /* Restrict max width of ad */
+  border-radius: 4px;
+  display: block;
+}
+
+.chat-next-prompts {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.chat-next-prompts::-webkit-scrollbar {
+  display: none;
+}
+.chat-next-prompts .next-prompt-btn {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  border: 1px solid #ff0004;
+  background: transparent;
+  color: #ff0004;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: auto !important;
+  display: inline-block !important;
+  font-family: "Work Sans";
+}
+.chat-next-prompts .next-prompt-btn:hover {
+  background: #ff0004;
+  color: #fff;
+}
+
+div#chat-area button.chat-cta,
+div#chat-area button.next-prompt-btn {
+  width: auto !important;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -14,6 +14,9 @@ async function randomAdMiddleware(req, res, next) {
       res.locals.randomFooterAd = null;
     }
 
+    // Expose full list for chat
+    res.locals.randomAdsList = ads;
+
     next();
   } catch (err) {
     console.error("❌ Random Ad Fetch Error:", err);
