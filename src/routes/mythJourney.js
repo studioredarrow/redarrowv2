@@ -54,7 +54,12 @@ router.get("/", async (req, res) => {
 router.post("/chat", express.json(), async (req, res) => {
   const userMessage = req.body.message;
   console.log(userMessage,'-----test')
-  const response = await handleUserMessage(userMessage);
+  
+  // Pass menuItems from res.locals (populated by menuMiddleware)
+  const menuItems = res.locals.menuItems || [];
+  const randomAdsList = res.locals.randomAdsList || [];
+  const suggestedQuestions = res.locals.suggestedQuestions || [];
+  const response = await handleUserMessage(userMessage, menuItems, randomAdsList, suggestedQuestions);
 
   res.json(response);
 });

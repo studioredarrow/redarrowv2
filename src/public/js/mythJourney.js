@@ -64,12 +64,55 @@ document.addEventListener("DOMContentLoaded", () => {
     chatArea.scrollTop = chatArea.scrollHeight;
   }
 
-  function addCTA(ctaTo) {
+  // Updated to handle object or string for backward compatibility
+  function addCTA(cta) {
+    if (!cta) return;
+    
+    const label = cta.label || "Explore";
+    const route = cta.route || cta; // Handle generic string case
+
     const btn = document.createElement("button");
-    btn.className = "btn primary";
-    btn.innerText = "Explore";
-    btn.onclick = () => (window.location.href = `/${ctaTo}`);
+    btn.className = "btn primary chat-cta"; // Added chat-cta class for specific styling if needed
+    btn.innerText = label;
+    btn.onclick = () => (window.location.href = route);
+    
     chatArea.appendChild(btn);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
+
+  // New: Render Ad
+  function addAd(ad) {
+    if (!ad || !ad.image) return;
+
+    const link = document.createElement("a");
+    link.href = ad.route || "#";
+    link.className = "chat-ad-link";
+
+    const img = document.createElement("img");
+    img.src = ad.image;
+    img.className = "chat-ad-banner"; // Ensure css handles this width
+    
+    link.appendChild(img);
+    chatArea.appendChild(link);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
+
+  // New: Render Next Prompts
+  function addNextPrompts(prompts) {
+    if (!prompts || !prompts.length) return;
+
+    const container = document.createElement("div");
+    container.className = "chat-next-prompts";
+
+    prompts.forEach(promptText => {
+      const btn = document.createElement("button");
+      btn.className = "chat-btn next-prompt-btn";
+      btn.innerText = promptText;
+      btn.onclick = () => handleQuestionClick(promptText); // Re-use handler logic
+      container.appendChild(btn);
+    });
+
+    chatArea.appendChild(container);
     chatArea.scrollTop = chatArea.scrollHeight;
   }
 
@@ -114,6 +157,52 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------------------
+     SHARED HANDLER
+  -------------------------------- */
+  async function handleQuestionClick(question, textResponse, memeResponse, ctaTo) {
+      addMessage(question, "user");
+
+      const thinkingBubble = await showThinkingBubble("answer_preparing");
+
+      // PRISMIC RESPONSE (INSTANT)
+      if (textResponse || memeResponse) {
+        setTimeout(() => {
+          thinkingBubble.remove();
+          if (textResponse) addMessage(textResponse, "bot");
+          if (memeResponse) addMeme(memeResponse);
+          if (ctaTo) addCTA({ route: `/${ctaTo}`, label: "Explore" }); // Legacy adapter
+        }, 2000);
+        return;
+      }
+
+      // AI FALLBACK
+      try {
+        const data = await fetchAIResponse(question);
+        thinkingBubble.remove();
+        processAIResponse(data);
+      } catch (e) {
+        thinkingBubble.remove();
+        addMessage("...silence...", "bot");
+      }
+  }
+
+  function processAIResponse(data) {
+      if (data.type === "text" || !data.type) {
+           if (data.message || data.answer) addMessage(data.message || data.answer, "bot");
+      }
+      
+      if (data.type === "meme" && data.meme) {
+        addMeme(data.meme.image);
+        if (data.meme.caption) addMessage(data.meme.caption, "bot");
+      }
+
+      // RENDER ORDER: CTA -> AD -> PROMPTS
+      if (data.primaryCta) addCTA(data.primaryCta);
+      if (data.ad) addAd(data.ad);
+      if (data.nextPrompts) addNextPrompts(data.nextPrompts);
+  }
+
+  /* -------------------------------
      INPUT SUBMIT (AI ONLY)
   -------------------------------- */
   input.addEventListener("keydown", async (e) => {
@@ -125,15 +214,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const thinkingBubble = await showThinkingBubble("answer_preparing");
 
-      const data = await fetchAIResponse(text);
-
-      thinkingBubble.remove();
-
-      if (data.type === "text") addMessage(data.message, "bot");
-      if (data.type === "meme" && data.meme) {
-        addMeme(data.meme.image);
-        if (data.meme.caption) addMessage(data.meme.caption, "bot");
-      }      
+      try {
+        const data = await fetchAIResponse(text);
+        thinkingBubble.remove();
+        processAIResponse(data);
+      } catch (err) {
+        thinkingBubble.remove();
+        addMessage("...silence...", "bot");
+      }
     }
   });
 
@@ -141,39 +229,15 @@ document.addEventListener("DOMContentLoaded", () => {
      PRISMIC QUESTIONS
   -------------------------------- */
   document.querySelectorAll(".chat-btn").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const question = btn.innerText.trim();
-      const textResponse = btn.dataset.text;
-      const memeResponse = btn.dataset.meme;
-      const ctaTo = btn.dataset.cta;
-
-      addMessage(question, "user");
-
-      const thinkingBubble = await showThinkingBubble("answer_preparing");
-
-      // PRISMIC RESPONSE (INSTANT)
-      if (textResponse || memeResponse) {
-        setTimeout(() => {
-          thinkingBubble.remove();
-
-          if (textResponse) addMessage(textResponse, "bot");
-          if (memeResponse) addMeme(memeResponse);
-          if (ctaTo) addCTA(ctaTo);
-        }, 2000);
-        return;
-      }
-
-      // AI FALLBACK
-      const data = await fetchAIResponse(question);
-
-      thinkingBubble.remove();
-
-      if (data.type === "text") addMessage(data.message, "bot");
-      if (data.type === "meme" && data.meme) {
-        addMeme(data.meme.image);
-        if (data.meme.caption) addMessage(data.meme.caption, "bot");
-      }      
-      if (ctaTo) addCTA(ctaTo);
+    // Exclude dynamically created ones if any exist linearly (though querySelectorAll matches snapshot)
+    btn.addEventListener("click", () => {
+       // logic moved to shared handler
+       handleQuestionClick(
+           btn.innerText.trim(), 
+           btn.dataset.text, 
+           btn.dataset.meme, 
+           btn.dataset.cta
+       );
     });
   });
 });
