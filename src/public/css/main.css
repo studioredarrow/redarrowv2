@@ -4225,7 +4225,7 @@ img.chat-meme {
 .intro-terms .terms-btn {
   color: white;
   padding: 10px 18px;
-  font-size: 16px;
+  font-size: 12px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -4233,9 +4233,24 @@ img.chat-meme {
   cursor: pointer;
 }
 
-/* Myth Journey page: Terms button text colour */
+/* Myth Journey page: Terms at bottom of screen, text colour, font size */
+.myth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.myth-wrapper main#myth-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.myth-wrapper .intro-terms {
+  margin-top: auto;
+  padding-bottom: 24px;
+}
 .myth-wrapper .intro-terms .terms-btn {
   color: #ff0004;
+  font-size: 12px;
 }
 
 .logo-container {
