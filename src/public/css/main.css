@@ -4233,6 +4233,10 @@ img.chat-meme {
   cursor: pointer;
 }
 
+/* Myth Journey page: Terms button text colour */
+.myth-wrapper .intro-terms .terms-btn {
+  color: #ff0004;
+}
 
 .logo-container {
   display: flex;
