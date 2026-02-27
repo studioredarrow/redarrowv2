@@ -4217,6 +4217,23 @@ img.chat-meme {
   margin-top: -30px;
 }
 
+.intro-terms {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.intro-terms .terms-btn {
+  color: white;
+  padding: 10px 18px;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Work Sans";
+  cursor: pointer;
+}
+
+
 .logo-container {
   display: flex;
   justify-content: center;
