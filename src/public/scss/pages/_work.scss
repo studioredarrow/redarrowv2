@@ -24,10 +24,6 @@ body {
   color: var(--text);
 }
 
-.work-outer {
-  margin-top: 240px;
-}
-
 .category-links .category {
   display: inline-block;
 }
@@ -343,13 +339,39 @@ body {
   }
 
   .work-outer {
-    margin-top: 180px;
-  }
+    padding-top: 0px !important;
+    margin-top: 0px;
+}
+.work-flex {
+  flex-direction: column;
+  gap: 100px;
+  padding-top: 160px;
+}
 }
 
 @media (max-width: 600px) {
   .category-links {
     font-size: 20px;
-    width: 366px;
+    width: 342px;
   }
+  .benji-absolute img {
+    position: absolute;
+    top: -135px;
+    left: -45px;
+    width: 70%;
+    z-index: 9999;
+}
+  .absolute-image {
+    top: -156px;
+    left: -52px;
+}
+.grid.active {
+  gap: 40px 30px;
+}
+.absolute-image img {
+  width: 100%;
+}
+}
+.work-outer {
+  margin-top: 170px;
 }

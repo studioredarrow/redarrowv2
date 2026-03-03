@@ -400,7 +400,7 @@ ul.services__list li:hover {
 }
 
 .create-outer .outer-btn {
-  margin-left: 200px;
+  margin-left: 110px;
   margin-top: 50px;
 }
 
@@ -1001,7 +1001,7 @@ video {
     r: 16px;
   }
   .services .fate-wrap {
-    bottom: 0px !important;
+    bottom: -28px !important;
     right: -25px !important;
   }
   .container img {
@@ -1159,15 +1159,15 @@ video {
     width: 115px;
   }
   .services__note {
-    bottom: -10px !important;
-    right: 70px;
+    bottom: -38px !important;
+    right: 78px !important;
   }
   .iconic-outer {
     padding-inline: 0px;
   }
   .iconic-image img {
     width: 390px;
-    padding-block: 60px;
+    padding-block: 10px !important;
     position: relative;
     left: 100px;
   }
@@ -1211,6 +1211,19 @@ video {
   .hero-section-unique .outer-unique .image-container-unique {
     right: -100px;
   }
+  .image-create-overlay {
+    width: 100% !important;
+  }
+  .image-create-overlay img {
+    top: -116px !important;
+    left: 46px !important;
+  }
+  .iconic-flex {
+    height: 100%;
+  }
+  .iconic-outer .iconic-inner .iconic-image {
+    right: -25px;
+  }
   .allimages {
     gap: 20px;
   }
@@ -1238,7 +1251,44 @@ video {
     width: 26%;
   }
   .image-wrapper img {
-    width: 100px;
+    width: 85px;
+  }
+  .card.large {
+    width: 100%;
+    height: 100%;
+  }
+  .card.small {
+    width: 100%;
+    height: 100%;
+  }
+  .card.medium {
+    width: 100%;
+    height: 100%;
+  }
+  .image-card1, .image-card2, .image-card3 {
+    height: 260px !important;
+  }
+  .hero-section-unique {
+    position: relative;
+    margin-top: 70px;
+  }
+  .hero-section-unique .outer-unique .image-container-unique img {
+    max-width: 100%;
+    position: relative;
+    right: -80px;
+  }
+  svg.fate-oval__svg {
+    top: -10px !important;
+    right: -38px !important;
+  }
+  .hero-section-unique .outer-unique .image-container-unique {
+    position: static;
+  }
+  .hero-section-unique .outer-unique .image-container-unique .label-group-unique {
+    position: absolute;
+    bottom: auto;
+    top: 78px;
+    left: 24px;
   }
   .hero-section-unique .outer-unique .inner-unique h1.animate-text-unique {
     font-size: 48px;
@@ -1971,8 +2021,27 @@ span.inner-dot svg {
     width: 172px;
     height: 208px;
   }
+  .digit-slot, .counter-suffix {
+    font-size: 48px !important;
+  }
   .machine {
     padding: 10px;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(2) {
+    order: 1;
+    width: 18% !important;
+  }
+  .counter-text {
+    padding: 14px !important;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(6) {
+    order: 6;
+    width: 45%;
+    margin-right: 22px;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(1) {
+    order: 5;
+    width: 23% !important;
   }
   .team-card.add-card {
     gap: 0px !important;
@@ -2026,6 +2095,11 @@ a {
   width: 124px;
 }
 
+@media (max-width: 390px) {
+  .digit-slot, .counter-suffix {
+    font-size: 38px !important;
+  }
+}
 :root {
   --bg: #f6f2ee;
   --text: #6b6b6b;
@@ -2050,10 +2124,6 @@ body {
   background: var(--bg);
   font-family: Work Sans;
   color: var(--text);
-}
-
-.work-outer {
-  margin-top: 240px;
 }
 
 .category-links .category {
@@ -2351,15 +2421,42 @@ body {
     margin-left: 0px;
   }
   .work-outer {
-    margin-top: 180px;
+    padding-top: 0px !important;
+    margin-top: 0px;
+  }
+  .work-flex {
+    flex-direction: column;
+    gap: 100px;
+    padding-top: 160px;
   }
 }
 @media (max-width: 600px) {
   .category-links {
     font-size: 20px;
-    width: 366px;
+    width: 342px;
+  }
+  .benji-absolute img {
+    position: absolute;
+    top: -135px;
+    left: -45px;
+    width: 70%;
+    z-index: 9999;
+  }
+  .absolute-image {
+    top: -156px;
+    left: -52px;
+  }
+  .grid.active {
+    gap: 40px 30px;
+  }
+  .absolute-image img {
+    width: 100%;
   }
 }
+.work-outer {
+  margin-top: 170px;
+}
+
 /* ==============================
    Benji Bistro – Scoped Styles
    ============================== */
@@ -2534,7 +2631,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-block: 50px;
+  margin-block: 30px;
   width: 100%;
 }
 .bistro-banner img {
@@ -2563,6 +2660,7 @@ body {
 .photo-right {
   max-width: 590px;
   margin-left: auto;
+  padding-bottom: 30px;
 }
 
 .bistro-inner-item {
@@ -3102,7 +3200,14 @@ body {
   .bistro-banner {
     padding-block: 50px;
   }
+  .benji-title {
+    font-size: 32px;
+  }
 }
+.create-item-grid img {
+  width: 100%;
+}
+
 body {
   font-family: Work Sans;
 }
@@ -3296,12 +3401,6 @@ body {
   .open-outer {
     margin-top: 10px;
     padding-inline: 20px;
-  }
-  .open-flex {
-    margin-top: 50px;
-  }
-  .page-wrapper {
-    height: 100vw;
   }
 }
 /* ================= GLOBAL ================= */
@@ -3761,7 +3860,7 @@ textarea::placeholder {
   line-height: 100%;
   text-align: center;
   text-transform: uppercase;
-  margin-left: -30px;
+  margin-left: -16px;
   margin-top: 25px;
 }
 .container .post-outer .content .form .btn-wrapper .btn-border {
@@ -3880,6 +3979,47 @@ svg.fate-oval__svg {
   transition: stroke-dashoffset 0.1s ease;
 }
 
+svg.fate-oval__svg.form-svg {
+  top: -22px;
+  left: -34px;
+}
+
+@media (max-width: 500px) {
+  svg.fate-oval__svg.form-svg {
+    top: -22px !important;
+  }
+  .container .post-outer {
+    position: relative;
+  }
+  .container .post-outer .content .left {
+    position: absolute;
+    top: 27px;
+    padding-inline: 20px;
+    left: 0;
+  }
+  .container .post-outer .header {
+    max-width: 100%;
+    margin: 0;
+  }
+  .container .post-outer .content .form .form-row {
+    gap: 25px;
+    margin-bottom: 15px;
+  }
+  .container .post-outer {
+    padding-block: 30px;
+    overflow: hidden;
+    margin-top: 112px;
+    position: relative;
+    padding-top: 70px;
+    margin-top: 140px;
+  }
+  .container .post-outer .content .left span.left-span-2nd {
+    margin-right: 80px;
+  }
+  .container .post-outer .content .form .interest-wrapper {
+    margin-bottom: 25px;
+  }
+}
 button {
   outline: none;
   box-shadow: none;
@@ -4455,11 +4595,14 @@ img.chat-meme {
 }
 
 a.terms-btn {
-  color: #ff0004;
+  color: #1e1e1e;
   text-decoration: none;
   font-family: Work Sans;
   font-weight: 500;
   font-size: 16px;
+}
+a.terms-btn:hover {
+  color: #ff0004;
 }
 
 /* Landing page (intro): Terms & Conditions in white */
@@ -4511,12 +4654,12 @@ a.terms-btn {
 .chat img {
   width: 10%;
   position: absolute;
-  top: -2px;
+  top: -16px;
   right: -4px;
 }
 
 .chat-input {
-  margin-bottom: 10px !important;
+  margin-bottom: 50px !important;
 }
 
 .myth-text {
@@ -5051,7 +5194,7 @@ div#chat-area button {
     font-size: 40px;
   }
   .item.main {
-    font-size: 40px;
+    font-size: 36px;
   }
   .myth-wrapper {
     padding: 15px;
@@ -5167,6 +5310,9 @@ div#chat-area button {
 .chat-next-prompts .next-prompt-btn:hover {
   background: #ff0004;
   color: #fff;
+}
+.chat-next-prompts .item.side {
+  font-size: 30px;
 }
 
 div#chat-area button.chat-cta,

@@ -76,120 +76,168 @@ html(lang="en")
 
     script.
       // =======================
-      // CLICK TO MOVE THE SLIDER
+      // RESPONSIVE 3D CAROUSEL (ALL DEVICES)
       // =======================
-      const carousel = document.getElementById('carousel');
-      const items = carousel.querySelectorAll('.item');
 
-      const sensitivity = 0.25;
-      const itemCount = items.length;
-      const translateZ = 450;
-      
-      // Track which item is currently centered (0-indexed)
+      const carousel = document.getElementById("carousel");
+      const items = carousel.querySelectorAll(".item");
+
       let centeredIndex = 0;
-      
-      // Position items so only 3 are visible: prev (-60°), current (0°), next (60°)
-      // Other items go to back (180°) to hide them
+      let translateZ = 450;
+      let sideAngle = 60;
+      const itemCount = items.length;
+
+      // -----------------------
+      // UPDATE SETTINGS BASED ON SCREEN SIZE
+      // -----------------------
+      function updateCarouselSettings() {
+        const width = window.innerWidth;
+
+        if (width <= 480) {
+          // Mobile
+          translateZ = 180; 
+          sideAngle = 50;
+        } 
+        else if (width <= 1024) {
+          // Tablet
+          translateZ = 300;
+          sideAngle = 55;
+        } 
+        else {
+          // Desktop
+          translateZ = 450;
+          sideAngle = 60;
+        }
+
+        repositionItems(centeredIndex);
+      }
+
+      window.addEventListener("resize", updateCarouselSettings);
+
+      // -----------------------
+      // POSITION ITEMS (3D ALWAYS)
+      // -----------------------
       function repositionItems(centerIdx) {
         const prevIdx = (centerIdx - 1 + itemCount) % itemCount;
         const nextIdx = (centerIdx + 1) % itemCount;
-        
+
         items.forEach((item, index) => {
+          item.style.transition =
+            "transform 0.8s cubic-bezier(0.23,1,0.32,1), opacity 0.6s";
+
           let angle;
+
           if (index === centerIdx) {
-            angle = 0;  // Center
-            item.classList.add('main');
-            item.classList.remove('side');
-          } else if (index === prevIdx) {
-            angle = -60;  // Left side (previous)
-            item.classList.add('side');
-            item.classList.remove('main');
-          } else if (index === nextIdx) {
-            angle = 60;   // Right side (next)
-            item.classList.add('side');
-            item.classList.remove('main');
-          } else {
-            angle = 180;  // Hidden at back
-            item.classList.add('side');
-            item.classList.remove('main');
+            angle = 0;
+            item.classList.add("main");
+            item.classList.remove("side");
+          } 
+          else if (index === prevIdx) {
+            angle = -sideAngle;
+            item.classList.add("side");
+            item.classList.remove("main");
+          } 
+          else if (index === nextIdx) {
+            angle = sideAngle;
+            item.classList.add("side");
+            item.classList.remove("main");
+          } 
+          else {
+            angle = 180;
+            item.classList.add("side");
+            item.classList.remove("main");
           }
+
           item.style.transform = `rotateY(${angle}deg) translateZ(${translateZ}px)`;
         });
       }
-      
-      // Apply initial positioning with item 0 centered
-      repositionItems(0);
 
-      // Function to check if an item is currently centered
+      // -----------------------
+      // CLICK HANDLING
+      // -----------------------
       function isItemCentered(item) {
-        return item.classList.contains('main');
+        return item.classList.contains("main");
       }
 
-      // Click event listener for each item
-      document.querySelectorAll('.carousel .item').forEach(item => {
-        item.addEventListener('click', (e) => {
+      items.forEach((item) => {
+        item.addEventListener("click", () => {
           const route = item.dataset.route;
           const label = item.dataset.label;
 
-          // Check if the clicked item is already centered
           const isCentered = isItemCentered(item);
           const itemIndex = Array.from(items).indexOf(item);
 
           if (isCentered) {
-            // Navigate to the page
-            console.log('NAVIGATING →', label);
             setTimeout(() => {
               window.location.replace(
                 `/loading?to=${encodeURIComponent(route)}&label=${encodeURIComponent(label)}`
               );
             }, 100);
           } else {
-            // Center this item and reposition all items
-            console.log('SCROLLING TO CENTER →', label);
             centeredIndex = itemIndex;
-            
-            // Add transition to items for smooth animation
-            items.forEach(i => {
-              i.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1)';
-            });
-            
             repositionItems(centeredIndex);
           }
         });
       });
 
-      // Initialize the carousel (no rotation on container needed)
-      carousel.style.transform = `rotateY(0deg)`;
+      // Initialize
+      updateCarouselSettings();
+
+
+      // =======================
+      // TOUCH SWIPE FOR MOBILE
+      // =======================
+
+      let startX = 0;
+
+      carousel.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+      });
+
+      carousel.addEventListener("touchend", (e) => {
+        let endX = e.changedTouches[0].clientX;
+        let diff = startX - endX;
+
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            // Swipe left → Next
+            centeredIndex = (centeredIndex + 1) % itemCount;
+          } else {
+            // Swipe right → Prev
+            centeredIndex = (centeredIndex - 1 + itemCount) % itemCount;
+          }
+          repositionItems(centeredIndex);
+        }
+      });
+
 
       // =======================
       // OVERLAY OPEN / CLOSE
       // =======================
-      const overlay = document.querySelector('.overlay');
-      const logo = document.querySelector('.logo1');
-      const arrow = document.querySelector('.arrow img');
+
+      const overlay = document.querySelector(".overlay");
+      const logo = document.querySelector(".logo1");
+      const arrow = document.querySelector(".arrow img");
+      const progressBarWrapper = document.querySelector(".progress-bar-wrapper");
 
       gsap.set(overlay, { y: "100%", display: "none" });
 
-      // Get progress bar wrapper (used on portfolio page)
-      const progressBarWrapper = document.querySelector('.progress-bar-wrapper');
-
-      logo.addEventListener('click', () => {
+      logo.addEventListener("click", () => {
         overlay.style.display = "block";
         gsap.to(overlay, { y: 0, duration: 1, ease: "power4.out" });
-        // Hide progress bar when menu opens
+
         if (progressBarWrapper) {
           progressBarWrapper.style.display = "none";
         }
       });
 
-      arrow.addEventListener('click', () => {
+      arrow.addEventListener("click", () => {
         gsap.to(overlay, {
           y: "100%",
           duration: 1,
           ease: "power4.in",
           onComplete: () => {
             overlay.style.display = "none";
-            // Show progress bar when menu closes
             if (progressBarWrapper) {
               progressBarWrapper.style.display = "block";
             }
@@ -197,23 +245,25 @@ html(lang="en")
         });
       });
 
+
       // =======================
-      // LOGO SCROLL SHOW / HIDE + FIXED POSITION
+      // LOGO SCROLL SHOW / HIDE
       // =======================
-      const logoContainer = document.querySelector('.logo-container');
+
+      const logoContainer = document.querySelector(".logo-container");
 
       let lastScrollY = window.scrollY;
       const scrollThreshold = 10;
 
       gsap.set(logoContainer, { y: 0, opacity: 1 });
 
-      window.addEventListener('scroll', () => {
+      window.addEventListener("scroll", () => {
         const currentScrollY = window.scrollY;
 
         if (Math.abs(currentScrollY - lastScrollY) < scrollThreshold) return;
 
         if (currentScrollY > lastScrollY && currentScrollY > 50) {
-          logoContainer.classList.remove('fixed');
+          logoContainer.classList.remove("fixed");
           gsap.to(logoContainer, {
             y: -100,
             opacity: 0,
@@ -221,7 +271,7 @@ html(lang="en")
             ease: "power3.out"
           });
         } else {
-          logoContainer.classList.add('fixed');
+          logoContainer.classList.add("fixed");
           gsap.to(logoContainer, {
             y: 0,
             opacity: 1,
