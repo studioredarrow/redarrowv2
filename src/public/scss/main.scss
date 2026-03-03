@@ -1303,7 +1303,7 @@ div#chat-area button {
   }
 
   .item.main {
-    font-size: 40px;
+    font-size: 36px;
   }
 
   .myth-wrapper {
@@ -1444,6 +1444,9 @@ div#chat-area button {
       color: #fff;
     }
   }
+  .item.side {
+    font-size: 30px;
+}
 }
 
 // Override strict selector for chat area buttons

@@ -813,11 +813,30 @@ span.inner-dot svg {
     width: 172px;
     height: 208px;
   }
+  .digit-slot, .counter-suffix {
+    font-size: 48px !important;
+}
 
   .machine {
     padding: 10px;
   }
 
+  .machine .panel .counter-row .counter-container:nth-child(2) {
+    order: 1;
+    width: 18% !important;
+}
+.counter-text {
+    padding: 14px !important;
+}
+.machine .panel .counter-row .counter-container:nth-child(6) {
+  order: 6;
+  width: 45%;
+  margin-right: 22px;
+}
+.machine .panel .counter-row .counter-container:nth-child(1) {
+  order: 5;
+  width: 23% !important;
+}
   .team-card.add-card {
     gap: 0px !important;
   }
@@ -883,4 +902,11 @@ a {
 
 .hero-absolute-img img {
   width: 124px;
+}
+
+
+@media (max-width: 390px) {
+  .digit-slot, .counter-suffix {
+    font-size: 38px !important;
+}
 }

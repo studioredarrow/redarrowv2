@@ -184,7 +184,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-block: 50px;
+  margin-block: 30px;
   width: 100%;
 
   img {
@@ -216,6 +216,7 @@ body {
 .photo-right {
   max-width: 590px;
   margin-left: auto;
+  padding-bottom: 30px;
 }
 
 .bistro-inner-item {
@@ -846,4 +847,11 @@ body {
   .bistro-banner {
     padding-block: 50px;
   }
+  .benji-title {
+    font-size: 32px;
+}
+}
+
+.create-item-grid img {
+  width: 100%;
 }

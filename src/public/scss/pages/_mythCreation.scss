@@ -440,7 +440,7 @@ ul.services__list li:hover {
 }
 
 .create-outer .outer-btn {
-  margin-left: 200px;
+  margin-left: 110px;
   margin-top: 50px;
 }
 
@@ -1107,10 +1107,9 @@ video {
   }
 
   .services .fate-wrap {
-    bottom: 0px !important;
+    bottom: -28px !important;
     right: -25px !important;
-  }
-
+}
   .container img {
     width: 100%;
   }
@@ -1309,9 +1308,9 @@ video {
   }
 
   .services__note {
-    bottom: -10px !important;
-    right: 70px;
-  }
+    bottom: -38px !important;
+    right: 78px !important;
+}
 
   .iconic-outer {
     padding-inline: 0px;
@@ -1319,7 +1318,7 @@ video {
 
   .iconic-image img {
     width: 390px;
-    padding-block: 60px;
+    padding-block: 10px !important;
     position: relative;
     left: 100px;
   }
@@ -1374,6 +1373,19 @@ video {
   .hero-section-unique .outer-unique .image-container-unique {
     right: -100px;
   }
+  .image-create-overlay {
+    width: 100% !important;
+}
+.image-create-overlay img {
+  top: -116px !important;
+  left: 46px !important;
+}
+.iconic-flex {
+  height: 100%;
+}
+.iconic-outer .iconic-inner .iconic-image {
+  right: -25px;
+}
 
   .allimages {
     gap: 20px;
@@ -1409,8 +1421,45 @@ video {
   }
 
   .image-wrapper img {
-    width: 100px;
+    width: 85px;
   }
+  .card.large {
+    width: 100%;
+    height: 100%;
+}
+  .card.small {
+    width: 100%;
+    height: 100%;
+}
+.card.medium {
+  width: 100%;
+  height: 100%;
+}
+.image-card1, .image-card2, .image-card3 {
+  height: 260px !important;
+}
+.hero-section-unique {
+  position: relative;
+  margin-top: 70px;
+}
+.hero-section-unique .outer-unique .image-container-unique img {
+  max-width: 100%;
+  position: relative;
+  right: -80px;
+}
+svg.fate-oval__svg {
+  top: -10px !important;
+  right: -38px !important;
+}
+.hero-section-unique .outer-unique .image-container-unique {
+  position: static;
+}
+.hero-section-unique .outer-unique .image-container-unique .label-group-unique {
+    position: absolute;
+    bottom: auto;
+    top: 78px;
+    left: 24px;
+}
 
   .hero-section-unique .outer-unique .inner-unique h1.animate-text-unique {
     font-size: 48px;
