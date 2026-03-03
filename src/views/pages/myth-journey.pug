@@ -47,27 +47,29 @@ block content
             src="/images/adults-image.png"
             alt="ADULTS ONLY I LOVE STORIES"
           )
-
       p.note
-        | Is this not what you want? Okay diva, skip the buttons and drop your custom request.
-      .chat-area#chat-area
+          | Is this not what you want? Okay diva, skip the buttons and drop your custom request.   
 
-      .chat-buttons
-        each q in questions
-          button.chat-btn(
-            data-text=q.textResponse
-            data-meme=q.memeResponse
-            data-cta=q.ctaTo
-          ) #{q.question}
+      .myth-bottom-section
+        
+        .chat-area#chat-area
+
+        .chat-buttons
+          each q in questions
+            button.chat-btn(
+              data-text=q.textResponse
+              data-meme=q.memeResponse
+              data-cta=q.ctaTo
+            ) #{q.question}
 
 
-      .chat-input
-        input(type="text" placeholder="Say something. Anything. I dare you.")
-        .chat
-         img(src="/images/chat-arrow.svg", alt="")
+        .chat-input
+          input(type="text" placeholder="Say something. Anything. I dare you.")
+          .chat
+           img(src="/images/chat-arrow.svg", alt="")
 
-      .intro-terms
-        a.terms-btn(href="/terms-and-conditions") Terms & Conditions
+        .intro-terms
+          a.terms-btn(href="/terms-and-conditions") Terms & Conditions
 
   script(src="/js/mythJourney.js")
   //- In your Pug file, at the bottom

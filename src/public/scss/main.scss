@@ -590,7 +590,54 @@ $border-radius: 18px;
   padding: 24px;
   width: 100%;
   margin-bottom: 40px;
-  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Myth Journey: keep bottom section (note, chat, input, terms) at bottom with 30px above terms */
+#myth-main.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.myth-bottom-section {
+  margin-top: auto;
+  width: 100%;
+}
+
+.myth-bottom-section .intro-terms {
+  margin-bottom: 30px;
+}
+
+/* Terms & Conditions link: centered, not blue (myth-journey + landing/intro) */
+.intro-terms {
+  text-align: center;
+  width: 100%;
+}
+
+a.terms-btn {
+  color: #1e1e1e;
+  text-decoration: none;
+  font-family: Work Sans;
+  font-weight: 500;
+  font-size: 16px;
+
+  &:hover {
+    color: #ff0004;
+  }
+}
+
+/* Landing page (intro): Terms & Conditions in white */
+.wrapper .intro-terms a.terms-btn {
+  color: #ffffff;
+
+  &:hover {
+    color: #ffffff;
+    opacity: 0.9;
+  }
 }
 
 
@@ -855,7 +902,6 @@ img.logo-trigger.logo1 {
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 2.5rem;
 
   .btn {
     border: 1px solid #ff0004;
