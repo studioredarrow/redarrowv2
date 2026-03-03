@@ -40,9 +40,8 @@ block content
           each section, index in terms.data.sections
             h2.animate-text(id=`section-${index}`)= section.section_title
 
-            each block in section.section_content
-              if block.type === "paragraph"
-                p.animate-text= block.text
+            if section.section_content
+              .animate-text.terms-rich-text!= asHTML(section.section_content)
 
   // ================= SCRIPTS =================
   script(src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js")

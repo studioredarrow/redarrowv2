@@ -423,7 +423,7 @@ ul.services__list li:hover {
 .iconic-flex {
   max-width: 955px;
   margin-left: auto;
-  height: 100%;
+  height: 100vh;
 }
 
 .card:hover div {
@@ -540,7 +540,13 @@ p.section-title {
 .clients-logos {
   margin-inline: 16px;
 }
-
+svg.fate-oval__svg {
+  position: absolute;
+  width: 230px;
+  top: -30px;
+  right: -52px !important;
+  pointer-events: none;
+}
 // slider horizental css start here
 .slider-flex {
   display: flex;

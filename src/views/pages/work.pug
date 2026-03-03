@@ -35,7 +35,7 @@ block content
             span.category(data-filter="brand-amplification") brand amplification 
             span.count (#{counts['brand-amplification'] || 0})
             | , 
-            span.category(data-filter="bdc") BDC 
+            span.category(data-filter="bdc") BD consultancy 
             span.count (#{counts['bdc'] || 0})
             .absolute-image 
               img(src="/images/category.svg", alt="")
@@ -67,9 +67,10 @@ block content
             -   // Row 3: gap, card1, card2 (gap in col 1, cards in cols 2-3 and 4-5)
             -   gridColClass = positionInRow === 0 ? 'col-5' : 'col-4'
             - }
+            - var itemCats = (item.data.category_group && item.data.category_group.length) ? item.data.category_group.map(e => (e.category || '')).filter(c => c).join(' ') : (item.data.category || 'other')
             .card(
               class=gridColClass
-              data-category=item.data.category || 'all'
+              data-categories=itemCats
               onclick=`window.location.href='/portfolio/${item.uid}'`
               style="cursor: pointer;"
             )
@@ -87,8 +88,9 @@ block content
         #listView.list
           .canvas
             each item, index in workItems
+              - var listItemCats = (item.data.category_group && item.data.category_group.length) ? item.data.category_group.map(e => (e.category || '')).filter(c => c).join(' ') : (item.data.category || 'other')
               .text(
-                data-category=item.data.category || 'all'
+                data-categories=listItemCats
                 data-image=item.data.thumbnail ? item.data.thumbnail.url : ''
                 onclick=`window.location.href='/portfolio/${item.uid}'`
                 style="cursor: pointer;"
@@ -150,11 +152,17 @@ block content
         function applyFilter(category) {
           const filterVal = category.trim().toLowerCase();
           
+          // Helper: check if item matches filter (supports multiple categories in data-categories)
+          function matchesFilter(el) {
+            if (filterVal === "all") return true;
+            const cats = (el.dataset.categories || "").trim().toLowerCase().split(/\s+/).filter(Boolean);
+            return cats.includes(filterVal);
+          }
+          
           // Filter Grid Cards
           let visibleCards = [];
           cards.forEach(card => {
-            const cardCat = (card.dataset.category || "all").trim().toLowerCase();
-            if (filterVal === "all" || cardCat === filterVal) {
+            if (matchesFilter(card)) {
               card.style.display = "block";
               visibleCards.push(card);
             } else {
@@ -165,8 +173,7 @@ block content
           // Filter List Items
           let visibleTexts = [];
           listItems.forEach(item => {
-            const itemCat = (item.dataset.category || "all").trim().toLowerCase();
-            if (filterVal === "all" || itemCat === filterVal) {
+            if (matchesFilter(item)) {
               item.style.display = "block";
               visibleTexts.push(item);
             } else {

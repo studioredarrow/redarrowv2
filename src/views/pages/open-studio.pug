@@ -63,9 +63,10 @@ block content
           .canvas
             if studioImages.data.exhibitions && studioImages.data.exhibitions.length
               each item, index in studioImages.data.exhibitions
-                .text.text1(
+                a.text.text1(
+                  href=`/open-studio/${item.uid}`
                   data-image=item.image ? item.image.url : ''
-                  style="cursor: default;"
+                  style="cursor: pointer; text-decoration: none; color: inherit;"
                 )= item.artist_name || 'Untitled'
 
 

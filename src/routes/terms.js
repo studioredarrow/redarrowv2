@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { client } = require("../prismic");
+const prismicH = require("@prismicio/helpers");
 
 router.get("/terms-and-conditions", async (req, res) => {
   try {
@@ -11,7 +12,7 @@ router.get("/terms-and-conditions", async (req, res) => {
       terms,
       showFooter: true,
       hideCreateOuter: true,
-      
+      asHTML: prismicH.asHTML
     });
   } catch (error) {
     console.error("❌ Terms page error:", error);

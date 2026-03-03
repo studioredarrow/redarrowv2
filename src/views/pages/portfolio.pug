@@ -249,7 +249,7 @@ block content
                       )
 
 
-          if portfolioItem.data.additional_photo_sections && portfolioItem.data.additional_photo_sections[0].section_description
+          if portfolioItem.data.additional_photo_sections && portfolioItem.data.additional_photo_sections[0] && portfolioItem.data.additional_photo_sections[0].section_description
             .photo-banner.ist-photo-banner1
               .container 
                 .photo-right
@@ -348,10 +348,19 @@ block content
                   if item.projects && !item.projects.isBroken
                     - var isFirst = projectIndex === 0
                     - projectIndex++
+                    - var proj = item.projects
+                    - var projUid = proj.uid || proj.slug || ''
+                    - var projBasePath = (proj.type === 'openstudio_items') ? '/open-studio' : '/portfolio'
+                    - var rawTitle = proj.data && (proj.data.title || proj.data.hero_title || proj.data.artist_name)
+                    - var projTitle = typeof rawTitle === 'string' ? rawTitle : (Array.isArray(rawTitle) ? asText(rawTitle) : projUid.replace(/-/g, ' ').toUpperCase())
+                    - var thumb = proj.data && (proj.data.thumbnail || proj.data.hero_banner_image) ? (proj.data.thumbnail || proj.data.hero_banner_image) : null
                     .project(class=isFirst ? 'center' : '')
-                      .project-card
-                      - var rawUid = item.projects && item.projects.uid ? item.projects.uid : item.uid || ''
-                      p= rawUid.replace(/-/g, ' ').toUpperCase()
+                      a.project-card(href=`${projBasePath}/${projUid}`)
+                        if thumb && thumb.url
+                          img(src=thumb.url, alt=projTitle)
+                        else
+                          .project-card-placeholder
+                      p= projTitle
 
 
 
@@ -389,7 +398,7 @@ block content
       });
 
       // IMAGE REVEAL
-      gsap.utils.toArray(".photo-item img, .bistro-item img").forEach(img => {
+      gsap.utils.toArray(".photo-item img, .bistro-item img, .project-card img").forEach(img => {
         gsap.from(img, {
           scrollTrigger: {
             trigger: img,
@@ -435,7 +444,7 @@ block content
       });
 
       // IMAGE REVEAL
-      gsap.utils.toArray(".photo-item img, .bistro-item img").forEach(img => {
+      gsap.utils.toArray(".photo-item img, .bistro-item img, .project-card img").forEach(img => {
         gsap.from(img, {
           scrollTrigger: {
             trigger: img,
