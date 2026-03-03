@@ -5,14 +5,28 @@ const prismicH = require("@prismicio/helpers");
 
 /**
  * Helper to safely fetch by UID
+ * @param {string} type - Document type
+ * @param {string} slug - UID slug
+ * @param {object} [options] - Optional fetch options (e.g. fetchLinks)
  */
-async function getByUIDSafe(type, slug) {
+async function getByUIDSafe(type, slug, options = {}) {
   try {
-    return await client.getByUID(type, slug);
+    return await client.getByUID(type, slug, options);
   } catch (err) {
     return null;
   }
 }
+
+/** Fetch options to resolve related work_item and openstudio_items with full data (images, titles) */
+const relatedProjectsFetchLinks = [
+  "work_item.thumbnail",
+  "work_item.title",
+  "work_item.short_description",
+  "openstudio_items.hero_banner_image",
+  "openstudio_items.hero_title",
+  "openstudio_items.title",
+  "openstudio_items.artist_name"
+];
 
 /**
  * Shared handler for Portfolio & Open Studio
@@ -33,10 +47,11 @@ router.get(
       console.log("📂 Primary Type:", primaryType);
       console.log("===============================\n");
 
-      // Try primary → fallback to work_item
+      // Try primary → fallback to work_item (fetchLinks resolves related work_items with thumbnail, title)
+      const fetchOpts = { fetchLinks: relatedProjectsFetchLinks };
       let portfolioItem =
-        (await getByUIDSafe(primaryType, slug)) ||
-        (await getByUIDSafe("work_item", slug));
+        (await getByUIDSafe(primaryType, slug, fetchOpts)) ||
+        (await getByUIDSafe("work_item", slug, fetchOpts));
 
       if (!portfolioItem) {
         throw new Error(`Item with slug "${slug}" not found`);
@@ -67,6 +82,12 @@ router.get(
           img6: !!section.section_image_6?.url
         });
       });
+
+      /* =============================
+         📎 RELATED PROJECTS (Prismic output)
+      ============================== */
+      const relatedProjects = portfolioItem.data?.related_projects;
+      console.log("\n📎 related_projects from Prismic:", JSON.stringify(relatedProjects, null, 2));
 
       /* =============================
          🎯 RENDER

@@ -198,6 +198,7 @@ body {
   display: flex;
   justify-content: space-around;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .photo-banner img {
@@ -337,13 +338,44 @@ body {
   }
 }
 
+/* Event grid (additional_photo_sections) – consistent image sizing for all portfolio items */
 .event-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
-  align-items: center;
+  align-items: stretch;
+}
+
+.event-grid-item {
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 0;
+  aspect-ratio: 1;
 
   img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+  }
+}
+
+/* Standalone event-item (e.g. 5th image in flex-grid) */
+.event-grid > .event-item:not(.event-item-grid) {
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 0;
+  aspect-ratio: 1;
+  position: relative;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
     border-radius: 20px;
   }
 }
@@ -353,6 +385,52 @@ body {
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   row-gap: 2px;
+
+  .event-grid-item {
+    aspect-ratio: 1;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+    }
+  }
+}
+
+.event-item.banner-right img,
+.event-item.banner-left img,
+.event-item.single-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
+}
+
+.event-item.banner-right,
+.event-item.banner-left,
+.event-item.single-banner {
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 200px;
+  aspect-ratio: 3 / 4;
+  position: relative;
+
+  img {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.event-item:not(.event-item-grid) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
 }
 
 // here is the project css start here
@@ -402,11 +480,25 @@ body {
 
 /* CARD */
 .project-card {
+  display: block;
   width: 100%;
   max-width: 470px;
   height: 220px;
   background: #c4c4c4;
   border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-card-placeholder {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .project-center {
@@ -427,32 +519,53 @@ body {
   height: 574px !important;
 }
 
-// new layout css start here
+// event-section-new: same 2x2 + single image layout for ALL portfolio items (Benji Bistro + others)
 .event-layout-new {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 69% 1fr;
   gap: 10px;
-  align-items: center;
+  width: 100%;
 }
 
-.event-gallery-new {
-  display: flex;
-  flex-wrap: wrap;
+.event-column-new.event-gallery-new {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 10px;
-  row-gap: 2px;
+  min-height: 280px;
+  aspect-ratio: 1;
+  min-width: 0;
+}
+
+.event-image-box-new {
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+  }
 }
 
 .event-column-new.event-single-image-new {
-  width: 19%;
-}
-
-.event-gallery-new {
-  width: 69%;
-}
-
-.event-image-box-new img,
-.event-single-image-new img {
+  min-height: 0;
+  overflow: hidden;
   border-radius: 20px;
+  position: relative;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+  }
 }
 
 .benji-services {
@@ -520,7 +633,7 @@ body {
 
   .event-item img {
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 }
 
@@ -639,26 +752,15 @@ body {
 
 @media (max-width: 768px) {
   .event-layout-new {
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    grid-template-columns: 1fr;
+  }
+
+  .event-column-new.event-gallery-new {
+    min-height: 280px;
   }
 
   .event-column-new.event-single-image-new {
-    width: 100%;
-  }
-
-  .event-gallery-new {
-    width: 100%;
-  }
-
-  .event-gallery-new {
-    justify-content: center;
-  }
-
-  .event-gallery-new img {
-    width: 100%;
+    min-height: 300px;
   }
 
   .projects-grid {

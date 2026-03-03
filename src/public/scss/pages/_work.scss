@@ -43,6 +43,7 @@ body {
   top: -374px;
   left: -215px;
   width: 90%;
+  pointer-events: none; /* allow clicks to pass through to category links */
 }
 
 .work-flex {
@@ -257,6 +258,7 @@ body {
   transition:
     opacity 0.5s ease,
     transform 0.5s ease;
+    border-radius: 20px;
 }
 
 /* Responsive */
