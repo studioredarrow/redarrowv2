@@ -361,17 +361,26 @@ body {
     width: 70%;
     z-index: 9999;
 }
-  .absolute-image {
-    top: -156px;
-    left: -52px;
+.absolute-image {
+  top: -192px;
+  left: -81px;
 }
 .grid.active {
   gap: 40px 30px;
 }
 .absolute-image img {
-  width: 100%;
+  width: 120%;
+}
+.category-links .count {
+  margin-top: -5px;
+}
+.work-outer {
+  padding-inline: 0px;
+}
+.work-outer .container {
+  padding-inline: 20px;
 }
 }
 .work-outer {
-  margin-top: 170px;
+  padding-top: 170px;
 }

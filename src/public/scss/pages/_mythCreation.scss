@@ -290,8 +290,8 @@ p.animate-text-unique {
 }
 
 .click-path {
-  top: 45px !important;
-  left: -56px;
+  top: 52px !important;
+  left: -52px;
 }
 
 .desktop-logo {
@@ -435,7 +435,7 @@ ul.services__list li:hover {
 }
 
 .iconic-sections {
-  margin-bottom: 150px;
+  margin-bottom: 40px;
   margin-top: 90px;
 }
 
@@ -871,8 +871,8 @@ ul.services__list a {
   position: absolute;
   right: 70px;
   bottom: -18px !important;
-  color: #1e1e1e;
-  font-weight: 300;
+  color: #1e1e1e !important;
+  font-weight: 400;
   font-size: 14px;
   line-height: 100%;
   text-align: right;
@@ -1108,7 +1108,15 @@ video {
 
   .services .fate-wrap {
     bottom: -28px !important;
-    right: -25px !important;
+    right: -38px !important;
+}
+.fate-wrap .fate-oval__svg {
+  width: 250px;
+  height: 130px;
+}
+svg.fate-oval__svg {
+  top: -30px !important;
+  left: -52px;
 }
   .container img {
     width: 100%;
@@ -1188,9 +1196,9 @@ video {
 
   .services__label img {
     top: -110px;
-    right: -30px;
+    right: -43px;
     left: auto;
-  }
+}
 
   .create-img img {
     width: 50%;
@@ -1309,7 +1317,7 @@ video {
 
   .services__note {
     bottom: -38px !important;
-    right: 78px !important;
+    right: 58px !important;
 }
 
   .iconic-outer {
@@ -1321,6 +1329,7 @@ video {
     padding-block: 10px !important;
     position: relative;
     left: 100px;
+    background-color: transparent !important;
   }
 
   .outer {
@@ -1380,11 +1389,33 @@ video {
   top: -116px !important;
   left: 46px !important;
 }
+.hero-section-unique .outer-unique {
+  margin-top: 60px;
+}
+.slider-flex {
+  padding-bottom: 0px;
+}
+.scroll-progress {
+  margin-top: 25px;
+}
+.myth-title h3 {
+  font-weight: 400;
+  font-size: 14px;
+}
+.create-item h3 {
+  font-weight: 400;
+  font-size: 14px;
+}
+p.section-title {
+  font-weight: 400;
+  font-size: 14px;
+}
 .iconic-flex {
   height: 100%;
 }
 .iconic-outer .iconic-inner .iconic-image {
   right: -25px;
+  background-color: transparent !important;
 }
 
   .allimages {
@@ -1404,10 +1435,13 @@ video {
   }
 
   .create-item.create-img img {
-    width: 181px;
-    height: 190px;
-    object-fit: contain;
-  }
+    width: 200px !important;
+    height: 189px !important;
+    object-fit: fill !important;
+}
+.create-item-int {
+  margin-top: 30px;
+}
 
   .create-outer .fate-wrap .fate-oval__svg {
     position: absolute;
@@ -1423,6 +1457,13 @@ video {
   .image-wrapper img {
     width: 85px;
   }
+  .how-outer {
+    gap: 15px;
+}
+.iconic-sections {
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
   .card.large {
     width: 100%;
     height: 100%;
@@ -1441,15 +1482,12 @@ video {
 .hero-section-unique {
   position: relative;
   margin-top: 70px;
+  height: 100%;
 }
 .hero-section-unique .outer-unique .image-container-unique img {
   max-width: 100%;
   position: relative;
   right: -80px;
-}
-svg.fate-oval__svg {
-  top: -10px !important;
-  right: -38px !important;
 }
 .hero-section-unique .outer-unique .image-container-unique {
   position: static;
@@ -1472,6 +1510,7 @@ svg.fate-oval__svg {
 
   .services__label {
     font-size: 14px;
+    font-weight: 400;
   }
 
   .right-form input[type="email"] {

@@ -212,7 +212,6 @@ textarea::placeholder {
                         line-height: 100%;
                         text-align: center;
                         text-transform: uppercase;
-                        margin-left: -16px;
                         margin-top: 25px;
                     }
 
@@ -364,9 +363,10 @@ svg.fate-oval__svg.form-svg {
 }
 
 @media (max-width: 500px) {
-svg.fate-oval__svg.form-svg {
-    top: -22px !important;
-}
+    svg.fate-oval__svg.form-svg {
+        top: -25px !important;
+        left: -28px;
+    }
 .container .post-outer {
     position: relative;
 }
@@ -375,6 +375,8 @@ svg.fate-oval__svg.form-svg {
     top: 27px;
     padding-inline: 20px;
     left: 0;
+    justify-content: start;
+    gap: 30px;
 }
 .container .post-outer .header {
     max-width: 100%;
@@ -392,10 +394,14 @@ svg.fate-oval__svg.form-svg {
     padding-top: 70px;
     margin-top: 140px;
 }
-.container .post-outer .content .left span.left-span-2nd {
-    margin-right: 80px;
-}
 .container .post-outer .content .form .interest-wrapper {
     margin-bottom: 25px;
 }
+.container .post-outer .content .form .btn-wrapper .btn {
+    margin-right: 30px;
+}
+}
+
+@media (max-width: 390px) {
+
 }
