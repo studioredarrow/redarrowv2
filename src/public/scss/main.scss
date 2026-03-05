@@ -1398,6 +1398,17 @@ div#chat-area button {
   a.terms-btn {
     color: #ff0004;
   }
+  .myth-bottom-section .intro-terms {
+    margin-bottom: 30px;
+  }
+  .toggle-header {
+    position: sticky;
+    right: 20px !important;
+    text-align: right;
+    top: 0;
+    margin-top: -40px;
+    margin-right: 10px;
+  }
 }
 
 // New Chat Layout Styles

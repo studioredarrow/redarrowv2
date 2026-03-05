@@ -40,60 +40,62 @@ block content
                   .benji-absolute
                     img(src="/images/category.svg", alt="")
 
+      .mobile-toggle
+        .toggle-header
+          img.toggle-icon(src="/images/plus-icon.png", alt="")
 
-    .benji-outer
-        .benji-inner
-          .container
-            .benji-flex
+        .toggle-content
+          .benji-outer
+            .benji-inner
+              .container
+                .benji-flex
 
-              // ================= LEFT COLUMN =================
-              .left
+                  // ================= LEFT COLUMN =================
+                  .left
 
-                // PROJECT META
-                .benji-left
-                  if portfolioItem.data.project_sector
-                    div
-                      span.label Sector
-                      br
-                      = portfolioItem.data.project_sector
-
-                  if portfolioItem.data.project_office
-                    div
-                      span.label Office
-                      br
-                      = portfolioItem.data.project_office
-
-                  if portfolioItem.data.project_partner
-                    div
-                      span.label Partner
-                      br
-                      = portfolioItem.data.project_partner
-
-                // PROJECT TEAM
-                if portfolioItem.data.project_team && portfolioItem.data.project_team.length
-                  .benji-left
-                    div
-                      span.label Project team
-                      br
-                      each member in portfolioItem.data.project_team
-                        if member.member_name
-                          = member.member_name
+                    .benji-left
+                      if portfolioItem.data.project_sector
+                        div
+                          span.label Sector
                           br
+                          = portfolioItem.data.project_sector
 
-              // ================= RIGHT COLUMN =================
-              .right
+                      if portfolioItem.data.project_office
+                        div
+                          span.label Office
+                          br
+                          = portfolioItem.data.project_office
 
-                if portfolioItem.data.challenge_content
-                  h2= portfolioItem.data.challenge_title
-                  p!= asHTML(portfolioItem.data.challenge_content)
+                      if portfolioItem.data.project_partner
+                        div
+                          span.label Partner
+                          br
+                          = portfolioItem.data.project_partner
 
-                if portfolioItem.data.strategy_content
-                  h2= portfolioItem.data.strategy_title
-                  p!= asHTML(portfolioItem.data.strategy_content)
+                    if portfolioItem.data.project_team && portfolioItem.data.project_team.length
+                      .benji-left
+                        div
+                          span.label Project team
+                          br
+                          each member in portfolioItem.data.project_team
+                            if member.member_name
+                              = member.member_name
+                              br
 
-                if portfolioItem.data.solution_content
-                  h2= portfolioItem.data.solution_title
-                  p!= asHTML(portfolioItem.data.solution_content)
+                  // ================= RIGHT COLUMN =================
+                  .right
+
+                    if portfolioItem.data.challenge_content
+                      h2= portfolioItem.data.challenge_title
+                      p!= asHTML(portfolioItem.data.challenge_content)
+
+                    if portfolioItem.data.strategy_content
+                      h2= portfolioItem.data.strategy_title
+                      p!= asHTML(portfolioItem.data.strategy_content)
+
+                    if portfolioItem.data.solution_content
+                      h2= portfolioItem.data.solution_title
+                      p!= asHTML(portfolioItem.data.solution_content)
 
     
         section
@@ -588,6 +590,30 @@ block content
         lastScroll = currentScroll;
       });
 
+
+    script.
+      document.addEventListener("DOMContentLoaded", function(){
+
+        document.querySelectorAll(".toggle-header").forEach(header => {
+
+          header.addEventListener("click", function(){
+
+            const parent = this.parentElement;
+            const icon = this.querySelector(".toggle-icon");
+
+            parent.classList.toggle("active");
+
+            if(parent.classList.contains("active")){
+              icon.src = "/images/minus-icon.png";
+            }else{
+              icon.src = "/images/plus-icon.png";
+            }
+
+          });
+
+        });
+
+      });
       
 
                   
