@@ -5,7 +5,12 @@ block content
     .post-outer
       .header
         h1 This Is Not A Postcard
-
+      //- display success/error message if available
+      if typeof success !== 'undefined'
+        if success
+          .alert.alert-success Your form has been submitted and an email has been sent!
+        else
+          .alert.alert-danger #{error || 'We were unable to send your message. Please try again later.'}
       .content
         .left
           span.left-span SENT TO:
