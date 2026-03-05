@@ -8,15 +8,14 @@ body {
 
 /* Load DS-Digital font */
 @font-face {
-  font-family: 'DS-Digital';
-  src: url('fonts/DS-Digital.woff2') format('woff2'),
-    url('fonts/DS-Digital.woff') format('woff'),
-    url('fonts/DS-Digital.ttf') format('truetype');
+  font-family: "DS-Digital";
+  src:
+    url("fonts/DS-Digital.woff2") format("woff2"),
+    url("fonts/DS-Digital.woff") format("woff"),
+    url("fonts/DS-Digital.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
 }
-
-
 
 .create-item.create-img img {
   width: 212px;
@@ -34,8 +33,7 @@ body {
   margin: 0 auto;
   box-shadow:
     inset 6px -6px 12px rgba(0, 0, 0, 0.8),
-    /* left + bottom (dark) */
-    inset -6px 6px 12px rgba(134, 131, 123, 0.9);
+    /* left + bottom (dark) */ inset -6px 6px 12px rgba(134, 131, 123, 0.9);
   /* top + right (light) */
 
   .screen {
@@ -69,8 +67,6 @@ body {
         flex-direction: column;
         align-items: start;
         gap: 6px;
-
-
 
         .label {
           color: #bdbdbd;
@@ -227,7 +223,7 @@ span.inner-dot svg {
   font-family: Work Sans;
   font-weight: 400;
   font-size: 14px;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 .team-card {
@@ -351,7 +347,6 @@ span.inner-dot svg {
 }
 
 .value {
-
   // Styles for location switcher
   &.location-toggles {
     display: flex;
@@ -371,7 +366,7 @@ span.inner-dot svg {
     line-height: 130%;
 
     &:hover {
-      color: #FF0004;
+      color: #ff0004;
     }
 
     &.active {
@@ -769,7 +764,7 @@ span.inner-dot svg {
 
       &:nth-child(4) {
         order: 4;
-        width: 15%;
+        width: 17%;
         margin-left: 0;
       }
 
@@ -791,7 +786,7 @@ span.inner-dot svg {
   }
 
   .value .location-btn.active {
-    color: #FF0004 !important;
+    color: #ff0004 !important;
   }
   .hero-mobile-flex {
     display: flex;
@@ -800,31 +795,32 @@ span.inner-dot svg {
   .hero .hero-description {
     font-size: 16px;
     margin-block: 40px;
-}
+  }
 }
 
 @media (max-width: 500px) {
   .team-grid {
     gap: 12px;
-}
-.hero .hero-title {
-  margin: 0;
-  margin-bottom: 0px;
-}
-.hero .hero-image img {
-  margin-bottom: 10px;
-}
-.hero-wrap .hero-oval__svg {
-  top: -44px;
-  left: -32px;
-}
+  }
+  .hero .hero-title {
+    margin: 0;
+    margin-bottom: 0px;
+  }
+  .hero .hero-image img {
+    margin-bottom: 10px;
+  }
+  .hero-wrap .hero-oval__svg {
+    top: -44px;
+    left: -32px;
+  }
   .team-card img {
     width: 172px;
     height: 208px;
   }
-  .digit-slot, .counter-suffix {
+  .digit-slot,
+  .counter-suffix {
     font-size: 48px !important;
-}
+  }
 
   .machine {
     padding: 10px;
@@ -833,19 +829,19 @@ span.inner-dot svg {
   .machine .panel .counter-row .counter-container:nth-child(2) {
     order: 1;
     width: 18% !important;
-}
-.counter-text {
-  height: 55px !important;
-  padding-inline: 11px !important;
-}
-.machine .panel .counter-row .counter-container:nth-child(6) {
-  order: 6;
-  width: 45%;
-}
-.machine .panel .counter-row .counter-container:nth-child(1) {
-  order: 5;
-  width: 23% !important;
-}
+  }
+  .counter-text {
+    height: 55px !important;
+    padding-inline: 11px !important;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(6) {
+    order: 6;
+    width: 45%;
+  }
+  .machine .panel .counter-row .counter-container:nth-child(1) {
+    order: 5;
+    width: 23% !important;
+  }
   .team-card.add-card {
     gap: 0px !important;
   }
@@ -876,24 +872,24 @@ span.inner-dot svg {
   }
   section.team-sec {
     padding-inline: 20px;
-}
-.hero-flex {
-  padding-inline: 20px;
-}
-.create-item-inner .create-item-int {
-  width: 100%;
-}
-.info-flex {
-  gap: 0px;
-  padding-inline: 14px;
-}
+  }
+  .hero-flex {
+    padding-inline: 20px;
+  }
+  .create-item-inner .create-item-int {
+    width: 100%;
+  }
+  .info-flex {
+    gap: 0px;
+    padding-inline: 14px;
+  }
 
   .team-card.empty {
     display: none;
   }
   .info-block {
     width: 100%;
-}
+  }
 
   .team-card.add-card {
     height: 208px;
@@ -911,11 +907,7 @@ span.inner-dot svg {
     padding: 25px 0px;
     margin-bottom: 80px;
   }
-
-
 }
-
-
 
 a {
   text-decoration: none;
@@ -925,9 +917,9 @@ a {
   width: 124px;
 }
 
-
 @media (max-width: 390px) {
-  .digit-slot, .counter-suffix {
+  .digit-slot,
+  .counter-suffix {
     font-size: 38px !important;
-}
+  }
 }
