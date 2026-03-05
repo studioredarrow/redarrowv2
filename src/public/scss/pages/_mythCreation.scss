@@ -69,9 +69,6 @@ body {
   transition: width 1.2s linear;
 }
 
-
-
-
 input::placeholder {
   color: #bdbdbd;
   /* change to any color you want */
@@ -364,7 +361,7 @@ ul.services__list li:hover {
         bottom: 0px;
         width: 300px;
         height: 80px;
-        background-image: url('/images/influnce-circle.svg');
+        background-image: url("/images/influnce-circle.svg");
         /* Replace with your image URL */
         background-size: cover;
         /* Make image fit the element */
@@ -1109,15 +1106,15 @@ video {
   .services .fate-wrap {
     bottom: -28px !important;
     right: -38px !important;
-}
-.fate-wrap .fate-oval__svg {
-  width: 250px;
-  height: 130px;
-}
-svg.fate-oval__svg {
-  top: -30px !important;
-  left: -52px;
-}
+  }
+  .fate-wrap .fate-oval__svg {
+    width: 250px;
+    height: 130px;
+  }
+  svg.fate-oval__svg {
+    top: -30px !important;
+    left: -52px;
+  }
   .container img {
     width: 100%;
   }
@@ -1135,7 +1132,11 @@ svg.fate-oval__svg {
     right: 10px;
   }
 
-  .hero-section-unique .outer-unique .inner-unique .banner-inner-unique p.animate-text-unique:first-child {
+  .hero-section-unique
+    .outer-unique
+    .inner-unique
+    .banner-inner-unique
+    p.animate-text-unique:first-child {
     max-width: 100%;
   }
 
@@ -1198,7 +1199,7 @@ svg.fate-oval__svg {
     top: -110px;
     right: -43px;
     left: auto;
-}
+  }
 
   .create-img img {
     width: 50%;
@@ -1240,8 +1241,8 @@ svg.fate-oval__svg {
 
   .hero-section-unique .outer-unique .inner-unique .banner-inner-unique {
     flex-direction: column;
+    padding-top: 215px;
   }
-
   .hero-section-unique .outer-unique .image-container-unique img {
     max-width: 100%;
   }
@@ -1318,7 +1319,7 @@ svg.fate-oval__svg {
   .services__note {
     bottom: -38px !important;
     right: 58px !important;
-}
+  }
 
   .iconic-outer {
     padding-inline: 0px;
@@ -1329,7 +1330,7 @@ svg.fate-oval__svg {
     padding-block: 10px !important;
     position: relative;
     left: 100px;
-    background-color: transparent !important;
+    background-color: #f9f5f1;
   }
 
   .outer {
@@ -1384,39 +1385,43 @@ svg.fate-oval__svg {
   }
   .image-create-overlay {
     width: 100% !important;
-}
-.image-create-overlay img {
-  top: -116px !important;
-  left: 46px !important;
-}
-.hero-section-unique .outer-unique {
-  margin-top: 60px;
-}
-.slider-flex {
-  padding-bottom: 0px;
-}
-.scroll-progress {
-  margin-top: 25px;
-}
-.myth-title h3 {
-  font-weight: 400;
-  font-size: 14px;
-}
-.create-item h3 {
-  font-weight: 400;
-  font-size: 14px;
-}
-p.section-title {
-  font-weight: 400;
-  font-size: 14px;
-}
-.iconic-flex {
-  height: 100%;
-}
-.iconic-outer .iconic-inner .iconic-image {
-  right: -25px;
-  background-color: transparent !important;
-}
+  }
+  .image-create-overlay img {
+    top: -116px !important;
+    left: 46px !important;
+  }
+  svg.fate-oval__svg.footer-temp {
+    left: -36px;
+    top: -16px !important;
+  }
+  .hero-section-unique .outer-unique {
+    margin-top: 60px;
+  }
+  .slider-flex {
+    padding-bottom: 0px;
+  }
+  .scroll-progress {
+    margin-top: 25px;
+  }
+  .myth-title h3 {
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .create-item h3 {
+    font-weight: 400;
+    font-size: 14px;
+  }
+  p.section-title {
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .iconic-flex {
+    height: 100%;
+  }
+  .iconic-outer .iconic-inner .iconic-image {
+    right: -25px;
+    background-color: #f9f5f1;
+  }
 
   .allimages {
     gap: 20px;
@@ -1438,10 +1443,10 @@ p.section-title {
     width: 200px !important;
     height: 189px !important;
     object-fit: fill !important;
-}
-.create-item-int {
-  margin-top: 30px;
-}
+  }
+  .create-item-int {
+    margin-top: 30px;
+  }
 
   .create-outer .fate-wrap .fate-oval__svg {
     position: absolute;
@@ -1459,45 +1464,51 @@ p.section-title {
   }
   .how-outer {
     gap: 15px;
-}
-.iconic-sections {
-  margin-bottom: 30px;
-  margin-top: 10px;
-}
+  }
+  .iconic-sections {
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
   .card.large {
     width: 100%;
     height: 100%;
-}
+  }
   .card.small {
     width: 100%;
     height: 100%;
-}
-.card.medium {
-  width: 100%;
-  height: 100%;
-}
-.image-card1, .image-card2, .image-card3 {
-  height: 260px !important;
-}
-.hero-section-unique {
-  position: relative;
-  margin-top: 70px;
-  height: 100%;
-}
-.hero-section-unique .outer-unique .image-container-unique img {
-  max-width: 100%;
-  position: relative;
-  right: -80px;
-}
-.hero-section-unique .outer-unique .image-container-unique {
-  position: static;
-}
-.hero-section-unique .outer-unique .image-container-unique .label-group-unique {
+  }
+  .card.medium {
+    width: 100%;
+    height: 100%;
+  }
+  .image-card1,
+  .image-card2,
+  .image-card3 {
+    height: 260px !important;
+  }
+  .hero-section-unique {
+    position: relative;
+    margin-top: 70px;
+    height: 100%;
+  }
+  .hero-section-unique .outer-unique .image-container-unique img {
+    max-width: 100%;
+    position: absolute;
+    top: 35%;
+    left: 20%;
+  }
+  .hero-section-unique .outer-unique .image-container-unique {
+    position: static;
+  }
+  .hero-section-unique
+    .outer-unique
+    .image-container-unique
+    .label-group-unique {
     position: absolute;
     bottom: auto;
     top: 78px;
     left: 24px;
-}
+  }
 
   .hero-section-unique .outer-unique .inner-unique h1.animate-text-unique {
     font-size: 48px;
