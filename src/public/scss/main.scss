@@ -1091,7 +1091,7 @@ img.logo-trigger.logo1 {
     .doodle-right {
       position: absolute;
       right: -110px;
-      top: 25%;
+      top: 62%;
 
       .desktop-img {
         display: block;
@@ -1176,19 +1176,22 @@ div#chat-area button {
 
   .page-404 .doodle-right {
     position: absolute;
-    left: -40px !important;
+    left: -15px !important;
     top: 90% !important;
     right: auto !important;
   }
 
   .page-404 {
     overflow: hidden;
-    padding-bottom: 120px;
   }
 
   .mobile-img {
     display: block;
     width: auto !important;
+  }
+  .int-404-inner {
+    height: 142vh;
+    margin-top: -200px;
   }
 }
 
@@ -1353,6 +1356,9 @@ div#chat-area button {
 }
 
 @media (max-width: 500px) {
+  .page-404 .footer-oval__svg {
+    width: 146px !important;
+  }
   /* 🔥 VERY CLOSE spacing */
   .item:nth-child(1) {
     transform: rotateY(0deg) translateZ(160px);
@@ -1376,7 +1382,6 @@ div#chat-area button {
 
   .page-404 {
     overflow: hidden;
-    padding-bottom: 120px;
   }
   .chat img {
     width: 22%;
