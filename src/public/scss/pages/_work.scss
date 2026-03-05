@@ -243,9 +243,10 @@ body {
 
 #imagePreview {
   position: fixed;
-  width: 600px;
-  height: 400px;
-  background-size: contain;
+  width: 470px;
+  height: 298px;
+  border-radius: 20px;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   pointer-events: none;
