@@ -1,0 +1,84 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    title New Form Submission
+    style.
+      /* enhanced email stylesheet matching site theme */
+      body {
+        font-family: 'Work Sans', Arial, sans-serif;
+        background-color: #f9f5f2;
+        color: #111;
+        margin: 0;
+        padding: 0;
+      }
+      .wrapper {
+        width: 100%;
+        padding: 40px 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(168, 112, 112, 0.05);
+        overflow: hidden;
+      }
+      .header {
+        background-color: #1e1e1e;
+        color: #fff;
+        padding: 20px 30px;
+        text-align: center;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .body {
+        padding: 30px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      td {
+        padding: 8px 0;
+        vertical-align: top;
+      }
+      .label {
+        font-weight: 600;
+        width: 140px;
+        color: #333;
+        text-transform: capitalize;
+      }
+      .value {
+        color: #555;
+      }
+      .footer {
+        background-color: #f1f1f1;
+        color: #666;
+        font-size: 12px;
+        text-align: center;
+        padding: 15px 30px;
+      }
+  body
+    .wrapper
+      .container
+        .header
+          h1 RedArrow Submission
+        .body
+          table
+            each value, key in formData
+              tr
+                td.label #{key.replace(/([A-Z])/g, ' $1').toLowerCase()}
+                td.value
+                  if key === 'email'
+                    a(href=`mailto:${value}`)= value
+                  else if key === 'message'
+                    pre(style="margin:0;font-family:inherit;white-space:pre-wrap;")= value
+                  else
+                    | #{value}
+        .footer
+          | This message was generated automatically. Do not reply to this email.
