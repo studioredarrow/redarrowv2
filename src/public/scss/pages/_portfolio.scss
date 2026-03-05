@@ -576,11 +576,11 @@ body {
       align-items: center;
 
       &::after {
-        content: "+";
-        font-size: 35px;
-        font-weight: 500;
-        line-height: 1;
-        color: #ff0004;
+        // content: "+";
+        // font-size: 35px;
+        // font-weight: 500;
+        // line-height: 1;
+        // color: #ff0004;
       }
     }
   }
@@ -920,6 +920,26 @@ body {
   .create-item-int.create-int img {
     width: 100% !important;
   }
+  .create-item-int {
+    width: 100% !important;
+  }
+  .event-image-box-new:nth-child(1) {
+    width: 100% !important;
+  }
+  .event-image-box-new:nth-child(4) {
+    width: 100% !important;
+  }
+  .position-absolute-img img {
+    display: block !important;
+  }
+  .benji-services {
+    width: 100%;
+    position: relative;
+  }
+  .position-absolute-img {
+    position: absolute;
+    right: 0;
+  }
 }
 
 // .create-item-grid img {
@@ -930,11 +950,11 @@ body {
 }
 .create-item-int img {
   border-radius: 20px;
-  width: 190px !important;
+  width: 190px;
   height: 195px !important;
 }
 .create-item-int.create-int img {
-  width: 395px !important;
+  width: 395px;
   height: 375px !important;
 }
 .create-inner-flex {
@@ -950,7 +970,7 @@ body {
   object-fit: cover;
 }
 .create-item-grid img {
-  width: 100%;
+  // width: 100%;
   height: 573px;
 }
 
@@ -993,4 +1013,68 @@ body {
 }
 .event-column-new.event-single-image-new {
   height: 630px;
+}
+.position-absolute-img img {
+  display: none;
+}
+
+// tab css
+
+.toggle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle-icon {
+  width: 35px;
+  transition: 0.3s;
+}
+
+.toggle-content {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .toggle-content {
+    display: none;
+  }
+  .toggle-header {
+    display: block !important;
+  }
+
+  .mobile-toggle.active .toggle-content {
+    display: block;
+  }
+
+  // .mobile-toggle.active .toggle-icon {
+  //   transform: rotate(45deg);
+  // }
+  .toggle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    right: 22px;
+    bottom: 75px;
+  }
+}
+
+.toggle-content {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .toggle-content {
+    display: none;
+  }
+
+  .mobile-toggle.active .toggle-content {
+    display: block;
+  }
+}
+.toggle-header {
+  display: none;
 }
