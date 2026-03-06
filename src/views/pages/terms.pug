@@ -35,17 +35,44 @@ block content
                   data-target=`section-${index}`
                 )= section.section_title
 
-        // ===== TERMS SECTIONS =====
-        .term-section
-          each section, index in terms.data.sections
-            h2.animate-text(id=`section-${index}`)= section.section_title
+        .mobile-toggle.term-toggle
+          .toggle-header
+            img.toggle-icon(src="/images/plus-icon.png", alt="")
 
-            if section.section_content
-              .animate-text.terms-rich-text!= asHTML(section.section_content)
+          .toggle-content
+            .term-section
+              each section, index in terms.data.sections
+                h2.animate-text(id=`section-${index}`)= section.section_title
+
+                if section.section_content
+                  .animate-text.terms-rich-text!= asHTML(section.section_content)
 
   // ================= SCRIPTS =================
   script(src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js")
   script(src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js")
+  script.
+    document.addEventListener("DOMContentLoaded", function(){
+
+      document.querySelectorAll(".toggle-header").forEach(header => {
+
+        header.addEventListener("click", function(){
+
+          const parent = this.parentElement;
+          const icon = this.querySelector(".toggle-icon");
+
+          parent.classList.toggle("active");
+
+          if(parent.classList.contains("active")){
+            icon.src = "/images/minus-icon.png";
+          }else{
+            icon.src = "/images/plus-icon.png";
+          }
+
+        });
+
+      });
+
+    });
 
   script.
     document.addEventListener("DOMContentLoaded", function () {
