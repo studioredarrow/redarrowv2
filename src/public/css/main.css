@@ -1179,7 +1179,7 @@ video {
     padding-block: 10px !important;
     position: relative;
     left: 100px;
-    background-color: #f9f5f1;
+    background-color: #f9f5f1 !important;
   }
   .outer {
     padding: 20px;
@@ -1258,7 +1258,7 @@ video {
   }
   .iconic-outer .iconic-inner .iconic-image {
     right: -25px;
-    background-color: #f9f5f1;
+    background-color: #f9f5f1 !important;
   }
   .allimages {
     gap: 20px;
@@ -1805,7 +1805,6 @@ span.inner-dot svg {
   font-size: 16px;
   color: #1e1e1e;
   max-width: 800px;
-  margin-bottom: 40px;
   font-family: Work Sans;
   font-weight: 400;
   line-height: 100%;
@@ -2076,6 +2075,9 @@ span.inner-dot svg {
     top: -44px;
     left: -32px;
   }
+  svg.hero-oval__svg.about-svg {
+    top: -40px !important;
+  }
   .team-card img {
     width: 172px;
     height: 208px;
@@ -2158,6 +2160,16 @@ span.inner-dot svg {
     margin-bottom: 80px;
   }
 }
+@media (max-width: 390px) {
+  .digit-slot,
+  .counter-suffix {
+    font-size: 38px !important;
+  }
+}
+.hero-mobile-flex {
+  margin-top: 40px;
+}
+
 a {
   text-decoration: none;
 }
@@ -2166,12 +2178,11 @@ a {
   width: 124px;
 }
 
-@media (max-width: 390px) {
-  .digit-slot,
-  .counter-suffix {
-    font-size: 38px !important;
-  }
+svg.hero-oval__svg.about-svg {
+  top: -21px;
+  left: -35px;
 }
+
 :root {
   --bg: #f6f2ee;
   --text: #6b6b6b;
@@ -2594,7 +2605,6 @@ body {
 }
 
 .benji-wrapper {
-  font-family: "Inter", sans-serif;
   color: #111;
   padding-top: 120px;
 }
@@ -3748,7 +3758,7 @@ body {
   font-weight: 500;
   font-size: 42px;
   line-height: 130%;
-  color: #1E1E1E;
+  color: #1e1e1e;
 }
 
 /* ================= PROGRESS BAR ================= */
@@ -3781,7 +3791,7 @@ body {
   font-size: 12px;
   font-weight: 400;
   margin-bottom: 10px;
-  color: #1E1E1E;
+  color: #1e1e1e;
 }
 .toc ul {
   list-style: none;
@@ -3813,7 +3823,7 @@ body {
   font-size: 32px;
   line-height: 130%;
   padding-bottom: 20px;
-  color: #1E1E1E;
+  color: #1e1e1e;
 }
 .term-section p {
   margin-bottom: 20px;
@@ -3821,7 +3831,7 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
-  color: #1E1E1E;
+  color: #1e1e1e;
 }
 .term-section {
   /* Rich text lists (section_content from Prismic) */
@@ -3843,7 +3853,7 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
-  color: #1E1E1E;
+  color: #1e1e1e;
 }
 
 /* ================= GSAP TEXT ANIMATION ================= */
@@ -3873,7 +3883,7 @@ body {
   cursor: pointer;
   border: none;
   background: transparent;
-  color: #FF0004;
+  color: #ff0004;
 }
 
 @media (max-width: 768px) {
@@ -3909,7 +3919,7 @@ body {
   font-size: 22px;
   font-weight: 500;
   cursor: pointer;
-  color: #1E1E1E;
+  color: #1e1e1e;
 }
 
 .toc ul a {
@@ -3918,7 +3928,7 @@ body {
 }
 
 .toc ul a:hover {
-  color: #FF0004;
+  color: #ff0004;
   font-weight: 600;
 }
 
@@ -3975,7 +3985,21 @@ body {
   .header-inner {
     padding-bottom: 0px;
   }
+  .mobile-toggle.term-toggle img {
+    width: 32px;
+  }
+  .mobile-toggle.term-toggle {
+    width: 100% !important;
+  }
 }
+.term-toggle {
+  display: block;
+}
+
+.mobile-toggle.term-toggle {
+  width: 65%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -4879,7 +4903,7 @@ img.chat-meme {
   padding: 24px;
   width: 100%;
   margin-bottom: 40px;
-  min-height: 100vh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
 }
