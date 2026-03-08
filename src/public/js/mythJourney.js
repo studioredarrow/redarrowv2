@@ -203,27 +203,37 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------------------
-     INPUT SUBMIT (AI ONLY)
+     INPUT SUBMIT (AI ONLY) - Enter key + Send icon
   -------------------------------- */
-  input.addEventListener("keydown", async (e) => {
-    if (e.key === "Enter" && input.value.trim()) {
-      const text = input.value.trim();
-      input.value = "";
+  async function sendInputMessage() {
+    const text = input.value.trim();
+    if (!text) return;
 
-      addMessage(text, "user");
+    input.value = "";
 
-      const thinkingBubble = await showThinkingBubble("answer_preparing");
+    addMessage(text, "user");
 
-      try {
-        const data = await fetchAIResponse(text);
-        thinkingBubble.remove();
-        processAIResponse(data);
-      } catch (err) {
-        thinkingBubble.remove();
-        addMessage("...silence...", "bot");
-      }
+    const thinkingBubble = await showThinkingBubble("answer_preparing");
+
+    try {
+      const data = await fetchAIResponse(text);
+      thinkingBubble.remove();
+      processAIResponse(data);
+    } catch (err) {
+      thinkingBubble.remove();
+      addMessage("...silence...", "bot");
     }
+  }
+
+  input.addEventListener("keydown", async (e) => {
+    if (e.key === "Enter") sendInputMessage();
   });
+
+  const sendIcon = document.querySelector(".chat-input .chat");
+  if (sendIcon) {
+    sendIcon.addEventListener("click", () => sendInputMessage());
+    sendIcon.style.cursor = "pointer";
+  }
 
   /* -------------------------------
      PRISMIC QUESTIONS
