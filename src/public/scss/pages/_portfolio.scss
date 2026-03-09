@@ -722,14 +722,13 @@ body {
 
   .left {
     display: flex;
-    justify-content: space-between;
+    gap: 74px !important;
   }
 }
 
 @media (max-width: 768px) {
   .bistro-banner {
     height: auto;
-    padding-bottom: 50px;
 
     img {
       width: 100%;
@@ -756,6 +755,12 @@ body {
 
   .event-column-new.event-single-image-new {
     min-height: 300px;
+  }
+  .bistro-banner {
+    margin-block: 15px !important;
+  }
+  .bistro-flex {
+    gap: 5px 0px !important;
   }
 
   .projects-grid {
@@ -886,10 +891,6 @@ body {
   }
   .bistro-flex {
     flex-wrap: wrap;
-  }
-
-  .bistro-banner {
-    padding-block: 10px;
   }
   .benji-title {
     font-size: 32px;
@@ -1072,6 +1073,9 @@ body {
 
   .mobile-toggle.active .toggle-content {
     display: block;
+  }
+  .photo-inner {
+    margin-top: 40px;
   }
 }
 .toggle-header {

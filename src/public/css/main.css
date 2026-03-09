@@ -1073,8 +1073,8 @@ video {
     flex-direction: column;
   }
   .services__label img {
-    top: -110px;
-    right: -43px;
+    top: -112px;
+    right: -237px;
     left: auto;
   }
   .create-img img {
@@ -1260,6 +1260,9 @@ video {
     right: -25px;
     background-color: #f9f5f1 !important;
   }
+  .how-outer .small-text {
+    font-weight: 400;
+  }
   .allimages {
     gap: 20px;
   }
@@ -1352,6 +1355,7 @@ video {
   }
   img.mobile-arrow {
     display: block;
+    width: 100%;
   }
   .section-clients {
     padding-block: 45px !important;
@@ -1989,8 +1993,8 @@ span.inner-dot svg {
     flex-direction: column-reverse;
   }
   .hero .hero-subtitle {
-    color: #1e1e1e;
     font-weight: 400;
+    color: #bdbdbd !important;
   }
   .hero .hero-image img {
     height: 232px;
@@ -2119,7 +2123,7 @@ span.inner-dot svg {
     height: auto;
   }
   .hero-mobile-flex {
-    margin-top: 0px;
+    margin-top: 0px !important;
   }
   .team-outer {
     padding-block: 35px;
@@ -3194,13 +3198,12 @@ body {
   }
   .left {
     display: flex;
-    justify-content: space-between;
+    gap: 74px !important;
   }
 }
 @media (max-width: 768px) {
   .bistro-banner {
     height: auto;
-    padding-bottom: 50px;
   }
   .bistro-banner img {
     width: 100%;
@@ -3221,6 +3224,12 @@ body {
   }
   .event-column-new.event-single-image-new {
     min-height: 300px;
+  }
+  .bistro-banner {
+    margin-block: 15px !important;
+  }
+  .bistro-flex {
+    gap: 5px 0px !important;
   }
   .projects-grid {
     grid-template-columns: 1fr;
@@ -3329,9 +3338,6 @@ body {
   }
   .bistro-flex {
     flex-wrap: wrap;
-  }
-  .bistro-banner {
-    padding-block: 10px;
   }
   .benji-title {
     font-size: 32px;
@@ -3507,6 +3513,9 @@ body {
   }
   .mobile-toggle.active .toggle-content {
     display: block;
+  }
+  .photo-inner {
+    margin-top: 40px;
   }
 }
 .toggle-header {
@@ -3706,6 +3715,14 @@ body {
   .open-outer {
     margin-top: 10px;
     padding-inline: 20px;
+  }
+  div#gridView img {
+    height: 232px;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .main-grid-img {
+    display: block;
   }
   .page-wrapper {
     height: 660px;
@@ -4992,10 +5009,9 @@ a.terms-btn:hover {
 }
 
 .chat img {
-  width: 10%;
   position: absolute;
   top: 50%;
-  right: -4px;
+  right: 30px;
   transform: translateY(-50%) !important;
 }
 
@@ -5538,7 +5554,7 @@ div#chat-area button {
     font-size: 40px;
   }
   .item.main {
-    font-size: 36px;
+    font-size: 32px;
   }
   .myth-wrapper {
     padding: 15px;
@@ -5598,8 +5614,12 @@ div#chat-area button {
     overflow: hidden;
   }
   .chat img {
-    width: 22%;
-    right: -14px;
+    right: 10px;
+    width: 30px;
+  }
+  .chat-buttons {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
   }
   .chat-next-prompts {
     flex-wrap: wrap !important;
@@ -5609,13 +5629,13 @@ div#chat-area button {
     width: auto !important;
   }
   a.terms-btn {
-    color: #ff0004;
+    font-size: 10px !important;
   }
   .myth-bottom-section .intro-terms {
     margin-bottom: 30px;
   }
   .toggle-header {
-    position: sticky;
+    position: static;
     right: 20px !important;
     text-align: right;
     top: 0;

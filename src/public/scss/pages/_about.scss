@@ -708,8 +708,8 @@ span.inner-dot svg {
   }
 
   .hero .hero-subtitle {
-    color: #1e1e1e;
     font-weight: 400;
+    color: #bdbdbd !important;
   }
 
   .hero .hero-image img {
@@ -862,8 +862,9 @@ span.inner-dot svg {
     height: auto;
   }
   .hero-mobile-flex {
-    margin-top: 0px;
-}
+    margin-top: 0px !important;
+  }
+
   .team-outer {
     padding-block: 35px;
   }

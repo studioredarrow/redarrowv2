@@ -1196,8 +1196,8 @@ video {
   }
 
   .services__label img {
-    top: -110px;
-    right: -43px;
+    top: -112px;
+    right: -237px;
     left: auto;
   }
 
@@ -1422,7 +1422,9 @@ video {
     right: -25px;
     background-color: #f9f5f1 !important;
   }
-
+  .how-outer .small-text {
+    font-weight: 400;
+  }
   .allimages {
     gap: 20px;
   }
@@ -1527,9 +1529,9 @@ video {
   .right-form input[type="email"] {
     width: 97%;
   }
-
   img.mobile-arrow {
     display: block;
+    width: 100%;
   }
 
   .section-clients {
