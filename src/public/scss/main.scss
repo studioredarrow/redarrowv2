@@ -684,10 +684,9 @@ a.terms-btn {
 }
 
 .chat img {
-  width: 10%;
   position: absolute;
   top: 50%;
-  right: -4px;
+  right: 30px;
   transform: translateY(-50%) !important;
 }
 
@@ -1308,7 +1307,7 @@ div#chat-area button {
   }
 
   .item.main {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .myth-wrapper {
@@ -1384,8 +1383,12 @@ div#chat-area button {
     overflow: hidden;
   }
   .chat img {
-    width: 22%;
-    right: -14px;
+    right: 10px;
+    width: 30px;
+  }
+  .chat-buttons {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
   }
   .chat-next-prompts {
     flex-wrap: wrap !important;
@@ -1396,18 +1399,19 @@ div#chat-area button {
     width: auto !important;
   }
   a.terms-btn {
-    color: #ff0004;
+    font-size: 10px !important;
   }
   .myth-bottom-section .intro-terms {
     margin-bottom: 30px;
   }
   .toggle-header {
-    position: sticky;
+    position: static;
     right: 20px !important;
     text-align: right;
     top: 0;
     margin-top: -40px;
     margin-right: 10px;
+    // padding-bottom: 40px;
   }
 }
 

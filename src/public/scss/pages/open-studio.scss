@@ -194,6 +194,14 @@ body {
     margin-top: 10px;
     padding-inline: 20px;
   }
+  div#gridView img {
+    height: 232px;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .main-grid-img {
+    display: block;
+  }
 
   .page-wrapper {
     height: 660px;
