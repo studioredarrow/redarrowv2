@@ -466,8 +466,17 @@ ul.services__list li:hover {
     align-items: center;
   }
 
+  .iconic-inner {
+    background-color: #f9f5f1;
+  }
+
+  .iconic-outer .iconic-inner .iconic-image {
+    background-color: #f9f5f1;
+  }
+
   .iconic-image img {
     width: 200px;
+    background-color: #f9f5f1;
   }
 }
 

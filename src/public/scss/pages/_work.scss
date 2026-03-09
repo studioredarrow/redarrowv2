@@ -107,9 +107,16 @@ body {
   font-weight: 500;
 }
 
+/* Count (brackets + number) matches active tab color when it follows the active category */
+.category-links .category.active + .count {
+  color: var(--accent);
+}
+
 .category-links .count {
   font-size: 0.7em;
   vertical-align: super;
+  color: #828282;
+  transition: color 0.3s ease;
 }
 
 /* Grid View */

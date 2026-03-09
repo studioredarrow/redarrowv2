@@ -428,8 +428,15 @@ ul.services__list li:hover {
     flex-direction: column;
     align-items: center;
   }
+  .iconic-inner {
+    background-color: #f9f5f1;
+  }
+  .iconic-outer .iconic-inner .iconic-image {
+    background-color: #f9f5f1;
+  }
   .iconic-image img {
     width: 200px;
+    background-color: #f9f5f1;
   }
 }
 .iconic-image img {
@@ -2298,9 +2305,16 @@ body {
   font-weight: 500;
 }
 
+/* Count (brackets + number) matches active tab color when it follows the active category */
+.category-links .category.active + .count {
+  color: var(--accent);
+}
+
 .category-links .count {
   font-size: 0.7em;
   vertical-align: super;
+  color: #828282;
+  transition: color 0.3s ease;
 }
 
 /* Grid View */
