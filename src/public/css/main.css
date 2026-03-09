@@ -2118,6 +2118,9 @@ span.inner-dot svg {
   .machine .screen video {
     height: auto;
   }
+  .hero-mobile-flex {
+    margin-top: 0px;
+  }
   .team-outer {
     padding-block: 35px;
   }
@@ -4903,7 +4906,7 @@ img.chat-meme {
   padding: 24px;
   width: 100%;
   margin-bottom: 40px;
-  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
