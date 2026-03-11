@@ -5094,6 +5094,10 @@ a.terms-btn:hover {
   --main-font: Work Sans;
 }
 
+.intro-page .logo-trigger.logo1 {
+  filter: brightness(0) invert(1);
+}
+
 .outer {
   margin: 0;
   background-color: #ff0004;
@@ -5192,14 +5196,6 @@ a.terms-btn:hover {
   gap: 20px;
 }
 
-img.logo-trigger.logo1 {
-  filter: brightness(0) saturate(100%) invert(7%) sepia(97%) saturate(7491%) hue-rotate(356deg) brightness(150%) contrast(101%);
-}
-
-.home-page img.logo-trigger.logo1 {
-  filter: brightness(0) saturate(100%) invert(95%) sepia(10%) saturate(300%) hue-rotate(0deg) brightness(173%) contrast(100%);
-}
-
 .project-name {
   color: #bdbdbd;
   margin-bottom: 1.2rem;
@@ -5207,6 +5203,10 @@ img.logo-trigger.logo1 {
   font-weight: 600;
   font-size: 16px;
   line-height: 100%;
+}
+
+.main-logo-filter img.logo-trigger.logo1 {
+  filter: brightness(0) invert(1);
 }
 
 .headline1 {
