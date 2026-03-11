@@ -32,13 +32,17 @@ html(lang="en")
         left: 20px;
         z-index: 999;
       }
+      
 
   body.page1
     // =======================
     // LOGO CONTAINER
     // =======================
     .logo-container
-      img.logo-trigger.logo1(src="/images/red-arrow-logo.png", alt="Red Logo")
+      img.logo-trigger.logo1(src="/images/red-color-logo.png", alt="Red Logo")
+
+    .logo-container.intro-page
+      img.logo-trigger.logo1(src="/images/Copy of Logo_RA-03 2.png", alt="Red Logo")  
 
     // =======================
     // OVERLAY
@@ -282,3 +286,23 @@ html(lang="en")
 
         lastScrollY = currentScrollY;
       });
+
+    script.
+      document.addEventListener("DOMContentLoaded", function () {
+
+        const path = window.location.pathname;
+
+        const defaultLogo = document.querySelector(".default-logo");
+        const introLogo = document.querySelector(".intro-page");
+
+        if (path === "/") {
+          // Homepage
+          if(defaultLogo) defaultLogo.style.display = "none";
+          if(introLogo) introLogo.style.display = "block";
+        } else {
+          // Other pages
+          if(defaultLogo) defaultLogo.style.display = "block";
+          if(introLogo) introLogo.style.display = "none";
+        }
+
+      });  
