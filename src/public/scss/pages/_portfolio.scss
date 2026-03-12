@@ -679,7 +679,7 @@ body {
   }
 
   .benji-image img {
-    height: 325px !important;
+    height: 236px !important;
     object-fit: cover;
   }
 
@@ -903,6 +903,11 @@ body {
   }
   .bistro-banner img {
     height: 220px;
+    object-fit: cover;
+  }
+  .benji-flex .left {
+    width: 50%;
+    gap: 50px !important;
   }
   .create-item-grid img {
     width: 100%;

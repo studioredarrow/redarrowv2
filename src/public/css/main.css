@@ -1221,6 +1221,9 @@ video {
   .hero-section-unique .outer-unique .image-container-unique {
     right: -100px;
   }
+  .hero-section-unique .outer-unique .image-container-unique .label-group-unique span {
+    font-weight: 400;
+  }
   .image-create-overlay {
     width: 100% !important;
   }
@@ -1239,7 +1242,7 @@ video {
     padding-bottom: 0px;
   }
   .scroll-progress {
-    margin-top: 25px;
+    margin-top: 18px;
   }
   .myth-title h3 {
     font-weight: 400;
@@ -1278,7 +1281,7 @@ video {
   .create-item.create-img img {
     width: 200px !important;
     height: 189px !important;
-    object-fit: fill !important;
+    object-fit: contain !important;
   }
   .create-item-int {
     margin-top: 30px;
@@ -1842,6 +1845,13 @@ span.inner-dot svg {
 }
 .hero .team-inner h6 {
   padding-bottom: 25px;
+  font-weight: 400;
+}
+.hero .team-img {
+  border-radius: 10px;
+}
+.hero .team-card img {
+  border-radius: 10px !important;
 }
 
 .screen img {
@@ -1979,9 +1989,6 @@ span.inner-dot svg {
   }
   .machine .panel .counter-row {
     grid-template-columns: repeat(4, 1fr);
-  }
-  .hero-absolute-img {
-    display: none;
   }
 }
 @media (max-width: 768px) {
@@ -2165,6 +2172,9 @@ span.inner-dot svg {
   .hero {
     padding: 25px 0px;
     margin-bottom: 80px;
+  }
+  .machine {
+    border-radius: 0px;
   }
 }
 @media (max-width: 390px) {
@@ -2523,8 +2533,8 @@ body {
 }
 @media (max-width: 600px) {
   .category-links {
-    font-size: 20px;
-    width: 342px;
+    font-size: 24px;
+    width: 100%;
   }
   .benji-absolute img {
     position: absolute;
@@ -3165,7 +3175,7 @@ body {
     width: 100%;
   }
   .benji-image img {
-    height: 325px !important;
+    height: 236px !important;
     object-fit: cover;
   }
   .benji-services {
@@ -3350,6 +3360,11 @@ body {
   }
   .bistro-banner img {
     height: 220px;
+    object-fit: cover;
+  }
+  .benji-flex .left {
+    width: 50%;
+    gap: 50px !important;
   }
   .create-item-grid img {
     width: 100%;
@@ -3720,6 +3735,7 @@ body {
     height: 232px;
     width: 100% !important;
     max-width: 100% !important;
+    object-fit: cover !important;
   }
   .main-grid-img {
     display: block;
@@ -4860,6 +4876,7 @@ img.chat-meme {
   cursor: pointer;
   transition: transform 0.3s ease;
   margin-top: 13px;
+  width: 52px;
 }
 
 .logo-trigger:hover {
@@ -5480,7 +5497,7 @@ div#chat-area button {
     margin-top: -40px;
   }
   .banner {
-    padding: 2rem 1.5rem;
+    padding: 0px;
   }
   .banner .banner-right h1 {
     font-size: 1.8rem;
@@ -5614,9 +5631,27 @@ div#chat-area button {
   .page-404 {
     overflow: hidden;
   }
+  .chat-input input {
+    border-radius: 20px;
+    box-shadow: none;
+  }
+  .note {
+    font-size: 16px;
+    padding-top: 20px;
+  }
+  .project-name {
+    margin-bottom: 10px;
+  }
+  .headline1 {
+    font-size: 16px;
+    padding-bottom: 10px;
+  }
   .chat img {
     right: 10px;
-    width: 30px;
+    width: 20px;
+  }
+  .btn-row {
+    gap: 15px;
   }
   .chat-buttons {
     display: grid !important;
@@ -5636,12 +5671,13 @@ div#chat-area button {
     margin-bottom: 30px;
   }
   .toggle-header {
-    position: static;
+    position: sticky;
     right: 20px !important;
     text-align: right;
     top: 0;
     margin-top: -40px;
     margin-right: 10px;
+    z-index: 99;
   }
 }
 .chat-cta {

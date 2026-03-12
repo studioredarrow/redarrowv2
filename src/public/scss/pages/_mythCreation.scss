@@ -1383,6 +1383,13 @@ video {
   .hero-section-unique .outer-unique .image-container-unique {
     right: -100px;
   }
+  .hero-section-unique
+    .outer-unique
+    .image-container-unique
+    .label-group-unique
+    span {
+    font-weight: 400;
+  }
   .image-create-overlay {
     width: 100% !important;
   }
@@ -1401,7 +1408,7 @@ video {
     padding-bottom: 0px;
   }
   .scroll-progress {
-    margin-top: 25px;
+    margin-top: 18px;
   }
   .myth-title h3 {
     font-weight: 400;
@@ -1444,7 +1451,7 @@ video {
   .create-item.create-img img {
     width: 200px !important;
     height: 189px !important;
-    object-fit: fill !important;
+    object-fit: contain !important;
   }
   .create-item-int {
     margin-top: 30px;
