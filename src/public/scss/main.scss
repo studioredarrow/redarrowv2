@@ -1420,11 +1420,10 @@ div#chat-area button {
     position: sticky;
     right: 20px !important;
     text-align: right;
-    top: 0;
+    top: 30px !important;
     margin-top: -40px;
     margin-right: 10px;
     z-index: 99;
-    // padding-bottom: 40px;
   }
 }
 
