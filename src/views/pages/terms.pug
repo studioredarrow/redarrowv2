@@ -24,28 +24,28 @@ block content
       // ===== TERMS CONTENT =====
       .terms-container
 
-        // ===== TABLE OF CONTENTS =====
-        .toc
-          h2.animate-text Table of Contents
-          ul
-            each section, index in terms.data.sections
-              li
-                a.animate-text.toc-link(
-                  href=`#section-${index}`
-                  data-target=`section-${index}`
-                )= section.section_title
-
         .mobile-toggle.term-toggle
           .toggle-header
             img.toggle-icon(src="/images/plus-icon.png", alt="")
 
           .toggle-content
-            .term-section
-              each section, index in terms.data.sections
-                h2.animate-text(id=`section-${index}`)= section.section_title
+            .toc
+              h2.animate-text Table of Contents
+              ul
+                each section, index in terms.data.sections
+                  li
+                    a.animate-text.toc-link(
+                      href=`#section-${index}`
+                      data-target=`section-${index}`
+                    )= section.section_title
 
-                if section.section_content
-                  .animate-text.terms-rich-text!= asHTML(section.section_content)
+
+        .term-section
+          each section, index in terms.data.sections
+            h2.animate-text(id=`section-${index}`)= section.section_title
+
+            if section.section_content
+              .animate-text.terms-rich-text!= asHTML(section.section_content)
 
   // ================= SCRIPTS =================
   script(src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js")

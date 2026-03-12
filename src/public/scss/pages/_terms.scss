@@ -59,7 +59,7 @@ body {
 
 /* ================= TOC ================= */
 .toc {
-  width: 19%;
+  // width: 19%;
   position: sticky;
   top: 20px;
   height: 100%;
@@ -218,6 +218,7 @@ body {
 .toc ul a {
   color: #828282;
   text-decoration: none;
+  font-size: 16px;
 }
 
 .toc ul a:hover {
@@ -286,6 +287,9 @@ body {
   .term-section h2 {
     font-size: 22px;
   }
+  .mobile-toggle.term-toggle {
+    width: 20%;
+  }
 
   .header-inner {
     padding-bottom: 0px;
@@ -297,10 +301,22 @@ body {
   .mobile-toggle.term-toggle {
     width: 100% !important;
   }
+  .mobile-toggle.term-toggle {
+    display: block;
+  }
+  .mobile-toggle.term-toggle {
+    display: block !important;
+  }
+  .terms-container .toggle-header {
+    position: fixed !important;
+    text-align: right;
+    top: 30px !important;
+    margin-top: -40px;
+    margin-right: 10px;
+    z-index: 99;
+    top: 70px !important;
+  }
 }
 .term-toggle {
   display: block;
-}
-.mobile-toggle.term-toggle {
-  width: 65%;
 }

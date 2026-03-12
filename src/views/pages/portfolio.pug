@@ -242,9 +242,9 @@ block content
             // ---- VALENTINE IMAGES (7 & 8) ----
             if portfolioItem.data.creative_gallery_images.length > 6
               .container
-                .photo-flex
+                .photo-flex.new-grid-mobile
                   each item in portfolioItem.data.creative_gallery_images.slice(6)
-                    .photo-item
+                    .photo-item.new-grid-phone
                       img(
                         src=item.image.url
                         alt=item.alt_text || ''
