@@ -3895,8 +3895,12 @@ body {
   color: #1e1e1e;
 }
 .toc ul {
-  list-style: none;
-  padding: 0;
+  display: grid;
+  list-style: none !important;
+  grid-template-columns: 1fr; /* 2 columns */
+  grid-template-rows: repeat(17, auto); /* 10 rows */
+  grid-auto-flow: column; /* fill column first */
+  counter-reset: num;
 }
 .toc ul li {
   margin: 6px 0;
@@ -4112,9 +4116,29 @@ body {
     z-index: 99;
     top: 70px !important;
   }
+  .toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columns */
+    grid-template-rows: repeat(9, auto); /* 10 rows */
+    grid-auto-flow: column; /* fill column first */
+    counter-reset: num;
+  }
+  .toc ul li::before {
+    counter-increment: num;
+    content: counter(num) " ";
+  }
 }
 .term-toggle {
   display: block;
+}
+
+.toc ul li::before {
+  counter-increment: num;
+  content: counter(num) " ";
+  font-size: 16px;
 }
 
 * {
