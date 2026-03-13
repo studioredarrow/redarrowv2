@@ -1409,6 +1409,8 @@ video {
   }
   .scroll-progress {
     margin-top: 18px;
+    margin-inline: 20px;
+    width: 90%;
   }
   .myth-title h3 {
     font-weight: 400;
@@ -1543,6 +1545,9 @@ video {
 
   .section-clients {
     padding-block: 45px !important;
+  }
+  .create-item-inner .create-item-int {
+    width: 100% !important;
   }
 }
 
