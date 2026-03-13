@@ -667,13 +667,11 @@ body {
   }
 
   .create-item-int {
-    width: 100%;
+    width: 48% !important;
   }
-
-  .create-item-int {
-    width: 100%;
+  .create-int {
+    width: 100% !important;
   }
-
   .benji-content {
     width: 100%;
   }
@@ -760,7 +758,7 @@ body {
     margin-block: 15px !important;
   }
   .bistro-flex {
-    gap: 5px 0px !important;
+    gap: 5px 10px !important;
   }
 
   .projects-grid {
@@ -799,8 +797,71 @@ body {
     width: 100%;
     height: 167px;
   }
+  .create-item-int:nth-child(4) {
+    order: 1;
+  }
+  .event-grid-item {
+    width: 47%;
+  }
+  .event-image-box-new {
+    width: 48% !important;
+  }
+  .event-image-box-new:nth-child(2) {
+    height: 170px !important;
+  }
+  .event-image-box-new:nth-child(3) {
+    height: 170px !important;
+  }
+  .event-image-box-new:nth-child(1) {
+    height: 220px !important;
+  }
+  .event-image-box-new:nth-child(4) {
+    height: 220px !important;
+  }
+  .event-column-new.event-single-image-new {
+    height: 341px !important;
+  }
+  .photo-item {
+    width: 100% !important;
+  }
+  .create-item-int img {
+    height: 166px !important;
+  }
+  .new-grid-phone {
+    width: 48% !important;
+  }
+  .event-item-grid {
+    grid-template-columns: 2fr;
+    gap: 14px !important;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .photo-flex {
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
+  .photo-item {
+    width: 48%;
+  }
+  .create-item-grid img {
+    height: 220px !important;
+  }
+
+  .create-item-int:nth-child(1) {
+    order: 2;
+  }
+
+  .create-item-int:nth-child(2) {
+    order: 3;
+  }
   .create-item-int {
-    width: 45%;
+    width: 47% !important;
+  }
+  .create-item-int img {
+    height: 166px !important;
+  }
+  .create-inner-flex {
+    gap: 2px 15px !important;
   }
   .create-item-int img {
     width: 100% !important;
@@ -917,16 +978,20 @@ body {
   .event-image-box-new:nth-child(4) {
     width: 100%;
   }
+  .create-item-grid .create-inner-item:nth-child(2) img {
+    height: 341px !important;
+    object-fit: cover;
+  }
   .bistro-item {
-    width: 46%;
+    width: 48%;
   }
   .create-item-int img {
     width: 100% !important;
   }
-  .create-item-int.create-int img {
+  .create-int {
     width: 100% !important;
   }
-  .create-item-int {
+  .create-item-int.create-int img {
     width: 100% !important;
   }
   .event-image-box-new:nth-child(1) {

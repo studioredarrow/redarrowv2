@@ -59,7 +59,7 @@ body {
 
 /* ================= TOC ================= */
 .toc {
-  width: 19%;
+  // width: 19%;
   position: sticky;
   top: 20px;
   height: 100%;
@@ -72,8 +72,15 @@ body {
   }
 
   ul {
-    list-style: none;
-    padding: 0;
+    display: grid;
+    list-style: none !important;
+    grid-template-columns: 1fr; /* 2 columns */
+
+    grid-template-rows: repeat(17, auto); /* 10 rows */
+
+    grid-auto-flow: column; /* fill column first */
+
+    counter-reset: num;
 
     li {
       margin: 6px 0;
@@ -218,6 +225,7 @@ body {
 .toc ul a {
   color: #828282;
   text-decoration: none;
+  font-size: 16px;
 }
 
 .toc ul a:hover {
@@ -286,6 +294,9 @@ body {
   .term-section h2 {
     font-size: 22px;
   }
+  .mobile-toggle.term-toggle {
+    width: 20%;
+  }
 
   .header-inner {
     padding-bottom: 0px;
@@ -297,10 +308,47 @@ body {
   .mobile-toggle.term-toggle {
     width: 100% !important;
   }
+  .mobile-toggle.term-toggle {
+    display: block;
+  }
+  .mobile-toggle.term-toggle {
+    display: block !important;
+  }
+  .terms-container .toggle-header {
+    position: fixed !important;
+    text-align: right;
+    top: 30px !important;
+    margin-top: -40px;
+    margin-right: 10px;
+    z-index: 99;
+    top: 70px !important;
+  }
+
+  .toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columns */
+
+    grid-template-rows: repeat(9, auto); /* 10 rows */
+
+    grid-auto-flow: column; /* fill column first */
+
+    counter-reset: num;
+  }
+  .toc ul li::before {
+    counter-increment: num;
+    content: counter(num) " ";
+  }
 }
 .term-toggle {
   display: block;
 }
-.mobile-toggle.term-toggle {
-  width: 65%;
+
+.toc ul li::before {
+  counter-increment: num;
+  content: counter(num) " ";
+  font-size: 16px;
 }
