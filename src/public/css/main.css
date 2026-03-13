@@ -2142,6 +2142,7 @@ span.inner-dot svg {
   }
   .team-inner h6 {
     padding-bottom: 20px;
+    font-weight: 500;
   }
   .main-about-outer {
     padding-inline: 0px;
