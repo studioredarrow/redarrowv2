@@ -2153,6 +2153,7 @@ span.inner-dot svg {
   }
   .team-inner h6 {
     padding-bottom: 20px;
+    font-weight: 400;
   }
   .main-about-outer {
     padding-inline: 0px;
@@ -4151,7 +4152,7 @@ body {
   }
   .toc ul li::before {
     counter-increment: num;
-    content: counter(num) " ";
+    content: counter(num) ". ";
   }
 }
 .term-toggle {
@@ -4160,7 +4161,7 @@ body {
 
 .toc ul li::before {
   counter-increment: num;
-  content: counter(num) " ";
+  content: counter(num) ". ";
   font-size: 16px;
 }
 
