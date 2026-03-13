@@ -850,6 +850,10 @@ ul.services__list a {
   cursor: pointer;
 }
 
+.footer-oval.outer-btn {
+  position: relative;
+}
+
 .footer-wrap {
   position: relative;
   display: inline-flex;
@@ -891,7 +895,7 @@ ul.services__list a {
   stroke-linejoin: round;
   stroke-dasharray: 500;
   stroke-dashoffset: 500;
-  transition: stroke-dashoffset 0.6s ease;
+  transition: stroke-dashoffset 0.35s ease;
 }
 
 img.desktop-arrow {
@@ -2149,6 +2153,7 @@ span.inner-dot svg {
   }
   .team-inner h6 {
     padding-bottom: 20px;
+    font-weight: 400;
   }
   .main-about-outer {
     padding-inline: 0px;
@@ -4147,7 +4152,7 @@ body {
   }
   .toc ul li::before {
     counter-increment: num;
-    content: counter(num) " ";
+    content: counter(num) ". ";
   }
 }
 .term-toggle {
@@ -4156,7 +4161,7 @@ body {
 
 .toc ul li::before {
   counter-increment: num;
-  content: counter(num) " ";
+  content: counter(num) ". ";
   font-size: 16px;
 }
 

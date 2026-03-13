@@ -1,8 +1,8 @@
-// load environment variables early
-require('dotenv').config();
+// load environment variables early (from same folder as server.js so src/.env is used)
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const express = require("express");
-const path = require("path");
 
 const menuMiddleware = require("./middleware/menu");
 const randomAdMiddleware = require("./middleware/randomAdMiddleware");
@@ -31,6 +31,12 @@ app.use(randomAdMiddleware);
 app.use(suggestedQuestionsMiddleware);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Expose footer signup query param so footer partial can show success/error
+app.use((req, res, next) => {
+  res.locals.footer_signup = req.query.footer_signup;
+  next();
+});
 
 app.use("/", introRoute);
 app.use("/myth-journey", mythJourneyRoute);
