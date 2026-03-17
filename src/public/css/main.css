@@ -3474,6 +3474,14 @@ body {
     position: absolute;
     right: 0;
   }
+  .benji-wrapper .toggle-content {
+    position: sticky;
+    overflow: auto;
+    height: 100%;
+    background: #f8f5f1;
+    z-index: 9999;
+    top: 120px;
+  }
 }
 .create-item-grid img {
   width: 100%;
@@ -4136,6 +4144,14 @@ body {
     counter-increment: num;
     content: counter(num) " ";
   }
+  .toggle-content {
+    position: fixed;
+    overflow: auto;
+    height: 100%;
+    background: #f8f5f1;
+    z-index: 9999;
+    top: 250px;
+  }
 }
 .term-toggle {
   display: block;
@@ -4143,7 +4159,7 @@ body {
 
 .toc ul li::before {
   counter-increment: num;
-  content: counter(num) " ";
+  content: counter(num) ". ";
   font-size: 16px;
 }
 
@@ -5790,8 +5806,8 @@ div#chat-area button {
     position: sticky;
     right: 20px !important;
     text-align: right;
-    top: 30px !important;
-    margin-top: -40px;
+    top: 80px !important;
+    margin-top: -32px;
     margin-right: 10px;
     z-index: 99;
   }
