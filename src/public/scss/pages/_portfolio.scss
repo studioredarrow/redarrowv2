@@ -1011,6 +1011,14 @@ body {
     position: absolute;
     right: 0;
   }
+  .benji-wrapper .toggle-content {
+    position: sticky;
+    overflow: auto;
+    height: 100%;
+    background: #f8f5f1;
+    z-index: 9999;
+    top: 120px;
+  }
 }
 
 // .create-item-grid img {

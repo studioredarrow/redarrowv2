@@ -342,6 +342,14 @@ body {
     counter-increment: num;
     content: counter(num) ". ";
   }
+  .toggle-content {
+    position: fixed;
+    overflow: auto;
+    height: 100%;
+    background: #f8f5f1;
+    z-index: 9999;
+    top: 250px;
+  }
 }
 .term-toggle {
   display: block;
