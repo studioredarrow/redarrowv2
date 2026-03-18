@@ -1349,12 +1349,21 @@ div#chat-area button {
 }
 
 @media (max-width: 500px) {
+  .footer-oval__svg {
+    bottom: 0 !important;
+  }
   .page-404 .footer-oval__svg {
     width: 146px !important;
   }
   /* 🔥 VERY CLOSE spacing */
   .item:nth-child(1) {
     transform: rotateY(0deg) translateZ(160px);
+  }
+  .chat-message.user {
+    font-size: 16px !important;
+  }
+  .chat-message.bot {
+    font-size: 16px !important;
   }
 
   .item:nth-child(2) {

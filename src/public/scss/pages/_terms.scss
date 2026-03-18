@@ -289,6 +289,7 @@ body {
 
   .header-inner h1 {
     font-size: 32px;
+    padding-top: 26px !important;
   }
 
   .term-section h2 {
@@ -303,7 +304,7 @@ body {
   }
   .mobile-toggle.term-toggle img {
     width: 32px;
-    margin-top: 50px;
+    margin-top: 100px;
   }
   .mobile-toggle.term-toggle {
     width: 100% !important;
@@ -314,16 +315,23 @@ body {
   .mobile-toggle.term-toggle {
     display: block !important;
   }
+  .mobile-toggle.term-toggle.active {
+    background: white;
+  }
   .terms-container .toggle-header {
     position: fixed !important;
     text-align: right;
-    top: 30px !important;
-    margin-top: -40px;
-    margin-right: 10px;
-    z-index: 99;
-    top: 70px !important;
+    width: 100%;
+    z-index: 9;
+    display: flex !important;
+    justify-content: end;
+    height: 120px;
+    margin-top: -78px;
+    margin-right: 0px !important;
   }
-
+  .terms-container .mobile-toggle.term-toggle.active .toggle-header {
+    background: #f8f5f1;
+  }
   .toc ul {
     list-style: none;
     margin: 0;
@@ -345,10 +353,11 @@ body {
   .toggle-content {
     position: fixed;
     overflow: auto;
-    height: 100%;
+    height: auto;
     background: #f8f5f1;
     z-index: 9999;
-    top: 250px;
+    top: 120px;
+    padding-block: 30px;
   }
 }
 .term-toggle {

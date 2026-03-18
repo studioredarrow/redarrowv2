@@ -292,7 +292,7 @@ p.animate-text-unique {
 }
 
 .desktop-logo {
-  width: 220px;
+  width: 200px;
 }
 
 ul.services__list span:hover {
@@ -868,10 +868,10 @@ ul.services__list a {
   gap: 45px;
 }
 
-.image-wrapper img {
-  width: 100%;
-  object-fit: cover;
-}
+// .image-wrapper img {
+//   width: 100%;
+//   object-fit: cover;
+// }
 
 .services__note {
   position: absolute;
@@ -1457,6 +1457,7 @@ video {
 
   .curve-wrapper {
     padding-block: 30px;
+    padding-inline: 20px !important;
   }
 
   .create-outer .outer-btn {
