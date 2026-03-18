@@ -1380,6 +1380,10 @@ video {
   display: none;
 }
 
+.social-icons-footer img {
+  width: 29px !important;
+}
+
 /* ===== HERO SECTION UNIQUE SCSS ===== */
 body {
   font-family: Work Sans;
