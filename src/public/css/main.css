@@ -2193,6 +2193,9 @@ span.inner-dot svg {
   .machine {
     border-radius: 0px;
   }
+  .address-content {
+    max-width: 100%;
+  }
 }
 @media (max-width: 390px) {
   .digit-slot,
@@ -2215,6 +2218,10 @@ a {
 svg.hero-oval__svg.about-svg {
   top: -21px;
   left: -35px;
+}
+
+.address-content {
+  max-width: 345px;
 }
 
 :root {
