@@ -573,14 +573,6 @@ body {
       display: flex;
       justify-content: space-between;
       align-items: center;
-
-      &::after {
-        // content: "+";
-        // font-size: 35px;
-        // font-weight: 500;
-        // line-height: 1;
-        // color: #ff0004;
-      }
     }
   }
 }
@@ -803,7 +795,7 @@ body {
   .mobile-toggle.active .toggle-content {
     display: block;
     overflow: scroll;
-    height: 550px;
+    height: 620px;
   }
   .event-grid-item {
     width: 47%;
