@@ -267,7 +267,7 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  // margin-top: 20px;
+  margin-top: 20px;
 
   .photo-item {
     img {
@@ -799,6 +799,11 @@ body {
   }
   .create-item-int:nth-child(4) {
     order: 1;
+  }
+  .mobile-toggle.active .toggle-content {
+    display: block;
+    overflow: scroll;
+    height: 550px;
   }
   .event-grid-item {
     width: 47%;
