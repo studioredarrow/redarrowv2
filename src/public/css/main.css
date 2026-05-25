@@ -3306,7 +3306,7 @@ body {
   .mobile-toggle.active .toggle-content {
     display: block;
     overflow: scroll;
-    height: 550px;
+    height: 620px;
   }
   .event-grid-item {
     width: 47%;
@@ -3939,6 +3939,7 @@ body {
   position: sticky;
   top: 20px;
   height: 100%;
+  min-width: 280px;
 }
 .toc h2 {
   font-size: 12px;
@@ -3947,17 +3948,19 @@ body {
   color: #1e1e1e;
 }
 .toc ul {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   list-style: none !important;
-  grid-template-columns: 1fr; /* 2 columns */
-  grid-template-rows: repeat(17, auto); /* 10 rows */
-  grid-auto-flow: column; /* fill column first */
   counter-reset: num;
+  gap: 6px 0;
 }
 .toc ul li {
-  margin: 6px 0;
+  margin: 0;
   color: #828282;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .toc ul li:hover {
   color: #ff0004;

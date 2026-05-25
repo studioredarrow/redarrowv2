@@ -1,0 +1,222 @@
+body {
+  font-family: Work Sans;
+}
+
+.open-flex {
+  display: flex;
+  gap: 130px;
+  flex-direction: row-reverse;
+}
+
+.text1 {
+  position: absolute;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #1e1e1e;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.grid-inner {
+  margin-top: 0px;
+}
+
+.grid .card-desc1 {
+  color: #1e1e1e;
+  padding-top: 5px;
+  max-width: 460px;
+  font-family: Work Sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.grid .card-title1 {
+  margin-top: 5px;
+  color: #1e1e1e;
+  font-family: Work Sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+.card-bottom1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: 10px;
+  font-family: inherit;
+}
+
+.grid .card-title .card:hover .card-desc {
+  color: #ff0004;
+}
+
+.card:hover .card-title {
+  color: #ff0004;
+}
+
+.main-grid-img {
+  overflow: hidden;
+  /* Hide anything outside the container */
+  display: inline-block;
+  border-radius: 20px;
+}
+
+.main-grid-img img {
+  transition: transform 0.3s ease;
+  /* Smooth hover */
+  display: block;
+  border-radius: 20px;
+}
+
+.main-grid-img img:hover {
+  transform: scale(1.1) !important;
+}
+
+/* --- Added Layout for Card Bottom --- */
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  /* Adjust spacing as needed */
+  font-family: inherit;
+  /* Inherit font from parent/body */
+}
+
+.card-title {
+  flex: 1;
+  text-align: left;
+  /* styles from card-title if needed */
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.card-desc {
+  /* margin-left: auto; */
+  /* flex justify-between handles this */
+  text-align: right;
+  /* Keep year on one line */
+  /* styles from card-desc if needed */
+  color: #000;
+  /* or inherit */
+}
+
+.container {
+  max-width: 1220px;
+  margin: auto;
+  padding: 0;
+}
+
+.studio-main-outer {
+  min-height: 100vh;
+  overflow: visible;
+}
+
+.work-outer.open-outer {
+  overflow: visible;
+}
+
+.open-outer {
+  margin-top: 0;
+}
+
+.inner-grid-open {
+  margin: 0px;
+}
+
+.studio-open {
+  margin-right: auto;
+  display: flex;
+  justify-content: end;
+  position: relative;
+  top: -7px;
+  right: -9px;
+}
+
+.studio-open img {
+  max-width: 155px;
+}
+
+.page-wrapper {
+  background-color: #b0b0b0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+}
+.page-wrapper .details {
+  color: white;
+  font-size: clamp(12px, 1.5vw, 16px);
+  display: flex;
+  gap: 70px;
+  margin-bottom: 30px;
+}
+.page-wrapper .details .details-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: Work Sans;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+}
+.page-wrapper .details .details-item .label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: white !important;
+}
+@media (max-width: 600px) {
+  .page-wrapper .details {
+    gap: 25px;
+    margin-bottom: 20px;
+  }
+}
+.page-wrapper .open-outer {
+  margin-top: 0px;
+}
+
+@media (max-width: 1000px) {
+  .open-flex .card {
+    width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .open-outer {
+    margin-top: 10px;
+    padding-inline: 20px;
+  }
+  div#gridView img {
+    height: 232px;
+    width: 100% !important;
+    max-width: 100% !important;
+    object-fit: cover !important;
+  }
+  .main-grid-img {
+    display: block;
+  }
+  .page-wrapper {
+    height: 660px;
+  }
+  .open-flex {
+    padding-top: 0px;
+  }
+  .open-outer .container {
+    padding-inline: 0px !important;
+  }
+  .item.side {
+    font-size: 32px !important;
+  }
+}
+.open-outer {
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
+
+/*# sourceMappingURL=open-studio.css.map */

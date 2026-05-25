@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "sass:watch": "sass --watch src/public/scss:src/public/css",
+    "sass:build": "sass src/public/scss:src/public/css"
   },
   "keywords": [],
   "author": "",
