@@ -3968,7 +3968,8 @@ body {
   font-weight: 600;
 }
 
-/* ================= TERMS CONTENT ================= */
+/* ================= ANCHOR LINK OFFSET ================= */
+/* ================= TERMS CONTENT Test ================= */
 .terms-container {
   display: flex;
   gap: 122px;
@@ -5948,3 +5949,4 @@ div#chat-area button.next-prompt-btn {
 }
 
 /*# sourceMappingURL=main.css.map */
+/*all testing done  */
