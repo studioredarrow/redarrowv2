@@ -1,43 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const mailHost = process.env.MAIL_HOST;
-const mailPort = parseInt(process.env.MAIL_PORT, 10) || 587;
-const mailUser = process.env.MAIL_USERNAME;
-const mailPass = process.env.MAIL_PASSWORD;
+// Initialize Resend with API key
+const resendApiKey = process.env.RESEND_API_KEY;
 
-// Log mail config at startup (no passwords). If host is missing, nodemailer falls back to 127.0.0.1
-if (!mailHost) {
-  console.warn("[form] MAIL_HOST is not set; SMTP will try 127.0.0.1 and likely fail. Check .env path and vars.");
+if (!resendApiKey) {
+  console.warn("[form] RESEND_API_KEY is not set. Email sending will fail. Check .env path and vars.");
+} else {
+  console.log("[form] Resend API initialized successfully");
 }
-console.log("[form] SMTP config:", {
-  host: mailHost || "(undefined → 127.0.0.1)",
-  port: mailPort,
-  user: mailUser ? `${mailUser.slice(0, 3)}***` : "(undefined)",
-  fromAddress: process.env.MAIL_FROM_ADDRESS || "(undefined)",
-});
 
-const transporter = nodemailer.createTransport({
-  host: mailHost,
-  port: mailPort,
-  secure: false,
-  auth: mailUser && mailPass ? { user: mailUser, pass: mailPass } : undefined,
-});
+const resend = new Resend(resendApiKey);
 
-transporter.verify((err, success) => {
-  if (err) {
-    console.error("[form] SMTP verify failed:", err.message);
-    console.error("[form] SMTP error details:", {
-      code: err.code,
-      address: err.address,
-      port: err.port,
-      command: err.command,
-    });
-  } else {
-    console.log("[form] SMTP server is ready to take messages");
-  }
-});
+// Email configuration
+const MAIL_FROM_ADDRESS = "onboarding@resend.dev";
+const MAIL_TO_ADDRESS = "developer@redarrow.ltd";
+const MAIL_FROM_NAME = "Red Arrow";
 
 // GET - Render Form Page
 router.get("/form", (req, res) => {
@@ -49,7 +28,7 @@ router.get("/form", (req, res) => {
 
 // POST - receive form submission and send email
 router.post("/postcard", async (req, res) => {
-  const required = ["MAIL_HOST", "MAIL_USERNAME", "MAIL_PASSWORD", "MAIL_FROM_NAME", "MAIL_FROM_ADDRESS"];
+  const required = ["RESEND_API_KEY"];
   const missing = required.filter((key) => !process.env[key]);
   if (missing.length) {
     console.error("[form] Mail not sent: missing env vars:", missing.join(", "));
@@ -86,18 +65,17 @@ router.post("/postcard", async (req, res) => {
         .join('');
   }
 
-  const toAddress = process.env.MAIL_TO_ADDRESS || process.env.MAIL_FROM_ADDRESS;
   const mailOptions = {
-    from: `"${process.env.MAIL_FROM_NAME}" <${process.env.MAIL_FROM_ADDRESS}>`,
-    to: toAddress,
+    from: `${MAIL_FROM_NAME} <${MAIL_FROM_ADDRESS}>`,
+    to: MAIL_TO_ADDRESS,
     subject: `New form submission from ${formData.name || "unknown"}`,
     html: htmlBody,
   };
-  console.log("[form] Sending email to:", toAddress);
+  console.log("[form] Sending email to:", MAIL_TO_ADDRESS);
 
   try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log("[form] Email sent successfully:", info.messageId || "(no messageId)");
+    const info = await resend.emails.send(mailOptions);
+    console.log("[form] Email sent successfully:", info.id || "(no id)");
     res.render("pages/form", {
       title: "Form",
       success: true,
@@ -105,14 +83,7 @@ router.post("/postcard", async (req, res) => {
     });
   } catch (error) {
     console.error("[form] Failed to send email:", error.message);
-    console.error("[form] Error details:", {
-      code: error.code,
-      address: error.address,
-      port: error.port,
-      command: error.command,
-      response: error.response,
-      responseCode: error.responseCode,
-    });
+    console.error("[form] Error details:", error);
     res.render("pages/form", {
       title: "Form",
       success: false,
@@ -124,7 +95,7 @@ router.post("/postcard", async (req, res) => {
 
 // POST - footer signup (same mail config, sends to same address)
 router.post("/footer-signup", async (req, res) => {
-  const required = ["MAIL_HOST", "MAIL_USERNAME", "MAIL_PASSWORD", "MAIL_FROM_NAME", "MAIL_FROM_ADDRESS"];
+  const required = ["RESEND_API_KEY"];
   const missing = required.filter((key) => !process.env[key]);
   const redirectBack = req.get("Referer") || "/";
 
@@ -137,17 +108,17 @@ router.post("/footer-signup", async (req, res) => {
   if (!email) {
     return res.redirect(redirectBack + (redirectBack.includes("?") ? "&" : "?") + "footer_signup=missing");
   }
-  const toAddress = process.env.MAIL_TO_ADDRESS || process.env.MAIL_FROM_ADDRESS;
+
   const mailOptions = {
-    from: `"${process.env.MAIL_FROM_NAME}" <${process.env.MAIL_FROM_ADDRESS}>`,
-    to: toAddress,
+    from: `${MAIL_FROM_NAME} <${MAIL_FROM_ADDRESS}>`,
+    to: MAIL_TO_ADDRESS,
     subject: `Footer signup: ${email}`,
     html: `<p><strong>New footer signup</strong></p><p>Email: <a href="mailto:${email}">${email}</a></p>`,
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    console.log("[form] Footer signup email sent to:", toAddress, "for:", email);
+    await resend.emails.send(mailOptions);
+    console.log("[form] Footer signup email sent to:", MAIL_TO_ADDRESS, "for:", email);
     return res.redirect(redirectBack + (redirectBack.includes("?") ? "&" : "?") + "footer_signup=success");
   } catch (error) {
     console.error("[form] Footer signup failed:", error.message);
