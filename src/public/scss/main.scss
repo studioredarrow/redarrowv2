@@ -1149,6 +1149,7 @@ div#chat-area button {
   display: flex;
   align-items: center;
   justify-content: center;
+     z-index: -1;
 }
 
 /* When screen is 768px or less, hide desktop and show mobile */
@@ -1513,4 +1514,12 @@ div#chat-area button.next-prompt-btn {
 }
 .chat-message img {
   margin-top: 20px !important;
+}
+
+#curveDot{
+display: none
+}
+
+.container.new-ms{
+  max-width: 95% !important;
 }

@@ -1,7 +1,7 @@
 /* ===== HERO SECTION UNIQUE SCSS ===== */
 body {
   font-family: Work Sans;
-  background-color: #f9f5f2;
+  background-color:  #FAF5F2;
   color: #111;
   overflow-x: hidden;
 }
@@ -93,7 +93,7 @@ img.mobile-arrow {
 }
 
 div#video-outer {
-  padding-bottom: 100px !important;
+  padding-block: 100px !important;
 }
 
 p.animate-text-unique {
@@ -106,7 +106,7 @@ p.animate-text-unique {
   align-items: center;
   justify-content: center;
   padding-block: 60px;
-  height: 100vh;
+  // height: 100vh;
 
   .outer-unique {
     width: 100%;
@@ -409,7 +409,7 @@ ul.services__list li:hover {
   left: 0;
   width: 100%;
   z-index: 0;
-  height: 100vh;
+  // height: 100vh;
   padding-top: 30px;
 }
 
@@ -420,7 +420,8 @@ ul.services__list li:hover {
 .iconic-flex {
   max-width: 955px;
   margin-left: auto;
-  height: 100vh;
+  // height: 100vh;
+  margin-bottom: 30px;
 }
 
 .card:hover div {
@@ -651,13 +652,14 @@ svg.fate-oval__svg {
 }
 
 .create-item {
-  width: 20%;
+  // width: 20%;
 
   h3 {
     font-weight: 600;
     font-size: 16px;
     line-height: 100%;
     color: #bdbdbd;
+    white-space: nowrap;
   }
 
   p {
@@ -969,7 +971,7 @@ ul.services__list a {
     stroke-linejoin: round;
     stroke-dasharray: 500;
     stroke-dashoffset: 500;
-    transition: stroke-dashoffset 0.35s ease;
+    transition: stroke-dashoffset 0.05s ease;
   }
 }
 

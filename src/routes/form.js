@@ -11,7 +11,11 @@ if (!resendApiKey) {
   console.log("[form] Resend API initialized successfully");
 }
 
-const resend = new Resend(resendApiKey);
+let resendClient;
+function getResend() {
+  if (!resendClient) resendClient = new Resend(process.env.RESEND_API_KEY);
+  return resendClient;
+}
 
 // Email configuration
 const MAIL_FROM_ADDRESS = "onboarding@resend.dev";
@@ -74,7 +78,7 @@ router.post("/postcard", async (req, res) => {
   console.log("[form] Sending email to:", MAIL_TO_ADDRESS);
 
   try {
-    const info = await resend.emails.send(mailOptions);
+    const info = await getResend().emails.send(mailOptions);
     console.log("[form] Email sent successfully:", info.id || "(no id)");
     res.render("pages/form", {
       title: "Form",
@@ -117,7 +121,7 @@ router.post("/footer-signup", async (req, res) => {
   };
 
   try {
-    await resend.emails.send(mailOptions);
+    await getResend().emails.send(mailOptions);
     console.log("[form] Footer signup email sent to:", MAIL_TO_ADDRESS, "for:", email);
     return res.redirect(redirectBack + (redirectBack.includes("?") ? "&" : "?") + "footer_signup=success");
   } catch (error) {

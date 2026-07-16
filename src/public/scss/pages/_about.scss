@@ -16,11 +16,21 @@ body {
   font-weight: 400;
   font-style: italic;
 }
+.create-item.create-img {
+    border-radius: 10px;
+    overflow: hidden;
+}
 
 .create-item.create-img img {
-  width: 212px;
-  height: 220px;
-  object-fit: contain;
+    width: 255px;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    TRANSFORM: TRANSLATE(0) !IMPORTANT;
+    border-radius:10px;
+}
+.create-item.create-img:hover img {
+    transform: scale(1.1) !important;
 }
 
 .machine {
@@ -326,7 +336,12 @@ span.inner-dot svg {
   margin-left: auto;
   padding-inline: 50px;
 }
-
+.address-content p {
+    line-height: 100% !important;
+}
+span.location-btn {
+    line-height: 100% !important;
+}
 .info-block {
   display: flex;
   gap: 60px;
@@ -948,4 +963,7 @@ svg.hero-oval__svg.about-svg {
 }
 .address-content {
   max-width: 347px;
+}
+.hero .hero-description {
+  text-transform: none;
 }

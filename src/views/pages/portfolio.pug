@@ -572,27 +572,32 @@ block content
         }
       });
 
-      // Change top position of the wrapper depending on scroll direction
-      let lastScroll = window.scrollY;
+      // Keep the progress bar below the visible top header if it becomes fixed
+      const wrapper = document.querySelector(".progress-bar-wrapper");
+      const baseHeader = document.querySelector("header.site-header");
 
-      window.addEventListener("scroll", () => {
-        const wrapper = document.querySelector(".progress-bar-wrapper");
-        let currentScroll = window.scrollY;
+      if (wrapper) {
+        const updateProgressTop = () => {
+          const fixedLogoHeader = document.querySelector(".logo-container.fixed");
+          const activeHeader = fixedLogoHeader || baseHeader;
+          const headerIsFixed = activeHeader && window.getComputedStyle(activeHeader).position === "fixed";
 
-        if(currentScroll > lastScroll){
-          // Scrolling down → stick to top: 0
-          wrapper.style.top = "0px";
-        } else {
-          // Scrolling up → stick to top: 65px
-          wrapper.style.top = "75px";
-        }
+          wrapper.style.position = headerIsFixed ? "fixed" : "fixed";
+          wrapper.style.top = headerIsFixed ? `${activeHeader.offsetHeight}px` : "0px";
+          if (headerIsFixed) {
+            wrapper.style.left = "0";
+            wrapper.style.width = "100%";
+          }
+        };
 
-        lastScroll = currentScroll;
-      });
+        updateProgressTop();
+        window.addEventListener("resize", updateProgressTop);
+        window.addEventListener("scroll", updateProgressTop);
+      }
 
 
     script.
-      document.addEventListener("DOMContentLoaded", function(){
+      document.addEventListener("DOMContentLoaded", function(){"}  }
 
         document.querySelectorAll(".toggle-header").forEach(header => {
 
