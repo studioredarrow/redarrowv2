@@ -1174,7 +1174,7 @@ div#chat-area button {
     top: 90% !important;
     right: auto !important;
   }
-
+ 
   .page-404 {
     overflow: hidden;
   }
@@ -1522,4 +1522,15 @@ display: none
 
 .container.new-ms{
   max-width: 95% !important;
+}
+
+.page-404 .content .doodle-right .desktop-img {
+  width: 149px;
+}
+.page-404 .content .doodle-right .mobile-img {
+    width: 100px !important;
+    transform: scaleX(-1) !important;
+}
+.footer-oval__svg .footer-oval__path{
+  stroke-width: 0.7px;
 }

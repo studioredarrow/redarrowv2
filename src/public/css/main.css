@@ -673,7 +673,7 @@ svg.fate-oval__svg {
 .fate-wrap .fate-oval__path {
   fill: none;
   stroke: red;
-  stroke-width: 0.2;
+  stroke-width: 0.8px !important;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -4545,7 +4545,7 @@ svg.fate-oval__svg {
 .fate-oval__path {
   fill: none;
   stroke: red;
-  stroke-width: 0.2 !important;
+  stroke-width: 0.4 !important;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 500;
@@ -5975,6 +5975,19 @@ div#chat-area button.next-prompt-btn {
 
 .container.new-ms {
   max-width: 95% !important;
+}
+
+.page-404 .content .doodle-right .desktop-img {
+  width: 149px;
+}
+
+.page-404 .content .doodle-right .mobile-img {
+  width: 100px !important;
+  transform: scaleX(-1) !important;
+}
+
+.footer-oval__svg .footer-oval__path {
+  stroke-width: 0.7px;
 }
 
 /*# sourceMappingURL=main.css.map */
