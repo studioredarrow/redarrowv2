@@ -449,8 +449,10 @@ span.location-btn {
 
 .hero-absolute-img {
   position: absolute;
-  top: 11px;
-  left: 53%;
+  // top: 11px;
+  // left: 53%;
+  top: 0;
+  right: 0;
 }
 
 .image-create-overlay {
@@ -954,8 +956,13 @@ a {
   text-decoration: none;
 }
 
+// .hero-absolute-img img {
+//   width: 124px;
+// }
+
 .hero-absolute-img img {
-  width: 124px;
+    width: 51%;
+    height: auto;
 }
 svg.hero-oval__svg.about-svg {
   top: -21px;

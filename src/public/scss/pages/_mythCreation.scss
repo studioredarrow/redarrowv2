@@ -788,8 +788,9 @@ ul.services__list a {
 
 .footer-line-image img {
   position: absolute;
-  bottom: -134px !important;
-  left: -93px;
+ bottom: -319px !important;
+    height: 550px;
+    transform: rotate(19deg) !important;
 }
 
 .footer-bottom {
@@ -906,12 +907,12 @@ ul.services__list a {
 }
 
 .footer {
-  margin-top: 2rem;
+  margin-top: 9rem;
   font-size: 0.7rem;
   color: #888;
   display: flex;
   align-items: center;
-  gap: 160px;
+  gap: 180px;
 
   a {
     font-family: Work Sans;
