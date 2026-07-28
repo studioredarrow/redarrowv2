@@ -5,6 +5,54 @@ extends ../layout
 //-   - var pageClass = 'portfolio-page'
 
 block content
+  //- ============================================================
+  //- MEDIA MIXIN
+  //- Renders a <video> when the field's URL is a video file,
+  //- otherwise renders an <img> with identical markup to before.
+  //- Fully backwards compatible: image fields are untouched.
+  //- ============================================================
+  - var VIDEO_RE = /\.(mp4|webm|ogg|ogv|mov|m4v)(\?.*)?$/i
+  mixin media(field)
+    if field && field.url
+      - var _url = field.url
+      - var _isVideo = VIDEO_RE.test(_url) || field.kind === 'document'
+      if _isVideo
+        video(src=_url autoplay muted loop playsinline preload="metadata")
+      else
+        img(src=_url alt=(field.alt || ''))
+
+  //- Video styling mirrors the existing image rules for these
+  //- sections. These are NEW rules (video only) — no image rule
+  //- is modified, so current layouts stay exactly the same.
+  style.
+    .event-outer video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+    }
+    .event-grid > .event-item:not(.event-item-grid) video,
+    .event-item.banner-right video,
+    .event-item.banner-left video,
+    .event-item.single-banner video {
+      position: absolute;
+      inset: 0;
+    }
+    /* Hero (first section) video — mirrors .benji-image img */
+    .benji-image video {
+      width: 100%;
+      height: 512px;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+    }
+    @media (max-width: 768px) {
+      .benji-image video {
+        height: 236px;
+      }
+    }
+
   .main-portfolio-outer
     .progress-bar-wrapper
       .progress-bar
@@ -13,11 +61,22 @@ block content
     .benji-wrapper
       .container
 
-        // HERO IMAGE
-        if portfolioItem.data.hero_banner_image && portfolioItem.data.hero_banner_image.url
+        // HERO MEDIA (image and/or video)
+        - var heroImg = portfolioItem.data.hero_banner_image
+        - var heroVid = portfolioItem.data.hero_banner_video || portfolioItem.data.hero_video || portfolioItem.data.banner_video
+        //- If the banner image field itself holds a video (Link to Media), treat it as the video
+        - if (heroImg && heroImg.url && (VIDEO_RE.test(heroImg.url) || heroImg.kind === 'document')) { if (!(heroVid && heroVid.url)) { heroVid = heroImg; } heroImg = null; }
+        //- Show the video when one is uploaded, otherwise show the image
+        if heroVid && heroVid.url
+          .benji-image
+            video(
+              src=heroVid.url
+              autoplay muted loop playsinline preload="metadata"
+            )
+        else if heroImg && heroImg.url
           .benji-image
             img(
-              src=portfolioItem.data.hero_banner_image.url
+              src=heroImg.url
               alt=portfolioItem.data.hero_title || "Hero image"
             )
 
@@ -271,39 +330,33 @@ block content
                         each imgField in [section.section_image_1, section.section_image_2, section.section_image_3, section.section_image_4]
                           if imgField && imgField.url
                             .event-grid-item
-                              img(src=imgField.url alt=imgField.alt || '')
+                              +media(imgField)
 
                       if section.section_image_5 && section.section_image_5.url
                         .event-item
-                          img(src=section.section_image_5.url alt=imgField.alt || '')
+                          +media(section.section_image_5)
 
                     else if section.section_layout === 'banner-right'
                       .event-item.event-item-grid
                         each imgField in [section.section_image_1,section.section_image_2,section.section_image_3,section.section_image_4 ]
                           if imgField && imgField.url
                             .event-grid-item
-                              img(src=imgField.url alt=imgField.alt || '')
+                              +media(imgField)
 
                       if section.section_image_5 && section.section_image_5.url
                         .event-item.banner-right
-                          img(src=section.section_image_5.url alt=section.section_image_5.alt || '')
+                          +media(section.section_image_5)
 
 
                     else if section.section_layout === 'banner-left'
                       .event-item.banner-left
                         if section.section_image_1 && section.section_image_1.url
-                          img(
-                            src=section.section_image_1.url
-                            alt=section.section_image_1.alt || ''
-                          )
+                          +media(section.section_image_1)
 
                     else if section.section_layout === 'single-banner'
                       .event-item.single-banner
                         if section.section_image_1 && section.section_image_1.url
-                          img(
-                            src=section.section_image_1.url
-                            alt=section.section_image_1.alt || ''
-                          )
+                          +media(section.section_image_1)
 
     
 
