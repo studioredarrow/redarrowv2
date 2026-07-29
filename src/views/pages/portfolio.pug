@@ -21,6 +21,18 @@ block content
       else
         img(src=_url alt=(field.alt || ''))
 
+  //- Video-priority: renders the video when a video is present (either an
+  //- explicit video field, or an image field that itself holds a video),
+  //- otherwise renders the image. Used for banners that may have a video
+  //- uploaded alongside the image.
+  mixin mediaOne(imgField, vidField)
+    - var _vid = (vidField && vidField.url) ? vidField : ((imgField && imgField.url && (VIDEO_RE.test(imgField.url) || imgField.kind === 'document')) ? imgField : null)
+    - var _img = _vid ? null : imgField
+    if _vid && _vid.url
+      video(src=_vid.url autoplay muted loop playsinline preload="metadata")
+    else if _img && _img.url
+      img(src=_img.url alt=(_img.alt || ''))
+
   //- Video styling mirrors the existing image rules for these
   //- sections. These are NEW rules (video only) — no image rule
   //- is modified, so current layouts stay exactly the same.
@@ -50,6 +62,33 @@ block content
     @media (max-width: 768px) {
       .benji-image video {
         height: 236px;
+      }
+    }
+    /* Brand banner video — mirrors .bistro-banner img */
+    .bistro-banner video {
+      width: 100%;
+      height: 574px;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+    }
+    /* Photo-gallery banner video — mirrors .photo-banner img */
+    .photo-banner video {
+      width: 100%;
+      margin-top: 10px;
+      display: block;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+    .inner-photo video {
+      width: 100%;
+      margin-top: 15px;
+      display: block;
+      border-radius: 20px;
+    }
+    @media (max-width: 768px) {
+      .bistro-banner video {
+        height: 220px;
       }
     }
 
@@ -163,12 +202,13 @@ block content
               .container
 
                 // ================= BRAND BANNER =================
-                if portfolioItem.data.brand_banner_image && portfolioItem.data.brand_banner_image.url
+                //- gallery_banner_video is a top-level Media field in Prismic;
+                //- when present it replaces the brand banner image with the video.
+                - var brandImg = portfolioItem.data.brand_banner_image
+                - var brandVid = portfolioItem.data.brands_banner_video || portfolioItem.data.brand_banner_video || portfolioItem.data.gallery_banner_video || portfolioItem.data.brand_video
+                if (brandImg && brandImg.url) || (brandVid && brandVid.url)
                   .bistro-banner
-                    img(
-                      src=portfolioItem.data.brand_banner_image.url
-                      alt=""
-                    )
+                    +mediaOne(brandImg, brandVid)
 
                 // ================= BRAND LOGOS =================
                 if portfolioItem.data.brand_logo_images && portfolioItem.data.brand_logo_images.length
@@ -194,8 +234,8 @@ block content
                           h2= gallery.gallery_title
                         if gallery.gallery_description
                           p!= asHTML(gallery.gallery_description)
-                        if gallery.gallery_banner_image && gallery.gallery_banner_image.url
-                          img(src=gallery.gallery_banner_image.url, alt="")
+                        if (gallery.gallery_banner_image && gallery.gallery_banner_image.url) || (gallery.gallery_banner_video && gallery.gallery_banner_video.url)
+                          +mediaOne(gallery.gallery_banner_image, gallery.gallery_banner_video)
 
                       .photo-flex
                         if gallery.gallery_image_1 && gallery.gallery_image_1.url
@@ -224,8 +264,8 @@ block content
                             h2= gallery.gallery_title
                           if gallery.gallery_description
                             p!= asHTML(gallery.gallery_description)
-                        if gallery.gallery_banner_image && gallery.gallery_banner_image.url
-                          img(src=gallery.gallery_banner_image.url, alt="")
+                        if (gallery.gallery_banner_image && gallery.gallery_banner_image.url) || (gallery.gallery_banner_video && gallery.gallery_banner_video.url)
+                          +mediaOne(gallery.gallery_banner_image, gallery.gallery_banner_video)
 
                       .photo-flex
                         if gallery.gallery_image_1 && gallery.gallery_image_1.url
@@ -249,9 +289,9 @@ block content
                           img(src=gallery.gallery_image_5.url, alt="")                    
                       
                     else if gallery.gallery_layout === "banner-only"
-                      if gallery.gallery_banner_image && gallery.gallery_banner_image.url
+                      if (gallery.gallery_banner_image && gallery.gallery_banner_image.url) || (gallery.gallery_banner_video && gallery.gallery_banner_video.url)
                         .photo-banner.ist-photo-banner1
-                          img(src=gallery.gallery_banner_image.url, alt="")
+                          +mediaOne(gallery.gallery_banner_image, gallery.gallery_banner_video)
       
 
         // ================= CREATIVE SECTION =================
