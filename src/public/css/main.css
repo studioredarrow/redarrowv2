@@ -1398,7 +1398,6 @@ body {
 }
 .create-item.create-img {
   border-radius: 10px;
-  overflow: hidden;
 }
 
 .create-item.create-img img {

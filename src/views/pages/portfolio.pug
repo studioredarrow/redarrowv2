@@ -295,7 +295,7 @@ block content
       
 
         // ================= CREATIVE SECTION =================
-        if portfolioItem.data.creative_gallery_images && portfolioItem.data.creative_gallery_images.length
+        if (portfolioItem.data.creative_gallery_images && portfolioItem.data.creative_gallery_images.length) || (portfolioItem.data.creative_banner_video && portfolioItem.data.creative_banner_video.url)
           section
             .creative-outer
               .creative-inner
@@ -307,6 +307,11 @@ block content
 
                     if portfolioItem.data.creative_section_description
                       p!= asHTML(portfolioItem.data.creative_section_description)
+
+                  //- Horizontal video below the title & description — shown only when a video is uploaded
+                  if portfolioItem.data.creative_banner_video && portfolioItem.data.creative_banner_video.url
+                    .bistro-banner
+                      video(src=portfolioItem.data.creative_banner_video.url autoplay muted loop playsinline preload="metadata")
 
                   // ---- IMAGE GRID ----
                   .create-grid
@@ -408,6 +413,12 @@ block content
 
                 if portfolioItem.data.event_section_description
                       p!= asHTML(portfolioItem.data.event_section_description)
+
+        //- Horizontal video below the title & description — shown only when a video is uploaded
+        if portfolioItem.data.event_banner_video && portfolioItem.data.event_banner_video.url
+          .container
+            .bistro-banner
+              video(src=portfolioItem.data.event_banner_video.url autoplay muted loop playsinline preload="metadata")
 
         if portfolioItem.data.event_gallery_images && portfolioItem.data.event_gallery_images.length > 4
 
