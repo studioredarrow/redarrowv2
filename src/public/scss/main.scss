@@ -1149,7 +1149,6 @@ div#chat-area button {
   display: flex;
   align-items: center;
   justify-content: center;
-     z-index: -1;
 }
 
 /* When screen is 768px or less, hide desktop and show mobile */
@@ -1536,4 +1535,8 @@ display: none
 }
 footer{
   overflow: hidden;
+}
+
+.page-404 .content .message a{
+  cursor: pointer !important;
 }

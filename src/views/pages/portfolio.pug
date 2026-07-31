@@ -17,7 +17,7 @@ block content
       - var _url = field.url
       - var _isVideo = VIDEO_RE.test(_url) || field.kind === 'document'
       if _isVideo
-        video(src=_url autoplay muted loop playsinline preload="metadata")
+        video.js-scroll-video(src=_url muted loop playsinline preload="metadata")
       else
         img(src=_url alt=(field.alt || ''))
 
@@ -29,7 +29,7 @@ block content
     - var _vid = (vidField && vidField.url) ? vidField : ((imgField && imgField.url && (VIDEO_RE.test(imgField.url) || imgField.kind === 'document')) ? imgField : null)
     - var _img = _vid ? null : imgField
     if _vid && _vid.url
-      video(src=_vid.url autoplay muted loop playsinline preload="metadata")
+      video.js-scroll-video(src=_vid.url muted loop playsinline preload="metadata")
     else if _img && _img.url
       img(src=_img.url alt=(_img.alt || ''))
 
@@ -108,9 +108,9 @@ block content
         //- Show the video when one is uploaded, otherwise show the image
         if heroVid && heroVid.url
           .benji-image
-            video(
+            video.js-scroll-video(
               src=heroVid.url
-              autoplay muted loop playsinline preload="metadata"
+              muted loop playsinline preload="metadata"
             )
         else if heroImg && heroImg.url
           .benji-image
@@ -311,7 +311,7 @@ block content
                   //- Horizontal video below the title & description — shown only when a video is uploaded
                   if portfolioItem.data.creative_banner_video && portfolioItem.data.creative_banner_video.url
                     .bistro-banner
-                      video(src=portfolioItem.data.creative_banner_video.url autoplay muted loop playsinline preload="metadata")
+                      video.js-scroll-video(src=portfolioItem.data.creative_banner_video.url muted loop playsinline preload="metadata")
 
                   // ---- IMAGE GRID ----
                   .create-grid
@@ -418,7 +418,7 @@ block content
         if portfolioItem.data.event_banner_video && portfolioItem.data.event_banner_video.url
           .container
             .bistro-banner
-              video(src=portfolioItem.data.event_banner_video.url autoplay muted loop playsinline preload="metadata")
+              video.js-scroll-video(src=portfolioItem.data.event_banner_video.url muted loop playsinline preload="metadata")
 
         if portfolioItem.data.event_gallery_images && portfolioItem.data.event_gallery_images.length > 4
 
@@ -469,6 +469,28 @@ block content
                       p= projTitle
 
 
+
+    //- Play videos only when scrolled into view; pause when out of view
+    script.
+      (function () {
+        var vids = document.querySelectorAll('video.js-scroll-video');
+        if (!vids.length) return;
+        if (!('IntersectionObserver' in window)) {
+          vids.forEach(function (v) { v.play().catch(function () {}); });
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var v = entry.target;
+            if (entry.isIntersecting) {
+              v.play().catch(function () {});
+            } else {
+              v.pause();
+            }
+          });
+        }, { threshold: 0.25 });
+        vids.forEach(function (v) { io.observe(v); });
+      })();
 
         // GSAP Core
     script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")

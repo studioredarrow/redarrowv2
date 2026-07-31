@@ -264,6 +264,18 @@ html(lang="en")
       window.addEventListener("scroll", () => {
         const currentScrollY = window.scrollY;
 
+        // Terms & Conditions page: keep the header fixed & visible while scrolling
+        if (window.location.pathname === "/terms-and-conditions") {
+          if (currentScrollY > 50) {
+            logoContainer.classList.add("fixed");
+          } else {
+            logoContainer.classList.remove("fixed");
+          }
+          gsap.set(logoContainer, { y: 0, opacity: 1 });
+          lastScrollY = currentScrollY;
+          return;
+        }
+
         if (Math.abs(currentScrollY - lastScrollY) < scrollThreshold) return;
 
         if (currentScrollY > lastScrollY && currentScrollY > 50) {

@@ -2882,6 +2882,10 @@ body {
   padding-block: 35px;
 }
 
+.creative-banner h3 {
+  margin-bottom: 10px !important;
+}
+
 .create-item-grid img {
   border-radius: 20px;
 }
@@ -5656,7 +5660,6 @@ div#chat-area button {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: -1;
 }
 
 /* When screen is 768px or less, hide desktop and show mobile */
@@ -5993,6 +5996,10 @@ div#chat-area button.next-prompt-btn {
 
 footer {
   overflow: hidden;
+}
+
+.page-404 .content .message a {
+  cursor: pointer !important;
 }
 
 /*# sourceMappingURL=main.css.map */

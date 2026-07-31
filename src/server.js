@@ -7,6 +7,7 @@ const express = require("express");
 const menuMiddleware = require("./middleware/menu");
 const randomAdMiddleware = require("./middleware/randomAdMiddleware");
 const suggestedQuestionsMiddleware = require("./middleware/suggestedQuestions");
+const footerContentMiddleware = require("./middleware/footerContent");
 const introRoute = require("./routes/index");
 const mythJourneyRoute = require("./routes/mythJourney");
 const loadingRoute = require("./routes/loading");
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(menuMiddleware);
 app.use(randomAdMiddleware);
 app.use(suggestedQuestionsMiddleware);
+app.use(footerContentMiddleware);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

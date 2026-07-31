@@ -5,23 +5,32 @@ footer
             .container
               .create-flex
                 .create-item.mobile-int-inner
-                  h3 CREATE CHAOS
+                  if footerCreateHeading
+                    h3= footerCreateHeading
+                  else
+                    h3 CREATE CHAOS
                 .create-item.create-img
                   if randomFooterAd
                     img(src=randomFooterAd alt="Advertisement")
                 .create-item-inner
                   .create-item-int
-                    p
-                      | Take a break.
-                      br
-                      | Wine, music and holy water at 
-                      br
-                      | Red Arrow is available
+                    if footerCreateText1
+                      p!= footerCreateText1
+                    else
+                      p
+                        | Take a break.
+                        br
+                        | Wine, music and holy water at
+                        br
+                        | Red Arrow is available
                   .create-item-int
-                    p
-                      | Some may like it gentle.
-                      br
-                      |  But we make it rough.
+                    if footerCreateText2
+                      p!= footerCreateText2
+                    else
+                      p
+                        | Some may like it gentle.
+                        br
+                        |  But we make it rough.
                 .image-create-overlay
                   img(src="/images/become-a-myth.svg" alt="")
             .outer-btn

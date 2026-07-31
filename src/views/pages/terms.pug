@@ -157,3 +157,27 @@ block content
         });
       }
     });
+
+  //- Keep the progress bar directly below the fixed header container
+  script.
+    document.addEventListener("DOMContentLoaded", function () {
+      var logo = document.querySelector(".logo-container");
+      var progress = document.querySelector(".progress-bar-wrapper");
+      if (!logo || !progress) return;
+
+      function positionProgressBar() {
+        if (logo.classList.contains("fixed")) {
+          var bottom = logo.getBoundingClientRect().bottom;
+          progress.style.position = "fixed";
+          progress.style.top = Math.max(0, Math.round(bottom)) + "px";
+          progress.style.left = "0";
+          progress.style.width = "100%";
+        } else {
+          progress.style.top = "0px";
+        }
+      }
+
+      window.addEventListener("scroll", positionProgressBar, { passive: true });
+      window.addEventListener("resize", positionProgressBar);
+      positionProgressBar();
+    });
