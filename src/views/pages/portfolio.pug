@@ -72,13 +72,19 @@ block content
       display: block;
       border-radius: 20px;
     }
-    /* Photo-gallery banner video — mirrors .photo-banner img */
+    /* Photo-gallery banner video — fixed size so every banner video matches */
     .photo-banner video {
       width: 100%;
+      height: 574px;
       margin-top: 10px;
       display: block;
       border-radius: 20px;
       object-fit: cover;
+    }
+    @media (max-width: 768px) {
+      .photo-banner video {
+        height: 220px;
+      }
     }
     .inner-photo video {
       width: 100%;
