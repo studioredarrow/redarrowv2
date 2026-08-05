@@ -158,21 +158,25 @@ block content
                   .left
 
                     .benji-left
+                      - var labelSector = pageType === 'openstudio_items' ? 'Exhibition' : 'Sector'
+                      - var labelOffice = pageType === 'openstudio_items' ? 'Title' : 'Office'
+                      - var labelPartner = pageType === 'openstudio_items' ? 'Artist' : 'Partner'
+
                       if portfolioItem.data.project_sector
                         div
-                          span.label Sector
+                          span.label= labelSector
                           br
                           = portfolioItem.data.project_sector
 
                       if portfolioItem.data.project_office
                         div
-                          span.label Office
+                          span.label= labelOffice
                           br
                           = portfolioItem.data.project_office
 
                       if portfolioItem.data.project_partner
                         div
-                          span.label Partner
+                          span.label= labelPartner
                           br
                           = portfolioItem.data.project_partner
 
