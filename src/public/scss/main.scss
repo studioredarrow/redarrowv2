@@ -1142,7 +1142,7 @@ div#chat-area button {
 }
 
 .int-404-inner {
-  position: relative;
+  // position: relative;
   width: 100%;
   height: 100vh;
   text-align: center;
@@ -1520,7 +1520,8 @@ display: none
 }
 
 .container.new-ms{
-  max-width: 95% !important;
+  max-width: 100% !important;
+  padding: 20PX;
 }
 
 .page-404 .content .doodle-right .desktop-img {

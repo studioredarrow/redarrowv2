@@ -733,29 +733,22 @@ block content
 
 
     script.
-      document.addEventListener("DOMContentLoaded", function(){"}  }
-
-        document.querySelectorAll(".toggle-header").forEach(header => {
-
-          header.addEventListener("click", function(){
-
-            const parent = this.parentElement;
-            const icon = this.querySelector(".toggle-icon");
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".toggle-header").forEach(function(header) {
+          header.addEventListener("click", function() {
+            var parent = this.parentElement;
+            var icon = this.querySelector(".toggle-icon");
 
             parent.classList.toggle("active");
 
-            if(parent.classList.contains("active")){
+            if (parent.classList.contains("active")) {
               icon.src = "/images/minus-icon.png";
-            }else{
+            } else {
               icon.src = "/images/plus-icon.png";
             }
-
           });
-
         });
-
       });
-      
 
                   
               

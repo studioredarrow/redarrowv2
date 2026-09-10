@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.11",
-    "sass": "^1.97.1"
+    "sass": "^1.104.0"
   }
 }
