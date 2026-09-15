@@ -1,4 +1,4 @@
-extends ../layout
+﻿extends ../layout
 
 block content
   //- HERO
@@ -36,24 +36,36 @@ block content
   //- VIDEO
   #video-outer
     .container
-      if page.video_file && page.video_file.url
-        video(
-          src=page.video_file.url
-          poster=page.video_poster && page.video_poster.url ? page.video_poster.url : ''
-          autoplay
-          loop
-          playsinline
-        )
-      else
-        //- Optional fallback (keeps layout intact)
-        //- You can remove this if you want the section hidden
-        video(
-          src="/images/RedArrow - 5S Videos - Website 2_V1.0.mp4"
-          poster="/images/vidio-play-image.png"
-          autoplay
-          loop
-          playsinline
-        )
+      .myth-video-wrap
+        if page.video_file && page.video_file.url
+          video(
+            id="myth-main-video"
+            src=page.video_file.url
+            poster=page.video_poster && page.video_poster.url ? page.video_poster.url : ''
+            autoplay
+            loop
+            playsinline
+          )
+        else
+          //- Optional fallback (keeps layout intact)
+          //- You can remove this if you want the section hidden
+          video(
+            id="myth-main-video"
+            src="/images/RedArrow - 5S Videos - Website 2_V1.0.mp4"
+            poster="/images/vidio-play-image.png"
+            autoplay
+            loop
+            playsinline
+          )
+
+        button.myth-video-toggle(type="button" aria-label="Pause video")
+          span.toggle-icon(aria-hidden="true")
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 700" aria-hidden="true")
+              <g xmlns="http://www.w3.org/2000/svg">
+                <path class="st0" d="M663.1,420.6c-1.8,84.8-1,169.6,2.4,254.3,21.6-5.1,27.4-3.3,45.5-6.7,2.3-.4,8.1-2.4,9.9-3.9,2-1.6,2.2-4.5,2.2-7.1,1.3-76.7-.7-153.5-5.8-230.1-.2-2.7-.5-5.8-2.5-7.6-1.7-1.6-4.3-1.8-6.6-2-15.8-1.1-31.7-2.3-47.5-3.4"/>
+                <path class="st0" d="M750.6,411.3c-1.8,83.8,4,169.1,8.8,252.7,17.2-1.2,34.4-2.4,51.6-3.6,1.5-.1,3.3-.3,4.1-1.6.6-.8.6-1.9.6-2.8,1.2-76.4-3.1-152.9-12.8-228.7-.4-2.8-.9-6-3-7.9-1.8-1.5-4.2-1.9-6.5-2.3-14.3-2-28.5-4-42.8-6"/>
+              </g>
+            </svg>
 
 
   //- HOW WE DO IT SECTION
@@ -473,6 +485,65 @@ block content
   script(src="https://unpkg.com/gsap@3/dist/gsap.min.js")
   script(src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js")
 
+  script.
+    const mythVideo = document.querySelector('#myth-main-video');
+    const mythWrap = document.querySelector('#video-outer .myth-video-wrap');
+    const mythToggle = document.querySelector('#video-outer .myth-video-toggle');
+
+    if (mythVideo && mythWrap && mythToggle) {
+      const toggleLabel = mythToggle.querySelector('.toggle-icon');
+
+      const togglePlayback = () => {
+        if (mythVideo.paused) {
+          mythVideo.play();
+        } else {
+          mythVideo.pause();
+        }
+      };
+
+      const syncToggleState = () => {
+        const isPaused = mythVideo.paused;
+        mythToggle.setAttribute('aria-label', isPaused ? 'Play video' : 'Pause video');
+
+        const pauseSVG = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="250 400 260 290" aria-hidden="true" style="width:52px;height:52px;display:block;fill:#ff0000;">
+            <g xmlns="http://www.w3.org/2000/svg">
+              <path class="st0" d="M663.1,420.6c-1.8,84.8-1,169.6,2.4,254.3,21.6-5.1,27.4-3.3,45.5-6.7,2.3-.4,8.1-2.4,9.9-3.9,2-1.6,2.2-4.5,2.2-7.1,1.3-76.7-.7-153.5-5.8-230.1-.2-2.7-.5-5.8-2.5-7.6-1.7-1.6-4.3-1.8-6.6-2-15.8-1.1-31.7-2.3-47.5-3.4"/>
+              <path class="st0" d="M750.6,411.3c-1.8,83.8,4,169.1,8.8,252.7,17.2-1.2,34.4-2.4,51.6-3.6,1.5-.1,3.3-.3,4.1-1.6.6-.8.6-1.9.6-2.8,1.2-76.4-3.1-152.9-12.8-228.7-.4-2.8-.9-6-3-7.9-1.8-1.5-4.2-1.9-6.5-2.3-14.3-2-28.5-4-42.8-6"/>
+            </g>
+          </svg>
+        `;
+
+        const playSVG = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="250 400 260 290" class="play-icon" >
+            <path
+                d="M275.3,422.6c-1.8,78.9,4.9,158,20.1,235.4,1.2,6,3.4,13.1,9.3,14.7,4.5,1.2,9-1.4,12.9-3.8,29.5-18.6,58.9-37.2,88.4-55.8,30.6-19.4,61.8-39.1,85.4-66.6,2.7-3.1,5.4-6.6,5.6-10.7.3-4.8-2.9-9.1-6.1-12.7-35.6-40.9-86.4-64.7-135.7-87.4-25.9-11.9-59.5-17.1-79.9-13"
+                fill="red"
+            />
+            </svg> 
+        `;
+
+        toggleLabel.innerHTML = isPaused ? playSVG : pauseSVG;
+        toggleLabel.style.opacity = '1';
+        toggleLabel.style.visibility = 'visible';
+      };
+
+      mythToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        togglePlayback();
+      });
+
+      mythWrap.addEventListener('click', (event) => {
+        if (event.target.closest('.myth-video-toggle')) return;
+        togglePlayback();
+      });
+
+      mythVideo.addEventListener('play', syncToggleState);
+      mythVideo.addEventListener('pause', syncToggleState);
+      mythVideo.addEventListener('ended', syncToggleState);
+      syncToggleState();
+    }
+
   //- Page animation
   script.
     gsap.registerPlugin(ScrollTrigger);
@@ -555,15 +626,18 @@ block content
     let lastScroll = window.scrollY;
     const wrapper = document.querySelector(".progress-bar-wrapper");
 
-    window.addEventListener("scroll", () => {
-      const currentScroll = window.scrollY;
-      if(currentScroll > lastScroll){
-        wrapper.style.top = "0px";       // scrolling down
-      } else {
-        wrapper.style.top = "75px";      // scrolling up
-      }
-      lastScroll = currentScroll;
-    });
+    if (wrapper) {
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.scrollY;
+        if(currentScroll > lastScroll){
+          wrapper.style.top = "0px";       // scrolling down
+        } else {
+          wrapper.style.top = "75px";      // scrolling up
+        }
+        lastScroll = currentScroll;
+      });
+    }
 
     ScrollTrigger.refresh();
     
+

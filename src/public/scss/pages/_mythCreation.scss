@@ -94,6 +94,96 @@ img.mobile-arrow {
 
 div#video-outer {
   padding-block: 100px !important;
+
+  .myth-video-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .myth-video-wrap video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 720px;
+    object-fit: cover;
+    background: #000;
+  }
+
+  .myth-video-toggle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    // transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 2;
+    opacity: 1;
+    visibility: visible;
+    padding: 0;
+
+    &:hover {
+      background: transparent;
+      // transform: translate(-50%, -50%) scale(1.04);
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    .toggle-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      color: #ff0000;
+      line-height: 1;
+
+      svg {
+        width: 52px;
+        height: 52px;
+        display: block;
+        fill: #ff0000;
+        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
+        path{
+          fill: #ff0000;
+        }
+
+        .st0 {
+          fill: none;
+          stroke: #ff0000;
+          stroke-width: 12;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+      }
+    }
+  }
+}
+
+button.myth-video-toggle[aria-label="Pause video"] svg {
+    transform: translateX(-64px) !important;
+    opacity: 0;
+    animation: pauseIconFade 2s ease forwards;
+}
+
+@keyframes pauseIconFade {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 p.animate-text-unique {
