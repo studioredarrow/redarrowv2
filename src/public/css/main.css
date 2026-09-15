@@ -99,6 +99,9 @@ div#video-outer .myth-video-wrap {
   width: 100%;
   overflow: hidden;
   background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 div#video-outer .myth-video-wrap video {
   display: block;
@@ -110,8 +113,6 @@ div#video-outer .myth-video-wrap video {
 }
 div#video-outer .myth-video-toggle {
   position: absolute;
-  top: 50%;
-  left: 50%;
   width: auto;
   height: auto;
   border: none;
