@@ -1574,9 +1574,10 @@ video {
   .how-outer .small-text {
     font-weight: 400;
   }
-  .allimages {
-    gap: 20px;
-  }
+.allimages {
+    gap: 35px 5%;
+    justify-content: center;
+}
 
   .iconic-sections {
     margin-bottom: 30px;
@@ -1611,7 +1612,18 @@ video {
   }
 
   .image-wrapper {
-    width: 26%;
+    width: 29.5%;
+  }
+  
+
+  .allimages > .image-wrapper:last-child:nth-child(odd) {
+    width: 100%;
+    display: flex;
+    justify-content: center !important;
+  }
+
+  .allimages > .image-wrapper:last-child:nth-child(odd) img {
+    margin-inline: auto !important;
   }
 
   .image-wrapper img {
@@ -1704,4 +1716,32 @@ video {
 
 div#video-outer .myth-video-toggle .toggle-icon svg .st0 {
   fill: #ff0000 !important;
+}
+
+@media (max-width: 470px) {
+  .allimages {
+    justify-content: center !important;
+}
+.image-wrapper {
+    width: 28% !important;
+}
+}
+
+@media (max-width: 768px) {
+.image-wrapper {
+    width: 18.5%;
+}
+.allimages {
+    justify-content: center;
+    gap: 35px 8%;
+}
+}
+
+@media (max-width: 320px) {
+  .allimages {
+    justify-content: space-between !important;
+}
+.image-wrapper {
+    width: 46% !important;
+}
 }
