@@ -1221,7 +1221,7 @@ video {
   .left-text {
     display: block !important;
     right: 27px;
-    bottom: -38px;
+    bottom: env(safe-area-inset-bottom);
   }
 }
 
