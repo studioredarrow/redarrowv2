@@ -39,9 +39,6 @@ body {
   max-width: 1220px !important;
   margin: auto !important;
   padding: 0;
-  padding-top: env(safe-area-inset-top);
-  padding-top: env(safe-area-inset-bottom);
-
 }
 
 .logo-container.fixed {
