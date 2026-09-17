@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/loading", (req, res) => {
-  const { to = "/", label = "" } = req.query;
+  const { to = "/loading", label = "" } = req.query;
 
   res.render("pages/loading", {
     title: "Loading",

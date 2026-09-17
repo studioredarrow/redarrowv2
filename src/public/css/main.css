@@ -1937,7 +1937,7 @@ span.location-btn {
 
 .hero-absolute-img {
   position: absolute;
-  top: 0;
+  top: -44px;
   right: 0;
 }
 
@@ -2375,7 +2375,7 @@ a {
 }
 
 .hero-absolute-img img {
-  width: 51%;
+  width: 71%;
   height: auto;
 }
 
@@ -3478,7 +3478,6 @@ body {
   .mobile-toggle.active .toggle-content {
     display: block;
     overflow: scroll;
-    height: 620px;
   }
   .event-grid-item {
     width: 47%;
@@ -3677,16 +3676,15 @@ body {
     right: 0;
   }
   .benji-wrapper .toggle-content {
-    position: sticky;
+    position: relative;
     overflow: auto;
     height: 100%;
     background: #f8f5f1;
     z-index: 9999;
-    top: 120px;
+    top: 0px;
   }
   .benji-wrapper .mobile-toggle.active .toggle-header {
     background: #f8f5f1;
-    padding-top: 80px;
   }
   .benji-flex {
     gap: 0px;
@@ -5116,7 +5114,7 @@ svg {
 
 path {
   stroke: #e60000;
-  stroke-width: 1;
+  stroke-width: 0.7px;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -6148,6 +6146,10 @@ footer {
 
 .page-404 .content .message a {
   cursor: pointer !important;
+}
+
+.width path {
+  stroke-width: 0.3px !important;
 }
 
 /*# sourceMappingURL=main.css.map */

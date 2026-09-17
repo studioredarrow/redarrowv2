@@ -389,7 +389,7 @@ svg {
 
 path {
   stroke: #e60000;
-  stroke-width: 1;
+  stroke-width: 0.7px ;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -1540,4 +1540,8 @@ footer{
 
 .page-404 .content .message a{
   cursor: pointer !important;
+}
+
+.width path{
+  stroke-width: 0.3px !important;
 }
