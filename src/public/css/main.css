@@ -3974,7 +3974,7 @@ body {
 
 .page-wrapper {
   background-color: #b0b0b0;
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   display: flex;
   align-items: flex-end;
