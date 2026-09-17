@@ -6142,10 +6142,6 @@ div#chat-area button.next-prompt-btn {
   stroke-width: 0.7px;
 }
 
-footer {
-  overflow: hidden;
-}
-
 .page-404 .content .message a {
   cursor: pointer !important;
 }
