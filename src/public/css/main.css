@@ -3477,8 +3477,8 @@ body {
   }
   .mobile-toggle.active .toggle-content {
     display: block;
-    overflow: scroll;
-    height: 620px;
+    overflow: auto;
+    height: 100%;
   }
   .event-grid-item {
     width: 47%;
