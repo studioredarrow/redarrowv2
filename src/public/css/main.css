@@ -3677,16 +3677,16 @@ body {
     right: 0;
   }
   .benji-wrapper .toggle-content {
-    position: sticky;
+    position: relative !important;
     overflow: auto;
     height: 100%;
     background: #f8f5f1;
     z-index: 9999;
-    top: 120px;
+    top: 0 !important;
   }
   .benji-wrapper .mobile-toggle.active .toggle-header {
     background: #f8f5f1;
-    padding-top: 80px;
+    padding-top: 0;
   }
   .benji-flex {
     gap: 0px;
