@@ -832,7 +832,6 @@ svg.fate-oval__svg {
   .fate-oval__path {
     fill: none;
     stroke: red;
-    stroke-width: 0.8px !important;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
@@ -882,6 +881,14 @@ ul.services__list a {
     height: 550px;
     transform: rotate(19deg) !important;
 }
+
+// .footer-line-image img {
+//     position: absolute;
+//     bottom: -48%;
+//     height: 243px;
+//     transform: rotate(0deg) !important;
+//     right: 22%;
+// }
 
 .footer-bottom {
   background-image: url(/images/footer-right-side-image.png);

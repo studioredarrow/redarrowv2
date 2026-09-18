@@ -752,7 +752,6 @@ svg.fate-oval__svg {
 .fate-wrap .fate-oval__path {
   fill: none;
   stroke: red;
-  stroke-width: 0.8px !important;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -6148,6 +6147,10 @@ footer {
 
 .page-404 .content .message a {
   cursor: pointer !important;
+}
+
+.curve-wrapper path {
+  stroke-width: 0.6 !important;
 }
 
 /*# sourceMappingURL=main.css.map */
