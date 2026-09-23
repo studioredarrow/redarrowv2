@@ -763,9 +763,9 @@ a.terms-btn {
   --main-font: Work Sans;
 }
 
-.intro-page .logo-trigger.logo1 {
-  filter: brightness(0) invert(1);
-}
+// .intro-page .logo-trigger.logo1 {
+//   filter: brightness(0) invert(1);
+// }
 
 .outer {
   margin: 0;
@@ -1306,11 +1306,11 @@ div#chat-area button {
   }
 
   .item.side {
-    font-size: 40px;
+    font-size: 40px ;
   }
 
   .item.main {
-    font-size: 32px;
+    font-size: 40px !important;
   }
 
   .myth-wrapper {
@@ -1334,7 +1334,7 @@ div#chat-area button {
 
   /* 👇 KEY CHANGE: smaller radius = closer items */
   .item:nth-child(1) {
-    transform: rotateY(0deg) translateZ(220px);
+    transform: rotateY(0deg) translateZ(220px) ;
   }
 
   .item:nth-child(2) {
@@ -1622,16 +1622,20 @@ div#chat-area button.next-prompt-btn {
   }
 }
 
-@supports (-webkit-touch-callout: none) {
-  .loader-wrapper {
-    height: -webkit-fill-available;
-  }
+// @supports (-webkit-touch-callout: none) {
+//   .loader-wrapper {
+//     height: -webkit-fill-available;
+//   }
 
-  .loader-wrapper .arrow {
-    animation-name: arrowMoveIOS;
-    -webkit-animation-name: arrowMoveIOS;
-    -webkit-animation-duration: 2s;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-  }
+//   .loader-wrapper .arrow {
+//     animation-name: arrowMoveIOS;
+//     -webkit-animation-name: arrowMoveIOS;
+//     -webkit-animation-duration: 2s;
+//     -webkit-animation-timing-function: linear;
+//     -webkit-animation-iteration-count: infinite;
+//   }
+// }
+
+.chat img {
+    width: auto;
 }

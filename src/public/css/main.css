@@ -5465,10 +5465,6 @@ a.terms-btn:hover {
   --main-font: Work Sans;
 }
 
-.intro-page .logo-trigger.logo1 {
-  filter: brightness(0) invert(1);
-}
-
 .outer {
   margin: 0;
   background-color: #ff0004;
@@ -5938,7 +5934,7 @@ div#chat-area button {
     font-size: 40px;
   }
   .item.main {
-    font-size: 32px;
+    font-size: 40px !important;
   }
   .myth-wrapper {
     padding: 15px;
@@ -6196,17 +6192,8 @@ div#chat-area button.next-prompt-btn {
     opacity: 0;
   }
 }
-@supports (-webkit-touch-callout: none) {
-  .loader-wrapper {
-    height: -webkit-fill-available;
-  }
-  .loader-wrapper .arrow {
-    animation-name: arrowMoveIOS;
-    -webkit-animation-name: arrowMoveIOS;
-    -webkit-animation-duration: 2s;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-  }
+.chat img {
+  width: auto;
 }
 
 /*# sourceMappingURL=main.css.map */
