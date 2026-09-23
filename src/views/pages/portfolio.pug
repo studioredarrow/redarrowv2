@@ -98,6 +98,16 @@ block content
       }
     }
 
+    .mobile-toggle {
+    margin-top: 20px;
+    }
+
+    .toggle-header .toggle-icon { display: inline; }
+    .toggle-header .icon-minus { display: none; }
+
+    .mobile-toggle.active .icon-plus  { display: none; }
+    .mobile-toggle.active .icon-minus { display: inline; }
+
   .main-portfolio-outer
     .progress-bar-wrapper
       .progress-bar
@@ -146,7 +156,8 @@ block content
 
       .mobile-toggle
         .toggle-header
-          img.toggle-icon(src="/images/plus-icon.png", alt="")
+          img.toggle-icon.icon-plus(src="/images/plus-icon.png", alt="")
+          img.toggle-icon.icon-minus(src="/images/minus-icon.png", alt="")
 
         .toggle-content
           .benji-outer
@@ -732,23 +743,32 @@ block content
       }
 
 
+    //- script.
+    //-   document.addEventListener("DOMContentLoaded", function() {
+    //-     document.querySelectorAll(".toggle-header").forEach(function(header) {
+    //-       header.addEventListener("click", function() {
+    //-         var parent = this.parentElement;
+    //-         var icon = this.querySelector(".toggle-icon");
+
+    //-         parent.classList.toggle("active");
+
+    //-         if (parent.classList.contains("active")) {
+    //-           icon.src = "/images/minus-icon.png";
+    //-         } else {
+    //-           icon.src = "/images/plus-icon.png";
+    //-         }
+    //-       });
+    //-     });
+    //-   });
+
     script.
-      document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".toggle-header").forEach(function(header) {
-          header.addEventListener("click", function() {
-            var parent = this.parentElement;
-            var icon = this.querySelector(".toggle-icon");
-
-            parent.classList.toggle("active");
-
-            if (parent.classList.contains("active")) {
-              icon.src = "/images/minus-icon.png";
-            } else {
-              icon.src = "/images/plus-icon.png";
-            }
-          });
+      document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".toggle-header").forEach(function (header) {
+        header.addEventListener("click", function () {
+          this.parentElement.classList.toggle("active");
         });
       });
+     });
 
                   
               
