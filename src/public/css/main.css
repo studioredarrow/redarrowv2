@@ -5681,7 +5681,7 @@ a.terms-btn:hover {
 /* Arrow animation */
 @keyframes arrowMove {
   0% {
-    transform: translate3d(-50%, -200px, 0);
+    top: -200px;
     opacity: 0;
   }
   10% {
@@ -5691,7 +5691,7 @@ a.terms-btn:hover {
     opacity: 1;
   }
   100% {
-    transform: translate3d(-50%, 100dvh, 0);
+    top: 100%;
     opacity: 0;
   }
 }
