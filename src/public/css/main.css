@@ -6155,4 +6155,58 @@ div#chat-area button.next-prompt-btn {
   cursor: pointer !important;
 }
 
+.intro-page .logo-container.fixed img {
+  display: none;
+}
+
+/* iPhone / Safari loader arrow fix */
+.loader-wrapper {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  position: relative;
+  overflow: hidden;
+}
+
+.loader-wrapper .arrow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  animation: arrowMoveIOS 2s linear infinite;
+  will-change: transform, opacity;
+  -webkit-transform: translate3d(-50%, -200px, 0);
+  transform: translate3d(-50%, -200px, 0);
+}
+
+@keyframes arrowMoveIOS {
+  0% {
+    -webkit-transform: translate3d(-50%, -200px, 0);
+    transform: translate3d(-50%, -200px, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate3d(-50%, 100dvh, 0);
+    transform: translate3d(-50%, 100dvh, 0);
+    opacity: 0;
+  }
+}
+@supports (-webkit-touch-callout: none) {
+  .loader-wrapper {
+    height: -webkit-fill-available;
+  }
+  .loader-wrapper .arrow {
+    animation-name: arrowMoveIOS;
+    -webkit-animation-name: arrowMoveIOS;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */
