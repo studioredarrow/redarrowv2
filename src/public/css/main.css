@@ -6157,13 +6157,7 @@ div#chat-area button.next-prompt-btn {
 
 /* iPhone / Safari loader arrow fix */
 .loader-wrapper .arrow {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  animation: arrowMoveIOS 2s linear infinite;
   will-change: transform, opacity;
-  -webkit-transform: translate3d(-50%, -200px, 0);
-  transform: translate3d(-50%, -200px, 0);
 }
 
 @keyframes arrowMoveIOS {
