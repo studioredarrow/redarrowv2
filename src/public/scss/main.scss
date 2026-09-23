@@ -1598,27 +1598,27 @@ div#chat-area button.next-prompt-btn {
 //   transform: translate3d(-50%, -200px, 0);
 // }
 
-// @keyframes arrowMoveIOS {
-//   0% {
-//     -webkit-transform: translate3d(-50%, -200px, 0);
-//     transform: translate3d(-50%, -200px, 0);
-//     opacity: 0;
-//   }
+@keyframes arrowMoveIOS {
+  0% {
+    -webkit-transform: translate3d(-50%, -200px, 0);
+    transform: translate3d(-50%, -200px, 0);
+    opacity: 0;
+  }
 
-//   10% {
-//     opacity: 1;
-//   }
+  10% {
+    opacity: 1;
+  }
 
-//   90% {
-//     opacity: 1;
-//   }
+  90% {
+    opacity: 1;
+  }
 
-//   100% {
-//     -webkit-transform: translate3d(-50%, 100vh, 0);
-//     transform: translate3d(-50%, 100dvh, 0);
-//     opacity: 0;
-//   }
-// }
+  100% {
+    -webkit-transform: translate3d(-50%, 100vh, 0);
+    transform: translate3d(-50%, 100dvh, 0);
+    opacity: 0;
+  }
+}
 
 
 
