@@ -315,8 +315,7 @@ block content
                           +mediaOne(gallery.gallery_banner_image, gallery.gallery_banner_video)
       
 
-        // ================= CREATIVE SECTION =================
-        if (portfolioItem.data.creative_gallery_images && portfolioItem.data.creative_gallery_images.length) || (portfolioItem.data.creative_banner_video && portfolioItem.data.creative_banner_video.url)
+        if (portfolioItem.data.creative_gallery_images && portfolioItem.data.creative_gallery_images.length) || (portfolioItem.data.creative_banner_video && portfolioItem.data.creative_banner_video.url) || (portfolioItem.data.creative_section_description1) || (portfolioItem.data.creative_section_title)
           section
             .creative-outer
               .creative-inner
@@ -326,8 +325,8 @@ block content
                     if portfolioItem.data.creative_section_title
                       h3= portfolioItem.data.creative_section_title
 
-                    if portfolioItem.data.creative_section_description
-                      p!= asHTML(portfolioItem.data.creative_section_description)
+                    if portfolioItem.data.creative_section_description1
+                      p!= asHTML(portfolioItem.data.creative_section_description1)
 
                   //- Horizontal video below the title & description — shown only when a video is uploaded
                   if portfolioItem.data.creative_banner_video && portfolioItem.data.creative_banner_video.url
