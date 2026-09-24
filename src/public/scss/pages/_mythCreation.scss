@@ -832,7 +832,7 @@ svg.fate-oval__svg {
   .fate-oval__path {
     fill: none;
     stroke: red;
-    stroke-width: 0.8px !important;
+    stroke-width: 0.8px;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
@@ -1512,7 +1512,7 @@ video {
     height: 619px;
 }
 .footer-line-image img {
-    bottom: -41px !important;
+    bottom: -181px !important;
     height: 550px;
     transform: rotate(6deg) !important;
     left: 0;
