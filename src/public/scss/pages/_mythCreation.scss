@@ -115,7 +115,7 @@ div#video-outer {
     position: absolute;
     top: 50%;
     left: 50%;
-    // transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     width: auto;
     height: auto;
     border: none;
@@ -1543,6 +1543,7 @@ video {
   }
   .hero-section-unique .outer-unique {
     margin-top: 60px;
+    gap: 0 ;
   }
   .slider-flex {
     padding-bottom: 0px;
@@ -1573,6 +1574,7 @@ video {
   }
   .how-outer .small-text {
     font-weight: 400;
+    margin-top: 0;
   }
 .allimages {
     gap: 35px 5%;
@@ -1661,7 +1663,7 @@ video {
   }
 
   div#video-outer{
-    padding: 30px 0px !important;
+    padding: 30px 0px 60px !important;
   }
   .hero-section-unique .outer-unique .image-container-unique img {
     max-width: 100%;
@@ -1688,7 +1690,8 @@ video {
   }
 
   .inner-unique {
-    position: relative;
+      position: relative;
+      margin-top: 20px;
   }
 
   .services__label {
