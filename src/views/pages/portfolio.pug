@@ -98,6 +98,16 @@ block content
       }
     }
 
+    .mobile-toggle {
+    margin-top: 20px;
+    }
+
+    .toggle-header .toggle-icon { display: inline; }
+    .toggle-header .icon-minus { display: none; }
+
+    .mobile-toggle.active .icon-plus  { display: none; }
+    .mobile-toggle.active .icon-minus { display: inline; }
+
   .main-portfolio-outer
     .progress-bar-wrapper
       .progress-bar
@@ -146,7 +156,8 @@ block content
 
       .mobile-toggle
         .toggle-header
-          img.toggle-icon(src="/images/plus-icon.png", alt="")
+          img.toggle-icon.icon-plus(src="/images/plus-icon.png", alt="")
+          img.toggle-icon.icon-minus(src="/images/minus-icon.png", alt="")
 
         .toggle-content
           .benji-outer
@@ -212,10 +223,8 @@ block content
               .container
 
                 // ================= BRAND BANNER =================
-                //- gallery_banner_video is a top-level Media field in Prismic;
-                //- when present it replaces the brand banner image with the video.
                 - var brandImg = portfolioItem.data.brand_banner_image
-                - var brandVid = portfolioItem.data.brands_banner_video || portfolioItem.data.brand_banner_video || portfolioItem.data.gallery_banner_video || portfolioItem.data.brand_video
+                - var brandVid = portfolioItem.data.brands_banner_video || portfolioItem.data.brand_banner_video || portfolioItem.data.brand_video
                 if (brandImg && brandImg.url) || (brandVid && brandVid.url)
                   .bistro-banner
                     +mediaOne(brandImg, brandVid)
@@ -234,6 +243,10 @@ block content
                     p!= asHTML(portfolioItem.data.brand_description)
 
                 // ================= PHOTO GALLERIES =================
+                if portfolioItem.data.gallery_banner_video && portfolioItem.data.gallery_banner_video.url
+                  .photo-banner.ist-photo-banner1
+                    +mediaOne(null, portfolioItem.data.gallery_banner_video)
+
                 if portfolioItem.data.photo_galleries && portfolioItem.data.photo_galleries.length
                   each gallery in portfolioItem.data.photo_galleries
 
@@ -304,8 +317,7 @@ block content
                           +mediaOne(gallery.gallery_banner_image, gallery.gallery_banner_video)
       
 
-        // ================= CREATIVE SECTION =================
-        if (portfolioItem.data.creative_section_description1 || (portfolioItem.data.creative_gallery_images && portfolioItem.data.creative_gallery_images.length) || (portfolioItem.data.creative_banner_video && portfolioItem.data.creative_banner_video.url))
+        if (portfolioItem.data.creative_gallery_images && portfolioItem.data.creative_gallery_images.length) || (portfolioItem.data.creative_banner_video && portfolioItem.data.creative_banner_video.url) || (portfolioItem.data.creative_section_description1) || (portfolioItem.data.creative_section_title)
           section
             .creative-outer
               .creative-inner
@@ -316,7 +328,7 @@ block content
                       h3= portfolioItem.data.creative_section_title
 
                     if portfolioItem.data.creative_section_description1
-                      .creative-description!= asHTML(portfolioItem.data.creative_section_description1)
+                      p!= asHTML(portfolioItem.data.creative_section_description1)
 
                   //- Horizontal video below the title & description — shown only when a video is uploaded
                   if portfolioItem.data.creative_banner_video && portfolioItem.data.creative_banner_video.url
@@ -732,23 +744,32 @@ block content
       }
 
 
+    //- script.
+    //-   document.addEventListener("DOMContentLoaded", function() {
+    //-     document.querySelectorAll(".toggle-header").forEach(function(header) {
+    //-       header.addEventListener("click", function() {
+    //-         var parent = this.parentElement;
+    //-         var icon = this.querySelector(".toggle-icon");
+
+    //-         parent.classList.toggle("active");
+
+    //-         if (parent.classList.contains("active")) {
+    //-           icon.src = "/images/minus-icon.png";
+    //-         } else {
+    //-           icon.src = "/images/plus-icon.png";
+    //-         }
+    //-       });
+    //-     });
+    //-   });
+
     script.
-      document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".toggle-header").forEach(function(header) {
-          header.addEventListener("click", function() {
-            var parent = this.parentElement;
-            var icon = this.querySelector(".toggle-icon");
-
-            parent.classList.toggle("active");
-
-            if (parent.classList.contains("active")) {
-              icon.src = "/images/minus-icon.png";
-            } else {
-              icon.src = "/images/plus-icon.png";
-            }
-          });
+      document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".toggle-header").forEach(function (header) {
+        header.addEventListener("click", function () {
+          this.parentElement.classList.toggle("active");
         });
       });
+     });
 
                   
               
