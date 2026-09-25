@@ -223,10 +223,8 @@ block content
               .container
 
                 // ================= BRAND BANNER =================
-                //- gallery_banner_video is a top-level Media field in Prismic;
-                //- when present it replaces the brand banner image with the video.
                 - var brandImg = portfolioItem.data.brand_banner_image
-                - var brandVid = portfolioItem.data.brands_banner_video || portfolioItem.data.brand_banner_video || portfolioItem.data.gallery_banner_video || portfolioItem.data.brand_video
+                - var brandVid = portfolioItem.data.brands_banner_video || portfolioItem.data.brand_banner_video || portfolioItem.data.brand_video
                 if (brandImg && brandImg.url) || (brandVid && brandVid.url)
                   .bistro-banner
                     +mediaOne(brandImg, brandVid)
@@ -245,6 +243,10 @@ block content
                     p!= asHTML(portfolioItem.data.brand_description)
 
                 // ================= PHOTO GALLERIES =================
+                if portfolioItem.data.gallery_banner_video && portfolioItem.data.gallery_banner_video.url
+                  .photo-banner.ist-photo-banner1
+                    +mediaOne(null, portfolioItem.data.gallery_banner_video)
+
                 if portfolioItem.data.photo_galleries && portfolioItem.data.photo_galleries.length
                   each gallery in portfolioItem.data.photo_galleries
 

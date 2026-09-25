@@ -149,9 +149,6 @@ body {
   display: flex;
   align-items: flex-end;
   padding: 40px;
-  position: relative;
-  min-height: 100dvh;
-  overflow: hidden;
 }
 .page-wrapper .details {
   color: white;
