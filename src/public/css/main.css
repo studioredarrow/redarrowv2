@@ -2794,6 +2794,7 @@ body {
 
 .benji-image img {
   height: 512px !important;
+  object-fit: cover;
 }
 
 .ist-photo-banner p {
@@ -2807,6 +2808,7 @@ body {
 
 .benji-image img {
   height: 512px !important;
+  object-fit: cover;
 }
 
 .ist-photo-banner1 p {
@@ -2975,6 +2977,7 @@ body {
   border-radius: 20px;
   width: 595px;
   height: 574px;
+  object-fit: cover;
 }
 
 .photo-right {
@@ -3256,6 +3259,7 @@ body {
 .photo-item img {
   width: 595px !important;
   height: 574px !important;
+  object-fit: cover;
 }
 
 .event-layout-new {
@@ -3739,6 +3743,7 @@ body {
 
 .create-item-grid img {
   height: 573px;
+  object-fit: cover;
 }
 
 .event-gallery-new {
